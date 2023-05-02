@@ -1,6 +1,17 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/05/01 17:28:53 by fgarzi-c          #+#    #+#              #
+#    Updated: 2023/05/01 17:32:40 by fgarzi-c         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 NAME = libft.a
-SRCS = ft_strlen.c ft_numlen.c ft_calloc.c ft_error.c  ft_itoa.c
+SRCS = ft_strlen.c ft_error.c ft_numlen.c ft_calloc.c ft_itoa.c
 OBJS = $(SRCS:.c=.o)
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror

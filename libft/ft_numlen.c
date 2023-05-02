@@ -6,9 +6,11 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:22:20 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/01 17:22:22 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/01 17:33:23 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	ft_numlen(long long num, int base)
 {
