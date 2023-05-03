@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:46 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/02 18:05:50 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/03 19:46:11 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	ft_print_prompt(void)
 
 	user_name = getenv("USER");
 	write(1, user_name, ft_strlen(user_name));
-	write(1, "\\> ", 3);
+	// write(1, "\\> ", 3);
+	readline("\\> ");
 }
 
 int	main(int ac, char **av, char **env)
