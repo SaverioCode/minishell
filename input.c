@@ -1,29 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/01 11:51:46 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/04 01:26:15 by fgarzi-c         ###   ########.fr       */
+/*   Created: 2023/05/04 01:03:46 by fgarzi-c          #+#    #+#             */
+/*   Updated: 2023/05/04 01:29:50 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int ac, char **av, char **env)
+static int	check_input(char *str)
 {
+	size_t	i;
+
+	if (!str)
+		return (0);
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] > 32 && str[i] < 127)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+char	*ft_print_prompt(void)
+{
+	char	*user_name;
 	char	*str;
 
-	ft_init_shell();
-	while (1)
-	{
-		str = ft_print_prompt();
-		free(str);
-	}
-	(void)av;
-	(void)env;
-	(void)ac;
-	return (0);
+	user_name = getenv("USER");
+	write(1, user_name, ft_strlen(user_name));
+	str = readline("\\> ");
+	if (check_input(str))
+		add_history(str);
+	return (str);
 }
