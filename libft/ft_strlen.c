@@ -5,21 +5,29 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/01 17:22:24 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/01 17:22:25 by fgarzi-c         ###   ########.fr       */
+/*   Created: 2023/05/04 22:58:42 by fgarzi-c          #+#    #+#             */
+/*   Updated: 2023/05/04 23:01:31 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(char *str)
+int	ft_numlen(long long num, int base)
 {
-	size_t	len;
+	int	counter;
 
-	if (!str)
-		return (0);
-	len = 0;
-	while (str[len])
-		len++;
-	return (len);
+	if (base < 2)
+		ft_error("Error: number base to low!\n");
+	counter = 0;
+	if (num < 0)
+	{
+		num *= -1;
+		counter++;
+	}
+	while (num > 0)
+	{	
+		num /= base;
+		counter++;
+	}
+	return (counter);
 }

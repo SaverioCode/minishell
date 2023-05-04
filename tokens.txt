@@ -1,6 +1,7 @@
 KEYWORDS:
 
 IDENTIFIERS:
+	commands:
 		echo 			 with option -n
 		cd 				 with only a relative or absolute path
 		pwd 			 with no options
@@ -8,6 +9,7 @@ IDENTIFIERS:
 		unset 			 with no options
 		env 			 with no options or arguments
 		exit 			 with no options
+	var:
 		*				 should work for the current working directory
 		$ (dollar sign)  followed by a sequence of characters which should
 							expand to their values
@@ -23,12 +25,12 @@ OPERATORS:
 						line containing the delimiter is seen. However, it 
 						doesn’t have to update the history
 		>> 		 		 should redirect output in append mode
- 2		| (pipe) 		 the output of each command in the pipeline is connected
+ 		| (pipe) 		 the output of each command in the pipeline is connected
 						to the input of the next command via a pipe
- 2		&&				 (with parenthesis for priorities) chain commands together,
+ 		&&				 (with parenthesis for priorities) chain commands together,
 						such that the next command is run if and only if the preceding
 						command exited without errors
- 2		||				 (with parenthesis for priorities)  It executes the command on
+ 		||				 (with parenthesis for priorities)  It executes the command on
 						the right only if the command on the left returned an error
 
 SEPARATORS:
@@ -37,4 +39,4 @@ SEPARATORS:
  		" (double quote) which should prevent the shell from interpreting
 						the metacharacters in the quoted sequence except
 						for $ (dollar sign)
- 1		()				 
+ 		()				 
