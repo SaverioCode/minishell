@@ -6,7 +6,7 @@
 #    By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/01 11:50:39 by fgarzi-c          #+#    #+#              #
-#    Updated: 2023/05/04 01:04:11 by fgarzi-c         ###   ########.fr        #
+#    Updated: 2023/05/04 18:05:49 by fgarzi-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,8 @@ all: $(%.c)
 	@$(CC) $(CFLAGS) -c $(SRCS)
 	@$(CC) $(CFLAGS) $(LIB_L) $(OBJS) $(LIB_R) $(LIB_RH) -lcurses -o $(NAME)
 
-configure:
-	@cd readline && sh ./configure; cd ..
+conf:
+	@cd readline && sh ./configure && cd ..
 
 %.c: %.o
 	@$(CC) $(CFLAGS) -o $<
