@@ -13,10 +13,6 @@
 #ifndef PARSER_H
 # define PARSER_H
 
-# define EXP 0b00000001
-# define OPR 0b00000010
-# define CMD 0b00000011
-
 typedef struct s_cmd
 {
 	char	*cmd;
@@ -32,7 +28,7 @@ typedef struct s_opr
 
 typedef struct s_exp
 {
-	char	type;
+	char	*exp;
 	t_cmd	*right;
 	t_opr	*left;
 }	t_exp;
