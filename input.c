@@ -40,3 +40,13 @@ char	*ft_print_prompt(void)
 		add_history(str);
 	return (str);
 }
+
+void	ft_check_input(int ac, char **av)
+{
+	if (ac > 1)
+	{
+		write(2, "Error: to many arguments, write only: ./minishell\n", 49);
+		exit(0);
+	}
+	(void)av;
+}

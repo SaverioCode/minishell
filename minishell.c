@@ -14,21 +14,23 @@
 
 int	main(int ac, char **av, char **env)
 {
-	char	*str;
+	t_exps	exp;
+	char	*input;
 
+	ft_check_input(ac, av);
 	ft_init_shell();
 	while (1)
 	{
-		str = ft_print_prompt();
+		input = ft_print_prompt();
+		// just for testing maintaining a clean exit //
 		if (str && str[0] == 'q')
 		{	
 			free(str);
 			return (0);
 		}
+		ft_parser(&exp, input);
 		free(str);
 	}
-	(void)av;
 	(void)env;
-	(void)ac;
 	return (0);
 }

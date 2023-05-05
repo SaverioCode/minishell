@@ -15,9 +15,9 @@
 
 # include "./libft/libft.h"
 # include "./readline/readline.h"
+# include "./parser/parser.h"
 
-
-
+void	ft_check_input(int ac, char **av);
 void	ft_init_shell(void);
 char	*ft_print_prompt(void);
 
