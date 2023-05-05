@@ -13,28 +13,42 @@
 #ifndef PARSER_H
 # define PARSER_H
 
-# define T_OPR 1
-# define T_CMD
-# define T_VAR
-# define T_SPR
+# define EXP 0b00000001
+# define OPR 0b00000010
+# define CMD 0b00000011
 
-typedef struct s_expr
+typedef struct s_cmd
 {
-	
-}	t_expr;
+	char	*cmd;
+	char	**args;
+}	t_cmd;
 
-# define ROOT 00000001
-# define AND  00000011
-# define OR   00000111
-# define PIPE 00001111
+typedef struct s_opr
+{
+	char	*fd;
+	char	*arg;
+	t_opr	*next;
+}	t_opr;
+
+typedef struct s_exp
+{
+	char	type;
+	t_cmd	*right;
+	t_opr	*left;
+}	t_exp;
+
+# define ROOT 0b10000001
+# define AND  0b10000010
+# define OR   0b10000011
+# define PIPE 0b10000100
 
 typedef struct s_primary
 {
 	char		type;
-	int			status;
-	char		*output;
-	t_primary	*next;
-	t_expr		*expr;
+	short int	status;
+	int			fd;
+	t_primary	*right;
+	t_expr		*left;
 }	t_primary;
 
 #endif
