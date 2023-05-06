@@ -62,64 +62,41 @@ static char	*cut_exp(t_node *node, char *input, int end)
 	return (str);
 }
 
-static char	get_token(t_node *node, char *input)
-{
-	int		i;
-	char	token;
-	char	len;
-
-	token = 0;
-	len = ft_strlen(input);
-	i = 0;
-	if (len > 1)
-	{
-		if (input[i] == 38 && input[i + 1] == 38)
-			node->token = AND;
-		else if (input == 124 && input[i + 1] == 124)
-			node->token = OR;
-		else if (input == 124 && !is_printable(input[i + 1]))
-			node->token = PIPE;
-	}
-	if (len == 1)
-	{
-		if (input == 124)
-			node->token = PIPE;
-	}
-	return (token);
-}
-
-static char	*create_new_node(t_node *node, char *input)
+static char	*create_new_node(t_node *node, t_input *input)
 {
 	t_node	*new_node;
 	char	*str;
 
 	new_node = ft_calloc(1, sizeof(t_node));
 	node->next = new_node;
-	str = get_token(new_node, input);
+	get_token(new_node, input);
 	free(input);
 	return (str);
 }
 
-void	ft_separete_exps(t_node *node, char *input)
+void	ft_separete_exps(t_node *node, t_input *input)
 {
-	int	i;
-	int	flag[2];
+	char	*str;
+	int		i;
+	int		flag[2];
 
 	if (!node)
 		return ;
+	input = input->starting;
 	flag[0] = 0;
 	i = 0;
-	while (input[i])
+	while (str[i])
 	{
-		check_flag(flag, input[i]);
-		if (!flag[0] && (input[i] == 38 || input[i] == 124 || !input[i + 1]))
+		check_flag(flag, str[i]);
+		if (!flag[0] && (str[i] == 38 || str[i] == 124 || !str[i + 1]))
 		{
 			node = ls_get_last_node(node);
-			input = cut_exp(node, input, i);
-			if (input[i + 1])
+			input->current = cut_exp(node, input, i);
+			if (str[i + 1])
 			{	
-				input = create_new_node(node, input);
+				str = create_new_node(node, input);
 			}
+			str = input->current;
 			i = -1;
 			if (!input)
 				break ;

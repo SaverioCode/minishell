@@ -15,24 +15,24 @@
 int	main(int ac, char **av, char **env)
 {
 	t_node	root;
-	char	*input;
+	t_input	input;
 
 	ft_check_input(ac, av);
 	ft_init_shell();
 	root.token = ROOT;
 	while (1)
 	{
-		input = ft_print_prompt();
-		if (!input)
+		input.starting = ft_print_prompt();
+		if (!input.starting)
 			continue ;
 		// just for testing maintaining a clean exit //
-		if (input && input[0] == 'q')
+		if (input.starting && input.starting[0] == 'q')
 		{	
-			free(input);
+			free(input.starting);
 			return (0);
 		}
-		ft_parser(&root, input);
-		free(input);
+		input.current = input.starting;
+		ft_parser(&root, &input);
 	}
 	(void)env;
 	return (0);

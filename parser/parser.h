@@ -44,7 +44,14 @@ typedef struct s_node
 	t_node		*next;
 }	t_node;
 
-void	ft_parser(t_node *exp, char *input);
-void	ft_separete_exps(t_node *exp, char *input);
+typedef struct s_input
+{
+	char	*starting;
+	char	*current;
+}	t_input;
+
+void	ft_parser(t_node *exp, t_input *input);
+void	ft_separete_exps(t_node *exp, t_input *inpt);
+char	get_token(t_node *node, t_input *input);
 
 #endif

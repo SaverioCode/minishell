@@ -12,8 +12,14 @@
 
 #include "parser.h"
 
-void	ft_parser(t_node *root, char *input)
+void	ft_parser(t_node *root, t_input *input)
 {
+	if (!root)
+	{
+		// write error //
+		// free everything //
+		// exit //
+	}
 	ft_separete_exps(root, input);
 	ft_create_exps_tree(root);
 }
