@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   separete_exps.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/05 00:14:38 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/06 17:45:51 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,19 @@ static char	*cut_exp(t_node *node, char *input, int end)
 	return (str);
 }
 
-static char	*create_new_node(t_node *node, t_input *input)
+static void	create_new_node(t_node *node, t_input *input)
 {
 	t_node	*new_node;
-	char	*str;
 
 	new_node = ft_calloc(1, sizeof(t_node));
 	node->next = new_node;
+	new_node->token = NULL;
+	new_node->status = 0;
+	new_node->fd_output = 0;
+	new_node->cmd = NULL;
+	new_node->opr = NULL;
+	new_node->next = NULL;
 	get_token(new_node, input);
-	free(input);
-	return (str);
 }
 
 void	ft_separete_exps(t_node *node, t_input *input)
@@ -94,7 +97,7 @@ void	ft_separete_exps(t_node *node, t_input *input)
 			input->current = cut_exp(node, input, i);
 			if (str[i + 1])
 			{	
-				str = create_new_node(node, input);
+				create_new_node(node, input);
 			}
 			str = input->current;
 			i = -1;

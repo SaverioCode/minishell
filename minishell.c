@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:46 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/04 01:35:19 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/06 17:44:45 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	set_root(t_node *root)
+{
+	root->token = ROOT;
+	root->status = 0;
+	root->fd_output = 0;
+	root->cmd = NULL;
+	root->opr = NULL;
+	root->next = NULL;
+}
 
 int	main(int ac, char **av, char **env)
 {
@@ -19,7 +29,7 @@ int	main(int ac, char **av, char **env)
 
 	ft_check_input(ac, av);
 	ft_init_shell();
-	root.token = ROOT;
+	set_root(&root);
 	while (1)
 	{
 		input.starting = ft_print_prompt();
