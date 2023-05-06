@@ -6,7 +6,7 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/06 17:45:51 by sav              ###   ########.fr       */
+/*   Updated: 2023/05/06 18:07:28 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ static void	create_new_node(t_node *node, t_input *input)
 	new_node->token = NULL;
 	new_node->status = 0;
 	new_node->fd_output = 0;
+	new_node->exp = NULL;
 	new_node->cmd = NULL;
 	new_node->opr = NULL;
 	new_node->next = NULL;
@@ -96,13 +97,11 @@ void	ft_separete_exps(t_node *node, t_input *input)
 			node = ls_get_last_node(node);
 			input->current = cut_exp(node, input, i);
 			if (str[i + 1])
-			{	
 				create_new_node(node, input);
-			}
 			str = input->current;
-			i = -1;
-			if (!input)
+			if (!str)
 				break ;
+			i = -1;
 		}
 		i++;
 	}

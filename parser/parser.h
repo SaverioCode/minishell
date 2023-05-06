@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/05 00:14:38 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/06 18:25:41 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ typedef struct s_opr
 
 typedef struct s_node
 {
-	char		token;
-	short int	status;
-	int			fd_output;
-	char		*exp;
-	t_cmd		*cmd;
-	t_opr		*opr;
-	t_node		*next;
+	char			token;
+	short int		status;
+	int				fd_output;
+	char			*exp;
+	t_cmd			*cmd;
+	t_opr			*opr;
+	struct s_node	*next;
 }	t_node;
 
 typedef struct s_input
@@ -50,8 +50,10 @@ typedef struct s_input
 	char	*current;
 }	t_input;
 
+void	ft_free_nodes(t_node *node);
 void	ft_parser(t_node *exp, t_input *input);
 void	ft_separete_exps(t_node *exp, t_input *inpt);
 char	get_token(t_node *node, t_input *input);
+t_node	*ls_get_last_node(t_node *node);
 
 #endif
