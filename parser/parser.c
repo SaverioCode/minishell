@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/05 00:14:38 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/06 18:45:22 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	ft_parser(t_node *root, t_input *input)
 {
 	if (!root)
 	{
+		ft_free(NULL, input);
 		// write error //
-		// free everything //
-		// exit //
+		exit(1);
 	}
 	ft_separete_exps(root, input);
 	ft_create_exps_tree(root);
