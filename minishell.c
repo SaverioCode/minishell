@@ -19,9 +19,12 @@ int	main(int ac, char **av, char **env)
 
 	ft_check_input(ac, av);
 	ft_init_shell();
+	root.token = ROOT;
 	while (1)
 	{
 		input = ft_print_prompt();
+		if (!input)
+			continue ;
 		// just for testing maintaining a clean exit //
 		if (input && input[0] == 'q')
 		{	

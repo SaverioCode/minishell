@@ -15,5 +15,5 @@
 void	ft_parser(t_node *root, char *input)
 {
 	ft_separete_exps(root, input);
-
+	ft_create_exps_tree(root);
 }

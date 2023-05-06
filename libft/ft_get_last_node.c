@@ -10,41 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#include "libft.h"
 
-# include "../libft/libft.h"
-
-# define ROOT 0b10000001
-# define AND  0b10000010
-# define OR   0b10000011
-# define PIPE 0b10000100
-
-typedef struct s_cmd
-{
-	char	*cmd;
-	char	**args;
-}	t_cmd;
-
-typedef struct s_opr
-{
-	char			*fd;
-	char			*arg;
-	struct s_opr	*next;
-}	t_opr;
-
-typedef struct s_node
-{
-	char		token;
-	short int	status;
-	int			fd_output;
-	char		*exp;
-	t_cmd		*cmd;
-	t_opr		*opr;
-	t_node		*next;
-}	t_node;
-
-void	ft_parser(t_node *exp, char *input);
-void	ft_separete_exps(t_node *exp, char *input);
-
-#endif
+void	*ft_get_last_node()
