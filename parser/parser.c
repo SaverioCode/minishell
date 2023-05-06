@@ -12,8 +12,8 @@
 
 #include "parser.h"
 
-void	ft_parser(t_exps *exp, char *input)
+void	ft_parser(t_node *root, char *input)
 {
-	ft_separete_exps(exp, input);
+	ft_separete_exps(root, input);
 
 }

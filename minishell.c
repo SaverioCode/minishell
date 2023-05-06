@@ -14,7 +14,7 @@
 
 int	main(int ac, char **av, char **env)
 {
-	t_exps	exp;
+	t_node	root;
 	char	*input;
 
 	ft_check_input(ac, av);
@@ -23,13 +23,13 @@ int	main(int ac, char **av, char **env)
 	{
 		input = ft_print_prompt();
 		// just for testing maintaining a clean exit //
-		if (str && str[0] == 'q')
+		if (input && input[0] == 'q')
 		{	
-			free(str);
+			free(input);
 			return (0);
 		}
-		ft_parser(&exp, input);
-		free(str);
+		ft_parser(&root, input);
+		free(input);
 	}
 	(void)env;
 	return (0);

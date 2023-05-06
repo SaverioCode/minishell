@@ -21,12 +21,12 @@ char	*ft_itoa(long num)
 		return (NULL);
 	if (num == 0)
 	{
-		strnum = ft_calloc(1);
+		strnum = ft_calloc(1, 1);
 		strnum[0] = 48;
 		return (strnum);
 	}
 	strlen = ft_numlen(num, 10);
-	strnum = ft_calloc(strlen);
+	strnum = ft_calloc(strlen, 1);
 	if (num < 0)
 	{
 		strnum[0] = 45;

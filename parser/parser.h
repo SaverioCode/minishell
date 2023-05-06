@@ -13,6 +13,8 @@
 #ifndef PARSER_H
 # define PARSER_H
 
+# include "../libft/libft.h"
+
 # define ROOT 0b10000001
 # define AND  0b10000010
 # define OR   0b10000011
@@ -31,7 +33,7 @@ typedef struct s_opr
 	struct s_opr	*next;
 }	t_opr;
 
-typedef struct s_exps
+typedef struct s_node
 {
 	char		type;
 	short int	status;
@@ -39,9 +41,9 @@ typedef struct s_exps
 	char		*exp;
 	t_cmd		*right;
 	t_opr		*left;
-}	t_exps;
+}	t_node;
 
-void	ft_parser(t_exps *exp, char *input);
-void	ft_separete_exps(t_exps *exp, char *input);
+void	ft_parser(t_node *exp, char *input);
+void	ft_separete_exps(t_node *exp, char *input);
 
 #endif

@@ -32,23 +32,23 @@ static void	check_flag(int *flag, char c)
 	}
 }
 
-static char	*cut_exp(t_exps *exp, char *input, int end)
+static char	*cut_exp(t_node *node, char *input, int end)
 {
 	char	*str;
-	char	*expression;
+	char	*expr;
 	int		i;
 	int		j;
 	char	len;
 
-	exp = ft_calloc(i, 1);
+	expr = ft_calloc(i, 1);
 	i = 0;
 	while (i < end)
 	{
-		expression[i] = input[i];
+		expr[i] = input[i];
 		i++;
 	}
-	exp->exp = expression;
-	expression = ft_calloc((ft_strlen(input) - i) + 1, 1);
+	node->exp = expr;
+	expr = ft_calloc((ft_strlen(input) - i) + 1, 1);
 	j = 0;
 	while (input[i])
 	{
@@ -60,7 +60,15 @@ static char	*cut_exp(t_exps *exp, char *input, int end)
 	return (str);
 }
 
-void	ft_separete_exps(t_exps *exp, char *input)
+static void	create_new_node(t_node *node, char *input)
+{
+	t_node	new_node;
+
+	new_node = ft_calloc(1, sizeof(t_node));
+	
+}
+
+void	ft_separete_exps(t_node *node, char *input)
 {
 	int	i;
 	int	flag[2];
@@ -72,8 +80,8 @@ void	ft_separete_exps(t_exps *exp, char *input)
 		check_flag(flag, input[i]);
 		if (!flag[0] && (input[i] == 26 || input[i] == 124))
 		{
-			input = cut_exp(exp, input, i);
-			create_new_node(exp, input);
+			input = cut_exp(node, input, i);
+			create_new_node(node, input);
 			i = 0;
 			continue ;
 		}
