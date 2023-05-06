@@ -32,19 +32,12 @@ static void	check_flag(int *flag, char c)
 	}
 }
 
-// static int	is_token(int *flag, char c)
-// {
-// 	if (!flag[0])
-// 	{
-// 		if (c == 26 || c = 124)
-// 	}
-// }
-
-static char	*split_input(t_exps *exp, char *input, int end)
+static char	*cut_exp(t_exps *exp, char *input, int end)
 {
 	char	*str;
 	char	*expression;
-	char	i;
+	int		i;
+	int		j;
 	char	len;
 
 	exp = ft_calloc(i, 1);
@@ -55,6 +48,14 @@ static char	*split_input(t_exps *exp, char *input, int end)
 		i++;
 	}
 	exp->exp = expression;
+	expression = ft_calloc((ft_strlen(input) - i) + 1, 1);
+	j = 0;
+	while (input[i])
+	{
+		str[j] = input[i];
+		i++;
+		j++;
+	}
 	free(input);
 	return (str);
 }
@@ -71,8 +72,10 @@ void	ft_separete_exps(t_exps *exp, char *input)
 		check_flag(flag, input[i]);
 		if (!flag[0] && (input[i] == 26 || input[i] == 124))
 		{
-			input = split_input(input, i);
-			i = -1;
+			input = cut_exp(exp, input, i);
+			create_new_node(exp, input);
+			i = 0;
+			continue ;
 		}
 		i++;
 	}

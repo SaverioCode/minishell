@@ -12,22 +12,14 @@
 
 #include "libft.h"
 
-int	ft_numlen(long long num, int base)
+size_t	ft_strlen(char *str)
 {
-	int	counter;
+	size_t	len;
 
-	if (base < 2)
-		ft_error("Error: number base to low!\n");
-	counter = 0;
-	if (num < 0)
-	{
-		num *= -1;
-		counter++;
-	}
-	while (num > 0)
-	{	
-		num /= base;
-		counter++;
-	}
-	return (counter);
+	if (!str)
+		return (0);
+	len = 0;
+	while (str[len])
+		len++;
+	return (len);
 }
