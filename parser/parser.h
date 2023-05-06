@@ -6,7 +6,7 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/06 18:25:41 by sav              ###   ########.fr       */
+/*   Updated: 2023/05/06 18:33:07 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct s_input
 	char	*current;
 }	t_input;
 
-void	ft_free_nodes(t_node *node);
+void	ft_free(t_node *node, t_input *input);
 void	ft_parser(t_node *exp, t_input *input);
 void	ft_separete_exps(t_node *exp, t_input *inpt);
 char	get_token(t_node *node, t_input *input);

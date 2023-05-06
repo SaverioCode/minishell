@@ -6,7 +6,7 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/06 18:07:28 by sav              ###   ########.fr       */
+/*   Updated: 2023/05/06 18:34:26 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static char	*cut_exp(t_node *node, char *input, int end)
 	char	len;
 
 	if (!input)
-		return (NULL); // magari free e return //
+		return (NULL);
 	expr = ft_calloc(i, 1);
 	i = 0;
 	while (i < end)
@@ -107,8 +107,8 @@ void	ft_separete_exps(t_node *node, t_input *input)
 	}
 	if (flag[0])
 	{
+		ft_free(node, input);
 		write(2, "Error: quotes or parentesi\n", 27);
-		// friare tutto //
 		exit(1);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 18:12:09 by sav               #+#    #+#             */
-/*   Updated: 2023/05/06 18:27:21 by sav              ###   ########.fr       */
+/*   Updated: 2023/05/06 18:32:50 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	ft_free_oprs(t_opr *opr)
 	}
 }
 
-void	ft_free_nodes(t_node *node)
+static void	ft_free_nodes(t_node *node)
 {
 	t_node	*var;
 
@@ -58,4 +58,11 @@ void	ft_free_nodes(t_node *node)
 		node = node->next;
 		free(var);
 	}
+}
+
+void	ft_free(t_node *node, t_input *input)
+{
+	ft_free_node(node);
+	free(input->starting);
+	free(input->current);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/05 00:14:38 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/06 18:42:31 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,10 @@ char	get_token(t_node *node, t_input *input)
 		node->token == PIPE;
 	if (!token)
 	{
+		ft_free(node, input);
 		// write error showing raw_token //
-		// free //
-		// exit //
+		// write(1, "Error: invalid token (raw_token)\n", num);
+		exit(1);
 	}
 	free(raw_token);
 	return (token);
