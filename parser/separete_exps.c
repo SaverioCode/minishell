@@ -6,7 +6,7 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/06 18:34:26 by sav              ###   ########.fr       */
+/*   Updated: 2023/05/06 21:02:11 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ static char	*cut_exp(t_node *node, char *input, int end)
 		expr[i] = input[i];
 		i++;
 	}
-	node->exp = expr;
-	expr = ft_calloc((ft_strlen(input) - i) + 1, 1);
+	node->exps->exp = expr;
+	str = ft_calloc((ft_strlen(input) - i) + 1, 1);
 	j = 0;
 	while (input[i])
 	{
@@ -71,9 +71,7 @@ static void	create_new_node(t_node *node, t_input *input)
 	new_node->token = NULL;
 	new_node->status = 0;
 	new_node->fd_output = 0;
-	new_node->exp = NULL;
-	new_node->cmd = NULL;
-	new_node->opr = NULL;
+	new_node->exps = NULL;
 	new_node->next = NULL;
 	get_token(new_node, input);
 }

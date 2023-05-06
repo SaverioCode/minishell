@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_nodes.c                                    :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 18:12:09 by sav               #+#    #+#             */
-/*   Updated: 2023/05/06 18:32:50 by sav              ###   ########.fr       */
+/*   Updated: 2023/05/06 21:01:07 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void	ft_free_cmd(t_cmd *cmd)
 		}
 		free(cmd->args);
 	}
+	free(cmd);
 }
 
 static void	ft_free_oprs(t_opr *opr)
@@ -46,14 +47,19 @@ static void	ft_free_oprs(t_opr *opr)
 static void	ft_free_nodes(t_node *node)
 {
 	t_node	*var;
+	t_exp	*exp;
 
 	while(node)
 	{
-		free(node->exp);
-		ft_free_oprs(node->opr);
-		free(node->opr);
-		free_cmd(node->cmd);
-		free(node->cmd);
+		exp = node->exps;
+		while (exp)
+		{
+			free(exp->exp);
+			ft_free_oprs(exp->opr);
+			ft_free_cmd(exp->cmd);
+			exp = exp->next;
+		}
+		free(exp);
 		var = node;
 		node = node->next;
 		free(var);

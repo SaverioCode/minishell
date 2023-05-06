@@ -6,7 +6,7 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:46 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/06 18:05:04 by sav              ###   ########.fr       */
+/*   Updated: 2023/05/06 20:21:55 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ static void	set_root(t_node *root)
 	root->status = 0;
 	root->fd_output = 0;
 	root->exp = NULL;
-	root->cmd = NULL;
-	root->opr = NULL;
 	root->next = NULL;
 }
 
@@ -44,6 +42,7 @@ int	main(int ac, char **av, char **env)
 		}
 		input.current = input.starting;
 		ft_parser(&root, &input);
+		// ft_run_all(&root);
 	}
 	(void)env;
 	return (0);
