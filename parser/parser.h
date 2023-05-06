@@ -6,7 +6,7 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/06 21:00:36 by sav              ###   ########.fr       */
+/*   Updated: 2023/05/06 21:29:44 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,14 @@ typedef struct s_input
 	char	*starting;
 	char	*current;
 }	t_input;
+
+/// eventualy to put this structure in minishell.h and delete the one above ///
+// typedef struct s_info
+// {
+// 	char	**env;
+// 	char	*starting_input;
+// 	char	*current_input;
+// }	t_info;
 
 void	ft_free(t_node *node, t_input *input);
 void	ft_parser(t_node *exp, t_input *input);
