@@ -6,7 +6,7 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:46 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/06 20:21:55 by sav              ###   ########.fr       */
+/*   Updated: 2023/05/06 21:04:16 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	set_root(t_node *root)
 	root->token = ROOT;
 	root->status = 0;
 	root->fd_output = 0;
-	root->exp = NULL;
+	root->exps = NULL;
 	root->next = NULL;
 }
 
