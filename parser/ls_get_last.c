@@ -1,15 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   ls_get_last.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/05 00:14:38 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/07 02:57:25 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "parser.h"
 
-void	*ft_get_last_node()
+t_node	*ls_get_last_node(t_node *node)
+{
+	if (!node)
+		return (0);
+	while (node->next)
+		node = node->next;
+	return (node);
+}
