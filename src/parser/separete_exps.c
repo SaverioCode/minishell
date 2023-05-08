@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/08 16:23:28 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/08 19:37:53 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ static t_node	*create_new_node(t_node *node, t_info *info)
 {
 	t_node	*new_node;
 
+	if (node->token == END)
+		return (NULL);
 	new_node = ft_calloc(1, sizeof(t_node));
 	node->next = new_node;
 	set_tnode(node);
@@ -85,6 +87,7 @@ int	ft_separete_exps(t_node *root, t_info *info, int *flag)
 		check_flag(flag, str[i]);
 		if (!flag[0] && (str[i] == 38 || str[i] == 124 || !str[i + 1]))
 		{
+			cut_current_input(node, info, i);
 			info->current_input = cut_exp(node, str, i);
 			if (get_token(node, info) == -1)
 				return (-1);

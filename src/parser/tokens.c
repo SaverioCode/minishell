@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/08 17:00:15 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/08 19:04:38 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,33 @@ static char	*cut_nbytes(t_info *info, int size)
 	return (raw_token);
 }
 
-static char	*get_raw_token(t_info *info)
-{
-	char	*raw_token;
-	char	*str;
-	int		i;
-	char	size;
+// static char	*get_raw_token(t_info *info)
+// {
+// 	char	*raw_token;
+// 	char	*str;
+// 	int		i;
+// 	char	size;
 
-	size = 0;
-	str = info->current_input;
-	i = 0;
-	if (str[i] == 38 && str[i] != 38)
-		size = 1;
-	else if (str[i] == 124 && str[i] != 124)
-		size = 1;
-	else if (str[i] == 124 && str[i] == 124 && str[i] != 124)
-		size = 2;
-	raw_token = cut_nbytes(info, size);
-	return (raw_token);
-}
+// 	size = 0;
+// 	str = info->current_input;
+// 	i = 0;
+// 	if (str[i] == 38 && str[i] != 38)
+// 	{
+// 		size = 1;
+// 		node->token == AND;
+// 	}
+// 	else if (str[i] == 124 && str[i] != 124)
+// 	{
+// 		size = 1;
+// 		node->token == PIPE;
+// 	}
+// 	else if (str[i] == 124 && str[i] == 124 && str[i] != 124)
+// 	{	
+// 		size = 2;
+// 		node->token == OR;
+// 	}
+// 	return (raw_token);
+// }
 
 int	get_token(t_node *node, t_info *info)
 {
@@ -66,14 +74,12 @@ int	get_token(t_node *node, t_info *info)
 	char	*raw_token;
 	char	len;
 
-	raw_token = get_raw_token(info);
-	if (check_current_input(info) == -1)
-		token = NULL;
-	if (ft_strcmp(raw_token, "&&"))
+	// raw_token = get_raw_token(info);
+	if (ft_strncmp(info->current_input, "&&", 2))
 		node->token == AND;
-	else if (ft_strcmp(raw_token, "||"))
+	else if (ft_strncmp(info->current_input, "||", 2))
 		node->token == OR;
-	else if (ft_strcmp(raw_token, "|"))
+	else if (ft_strncmp(info->current_input, "|", 1))
 		node->token == PIPE;
 	if (!token)
 	{
@@ -83,6 +89,7 @@ int	get_token(t_node *node, t_info *info)
 		free(raw_token);
 		return (-1);
 	}
+	raw_token = cut_nbytes(info, size);
 	free(raw_token);
 	return (0);
 }
