@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/08 13:05:00 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/08 13:13:35 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ void	ft_free(t_node *node, t_info *info);
 void	ft_check_input(int ac, char **av);
 void	ft_init_shell(void);
 char	*ft_print_prompt(void);
+t_node	*ls_get_last_node(t_node *node);
 
 #endif

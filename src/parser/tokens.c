@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/08 11:15:30 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/08 13:25:37 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,14 @@ static char	*cut_from_index(char *str, int i)
 	return (new_str);
 }
 
-static char	*get_raw_token(t_input *input)
+static char	*get_raw_token(t_info *info)
 {
 	char	*raw_token;
 	char	*str;
 	int		i;
 	int		j;
 
-	str = input->current;
+	str = info->current_input;
 	i = 0;
 	while (str[i])
 	{
@@ -79,17 +79,17 @@ static char	*get_raw_token(t_input *input)
 		raw_token[0] = str[i];
 		j++;
 	}
-	input->current = cut_from_index(input->current, i);
+	info->current_input = cut_from_index(info->current_input, i);
 	return (raw_token);
 }
 
-char	get_token(t_node *node, t_input *input)
+char	get_token(t_node *node, t_info *info)
 {
 	char	token;
 	char	*raw_token;
 	char	len;
 
-	raw_token = get_raw_token(input);
+	raw_token = get_raw_token(info);
 	raw_token = ft_trim_raw_token(raw_token);
 	if (ft_strcmp(raw_token, "&&"))
 		node->token == AND;
@@ -99,7 +99,7 @@ char	get_token(t_node *node, t_input *input)
 		node->token == PIPE;
 	if (!token)
 	{
-		ft_free(node, input);
+		ft_free(node, info);
 		// write error showing raw_token //
 		// write(1, "Error: invalid token (raw_token)\n", num);
 		exit(1);

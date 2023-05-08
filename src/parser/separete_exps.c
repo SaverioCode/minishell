@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/08 11:15:20 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/08 13:21:48 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,29 +61,25 @@ static char	*cut_exp(t_node *node, char *input, int end)
 	return (str);
 }
 
-static void	create_new_node(t_node *node, t_input *input)
+static void	create_new_node(t_node *node, t_info *info)
 {
 	t_node	*new_node;
 
 	new_node = ft_calloc(1, sizeof(t_node));
 	node->next = new_node;
-	new_node->token = NULL;
-	new_node->status = 0;
-	new_node->fd_output = 0;
-	new_node->exps = NULL;
-	new_node->next = NULL;
-	get_token(new_node, input);
+	set_tnode(node);
+	get_token(new_node, info);
 }
 
-void	ft_separete_exps(t_node *node, t_input *input)
+void	ft_separete_exps(t_node *node, t_info *info)
 {
 	char	*str;
 	int		i;
 	int		flag[2];
 
-	if (!node)
+	if (!node || !info)
 		return ;
-	input = input->starting;
+	str = info->starting_input;
 	flag[0] = 0;
 	i = 0;
 	while (str[i])
@@ -91,11 +87,13 @@ void	ft_separete_exps(t_node *node, t_input *input)
 		check_flag(flag, str[i]);
 		if (!flag[0] && (str[i] == 38 || str[i] == 124 || !str[i + 1]))
 		{
-			node = ls_get_last_node(node);
-			input->current = cut_exp(node, input, i);
+			node = ls_get_last_tnode(node);
+			info->current_input = cut_exp(node, str, i);
 			if (str[i + 1])
-				create_new_node(node, input);
-			str = input->current;
+				create_new_node(node, info);
+			// insert here $ expansion //
+			// insert here parentesi check and tree //
+			str = info->current_input;
 			if (!str)
 				break ;
 			i = -1;
@@ -104,7 +102,7 @@ void	ft_separete_exps(t_node *node, t_input *input)
 	}
 	if (flag[0])
 	{
-		ft_free(node, input);
+		ft_free(node, info);
 		write(2, "Error: quotes or parentesi\n", 27);
 		exit(1);
 	}
