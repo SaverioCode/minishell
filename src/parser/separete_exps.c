@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/08 13:21:48 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/08 13:35:08 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,16 +71,12 @@ static void	create_new_node(t_node *node, t_info *info)
 	get_token(new_node, info);
 }
 
-void	ft_separete_exps(t_node *node, t_info *info)
+void	ft_separete_exps(t_node *node, t_info *info, int *flag)
 {
 	char	*str;
 	int		i;
-	int		flag[2];
 
-	if (!node || !info)
-		return ;
 	str = info->starting_input;
-	flag[0] = 0;
 	i = 0;
 	while (str[i])
 	{
@@ -91,19 +87,12 @@ void	ft_separete_exps(t_node *node, t_info *info)
 			info->current_input = cut_exp(node, str, i);
 			if (str[i + 1])
 				create_new_node(node, info);
-			// insert here $ expansion //
-			// insert here parentesi check and tree //
+			ft_create_exps_tree(node);
 			str = info->current_input;
 			if (!str)
 				break ;
 			i = -1;
 		}
 		i++;
-	}
-	if (flag[0])
-	{
-		ft_free(node, info);
-		write(2, "Error: quotes or parentesi\n", 27);
-		exit(1);
 	}
 }

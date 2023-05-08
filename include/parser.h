@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/08 13:29:30 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/08 13:35:02 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	set_texp(t_exp *node);
 void	set_topr(t_opr *node);
 void	set_tcmd(t_cmd *node);
 void	ft_parser(t_node *exp, t_info *input);
-void	ft_separete_exps(t_node *exp, t_info *inpt);
+void	ft_separete_exps(t_node *exp, t_info *info, int *flag);
 char	get_token(t_node *node, t_info *input);
 void	ft_create_exps_tree(t_node *node);
 
