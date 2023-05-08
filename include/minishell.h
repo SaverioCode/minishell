@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/08 13:04:11 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/08 13:05:00 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ typedef struct s_info
 
 void	set_tenv(t_env *node);
 void	set_tinfo(t_info *info);
-void	ft_free_info(t_info *info);
 void	ft_free(t_node *node, t_info *info);
 void	ft_check_input(int ac, char **av);
 void	ft_init_shell(void);

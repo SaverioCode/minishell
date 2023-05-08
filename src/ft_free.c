@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 18:12:09 by sav               #+#    #+#             */
-/*   Updated: 2023/05/08 13:04:05 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/08 13:04:58 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	ft_free_oprs(t_opr *opr)
 	}
 }
 
-void	ft_free_parse(t_node *node)
+static void	ft_free_parse(t_node *node)
 {
 	t_node	*var;
 	t_exp	*exp;
@@ -68,7 +68,7 @@ void	ft_free_parse(t_node *node)
 	}
 }
 
-void	ft_free_info(t_info *info)
+static void	ft_free_info(t_info *info)
 {
 	t_env	*env;
 	t_env	*var;
