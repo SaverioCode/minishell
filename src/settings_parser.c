@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   settings.c                                         :+:      :+:    :+:   */
+/*   settings_parser.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 10:35:21 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/08 11:15:25 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/08 13:30:04 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ void	set_topr(t_opr *node)
 
 void	set_texp(t_exp *node)
 {
-	node->parentesis = 0;
+	node->shlvl = 0;
+	node->token = NULL;
+	node->status = 0;
 	node->exp = NULL;
 	node->cmd = NULL;
 	node->opr = NULL;

@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/08 13:13:28 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/08 13:29:30 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ typedef struct s_opr
 
 typedef struct	s_exp
 {
-	char			parentesis;
+	short int		shlvl;
+	char			token;
+	short int		status;
 	char			*exp;
 	t_cmd			*cmd;
 	t_opr			*opr;
