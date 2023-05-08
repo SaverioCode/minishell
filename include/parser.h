@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/08 13:41:00 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/08 14:53:11 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,6 @@
 # define AND  0b10000010
 # define OR   0b10000011
 # define PIPE 0b10000100
-
-# define TRUE 1
-# define FALSE 0
 
 typedef struct s_cmd
 {
