@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   settings_mini.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/08 12:38:25 by fgarzi-c         ###   ########.fr       */
+/*   Created: 2023/05/08 11:24:01 by fgarzi-c          #+#    #+#             */
+/*   Updated: 2023/05/08 11:26:01 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_parser(t_node *root, t_info *info)
+void	set_tenv(t_env *node)
 {
-	t_node	*node;
+	node->name = NULL;
+	node->value = NULL;
+	node->next = NULL;
+}
 
-	if (!root)
-	{
-		ft_free(NULL, info);
-		// write error //
-		exit(1);
-	}
-	ft_separete_exps(root, info);
-	node = root;
-	while (node)
-	{
-		ft_create_exps_tree(root);
-		node = node->next;
-	}
+void	set_tinfo(t_info *info)
+{
+	info->env = NULL;
+	info->starting_input = NULL;
+	info->current_input = NULL;
 }

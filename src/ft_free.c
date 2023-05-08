@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 18:12:09 by sav               #+#    #+#             */
-/*   Updated: 2023/05/08 11:15:06 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/08 13:04:05 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,11 @@ static void	ft_free_oprs(t_opr *opr)
 	}
 }
 
-static void	ft_free_nodes(t_node *node)
+void	ft_free_parse(t_node *node)
 {
 	t_node	*var;
 	t_exp	*exp;
+	t_exp	*old_exp;
 
 	while(node)
 	{
@@ -57,18 +58,35 @@ static void	ft_free_nodes(t_node *node)
 			free(exp->exp);
 			ft_free_oprs(exp->opr);
 			ft_free_cmd(exp->cmd);
+			old_exp = exp;
 			exp = exp->next;
+			free(exp);
 		}
-		free(exp);
 		var = node;
 		node = node->next;
 		free(var);
 	}
 }
 
-void	ft_free(t_node *node, t_input *input)
+void	ft_free_info(t_info *info)
 {
-	ft_free_node(node);
-	free(input->starting);
-	free(input->current);
+	t_env	*env;
+	t_env	*var;
+
+	env = info->env;
+	while (env)
+	{
+		free(env->name);
+		free(env->value);
+		var = env;
+		env = env->next;
+		free(env);		
+	}
+	free(info);
+}
+
+void	ft_free(t_node *node, t_info *info)
+{
+	ft_free_parse(node);
+	ft_free_info(info);
 }
