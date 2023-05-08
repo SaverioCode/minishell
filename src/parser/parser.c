@@ -6,13 +6,13 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/08 13:35:26 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/08 13:40:57 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_parser(t_node *root, t_info *info)
+int	ft_parser(t_node *root, t_info *info)
 {
 	t_node	*node;
 	int		flag[2];
@@ -24,7 +24,8 @@ void	ft_parser(t_node *root, t_info *info)
 		exit(1);
 	}
 	flag[0] = 0;
-	ft_separete_exps(root, info, flag);
+	if (ft_separete_exps(root, info, flag) == -1)
+		return (-1);
 	if (flag[0])
 	{
 		ft_free(node, info);

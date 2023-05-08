@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:46 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/08 11:13:36 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/08 13:44:50 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	main(int ac, char **av, char **env)
 {
 	t_node	root;
-	t_input	input;
+	t_info	info;
 
 	ft_check_input(ac, av);
 	ft_init_shell();
@@ -23,17 +23,21 @@ int	main(int ac, char **av, char **env)
 	root.token = ROOT;
 	while (1)
 	{
-		input.starting = ft_print_prompt();
-		if (!input.starting)
+		info.starting_input = ft_print_prompt();
+		if (!info.starting_input)
 			continue ;
 		// just for testing maintaining a clean exit //
-		if (input.starting && input.starting[0] == 'q')
+		if (info.starting_input && info.starting_input[0] == 'q')
 		{	
-			free(input.starting);
+			free(info.starting_input);
 			return (0);
 		}
-		input.current = input.starting;
-		ft_parser(&root, &input);
+		info.current_input = info.starting_input;
+		if (ft_parser(&root, &info) == -1)
+		{
+			ft_free(&root, &info);
+			continue ;
+		}
 		// ft_run_all(&root);
 	}
 	(void)env;

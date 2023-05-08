@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:03:46 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/04 01:29:50 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/08 13:43:10 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ char	*ft_print_prompt(void)
 	str = readline("\\> ");
 	if (check_input(str))
 		add_history(str);
+		
 	return (str);
 }
 
