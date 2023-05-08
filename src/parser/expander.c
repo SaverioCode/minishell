@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 02:53:39 by sav               #+#    #+#             */
-/*   Updated: 2023/05/08 11:15:02 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/08 15:00:24 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,13 @@ static int	find_index(char *str)
 		if (str[i] == 96)
 		{
 			if (flag)
+			{
 				flag = 0;
+			}
 			else if (!flag)
+			{
 				flag = 1;
+			}
 		}
 		if (!flag && str[i] == 36)
 			return (i);
@@ -94,19 +98,13 @@ static char	*sub_dollar(t_exp *exps, char **env, int i)
 void	ft_expand_dollar(t_node *node, t_info *info)
 {
 	char	*str;
-	t_exp	*exps;
 	int		i;
 
-	exps = node->exps;
-	while (exps)
+	while (1)
 	{
-		while (1)
-		{
-			i = find_index(exps->exp);
-			if (i < 0)
-				break ;
-			exps->exp = sub_dollar(exps, info->env, i);
-		}			
-		exps = exps->next;
+		i = find_index(node->exps->exp);
+		if (i < 0)
+			break ;
+		sub_dollar(node, info->env, i);
 	}
 }
