@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:46 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/08 13:44:50 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/08 16:04:17 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	main(int ac, char **av, char **env)
 	ft_check_input(ac, av);
 	ft_init_shell();
 	set_tnode(&root);
-	root.token = ROOT;
 	while (1)
 	{
 		info.starting_input = ft_print_prompt();

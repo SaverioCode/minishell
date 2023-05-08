@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/08 13:39:47 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/08 16:23:28 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,21 +61,23 @@ static char	*cut_exp(t_node *node, char *input, int end)
 	return (str);
 }
 
-static void	create_new_node(t_node *node, t_info *info)
+static t_node	*create_new_node(t_node *node, t_info *info)
 {
 	t_node	*new_node;
 
 	new_node = ft_calloc(1, sizeof(t_node));
 	node->next = new_node;
 	set_tnode(node);
-	get_token(new_node, info);
+	return (new_node);
 }
 
-int	ft_separete_exps(t_node *node, t_info *info, int *flag)
+int	ft_separete_exps(t_node *root, t_info *info, int *flag)
 {
+	t_node	*node;
 	char	*str;
 	int		i;
 
+	node = root;
 	str = info->starting_input;
 	i = 0;
 	while (str[i])
@@ -83,15 +85,16 @@ int	ft_separete_exps(t_node *node, t_info *info, int *flag)
 		check_flag(flag, str[i]);
 		if (!flag[0] && (str[i] == 38 || str[i] == 124 || !str[i + 1]))
 		{
-			node = ls_get_last_tnode(node);
 			info->current_input = cut_exp(node, str, i);
-			if (str[i + 1])
-				create_new_node(node, info);
+			if (get_token(node, info) == -1)
+				return (-1);
 			if (ft_create_exps_tree(node) == -1)
 				return (-1);
+			if (node->token)
+				node = create_new_node(node, info);
 			str = info->current_input;
-			if (!str)
-				break ;
+			// if (!str)
+			// 	break ;
 			i = -1;
 		}
 		i++;

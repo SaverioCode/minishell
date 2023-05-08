@@ -6,55 +6,38 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/08 13:25:37 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/08 17:00:15 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char *ft_trim_raw_token(char *str)
+static char	*cut_nbytes(t_info *info, int size)
 {
 	char	*new_str;
+	char	*str;
+	char	*raw_token;
 	int		i;
-	int		end;
 
-	i = ft_strlen(str) - 1;
-	if (i == 0)
-		return (str);
-	while (i >= 0)
+	if (!size)
+		return (0);
+	str = info->current_input;
+	i = 0;
+	new_str = ft_calloc(ft_strlen(str) - size, 1);
+	raw_token = ft_calloc(size + 1, 1);
+	while (i < size)
 	{
-		if (is_printable(str[i]));
-		{
-			end = i;
-			break;
-		}
-		i--;
+		raw_token[i] = str[i];
+		i++;
 	}
-	new_str = ft_calloc(end + 2, 1);
-	while (end >= 0)
-	{
-		new_str[end] = str[end];
-		end--;
-	}
-	free(str);
-	return (new_str);
-}
-
-static char	*cut_from_index(char *str, int i)
-{
-	char	*new_str;
-	int		j;
-
-	j = 0;
-	new_str = ft_calloc(ft_strlen(str) - i + 1, 1);
 	while (str[i])
 	{
-		new_str[j] = str[i]; 
+		new_str[i - size] = str[i]; 
 		i++;
-		j++;
 	}
-	free(str);
-	return (new_str);
+	free(info->current_input);
+	info->current_input = new_str;
+	return (raw_token);
 }
 
 static char	*get_raw_token(t_info *info)
@@ -62,35 +45,30 @@ static char	*get_raw_token(t_info *info)
 	char	*raw_token;
 	char	*str;
 	int		i;
-	int		j;
+	char	size;
 
+	size = 0;
 	str = info->current_input;
 	i = 0;
-	while (str[i])
-	{
-		if (str[i] != 38 && str[i] != 124 && is_printable(str[i]))
-			break ;
-		i++;
-	}
-	raw_token = ft_calloc(i + 1, 1);
-	j = 0;
-	while (j < i)
-	{
-		raw_token[0] = str[i];
-		j++;
-	}
-	info->current_input = cut_from_index(info->current_input, i);
+	if (str[i] == 38 && str[i] != 38)
+		size = 1;
+	else if (str[i] == 124 && str[i] != 124)
+		size = 1;
+	else if (str[i] == 124 && str[i] == 124 && str[i] != 124)
+		size = 2;
+	raw_token = cut_nbytes(info, size);
 	return (raw_token);
 }
 
-char	get_token(t_node *node, t_info *info)
+int	get_token(t_node *node, t_info *info)
 {
 	char	token;
 	char	*raw_token;
 	char	len;
 
 	raw_token = get_raw_token(info);
-	raw_token = ft_trim_raw_token(raw_token);
+	if (check_current_input(info) == -1)
+		token = NULL;
 	if (ft_strcmp(raw_token, "&&"))
 		node->token == AND;
 	else if (ft_strcmp(raw_token, "||"))
@@ -102,8 +80,9 @@ char	get_token(t_node *node, t_info *info)
 		ft_free(node, info);
 		// write error showing raw_token //
 		// write(1, "Error: invalid token (raw_token)\n", num);
-		exit(1);
+		free(raw_token);
+		return (-1);
 	}
 	free(raw_token);
-	return (token);
+	return (0);
 }
