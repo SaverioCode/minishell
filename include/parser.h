@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/06 21:29:44 by sav              ###   ########.fr       */
+/*   Updated: 2023/05/08 11:12:29 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_opr
 	struct s_opr	*next;
 }	t_opr;
 
-typedef struct	t_exp
+typedef struct	s_exp
 {
 	char			parentesis;
 	char			*exp;
@@ -68,6 +68,10 @@ typedef struct s_input
 // 	char	*current_input;
 // }	t_info;
 
+void	set_tnode(t_node *node);
+void	set_texp(t_exp *node);
+void	set_topr(t_opr *node);
+void	set_tcmd(t_cmd *node);
 void	ft_free(t_node *node, t_input *input);
 void	ft_parser(t_node *exp, t_input *input);
 void	ft_separete_exps(t_node *exp, t_input *inpt);

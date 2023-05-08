@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/01 11:51:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/04 23:36:00 by fgarzi-c         ###   ########.fr       */
+/*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
+/*   Updated: 2023/05/08 11:15:15 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-# include "./libft/libft.h"
-# include "./readline/readline.h"
-# include "./parser/parser.h"
+void	ft_parser(t_node *root, t_input *input)
+{
+	t_node	*node;
 
-void	ft_check_input(int ac, char **av);
-void	ft_init_shell(void);
-char	*ft_print_prompt(void);
-
-#endif
+	if (!root)
+	{
+		ft_free(NULL, input);
+		// write error //
+		exit(1);
+	}
+	ft_separete_exps(root, input);
+	node = root;
+	while (node)
+	{
+		ft_create_exps_tree(root);
+		node = node->next;
+	}
+}

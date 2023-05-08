@@ -6,7 +6,7 @@
 #    By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/01 11:50:39 by fgarzi-c          #+#    #+#              #
-#    Updated: 2023/05/04 23:11:41 by fgarzi-c         ###   ########.fr        #
+#    Updated: 2023/05/08 11:10:13 by fgarzi-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,14 +20,14 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
 all:
-	@make -C ./readline
 	@make -C ./libft
 	@make -C ./src
 	@$(CC) $(CFLAGS) -c $(SRCS)
 	@$(CC) $(CFLAGS) $(LIB_L) $(OBJS) $(LIB_R) $(LIB_RH) -lcurses -o $(NAME)
 
 config:
-	@cd readline && sh ./configure && cd ..
+	@cd readline && sh ./include/configure && cd ..
+	@make -C ./include/readline
 
 clean:
 	@make clean -C ./libft

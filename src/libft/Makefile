@@ -6,13 +6,13 @@
 #    By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/01 17:28:53 by fgarzi-c          #+#    #+#              #
-#    Updated: 2023/05/04 23:11:09 by fgarzi-c         ###   ########.fr        #
+#    Updated: 2023/05/08 10:37:41 by fgarzi-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 SRCS = ft_strlen.c ft_error.c ft_numlen.c ft_calloc.c ft_itoa.c \
-	ft_atoi.c
+	ft_atoi.c int ft_strcmp.c
 OBJS = $(SRCS:.c=.o)
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror

@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/01 17:29:03 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/01 20:59:21 by fgarzi-c         ###   ########.fr       */
+/*   Created: 2023/05/01 11:51:09 by fgarzi-c          #+#    #+#             */
+/*   Updated: 2023/05/08 11:14:38 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
-# include <unistd.h>
-# include <limits.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <sys/ioctl.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+# include "../src/libft/libft.h"
+# include "./readline/readline.h"
+# include "parser.h"
 
-size_t	ft_strlen(char *str);
-int		ft_numlen(long long num, int base);
-void	ft_error(char *str);
-void	*ft_calloc(size_t bytes, size_t size);
-int		ft_atoi(const char *str);
-char	*ft_itoa(long num);
+void	ft_check_input(int ac, char **av);
+void	ft_init_shell(void);
+char	*ft_print_prompt(void);
 
 #endif

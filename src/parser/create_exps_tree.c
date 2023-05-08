@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls_get_last.c                                      :+:      :+:    :+:   */
+/*   create_exps_tree.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/07 02:57:25 by sav              ###   ########.fr       */
+/*   Created: 2023/05/06 19:29:55 by sav               #+#    #+#             */
+/*   Updated: 2023/05/08 11:12:45 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "minishell.h"
 
-t_node	*ls_get_last_node(t_node *node)
+void	ft_create_exps_tree(t_node *node)
 {
-	if (!node)
-		return (0);
-	while (node->next)
-		node = node->next;
-	return (node);
+	ft_expand_dollar(node);
+	ft_parentesis(node);
 }
