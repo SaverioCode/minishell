@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/09 19:53:16 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/09 20:00:41 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,23 @@ static t_node	*create_new_node(t_node *node, t_info *info)
 	node->next = new_node;
 	set_tnode(new_node);
 	return (new_node);
+}
+
+static int	check_exps_exp(t_node *node)
+{
+	int		i;
+	char	*str;
+
+	if (node->token != END)
+		return (0);
+	str = node->exps->exp;
+	while(str[i])
+	{
+		if (is_printable(str[i]))
+			return (0);
+		i++;
+	}
+	return (-1);
 }
 
 int	ft_separete_exps(t_node *root, t_info *info, int *flag)
