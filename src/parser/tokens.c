@@ -6,13 +6,13 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/09 18:33:51 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/09 20:46:04 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void cut_token(t_node *node, t_info *info)
+static void	cut_token(t_node *node, t_info *info)
 {
 	int		size;
 	char	*str;

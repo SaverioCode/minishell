@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/09 20:02:56 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/09 20:45:44 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static int	check_exps_exp(t_node *node)
 	if (node->token != END)
 		return (0);
 	str = node->exps->exp;
-	while(str[i])
+	while (str[i])
 	{
 		if (is_printable(str[i]))
 			return (0);

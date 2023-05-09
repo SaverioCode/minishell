@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/09 18:25:51 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/09 22:41:19 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,16 @@ typedef struct s_opr
 	struct s_opr	*next;
 }	t_opr;
 
-typedef struct	s_exp
+typedef struct s_node
 {
 	short int		shlvl;
 	char			token;
 	short int		status;
+	int				fd_output;
 	char			*exp;
 	t_cmd			*cmd;
 	t_opr			*opr;
-	struct t_exp	*next;
-}	t_exp;
-
-typedef struct s_node
-{
-	char			token;
-	short int		status;
-	int				fd_output;
-	t_exp			*exps;
+	struct s_node	*exps;
 	struct s_node	*next;
 }	t_node;
 
@@ -57,7 +50,6 @@ typedef struct s_node
 // in minishell.h //
 
 void	set_tnode(t_node *node);
-void	set_texp(t_exp *node);
 void	set_topr(t_opr *node);
 void	set_tcmd(t_cmd *node);
 int		ft_parser(t_node *exp, t_info *input);
