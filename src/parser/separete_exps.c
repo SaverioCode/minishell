@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/09 19:45:59 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/09 19:53:16 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ int	ft_separete_exps(t_node *root, t_info *info, int *flag)
 			if (get_token(node, info) == -1)
 				return (-1);
 			if (ft_create_exps_tree(node) == -1)
+				return (-1);
+			if (check_exps_exp(node) == -1)
 				return (-1);
 			node = create_new_node(node, info);
 			str = info->current_input;
