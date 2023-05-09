@@ -6,14 +6,14 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/08 19:24:31 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/09 18:25:51 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-# define END 0b10000001
+# define END  0b10000001
 # define AND  0b10000010
 # define OR   0b10000011
 # define PIPE 0b10000100
@@ -50,6 +50,11 @@ typedef struct s_node
 	t_exp			*exps;
 	struct s_node	*next;
 }	t_node;
+
+/////// CHECK IF DO THE THING WRITTEN BELOW //////////
+// in order to keep the work ordered and not having //
+// <untype> arguments all functions declarations are //
+// in minishell.h //
 
 void	set_tnode(t_node *node);
 void	set_texp(t_exp *node);

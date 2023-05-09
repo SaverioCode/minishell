@@ -6,67 +6,36 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/08 19:04:38 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/09 18:33:51 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*cut_nbytes(t_info *info, int size)
+static void cut_token(t_node *node, t_info *info)
 {
-	char	*new_str;
+	int		size;
 	char	*str;
-	char	*raw_token;
+	int		len;
 	int		i;
 
-	if (!size)
-		return (0);
-	str = info->current_input;
+	if (node->token == AND || node->token == OR)
+		size = 2;
+	else if (node->token == PIPE)
+		size = 1;
+	else if (node->token == END)
+		return (info->current_input);
+	len = ft_strlen(info->current_input) - size;
+	str = ft_calloc(len + 1, 1);
 	i = 0;
-	new_str = ft_calloc(ft_strlen(str) - size, 1);
-	raw_token = ft_calloc(size + 1, 1);
-	while (i < size)
+	while (i < len)
 	{
-		raw_token[i] = str[i];
-		i++;
-	}
-	while (str[i])
-	{
-		new_str[i - size] = str[i]; 
+		str[i] = info->current_input[i + size];
 		i++;
 	}
 	free(info->current_input);
-	info->current_input = new_str;
-	return (raw_token);
+	info->current_input = str;
 }
-
-// static char	*get_raw_token(t_info *info)
-// {
-// 	char	*raw_token;
-// 	char	*str;
-// 	int		i;
-// 	char	size;
-
-// 	size = 0;
-// 	str = info->current_input;
-// 	i = 0;
-// 	if (str[i] == 38 && str[i] != 38)
-// 	{
-// 		size = 1;
-// 		node->token == AND;
-// 	}
-// 	else if (str[i] == 124 && str[i] != 124)
-// 	{
-// 		size = 1;
-// 		node->token == PIPE;
-// 	}
-// 	else if (str[i] == 124 && str[i] == 124 && str[i] != 124)
-// 	{	
-// 		size = 2;
-// 		node->token == OR;
-// 	}
-// 	return (raw_token);
-// }
 
 int	get_token(t_node *node, t_info *info)
 {
@@ -74,22 +43,23 @@ int	get_token(t_node *node, t_info *info)
 	char	*raw_token;
 	char	len;
 
-	// raw_token = get_raw_token(info);
 	if (ft_strncmp(info->current_input, "&&", 2))
 		node->token == AND;
+	else if (ft_strncmp(info->current_input, "&", 1))
+		node->token == NULL;
 	else if (ft_strncmp(info->current_input, "||", 2))
 		node->token == OR;
 	else if (ft_strncmp(info->current_input, "|", 1))
 		node->token == PIPE;
+	else
+		node->token == END;
 	if (!token)
 	{
 		ft_free(node, info);
 		// write error showing raw_token //
 		// write(1, "Error: invalid token (raw_token)\n", num);
-		free(raw_token);
 		return (-1);
 	}
-	raw_token = cut_nbytes(info, size);
-	free(raw_token);
+	cut_token(node, info);
 	return (0);
 }
