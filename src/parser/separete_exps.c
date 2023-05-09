@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/09 19:41:21 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/09 19:45:59 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	ft_separete_exps(t_node *root, t_info *info, int *flag)
 	node = root;
 	str = info->starting_input;
 	i = 0;
-	while (str[i])
+	while (str && str[i])
 	{
 		check_flag(flag, str[i]);
 		if (!flag[0] && (str[i] == 38 || str[i] == 124 || !str[i + 1]))
