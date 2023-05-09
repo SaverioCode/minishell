@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/09 20:00:41 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/09 20:02:56 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ static int	check_exps_exp(t_node *node)
 			return (0);
 		i++;
 	}
+	// write error I think highlighting that current token is invalid //
+	// to be sure check bash error handling in this situation //
 	return (-1);
 }
 
