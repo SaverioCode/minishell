@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/09 22:46:16 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/09 22:50:56 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ static t_node	*create_new_node(t_node *node, t_info *info)
 	node->next = new_node;
 	new_node->exps = new_exps;
 	set_tnode(new_node);
+	set_tnode(new_exps);
 	return (new_node);
 }
 
@@ -95,7 +96,7 @@ static int	check_exps_exp(t_node *node)
 	return (-1);
 }
 
-int	ft_separete_exps(t_node *root, t_info *info, int *flag)
+int	ft_separete_nodes(t_node *root, t_info *info, int *flag)
 {
 	t_node	*node;
 	char	*str;
