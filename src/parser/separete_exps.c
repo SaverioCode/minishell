@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/09 19:38:24 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/09 19:41:21 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,6 @@ int	ft_separete_exps(t_node *root, t_info *info, int *flag)
 				return (-1);
 			node = create_new_node(node, info);
 			str = info->current_input;
-			// if (!str)
-			// 	break ;
 			i = -1;
 		}
 		i++;

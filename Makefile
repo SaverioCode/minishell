@@ -6,7 +6,7 @@
 #    By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/01 11:50:39 by fgarzi-c          #+#    #+#              #
-#    Updated: 2023/05/08 11:10:13 by fgarzi-c         ###   ########.fr        #
+#    Updated: 2023/05/09 19:42:59 by fgarzi-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = minishell
 LIB_L = ./libft/libft.a
 LIB_R = ./readline/libreadline.a
 LIB_RH = ./readline/libhistory.a
+LIBS = $(LIB_L) $(LIB_R) $(LIB_RH)
 SRCS = minishell.c init_shell.c input.c
 OBJS = $(SRCS:.c=.o)
 CC = gcc
@@ -23,7 +24,7 @@ all:
 	@make -C ./libft
 	@make -C ./src
 	@$(CC) $(CFLAGS) -c $(SRCS)
-	@$(CC) $(CFLAGS) $(LIB_L) $(OBJS) $(LIB_R) $(LIB_RH) -lcurses -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) -lcurses -o $(NAME)
 
 config:
 	@cd readline && sh ./include/configure && cd ..
