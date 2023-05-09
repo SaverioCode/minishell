@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/09 20:45:44 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/09 22:46:16 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,14 @@ static char	*cut_exp(t_node *node, char *input, int end)
 static t_node	*create_new_node(t_node *node, t_info *info)
 {
 	t_node	*new_node;
+	t_node	*new_exps;
 
 	if (node->token == END)
 		return (NULL);
 	new_node = ft_calloc(1, sizeof(t_node));
+	new_exps = ft_calloc(1, sizeof(t_node));
 	node->next = new_node;
+	new_node->exps = new_exps;
 	set_tnode(new_node);
 	return (new_node);
 }
