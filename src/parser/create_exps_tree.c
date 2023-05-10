@@ -6,14 +6,14 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 19:29:55 by sav               #+#    #+#             */
-/*   Updated: 2023/05/09 22:42:52 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/10 00:00:20 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_create_exps_tree(t_node *node)
+int	ft_create_exps_tree(t_node *exps)
 {
-	ft_parentesis(node);
+	
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/09 22:51:16 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/10 02:15:06 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ typedef struct s_node
 	short int		status;
 	int				fd_output;
 	char			*exp;
-	t_cmd			*cmd;
 	t_opr			*opr;
-	struct s_node	*exps;
+	t_cmd			*cmd;
+	struct s_node	*subshl;
 	struct s_node	*next;
 }	t_node;
 
