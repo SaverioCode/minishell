@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/11 18:36:42 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/11 20:21:28 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static int	check_exps_exp(t_node *node)
 	return (-1);
 }
 
-int	ft_separete_nodes(t_node *root, t_info *info, int *flag)
+int	ft_create_nodes(t_node *root, t_info *info, int *flag, int *brackets)
 {
 	t_node	*node;
 	char	*str;
@@ -87,7 +87,7 @@ int	ft_separete_nodes(t_node *root, t_info *info, int *flag)
 	i = 0;
 	while (str && str[i])
 	{
-		if (ft_check_flag(flag, str[i]) == -1)
+		if (ft_check_flag(flag, str[i], brackets) == -1)
 			return (-1);
 		if (!flag[0] && (str[i] == 38 || str[i] == 124 || !str[i + 1]))
 		{

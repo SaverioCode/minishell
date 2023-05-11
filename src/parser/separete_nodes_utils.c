@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 18:35:46 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/11 20:17:39 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/11 20:20:21 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,8 @@ static int	flag_is_off(int *flag, int *brackets, char c)
 	
 }
 
-int	ft_check_flag(int *flag, char c)
+int	ft_check_flag(int *flag, char c, int *brackets)
 {
-	static int	brackets;
-
 	if (c == 34 || c == 96 || c == 28 || c == 29)
 	{
 		if (flag[0])

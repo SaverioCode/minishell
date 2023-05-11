@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/09 22:51:07 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/11 20:21:36 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 int	ft_parser(t_node *root, t_info *info)
 {
-	t_node	*node;
-	int		flag[2];
+	// t_node		*node;
+	int			flag[2];
+	static int	brackets;
 
 	if (!root || !info)
 	{
@@ -24,7 +25,7 @@ int	ft_parser(t_node *root, t_info *info)
 		return (-1);
 	}
 	flag[0] = 0;
-	if (ft_separete_nodes(root, info, flag) == -1)
+	if (ft_create_nodes(root, info, flag, &brackets) == -1)
 		return (-1);
 	/// check if last node is not empty and in case is empty and ///
 	/// flag is set to END ask again for input ///
