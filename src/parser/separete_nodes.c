@@ -1,36 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   separete_exps.c                                    :+:      :+:    :+:   */
+/*   separete_nodes.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/10 03:16:56 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/11 18:36:42 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static void	check_flag(int *flag, char c)
-{
-	if (c == 34 || c == 96 || c == 28 || c == 29)
-	{
-		if (flag[0])
-		{	
-			if ((flag[1] == 28 && c == 29) || (flag[1] != 28 && c == flag[1]))
-			{
-				flag[0] = 0;
-				flag[1] = 0;
-			}
-		}
-		else if (!flag[0] && c != 29)
-		{
-			flag[0] = 1;
-			flag[1] = c;
-		}
-	}
-}
 
 static char	*cut_exp(t_node *node, char *input, int end)
 {
@@ -107,7 +87,8 @@ int	ft_separete_nodes(t_node *root, t_info *info, int *flag)
 	i = 0;
 	while (str && str[i])
 	{
-		check_flag(flag, str[i]);
+		if (ft_check_flag(flag, str[i]) == -1)
+			return (-1);
 		if (!flag[0] && (str[i] == 38 || str[i] == 124 || !str[i + 1]))
 		{
 			info->current_input = cut_exp(node, str, i);
