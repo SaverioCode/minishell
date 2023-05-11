@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/11 22:36:09 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 01:55:08 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@
 # define AND  0b10000010
 # define OR   0b10000011
 # define PIPE 0b10000100
+# define CHAR 0b10000101
+# define INP  0b10000110
+# define OUT  0b10000111
+# define BRKO 0b10001000
+# define BRKC 0b10001001
 
 typedef struct s_cmd
 {
