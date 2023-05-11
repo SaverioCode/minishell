@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:03:46 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/09 20:45:03 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 01:06:23 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	check_input(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] > 32 && str[i] < 127)
+		if (str[i] > 32 && str[i] < 127 && str[i] > 127)
 			return (1);
 		i++;
 	}
@@ -36,8 +36,12 @@ char	*ft_print_prompt(void)
 	user_name = getenv("USER");
 	write(1, user_name, ft_strlen(user_name));
 	str = readline("\\> ");
-	if (check_input(str))
-		add_history(str);
+	if (!check_input(str))
+	{	
+		free(str);
+		// clean buffer //
+		ft_print_prompt();
+	}
 	return (str);
 }
 

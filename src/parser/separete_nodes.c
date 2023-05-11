@@ -6,13 +6,13 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/11 20:25:39 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 00:07:30 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*cut_exp(t_node *node, char *input, int end)
+static char	*cut_exp(t_node *node, t_info *info, int end)
 {
 	char	*str;
 	char	*expr;
@@ -20,13 +20,18 @@ static char	*cut_exp(t_node *node, char *input, int end)
 	int		j;
 	char	len;
 
-	if (!input)
+	if (!info->current_input)
 		return (NULL);
+	if (node->token == END)
+	{
+		node->exp = info->current_input;
+		return (NULL);
+	}
 	expr = ft_calloc(i, 1);
 	i = 0;
 	while (i < end)
 	{
-		expr[i] = input[i];
+		expr[i] = info->current_input[i];
 		i++;
 	}
 	node->exp = expr;
@@ -76,9 +81,23 @@ static int	check_exps_exp(t_node *node)
 	return (-1);
 }
 
+static int	get_token_and_exp(t_node *node, t_info *info, int i)
+{
+	int	status;
+
+	if (get_token(node, info, i) == -1)
+		return (-1);
+	cut_exp(node, info, i);
+	cut_token(node, info);
+	update_current_input(node, info);
+	status = check_exp(node);
+	return (status);
+}
+
 int	ft_create_nodes(t_node *root, t_info *info, int *flag, int *brackets)
 {
 	t_node	*node;
+	int		status;
 	char	*str;
 	int		i;
 
@@ -91,13 +110,16 @@ int	ft_create_nodes(t_node *root, t_info *info, int *flag, int *brackets)
 			return (-1);
 		if (!flag[0] && (str[i] == 38 || str[i] == 124 || !str[i + 1]))
 		{
-			info->current_input = cut_exp(node, str, i);
-			if (get_token(node, info) == -1)
-				return (-1);
+			status = get_token_and_exp(node, info, i);
+			if (status != 0)
+				return (status);
+			// info->current_input = cut_exp(node, str, i);
+			// if (get_token(node, info) == -1)
+			// 	return (-1);
 			if (ft_create_exps_tree(node) == -1)
 				return (-1);
-			if (check_exps_exp(node) == -1)
-				return (-1);
+			// if (check_exps_exp(node) == -1)
+			// 	return (-1);
 			node = create_new_node(node, info);
 			str = info->current_input;
 			i = -1;
