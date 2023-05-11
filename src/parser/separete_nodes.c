@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/11 20:21:28 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/11 20:25:39 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static char	*cut_exp(t_node *node, char *input, int end)
 		expr[i] = input[i];
 		i++;
 	}
-	node->exps->exp = expr;
+	node->exp = expr;
 	str = ft_calloc((ft_strlen(input) - i) + 1, 1);
 	j = 0;
 	while (input[i + j])
