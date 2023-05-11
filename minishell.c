@@ -6,38 +6,37 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:46 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/08 16:04:17 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 01:45:06 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+
 int	main(int ac, char **av, char **env)
 {
-	t_node	root;
-	t_info	info;
+	t_node		root;
+	t_info		info;
+	short int	status;
 
 	ft_check_input(ac, av);
 	ft_init_shell();
 	set_tnode(&root);
+	set_starting_env(env, &info);
+	// set_signals();
 	while (1)
 	{
-		info.starting_input = ft_print_prompt();
-		if (!info.starting_input)
-			continue ;
-		// just for testing maintaining a clean exit //
-		if (info.starting_input && info.starting_input[0] == 'q')
-		{	
-			free(info.starting_input);
-			return (0);
-		}
-		info.current_input = info.starting_input;
-		if (ft_parser(&root, &info) == -1)
+		ft_get_input(&info);
+		status = lexical_check(info);
+		if (status != 0)
 		{
-			ft_free(&root, &info);
+			if (status == -1)
+				ft_free(NULL, &info);
 			continue ;
 		}
-		// ft_run_all(&root);
+		add_history(info.input);
+		ft_parser(&root, &info);
+		// ft_run_all(&root, &info);
 	}
 	(void)env;
 	return (0);

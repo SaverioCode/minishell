@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:03:46 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/12 01:06:23 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 01:36:22 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	check_input(char *str)
 	return (0);
 }
 
-char	*ft_print_prompt(void)
+void	ft_get_input(t_info *info)
 {
 	char	*user_name;
 	char	*str;
@@ -40,9 +40,13 @@ char	*ft_print_prompt(void)
 	{	
 		free(str);
 		// clean buffer //
-		ft_print_prompt();
+		ft_get_input(info);
 	}
-	return (str);
+	// clean buffer //
+	if (info->input)
+		info->input = ft_strjoin(info->input, str);
+	else
+		info->input = str;
 }
 
 void	ft_check_input(int ac, char **av)
