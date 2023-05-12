@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/12 06:29:56 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 06:38:03 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,16 @@ void	ft_parser(t_node *node, char *input)
 		lx_check_quotes(flag, input[i]);
 		if (!flag[0])
 		{
-			handle_token(node, input, i);
 			if (input[i] == '(')
-			{
 				create_subshell(node);
+			if (input[i] == ')')
+				get_back(node);
+			if (input[i] == '&' || input[i] == '|')
+			{	
+				cut_exp(node, input, i);
+				orginize_exp(node);
+				create_new_node(node, input, i);
+				cut_token(input, i);
 			}
 		}
 		i++;

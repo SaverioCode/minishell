@@ -6,14 +6,13 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/12 06:30:35 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 06:37:51 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-// # define END 	0b10000001
 # define AND	0b10000010
 # define OR  	0b10000011
 # define PIPE	'|'
@@ -57,7 +56,7 @@ void	lx_check_quotes(int *flag, char c);
 int		lx_token_check(char token, char new_token, int *brkts);
 int		lexical_check(char *input);
 void	ft_parser(t_node *node, char *input);
-int		ft_create_nodes(t_node *exp, t_info *info, int *flag, int *brackets);
+int		ft_create_nodes(t_node *node, t_info *info, int *flag, int *brackets);
 int		ft_check_flag(int *flag, char c, int *brackets);
 int		get_token(t_node *node, t_info *info, int i);
 int		ft_create_exps_tree(t_node *node);
