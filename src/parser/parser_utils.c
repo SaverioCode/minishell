@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 06:57:18 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/12 10:38:34 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 10:43:37 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void	append_opr(t_node *node, t_opr *opr)
 static void	update_opr(t_node *node, int fd_len, int *i)
 {
 	t_opr	*opr;
+	char	*str;
 
 	opr = ft_calloc(1, 8);
 	set_topr(opr);
@@ -47,6 +48,7 @@ static void	update_opr(t_node *node, int fd_len, int *i)
 		opr->token = OUT;
 	else if (node->exp[*i] = '<')
 		opr->token = OUT;
+	opr->arg = str;
 	append_opr(node, opr);
 }
 
@@ -68,12 +70,14 @@ void	organize_exp(t_node *node)
 			get_fd();
 			get_opr();
 			get_arg();
+			len = 0;
 			continue ;
 		}
 		print = ft_isprint(exp[i]);
 		if (!print && len)
 		{
 			update_cmd();
+			len = 0;
 		}
 		else if (print)
 		{

@@ -6,21 +6,15 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 01:47:49 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/12 08:19:39 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 10:45:28 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	which_token(char *str)
+char	lx_which_token(char *str)
 {
-	if (str[0] == '(' || str[0] == ')')
-		return (str[0]);
-	else if (str[0] == '&' && str[1] == '&')
-		return (AND);
-	else if (str[0] == '&')
-		return ('&');
-	else if (str[0] == INP && str[1] == INP)
+	if (str[0] == INP && str[1] == INP)
 		return (HDOC);
 	else if (str[0] == INP)
 		return (INP);
@@ -28,6 +22,12 @@ static char	which_token(char *str)
 		return (OUT);
 	else if (str[0] == OUT)
 		return (APP);
+	else if (str[0] == '(' || str[0] == ')')
+		return (str[0]);
+	else if (str[0] == '&' && str[1] == '&')
+		return (AND);
+	else if (str[0] == '&')
+		return ('&');
 	else if (str[0] == PIPE && str[0] == PIPE)
 		return (OR);
 	else if (str[0] == PIPE)
@@ -71,7 +71,7 @@ int	lexical_check(char *input)
 		lx_check_quotes(flag, input[i]);
 		if (!flag[0] && ft_isprint(input[i]))
 		{
-			new_token = which_token(&input[i]);
+			new_token = lx_which_token(&input[i]);
 			if (lx_token_check(token, new_token, &brkts) == -1)
 			{
 				/// write error indicando il token sbagliato ///
