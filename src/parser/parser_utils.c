@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 06:57:18 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/12 10:43:37 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 10:53:32 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,25 @@ static void	update_opr(t_node *node, int fd_len, int *i)
 {
 	t_opr	*opr;
 	char	*str;
+	int		start;
+	int		end;
 
 	opr = ft_calloc(1, 8);
 	set_topr(opr);
 	if (fd_len)
-	{
 		opr->fd = get_str(node->exp, fd_len, i);
+	opr->token = lx_which_token(&node->exp[*i]);
+	if (opr->token == INP || opr->token == OUT)
+		start = *i + 1;
+	else if (opr->token == HDOC || opr->token == APP)
+		start = *i + 2;
+	end = start;
+	while (ft_isprint(node->exp))
+	{
+		end++;
 	}
-	if (node->exp[*i] = '<' && node->exp[*i + 1] == '<')
-		opr->token = HDOC;
-	else if (node->exp[*i] = '<')
-		opr->token = INP;
-	else if (node->exp[*i] = '>' && node->exp[*i + 1] == '>')
-		opr->token = OUT;
-	else if (node->exp[*i] = '<')
-		opr->token = OUT;
-	opr->arg = str;
+	opr->arg = get_str(node->exp, end - start, end);
+	*i = end + 1;
 	append_opr(node, opr);
 }
 
@@ -66,10 +69,7 @@ void	organize_exp(t_node *node)
 	{
 		if (exp[i] == '<' || exp[i] == '>')
 		{
-			create_opr(node, len, &i);
-			get_fd();
-			get_opr();
-			get_arg();
+			update_opr(node, len, &i);
 			len = 0;
 			continue ;
 		}
