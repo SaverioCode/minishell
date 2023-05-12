@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 04:17:47 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/12 08:20:34 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 08:34:47 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ static int	token_check_first(char old, char new)
 	if (old == INP || old == HDOC || old == OUT || old == APP)
 	{
 		if (new == CHAR)
-			return (0);
-		if (new == INP || new == HDOC || new == OUT || new == APP)
 			return (0);
 		return (-1);
 	}
