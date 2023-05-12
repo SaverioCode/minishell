@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/12 06:49:52 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 07:01:45 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,5 @@ int		lx_token_check(char token, char new_token, int *brkts);
 int		lexical_check(char *input);
 void	ft_parser(t_node *node, char *input);
 int		get_token(t_node *node, t_info *info, int i);
-int		ft_create_exps_tree(t_node *node);
 
 #endif

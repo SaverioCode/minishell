@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/12 06:56:14 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 07:00:51 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,13 @@ static t_node	*create_subshell(t_node *node)
 	set_tnode(subshl);
 	subshl->back = node;
 	return (subshl);
+}
+
+static t_node	*create_new_node(t_node *node, char *input, int i)
+{
+	if (input[i + 1] == 0)
+		return (NULL);
+	
 }
 
 void	ft_parser(t_node *node, char *input)

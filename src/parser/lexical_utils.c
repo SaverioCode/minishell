@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 04:17:47 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/12 05:02:50 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 07:03:00 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	token_check_first(char old, char new)
 		return (0);
 	if (new == '&')
 		return (-1);
-	if (old == END || old == PIPE || old == OR)
+	if (old == AND || old == PIPE || old == OR)
 	{
 		if (new == CHAR || new == INP || new == OUT)
 			return (0);
