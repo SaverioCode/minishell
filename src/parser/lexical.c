@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 01:47:49 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/12 05:14:42 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 06:25:00 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static char	which_token(char *str)
 	return (0);
 }
 
-void	check_quotes(int *flag, char c)
+void	lx_check_quotes(int *flag, char c)
 {
 	if (c == 34 || c == 96)
 	{
