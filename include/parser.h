@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/12 08:17:43 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 09:48:52 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_opr
 	char			*fd;
 	char			*arg;
 	struct s_opr	*next;
+	struct s_opr	*back;
 }	t_opr;
 
 typedef struct s_node

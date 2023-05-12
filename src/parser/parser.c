@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/12 08:27:04 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 09:47:21 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,15 @@ void	ft_parser(t_node *node, char *input)
 		if (!flag[0])
 		{
 			if (input[i] == '(')
+			{
+				input[i] = 32;
 				node = create_subshell(node);
+			}
 			else if (input[i] == ')')
+			{
+				input[i] = 32;
 				node = node->back;
+			}
 			else if (input[i] == '&' || input[i] == '|' || input[i + 1] == 0)
 			{	
 				cut_exp(node, input, i);
