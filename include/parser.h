@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/12 10:45:22 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 12:35:53 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_cmd
 typedef struct s_opr
 {
 	char			token;
-	char			*fd;
+	int				fd;
 	char			*arg;
 	struct s_opr	*next;
 }	t_opr;

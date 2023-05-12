@@ -6,27 +6,30 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 06:57:18 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/12 10:53:32 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 12:43:40 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	append_opr(t_node *node, t_opr *opr)
+static void	create_opr(t_node *node, t_opr *opr)
 {
+	t_opr	*new_opr;
 	t_opr	*opr;
 
+	new_opr = ft_calloc(1, 8);
+	set_topr(new_opr);
 	opr = node->opr;
 	if (!opr)
 	{
-		node->opr = opr;
+		node->opr = new_opr;
 		return ;
 	}
 	while (opr->next)
 	{
 		opr = opr->next;
 	}
-	opr->next = opr;
+	opr->next = new_opr;
 }
 
 static void	update_opr(t_node *node, int fd_len, int *i)
@@ -58,6 +61,7 @@ static void	update_opr(t_node *node, int fd_len, int *i)
 void	organize_exp(t_node *node)
 {
 	char	*exp;
+	char	*str;
 	int		i;
 	int		len;
 	int		print;
@@ -67,23 +71,39 @@ void	organize_exp(t_node *node)
 	len = 0;
 	while (exp[i])
 	{
-		if (exp[i] == '<' || exp[i] == '>')
-		{
-			update_opr(node, len, &i);
-			len = 0;
-			continue ;
-		}
-		print = ft_isprint(exp[i]);
-		if (!print && len)
-		{
-			update_cmd();
-			len = 0;
-		}
-		else if (print)
+		while (ft_isprint(exp[i]))
 		{
 			len++;
+			i++;
+			if (exp[i] == '<' || exp[i] == '>')
+			{
+				create_opr(node);
+				if (len > 1)
+				{
+					str = get_str(exp, len, i);
+					if (ft_str_isdigit(str));
+				}
+			}
 		}
+		len = 0;
 		i++;
+		// if (exp[i] == '<' || exp[i] == '>')
+		// {
+		// 	update_opr(node, len, &i);
+		// 	len = 0;
+		// 	continue ;
+		// }
+		// print = ft_isprint(exp[i]);
+		// if (!print && len)
+		// {
+		// 	update_cmd();
+		// 	len = 0;
+		// }
+		// else if (print)
+		// {
+		// 	len++;
+		// }
+		// i++;
 	}
 	free(node->exp);
 }
