@@ -6,11 +6,27 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/12 06:48:56 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 06:56:14 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void *cut_exp(t_node *node, char *input, int end)
+{
+	char		*str;
+	static int	start;
+
+	if (input[end] != '&' && input[end] != '|')
+		end++;
+	str = ft_calloc(end, 1);
+	while (start < end)
+	{
+		str[start] = input[start];
+		start++;
+	}
+	node->exp = str;
+}
 
 static t_node	*create_subshell(t_node *node)
 {
