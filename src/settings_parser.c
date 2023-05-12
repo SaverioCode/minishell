@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 10:35:21 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/09 22:47:27 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 06:45:29 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	set_tnode(t_node *node)
 	node->exp = NULL;
 	node->cmd = NULL;
 	node->opr = NULL;
-	node->exps = NULL;
+	node->subshl = NULL;
 	node->next = NULL;
+	node->back = NULL;
 }
