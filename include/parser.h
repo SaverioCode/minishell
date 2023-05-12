@@ -6,22 +6,27 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/12 01:55:08 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 02:16:57 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-# define END  0b10000001
-# define AND  0b10000010
-# define OR   0b10000011
-# define PIPE 0b10000100
-# define CHAR 0b10000101
-# define INP  0b10000110
-# define OUT  0b10000111
-# define BRKO 0b10001000
-# define BRKC 0b10001001
+# define END 	0b10000001
+# define AND 	'&'
+# define AND2	0b10000010
+# define OR  	0b10000011
+# define PIPE	'|'
+# define CHAR	0b10000100
+# define INP	'<'
+# define INP2	0b10000101
+# define OUT 	'>'
+# define OUT2	0b10000110
+# define OBRK	'('
+# define CBRK	')'
+# define SQUOTE	'\''
+# define DQUOTE '\"'
 
 typedef struct s_cmd
 {
