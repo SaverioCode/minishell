@@ -24,4 +24,4 @@ Se incontro un '('
 
 Se incontro un ')'
 	i token validi sono:
-		')', '&', '|'
+		'&', '|', '<', '>'

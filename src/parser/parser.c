@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/12 07:00:51 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 07:09:08 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,11 @@ static t_node	*create_subshell(t_node *node)
 
 static t_node	*create_new_node(t_node *node, char *input, int i)
 {
+	t_node	*new_node;
+
 	if (input[i + 1] == 0)
 		return (NULL);
+	new_node = ft_calloc(1, 8);
 	
 }
 
