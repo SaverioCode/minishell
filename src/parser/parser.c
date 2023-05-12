@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/12 07:22:49 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 07:49:49 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,32 @@ static t_node	*create_subshell(t_node *node)
 	return (subshl);
 }
 
-static t_node	*create_new_node(t_node *node, char *input, int i)
+static t_node	*create_new_node(t_node *node, char *input, int *i)
 {
 	t_node	*new_node;
 
-	if (input[i + 1] == 0)
+	if (input[1] == 0)
 		return (NULL);
+	if (input[0] == '&' && input[1] == '&')
+	{	
+		node->token = AND;
+		*i += 2;
+	}
+	else if (input[0] == '|' && input[1] == '|')
+	{	
+		node->token == OR;
+		*i += 2;
+	}
+	else if (input[0] == '|')
+	{	
+		node->token == PIPE;
+		*i += 1;
+	}
 	new_node = ft_calloc(1, 8);
-	
+	set_tnode(new_node);
+	node->next = new_node;
+	new_node->back = node;
+	return (new_node);
 }
 
 void	ft_parser(t_node *node, char *input)
@@ -68,9 +86,7 @@ void	ft_parser(t_node *node, char *input)
 			{	
 				cut_exp(node, input, i);
 				orginize_exp(node);
-				node = create_new_node(node, input, i);
-				cut_token(input, i);  // maybe not needed
-				i = -1;
+				node = create_new_node(node, &input[i], &i);
 			}
 		}
 		i++;
