@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 01:47:49 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/12 06:25:00 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 07:23:22 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	lexical_check(char *input)
 	brkts = 0;
 	while (input[i])
 	{
-		check_quotes(flag, input[i]);
+		lx_check_quotes(flag, input[i]);
 		if (!flag[0] && ft_isprint(input[i]))
 		{
 			new_token = which_token(&input[i]);

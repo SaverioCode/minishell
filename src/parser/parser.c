@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/12 07:09:08 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 07:22:49 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	ft_parser(t_node *node, char *input)
 	int	i;
 
 	flag[0] = 0;
-	flag[1] = 0;
 	i = 0;
 	while (input && input[i])
 	{
