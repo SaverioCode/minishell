@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 04:17:47 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/12 07:13:59 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 07:15:19 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ static int	token_check_second(char old, char new, int *brkts)
 		if (brkts[0] == 0)
 			return (-1);
 		*brkts--;
-		if (new == CHAR)
-			return (0);
 		if (new == INP || new == INP2 || new == OUT || new == OUT2)
 			return (0);
 		if (new == AND || new == PIPE)
