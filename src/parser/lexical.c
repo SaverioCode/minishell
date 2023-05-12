@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 01:47:49 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/12 03:22:39 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 05:03:22 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,12 @@
 
 static char	which_token(char *str)
 {
-	if (str[0] == OBRK || str[0] == CBRK)
+	if (str[0] == '(' || str[0] == ')')
 		return (str[0]);
-	else if (str[0] == SQUOTE || str[0] == DQUOTE)
-		return (str[0]);
-	else if (str[0] == AND1 && str[1] == AND1)
+	else if (str[0] == '&' && str[1] == '&')
 		return (AND);
-	else if (str[0] == AND1)
-		return (AND1);
+	else if (str[0] == '&')
+		return ('&');
 	else if (str[0] == INP && str[1] == INP)
 		return (INP2);
 	else if (str[0] == INP)
@@ -35,21 +33,42 @@ static char	which_token(char *str)
 	return (0);
 }
 
-
-int	lexical_check(t_info *info)
+static void	check_quotes(int *flag, char c)
 {
-	char	token;
+	if (c == 34 || c == 96)
+	{
+		if (!flag[0])
+		{
+			flag[0] = 1;
+			flag[1] = c;
+		}
+		else if (flag[1] == c)
+		{
+			flag[0] = 0;
+			flag[1] = 0;
+		}
+	}
+}
+
+int	lexical_check(char *input)
+{
+	int		token;
 	char	new_token;
+	int		brkts;
+	int		flag[2];
 	size_t	i;
 
 	i = 0;
 	token = 0;
-	while (info->input[i])
+	flag[0] = 0;
+	brkts = 0;
+	while (input[i])
 	{
-		if (ft_isprint(info->input[i]))
+		check_quotes(flag, input[i]);
+		if (!flag[0] && ft_isprint(input[i]))
 		{
-			new_token = which_token(&info->input[i]);
-			if (check_token(token, new_token) == -1)
+			new_token = which_token(&input[i]);
+			if (lx_token_check(token, new_token, &brkts) == -1)
 			{
 				/// write error indicando il token sbagliato ///
 				return (-1);
@@ -58,5 +77,7 @@ int	lexical_check(t_info *info)
 		}
 		i++;
 	}
+	if (flag[0] || brkts)
+		return (1);
 	return (token);
 }

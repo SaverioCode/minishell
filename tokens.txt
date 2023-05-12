@@ -1,6 +1,6 @@
 Se incontro un CHAR
 	i token validi sono:
-		'&', '|', '<', '>', '(', char
+		'&', '|', '<', '>', '(', ')' char
 
 Se incontro un '&'
 	i token validi sono:
@@ -12,7 +12,7 @@ Se incontro un '|'
 
 Se incontro un '<'
 	i token validi sono:
-		'&', '|', char
+		char
 
 Se incotntro un '<<'
 	i token validi sono:
