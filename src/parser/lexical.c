@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 01:47:49 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/12 07:24:48 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 08:19:39 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,13 @@ static char	which_token(char *str)
 	else if (str[0] == '&')
 		return ('&');
 	else if (str[0] == INP && str[1] == INP)
-		return (INP2);
+		return (HDOC);
 	else if (str[0] == INP)
 		return (INP);
+	else if (str[0] == OUT && str[1] == OUT)
+		return (OUT);
+	else if (str[0] == OUT)
+		return (APP);
 	else if (str[0] == PIPE && str[0] == PIPE)
 		return (OR);
 	else if (str[0] == PIPE)

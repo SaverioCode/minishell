@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/12 07:50:00 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 08:17:43 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 # define PIPE	'|'
 # define CHAR	0b10000100
 # define INP	'<'
-# define INP2	0b10000101
+# define HDOC	0b10000101
 # define OUT 	'>'
-# define OUT2	0b10000110
+# define APP	0b10000110
 
 typedef struct s_cmd
 {

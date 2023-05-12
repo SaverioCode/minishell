@@ -1,16 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   settings_parser.c                                  :+:      :+:    :+:   */
+/*   init_strutcs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/08 10:35:21 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/12 06:45:29 by fgarzi-c         ###   ########.fr       */
+/*   Created: 2023/05/12 08:12:12 by fgarzi-c          #+#    #+#             */
+/*   Updated: 2023/05/12 08:13:28 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	set_tenv(t_env *node)
+{
+	node->name = NULL;
+	node->value = NULL;
+	node->next = NULL;
+}
+
+void	set_tinfo(t_info *info)
+{
+	info->env = NULL;
+	info->input = NULL;
+}
 
 void	set_tcmd(t_cmd *node)
 {
