@@ -4,19 +4,19 @@ Se incontro un CHAR
 
 Se incontro un '&'
 	i token validi sono:
-		'<', '>', char
+		'<', '>', '(', char
 
 Se incontro un '|'
 	i token validi sono:
-		'<', '>', char
+		'<', '>', '(', char
 
 Se incontro un '<'
 	i token validi sono:
-		char
+		char, '&', '|'
 
 Se incotntro un '<<'
 	i token validi sono:
-		char
+		char, '&', '|'
 
 Se incontro un '('
 	i token validi sono:
