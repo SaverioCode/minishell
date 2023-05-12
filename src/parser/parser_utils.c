@@ -6,13 +6,13 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 06:57:18 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/12 12:43:40 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 12:44:31 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	create_opr(t_node *node, t_opr *opr)
+static void	create_opr(t_node *node)
 {
 	t_opr	*new_opr;
 	t_opr	*opr;
