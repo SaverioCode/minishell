@@ -6,14 +6,14 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/12 05:24:55 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 06:24:05 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-# define END 	0b10000001
+// # define END 	0b10000001
 # define AND	0b10000010
 # define OR  	0b10000011
 # define PIPE	'|'
