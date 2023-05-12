@@ -1,6 +1,6 @@
 Se incontro un CHAR
 	i token validi sono:
-		'&', '|', '<', '>', '('
+		'&', '|', '<', '>', '(', char
 
 Se incontro un '&'
 	i token validi sono:

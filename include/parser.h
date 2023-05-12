@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/12 02:16:57 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 03:20:29 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define PARSER_H
 
 # define END 	0b10000001
-# define AND 	'&'
-# define AND2	0b10000010
+# define AND1	'&'
+# define AND	0b10000010
 # define OR  	0b10000011
 # define PIPE	'|'
 # define CHAR	0b10000100
