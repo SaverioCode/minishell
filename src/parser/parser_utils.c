@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 06:57:18 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/12 12:44:31 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 12:46:50 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	create_opr(t_node *node)
 	opr->next = new_opr;
 }
 
-static void	update_opr(t_node *node, int fd_len, int *i)
+static void	update_opr(t_node *node, char *fd, int *i)
 {
 	t_opr	*opr;
 	char	*str;
@@ -41,8 +41,11 @@ static void	update_opr(t_node *node, int fd_len, int *i)
 
 	opr = ft_calloc(1, 8);
 	set_topr(opr);
-	if (fd_len)
-		opr->fd = get_str(node->exp, fd_len, i);
+	if (fd)
+	{
+		opr->fd = ft_atoi(fd);
+		free(fd);
+	}
 	opr->token = lx_which_token(&node->exp[*i]);
 	if (opr->token == INP || opr->token == OUT)
 		start = *i + 1;
