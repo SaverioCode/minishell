@@ -6,20 +6,23 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/12 05:11:04 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 05:23:37 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_parser(t_node *root, t_info *info)
+void	ft_parser(t_node *node, char *input)
 {
-	// if (!root || !info)
-	// {
-	// 	ft_free(root, info);
-	// 	// write error //
-	// 	return (-1);
-	// }
-	if (ft_create_nodes(root, info, flag, &brackets) == -1)
-		return (-1);
+	int	flag[2];
+	int	i;
+
+	flag[0] = 0;
+	flag[1] = 0;
+	i = 0;
+	while (input[i])
+	{
+		
+		i++;
+	}
 }

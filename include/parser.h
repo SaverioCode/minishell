@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/12 05:13:45 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/12 05:24:55 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,13 @@ typedef struct s_node
 	struct s_node	*next;
 }	t_node;
 
-/////// CHECK IF DO THE THING WRITTEN BELOW //////////
-// in order to keep the work ordered and not having //
-// <untype> arguments all functions declarations are //
-// in minishell.h //
-
 void	set_tnode(t_node *node);
 void	set_topr(t_opr *node);
 void	set_tcmd(t_cmd *node);
 void	check_quotes(int *flag, char c);
 int		lx_token_check(char token, char new_token, int *brkts);
 int		lexical_check(char *input);
-int		ft_parser(t_node *exp, t_info *input);
+void	ft_parser(t_node *node, char *input);
 int		ft_create_nodes(t_node *exp, t_info *info, int *flag, int *brackets);
 int		ft_check_flag(int *flag, char c, int *brackets);
 int		get_token(t_node *node, t_info *info, int i);
