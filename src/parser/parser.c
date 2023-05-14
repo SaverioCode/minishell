@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/12 09:47:21 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/14 19:34:32 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+0 1 2 3 4 5 6
 
 #include "minishell.h"
 
@@ -19,7 +21,7 @@ static void *cut_exp(t_node *node, char *input, int end)
 
 	if (input[end] != '&' && input[end] != '|')
 		end++;
-	str = ft_calloc(end, 1);
+	str = ft_calloc(end + 1, 1);
 	while (start < end)
 	{
 		str[start] = input[start];
