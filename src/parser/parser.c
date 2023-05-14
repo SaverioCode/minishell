@@ -6,7 +6,7 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/14 19:34:32 by sav              ###   ########.fr       */
+/*   Updated: 2023/05/14 22:07:39 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static t_node	*create_subshell(t_node *node)
 	t_node *subshl;
 
 	subshl = ft_calloc(1, 8);
-	set_tnode(subshl);
+	init_tnode(subshl);
 	node->subshl = subshl;
 	subshl->back = node;
 	return (subshl);
@@ -63,7 +63,7 @@ static t_node	*create_new_node(t_node *node, char *input, int *i)
 		*i += 1;
 	}
 	new_node = ft_calloc(1, 8);
-	set_tnode(new_node);
+	init_tnode(new_node);
 	node->next = new_node;
 	new_node->back = node;
 	return (new_node);

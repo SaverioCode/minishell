@@ -6,7 +6,7 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:46 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/14 20:34:33 by sav              ###   ########.fr       */
+/*   Updated: 2023/05/14 22:06:56 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int ac, char **av, char **env)
 	t_info		info;
 
 	ft_check_input(ac, av);
-	set_tnode(&root);
+	init_tnode(&root);
 	// set_starting_env(env, &info);
 	// set_signals();
 	ft_init_shell();
