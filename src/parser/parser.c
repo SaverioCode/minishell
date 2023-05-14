@@ -6,16 +6,31 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/14 22:26:31 by sav              ###   ########.fr       */
+/*   Updated: 2023/05/14 23:09:45 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static int	get_token(t_node *node, char *input)
+{
+	char	token;
+	int		size;
+
+	token = lx_which_token(input);
+	if (token == AND || token == OR)
+		size = 2;
+	else if (token == PIPE)
+		size = 1;
+	
+	return (size);
+}
+
 static void *cut_exp(t_node *node, char *input, int end)
 {
 	char		*str;
 	static int	start;
+	int			size;
 
 	if (input[end] != '&' && input[end] != '|')
 		end++;
@@ -25,6 +40,8 @@ static void *cut_exp(t_node *node, char *input, int end)
 		str[start] = input[start];
 		start++;
 	}
+	size = get_token(node, &input[i]);
+	start += size;
 	node->exp = str;
 }
 
@@ -92,6 +109,7 @@ void	ft_parser(t_node *node, char *input)
 			else if (input[i] == '&' || input[i] == '|' || input[i + 1] == 0)
 			{	
 				cut_exp(node, input, i);
+				// I could assign token here //
 				orginize_exp(node);
 				node = create_new_node(node, &input[i], &i);
 			}
