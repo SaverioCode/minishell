@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:46 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/12 08:09:53 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/14 19:36:50 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ int	main(int ac, char **av, char **env)
 	short int	token;
 
 	ft_check_input(ac, av);
-	ft_init_shell();
 	set_tnode(&root);
 	// set_starting_env(env, &info);
 	// set_signals();
+	ft_init_shell();
 	while (1)
 	{
 		ft_get_input(&info);
