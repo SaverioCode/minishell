@@ -3,16 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:03:46 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/12 01:36:22 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/14 19:56:30 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	check_input(char *str)
+void	ft_check_input(int ac, char **av)
+{
+	if (ac > 1)
+	{
+		write(2, "Error: to many arguments, write only: ./minishell\n", 49);
+		exit(0);
+	}
+	(void)av;
+}
+
+static int	is_empty(char *str)
 {
 	size_t	i;
 
@@ -21,7 +31,7 @@ static int	check_input(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] > 32 && str[i] < 127 && str[i] > 127)
+		if (is_print(str[i]))
 			return (1);
 		i++;
 	}
@@ -36,7 +46,7 @@ void	ft_get_input(t_info *info)
 	user_name = getenv("USER");
 	write(1, user_name, ft_strlen(user_name));
 	str = readline("\\> ");
-	if (!check_input(str))
+	if (!is_empty(str))
 	{	
 		free(str);
 		// clean buffer //
@@ -49,12 +59,3 @@ void	ft_get_input(t_info *info)
 		info->input = str;
 }
 
-void	ft_check_input(int ac, char **av)
-{
-	if (ac > 1)
-	{
-		write(2, "Error: to many arguments, write only: ./minishell\n", 49);
-		exit(0);
-	}
-	(void)av;
-}
