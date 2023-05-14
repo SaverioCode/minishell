@@ -6,7 +6,7 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 01:47:49 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/14 19:23:22 by sav              ###   ########.fr       */
+/*   Updated: 2023/05/14 20:25:28 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,23 @@ void	lx_check_quotes(int *flag, char c)
 	}
 }
 
-int	lexical_check(char *input)
+static void	reset_params(int *token, int *flag, int *brkts, int *i)
 {
-	int		token;
-	char	new_token;
-	int		brkts;
-	int		flag[2];
-	size_t	i;
 
-	i = 0;
-	token = 0;
-	flag[0] = 0;
-	brkts = 0;
+}
+
+int	lexical_check(char *input, int flag)
+{
+	static int		token;
+	char			new_token;
+	static int		brkts;
+	static int		flag[2];
+	static size_t	i;
+
+	if (!flag)
+	{
+		reset_params(token, flag, brkts, i);
+	}
 	while (input[i])
 	{
 		lx_check_quotes(flag, input[i]);

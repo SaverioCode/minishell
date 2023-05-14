@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexical_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 04:17:47 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/12 08:34:47 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/14 20:09:06 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ int	lx_token_check(char token, char new_token, int *brkts)
 	int	status;
 
 	status = token_check_first(token, new_token);
-	if (status <= 0)
+	if (status < 1)
 		return (status);
 	status = token_check_second(token, new_token, brkts);
-	if (status <= 0)
+	if (status < 1)
 		return (status);
 	return (-1);
 }
