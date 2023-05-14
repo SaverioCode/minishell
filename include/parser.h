@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/12 12:35:53 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/14 22:00:45 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	set_tcmd(t_cmd *node);
 char	lx_which_token(char *str);
 void	lx_check_quotes(int *flag, char c);
 int		lx_token_check(char token, char new_token, int *brkts);
-int		lexical_check(char *input);
+int		lexical_check(char *input, int flag);
 void	ft_parser(t_node *node, char *input);
 
 #endif
