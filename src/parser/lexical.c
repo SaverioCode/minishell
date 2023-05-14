@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexical.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 01:47:49 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/12 10:45:28 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/14 19:17:58 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ char	lx_which_token(char *str)
 	else if (str[0] == INP)
 		return (INP);
 	else if (str[0] == OUT && str[1] == OUT)
-		return (OUT);
-	else if (str[0] == OUT)
 		return (APP);
+	else if (str[0] == OUT)
+		return (OUT);
 	else if (str[0] == '(' || str[0] == ')')
 		return (str[0]);
 	else if (str[0] == '&' && str[1] == '&')
