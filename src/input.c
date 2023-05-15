@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:03:46 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/14 20:34:08 by sav              ###   ########.fr       */
+/*   Updated: 2023/05/15 11:00:23 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,17 +60,17 @@ void	ft_handle_input(t_info *info)
 	token = 0;
 	while (token != CHAR)
 	{	
-		ft_get_input(&info, token);
-		token = lexical_check(info.input);
+		ft_get_input(&info);
+		token = lexical_check(info->input, token);
 		if (token == -1)
 		{
-			add_history(info.input);
-			free(info.input);
-			info.input = NULL;
+			add_history(info->input);
+			free(info->input);
+			info->input = NULL;
 			token = 0;
 		}
 	}
-	add_history(info.input);
+	add_history(info->input);
 }
 
 void	ft_check_input(int ac, char **av)
