@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 01:47:49 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/15 17:29:40 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/15 19:07:14 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ void	lx_check_quotes(int *flag, char c)
 
 static void	reset_params(int *token, int *flag, int *brkts, int *i)
 {
-	*token = 0;
+	token[0] = 0;
+	token[1] = 0;
 	flag[0] = 0;
 	flag[1] = 0;
 	*brkts = 0;
@@ -65,7 +66,7 @@ static void	reset_params(int *token, int *flag, int *brkts, int *i)
 
 int	lexical_check(char *input, int reset)
 {
-	static int		token;
+	static int		token[2];
 	char			new_token;
 	static int		brkts;
 	static int		flag[2];
@@ -73,7 +74,7 @@ int	lexical_check(char *input, int reset)
 
 	if (!reset)
 	{
-		reset_params(&token, flag, &brkts, &i);
+		reset_params(token, flag, &brkts, &i);
 	}
 	while (input[i])
 	{
@@ -86,13 +87,17 @@ int	lexical_check(char *input, int reset)
 				/// write error indicando il token sbagliato ///
 				return (-1);
 			}
-			token = new_token;
+			if (token[0] != new_token)
+			{
+				token[1] = token[0];
+				token[0] = new_token;
+			}
 		}
 		i++;
 	}
 	if (flag[0] || brkts)
 		return (1);
-	if (token == INP || token == HDOC || token == OUT || token == APP)
+	if (token[0] == INP || token[0] == HDOC || token[0] == OUT || token[0] == APP)
 		return (-1);
-	return (token);
+	return (token[0]);
 }
