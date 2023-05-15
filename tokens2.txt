@@ -1,0 +1,61 @@
+TOKEN	where		accepted tokens
+
+NULL
+		after 1		'<', '<<', '>', '>>', CHAR, '('
+
+		after 2		all
+
+CHAR	
+		after 1		all
+
+		after 2		all
+
+'&'		TOKEN NOT ALLOWED
+		after 1		
+
+		after 2
+
+'&&'
+		after 1		CHAR, '<', '<<', '>', '>>', '('
+
+		after 2		all
+
+'|'
+		after 1		CHAR, '<', '<<', '>', '>>', '('
+
+		after 2		all
+
+'||'
+		after 1		CHAR, '<', '<<', '>', '>>', '('
+
+		after 2		all
+
+'<'
+		after 1		CHAR
+
+		after 2		'&&', '|', '||', '<', '<<', '>', '>>' ')'
+
+'<<'
+		after 1		CHAR
+
+		after 2		'&&', '|', '||', '<', '<<', '>', '>>' ')'
+
+'>'
+		after 1		CHAR
+
+		after 2		'&&', '|', '||', '<', '<<', '>', '>>' ')'
+
+'>>'
+		after 1		CHAR
+
+		after 2		'&&', '|', '||', '<', '<<', '>', '>>' ')'
+
+')'
+		after 1		all
+
+		after 2		all
+
+'('
+		after 1		CHAR, '(', '<', '<<', '>', '>>',
+
+		after 2		all

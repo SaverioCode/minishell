@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/14 23:09:45 by sav              ###   ########.fr       */
+/*   Updated: 2023/05/15 11:50:58 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,29 @@ static int	get_token(t_node *node, char *input)
 {
 	char	token;
 	int		size;
+	t_node	*last;
 
 	token = lx_which_token(input);
 	if (token == AND || token == OR)
 		size = 2;
 	else if (token == PIPE)
 		size = 1;
-	
+	last = ls_get_last_tnode(node, 's');
+	if (!last->token)
+		last->token = token;
 	return (size);
 }
 
-static void *cut_exp(t_node *node, char *input, int end)
+static t_node* get_node(t_node *node)
+{
+	t_node	*subshl;
+
+	subshl = ls_get_last_tnode(node, 's');
+	if (!subshl->token && !subshl->exp)
+		return (subshl);
+}
+
+static void *get_exp_and_token(t_node *node, char *input, int end)
 {
 	char		*str;
 	static int	start;
@@ -40,7 +52,7 @@ static void *cut_exp(t_node *node, char *input, int end)
 		str[start] = input[start];
 		start++;
 	}
-	size = get_token(node, &input[i]);
+	size = get_token(node, &input[end]);
 	start += size;
 	node->exp = str;
 }
@@ -62,21 +74,21 @@ static t_node	*create_new_node(t_node *node, char *input, int *i)
 
 	if (input[1] == 0)
 		return (NULL);
-	if (input[0] == '&' && input[1] == '&')
-	{	
-		node->token = AND;
-		*i += 2;
-	}
-	else if (input[0] == '|' && input[1] == '|')
-	{	
-		node->token == OR;
-		*i += 2;
-	}
-	else if (input[0] == '|')
-	{	
-		node->token == PIPE;
-		*i += 1;
-	}
+	// if (input[0] == '&' && input[1] == '&')
+	// {	
+	// 	node->token = AND;
+	// 	*i += 2;
+	// }
+	// else if (input[0] == '|' && input[1] == '|')
+	// {	
+	// 	node->token == OR;
+	// 	*i += 2;
+	// }
+	// else if (input[0] == '|')
+	// {	
+	// 	node->token == PIPE;
+	// 	*i += 1;
+	// }
 	new_node = ft_calloc(1, 8);
 	init_tnode(new_node);
 	node->next = new_node;
@@ -109,6 +121,7 @@ void	ft_parser(t_node *node, char *input)
 			else if (input[i] == '&' || input[i] == '|' || input[i + 1] == 0)
 			{	
 				cut_exp(node, input, i);
+				// I could call the function above get_exp_and_token //
 				// I could assign token here //
 				orginize_exp(node);
 				node = create_new_node(node, &input[i], &i);

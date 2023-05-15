@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/14 20:28:02 by sav              ###   ########.fr       */
+/*   Updated: 2023/05/15 11:38:24 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ typedef struct s_info
 	char	*input;
 }	t_info;
 
-void	set_tenv(t_env *node);
-void	set_tinfo(t_info *info);
+void	init_tenv(t_env *node);
+void	init_tinfo(t_info *info);
 void	ft_free(t_node *node, t_info *info);
 void	ft_check_input(int ac, char **av);
 void	ft_init_shell(void);
 void	ft_handle_input(t_info *info);
-t_node	*ls_get_last_node(t_node *node);
+t_node	*ls_get_last_tnode(t_node *node, char c);
 
 #endif

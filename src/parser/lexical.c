@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexical.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 01:47:49 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/14 21:02:05 by sav              ###   ########.fr       */
+/*   Updated: 2023/05/15 17:29:40 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	reset_params(int *token, int *flag, int *brkts, int *i)
 	*i = 0;
 }
 
-int	lexical_check(char *input, int flag)
+int	lexical_check(char *input, int reset)
 {
 	static int		token;
 	char			new_token;
@@ -71,7 +71,7 @@ int	lexical_check(char *input, int flag)
 	static int		flag[2];
 	static size_t	i;
 
-	if (!flag)
+	if (!reset)
 	{
 		reset_params(&token, flag, &brkts, &i);
 	}
@@ -92,7 +92,7 @@ int	lexical_check(char *input, int flag)
 	}
 	if (flag[0] || brkts)
 		return (1);
-	if (token == INP || token == DHOC || token == OUT || token == APP)
+	if (token == INP || token == HDOC || token == OUT || token == APP)
 		return (-1);
 	return (token);
 }

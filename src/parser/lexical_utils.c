@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexical_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 04:17:47 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/14 20:09:06 by sav              ###   ########.fr       */
+/*   Updated: 2023/05/15 17:31:01 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	token_check_first(char old, char new)
 {
-	if (old == CHAR)
+	if (!old || old == CHAR)
 		return (0);
 	if (new == '&')
 		return (-1);
@@ -39,7 +39,7 @@ static int	token_check_second(char old, char new, int *brkts)
 {
 	if (old == '(')
 	{
-		*brkts++;
+		(*brkts)++;
 		if (new == CHAR)
 			return (0);
 		if (new == INP || new == HDOC || new == OUT || new == APP)
@@ -50,7 +50,7 @@ static int	token_check_second(char old, char new, int *brkts)
 	{
 		if (brkts[0] == 0)
 			return (-1);
-		*brkts--;
+		(*brkts)--;
 		if (new == INP || new == HDOC || new == OUT || new == APP)
 			return (0);
 		if (new == AND || new == PIPE)
@@ -62,7 +62,8 @@ static int	token_check_second(char old, char new, int *brkts)
 
 int	lx_token_check(char token, char new_token, int *brkts)
 {
-	int	status;
+	static char	old_main_token;
+	int			status;
 
 	status = token_check_first(token, new_token);
 	if (status < 1)
