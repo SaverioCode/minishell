@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 01:47:49 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/15 19:07:14 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/16 23:07:56 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,14 @@ static void	reset_params(int *token, int *flag, int *brkts, int *i)
 	*i = 0;
 }
 
+static int lx_exit_status(int *flag, int brkts, char token)
+{
+	if (flag[0] || brkts)
+		return (1);
+	if (token == INP || token == HDOC || token == OUT || token == APP)
+		return (-1);
+}
+
 int	lexical_check(char *input, int reset)
 {
 	static int		token[2];
@@ -87,17 +95,8 @@ int	lexical_check(char *input, int reset)
 				/// write error indicando il token sbagliato ///
 				return (-1);
 			}
-			if (token[0] != new_token)
-			{
-				token[1] = token[0];
-				token[0] = new_token;
-			}
 		}
 		i++;
 	}
-	if (flag[0] || brkts)
-		return (1);
-	if (token[0] == INP || token[0] == HDOC || token[0] == OUT || token[0] == APP)
-		return (-1);
-	return (token[0]);
+	return (lx_exit_status(flag, brkts, token[0]));
 }
