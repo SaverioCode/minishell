@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 04:17:47 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/16 23:04:45 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/16 23:23:43 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,6 @@ static int	token_check_second(char new, char old_1, char old_2, int *brkts)
 		return (0);
 	}
 	return (1);
-}
-
-int	token_check_third(int *token, char new)
-{
-	char	old;
-	char	oldest;
-
-	old = token[0];
-	oldest = token[1];
-
 }
 
 int	lx_token_check(int *token, char new_token, int *brkts)
