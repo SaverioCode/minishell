@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/01 11:51:46 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/16 23:50:11 by fgarzi-c         ###   ########.fr       */
+/*   Created: 2023/05/16 23:56:55 by fgarzi-c          #+#    #+#             */
+/*   Updated: 2023/05/17 00:00:20 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	main(int ac, char **av, char **env)
+int	ft_strchr(char *str, char c)
 {
-	t_node		root;
-	t_info		info;
+	size_t	i;
 
-	ft_check_input(ac, av);
-	init_tnode(&root);
-	ft_set_env(env, &info);
-	// set_signals();
-	ft_init_shell();
-	while (1)
-	{
-		ft_handle_input(&info);
-		ft_parser(&root, info.input);
-		// ft_run_all(&root, &info);
+	if (!str)
+	{	
+		return (-1);
 	}
-	(void)env;
-	return (0);
+	i = 0;
+	while (str[i])
+	{
+		if (c == str[i])
+			return (i);
+	}
+	return (i);
 }

@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_getstr_from_to.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/01 11:51:46 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/16 23:50:11 by fgarzi-c         ###   ########.fr       */
+/*   Created: 2023/05/17 00:50:23 by fgarzi-c          #+#    #+#             */
+/*   Updated: 2023/05/17 00:50:56 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	main(int ac, char **av, char **env)
+char	*ft_getstr_from_to(char *str, int from, int to)
 {
-	t_node		root;
-	t_info		info;
+	char	*new_str;
+	int		len;
+	int		i;
 
-	ft_check_input(ac, av);
-	init_tnode(&root);
-	ft_set_env(env, &info);
-	// set_signals();
-	ft_init_shell();
-	while (1)
-	{
-		ft_handle_input(&info);
-		ft_parser(&root, info.input);
-		// ft_run_all(&root, &info);
+	if (!str || from < 0 || to < 0 || to <= from)
+	{	
+		return (NULL);
 	}
-	(void)env;
-	return (0);
+	len = to - from + 1;
+	new_str = ft_calloc(1, len + 1);
+	i = 0;
+	while (i + from <= to)
+	{
+		new_str[i] = str[i + from];
+		i++;
+	}
+	return (new_str);
 }
