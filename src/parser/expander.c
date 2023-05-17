@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 02:53:39 by sav               #+#    #+#             */
-/*   Updated: 2023/05/17 17:36:56 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/17 17:37:20 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static char *triple_strjoin(char *str1, int to, char *str2, char *str3)
 	j = 0;
 	while (str2 && str2[j])
 	{
-		new_str[i] = str2[j];\
+		new_str[i] = str2[j];
 		i++;
 		j++;
 	}
