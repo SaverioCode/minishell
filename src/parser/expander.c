@@ -6,13 +6,13 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 02:53:39 by sav               #+#    #+#             */
-/*   Updated: 2023/05/17 17:37:20 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/17 17:43:01 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char *triple_strjoin(char *str1, int to, char *str2, char *str3)
+static char *strjoin_in_the_middle(char *str1, int to, char *str2, char *str3)
 {
 	char	*new_str;
 	int		len;
@@ -62,7 +62,7 @@ static char	*dollar_sub(char *str, int i)
 		free(var);
 		return (str);
 	}
-	str = triple_strjoin(str, from - 1, var, &str[i]);
+	str = strjoin_in_the_middle(str, from - 1, var, &str[i]);
 	free(var);
 	return (str);
 }
