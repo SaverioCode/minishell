@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 02:53:39 by sav               #+#    #+#             */
-/*   Updated: 2023/05/17 18:22:40 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/17 18:36:20 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,51 @@ static char	*dollar_sub(char *str, int i)
 	return (str);
 }
 
-static char	*sub_quotes()
+void	count_quotes(int *flag, char c, int *len)
 {
-	
+	if (c == 34 || c == 96)
+	{
+		if (!flag[0])
+		{
+			(*len)++;
+			flag[0] = 1;
+			flag[1] = c;
+		}
+		else if (flag[1] == c)
+		{
+			flag[0] = 0;
+			flag[1] = 0;
+		}
+	}
+}
+
+static char	*quotes_cleaner(char *str)
+{
+	char	*new_str;
+	size_t	i;
+	size_t	len;
+	size_t	j;
+	int		flag[2];
+
+	flag[0] = 0;
+	len = 0;
+	i = -1;
+	while (str[++i])
+		count_quotes(flag, str[i], &len);
+	if (!len)
+		return (str);
+	new_str = ft_calloc(1, ft_strlen(str) - len + 1);
+	i = 0;
+	j = -1;
+	while (str[i])
+	{
+		lx_check_quotes(flag, str[i]);
+		if (flag[0] && flag[1] == str[i])
+			new_str[++j] = str[i];
+		i++;
+	}
+	free(str);
+	return (new_str);
 }
 
 static char	*expansion(char *str, t_env *env)
@@ -84,7 +126,7 @@ static char	*expansion(char *str, t_env *env)
 		}
 		i++;
 	}
-	str = sub_quotes(str);
+	str = quotes_cleaner(str);
 	return (str);
 }
 
