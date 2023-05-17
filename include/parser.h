@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/17 18:38:46 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/17 18:39:25 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,6 @@
 # define HDOC	0b10000101
 # define OUT 	'>'
 # define APP	0b10000110
-
-// typedef struct s_arg
-// {
-// 	char			*arg;
-// 	struct s_arg	*next;
-// }	t_arg;
 
 typedef struct s_cmd
 {
@@ -46,7 +40,6 @@ typedef struct s_node
 {
 	short int		shlvl;
 	char			token;
-	// short int		status;
 	int				fd_output;
 	char			*exp;
 	t_opr			*opr;

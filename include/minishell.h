@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/17 03:18:28 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/17 18:39:32 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_info
 {
 	t_env	*env;
 	char	*input;
+	int		status;
 }	t_info;
 
 void	init_tenv(t_env *node);
