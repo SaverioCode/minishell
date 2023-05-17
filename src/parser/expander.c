@@ -6,105 +6,38 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 02:53:39 by sav               #+#    #+#             */
-/*   Updated: 2023/05/08 15:00:24 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/17 15:46:34 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	find_index(char *str)
+static char	*expansion(char *str, t_env *env)
 {
+	int	flag[2];
 	int	i;
-	int	flag;
 
-	if (!str)
-		return (-1);
-	flag = 0;
+	flag[0] = 0;
 	i = 0;
-	while (str[i])
-	{
-		if (str[i] == 96)
-		{
-			if (flag)
-			{
-				flag = 0;
-			}
-			else if (!flag)
-			{
-				flag = 1;
-			}
-		}
-		if (!flag && str[i] == 36)
-			return (i);
-	}
-	return (-1);
 }
 
-static char	*find_var_name(char *str, int i)
+void	ps_expander(t_node *node, t_env *env)
 {
-	char	*var_name;
-	int		j;
-	int		index;
+	t_opr	*opr;
+	size_t	i;
 
-	j = i;
-	while (str[j])
+	node->cmd->cmd = expansion(node->cmd->cmd, env);
+	i = 0;
+	while (node->cmd->args[i])
 	{
-		if (!is_printable(str[j]))
-			break ;
-		j++;
-	}
-	var_name = ft_calloc(j - i + 1, 1);
-	index = 0;
-	while (i < j)
-	{
-		var_name[index] = str[i];
-		index++;
+		node->cmd->args[i] = expansion(node->cmd->args[i], env);
 		i++;
 	}
-	return (var_name);
-
-}
-
-static char	*sub_dollar(t_exp *exps, char **env, int i)
-{
-	char	*new_char;
-	char	*var_name;
-	char	*var_value;
-	char	len;
-	int		j;
-
-	var_name = find_var_name(exps->exp, i);
-	var_value = find_var_value(exps->exp, info, i);
-	if (!var_value)
-		var_value = " ";
-	len = ft_strlen(var_value) + ft_strlne(exps->exp) - ft_strlne(var_name); // check if right //
-	new_char = ft_calloc(len, 1);
-	j = 0;
-	while (j < i)
+	opr = node->opr;
+	while (opr->next)
 	{
-		new_char[j] = exps->exp[i];
-		j++;
+		opr->arg = expansion(opr->arg, env);
+		opr = opr->next;
 	}
-	i = 0;
-	while (var_value[i])
-	{
-		new_char[j] =
-	}
-	free(var_name);
-	free(var_value);
-
-}
-
-void	ft_expand_dollar(t_node *node, t_info *info)
-{
-	char	*str;
-	int		i;
-
-	while (1)
-	{
-		i = find_index(node->exps->exp);
-		if (i < 0)
-			break ;
-		sub_dollar(node, info->env, i);
-	}
+	opr->arg = expansion(opr->arg, env);
 }

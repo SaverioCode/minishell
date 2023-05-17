@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 06:57:18 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/17 03:35:51 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/17 15:58:55 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,40 @@ static t_opr	*get_last_opr(t_node *node)
 	return (opr->next);
 }
 
+/// all things comments refer to the option of having the ///
+/// args in a separated struct instead of a matrix //
+// static void	add_to_cmd(t_node *node, char *str)
+// {
+	// t_arg	*s_arg;
+
+	// if (!node->cmd)
+	// {
+	// 	node->cmd = ft_calloc(8, 1);
+	// 	init_tcmd(node->cmd);
+	// 	node->cmd->cmd = str;
+	// 	return ;
+	// }
+	// s_arg = node->cmd->arg;
+	// if (!s_arg)
+	// {
+	// 	s_arg = ft_calloc(8, 1);
+	// 	s_arg->arg = str;
+	// 	s_arg->next = NULL;
+	// 	return ;
+	// }
+	// while (s_arg->next)
+	// {
+	// 	s_arg = s_arg->next;
+	// }
+	// s_arg = ft_calloc(8, 1);
+	// s_arg->arg = str;
+	// s_arg->next = NULL;
+// }
+
 static void	add_to_cmd(t_node *node, char *str)
 {
-	t_arg	*s_arg;
+	char	**new_args;
+	size_t	i;
 
 	if (!node->cmd)
 	{
@@ -60,21 +91,22 @@ static void	add_to_cmd(t_node *node, char *str)
 		node->cmd->cmd = str;
 		return ;
 	}
-	s_arg = node->cmd->arg;
-	if (!s_arg)
+	if (!node->cmd->args)
 	{
-		s_arg = ft_calloc(8, 1);
-		s_arg->arg = str;
-		s_arg->next = NULL;
+		node->cmd->args = ft_calloc(8, 2);
+		node->cmd->args[0] = str;
 		return ;
 	}
-	while (s_arg->next)
+	i = ft_biarrlen(node->cmd->args[i]);
+	new_args = ft_calloc(8, i + 2);
+	new_args[i + 1] = str;
+	while (i >= 0)
 	{
-		s_arg = s_arg->next;
+		new_args[i] = node->cmd->args[i];
+		i--;
 	}
-	s_arg = ft_calloc(8, 1);
-	s_arg->arg = str;
-	s_arg->next = NULL;
+	free(node->cmd->args);
+	node->cmd->args = new_args;
 }
 
 static void	add_instruction(t_node *node, char *exp, int from, int *i)

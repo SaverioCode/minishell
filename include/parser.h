@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/17 03:31:25 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/17 15:46:57 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@
 # define OUT 	'>'
 # define APP	0b10000110
 
-typedef struct s_arg
-{
-	char			*arg;
-	struct s_arg	*next;
-}	t_arg;
+// typedef struct s_arg
+// {
+// 	char			*arg;
+// 	struct s_arg	*next;
+// }	t_arg;
 
 typedef struct s_cmd
 {
 	char	*cmd;
-	t_arg	*arg;
+	char	**args;
 }	t_cmd;
 
 typedef struct s_opr
@@ -64,5 +64,6 @@ void	lx_check_quotes(int *flag, char c);
 int		lx_token_check(int *token, char new_token, int *brkts);
 int		lexical_check(char *input, int flag);
 void	ft_parser(t_node *node, char *input);
+void	ps_expander(t_node *node, t_env *env);
 
 #endif
