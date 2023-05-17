@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/17 15:46:57 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/17 16:21:16 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct s_node
 {
 	short int		shlvl;
 	char			token;
-	short int		status;
+	// short int		status;
 	int				fd_output;
 	char			*exp;
 	t_opr			*opr;
