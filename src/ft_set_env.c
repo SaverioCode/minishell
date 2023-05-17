@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 23:49:40 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/17 01:11:00 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/17 02:38:44 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static t_env	*create_s_env(t_env *env)
 	return (new_env);
 }
 
-static void	get_name_and_vale(char *str, t_env *env)
+static void	get_name_and_value(char *str, t_env *env)
 {
 	int		i;
 	int		len;
@@ -51,7 +51,7 @@ void	ft_set_starting_env(char **env, t_info *info)
 	i = 0;
 	while (env[i])
 	{
-		get_name_and_vale(env[i], env_s);
+		get_name_and_value(env[i], env_s);
 		if (env[i + 1])
 		{	
 			env_s = create_s_env(env_s);

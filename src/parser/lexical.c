@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 01:47:49 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/16 23:07:56 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/17 03:01:25 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	reset_params(int *token, int *flag, int *brkts, int *i)
 	*i = 0;
 }
 
-static int lx_exit_status(int *flag, int brkts, char token)
+static int	lx_exit_status(int *flag, int brkts, char token)
 {
 	if (flag[0] || brkts)
 		return (1);

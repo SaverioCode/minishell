@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:03:46 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/15 11:00:23 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/17 03:00:40 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	ft_get_input(t_info *info)
 	if (!info->input)
 		info->input = str;
 	else
-		info->input = ft_strjoin(info->input, str);
+		info->input = ft_strjoin(info->input, str); // add newline
 }
 
 void	ft_handle_input(t_info *info)

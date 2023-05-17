@@ -1,112 +1,116 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_utils.c                                     :+:      :+:    :+:   */
+/*   organize_exp.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 06:57:18 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/12 12:46:50 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/17 03:14:12 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	create_opr(t_node *node)
+static t_opr	*create_sopr(t_node *node)
 {
-	t_opr	*new_opr;
+	t_opr	*opr;
+	t_opr	*old;
+
+	opr = ft_calloc(8, 1);
+	init_topr(opr);
+	if (!node->opr)
+	{	
+		node->opr = opr;
+	}
+	old = node->opr;
+	while (old->next)
+	{
+		old = old->next;
+	}
+	old->next = opr;
+	return (opr);
+}
+
+static t_opr	*get_rigth_opr(t_node *node)
+{
 	t_opr	*opr;
 
-	new_opr = ft_calloc(1, 8);
-	set_topr(new_opr);
-	opr = node->opr;
-	if (!opr)
+	if (!node->opr)
 	{
-		node->opr = new_opr;
-		return ;
+		opr = ft_calloc(8, 1);
+		init_topr(opr);
+		node->opr = opr;
+		return (opr);
 	}
+	opr = node->opr;
 	while (opr->next)
 	{
 		opr = opr->next;
 	}
-	opr->next = new_opr;
+	if (!opr->arg)
+	{	
+		return (opr);
+	}
+	opr->next = ft_calloc(8, 1);
+	init_topr(opr->next);
+	return (opr->next);
 }
 
-static void	update_opr(t_node *node, char *fd, int *i)
+static void	add_instruction(t_node *node, char *exp, int from, int *i)
 {
-	t_opr	*opr;
 	char	*str;
-	int		start;
-	int		end;
+	t_opr	*opr;
 
-	opr = ft_calloc(1, 8);
-	set_topr(opr);
-	if (fd)
+	str = ft_getstr_from_to(exp, from, *i);
+	if (exp[*i] == '<' || exp[*i] == '>')
 	{
-		opr->fd = ft_atoi(fd);
-		free(fd);
+		opr = get_rigth_opr(node);
+		if (ft_str_isdigit(str))
+		{
+			opr->fd = ft_atoi(str);
+			free(str);
+		}
+		else
+		{
+			// function //
+		}
+		opr->token = lx_which_token(&exp[*i]);
 	}
-	opr->token = lx_which_token(&node->exp[*i]);
-	if (opr->token == INP || opr->token == OUT)
-		start = *i + 1;
-	else if (opr->token == HDOC || opr->token == APP)
-		start = *i + 2;
-	end = start;
-	while (ft_isprint(node->exp))
+	else if ()
 	{
-		end++;
+		opr = get_rigth_opr(node);
+
+		// function //
 	}
-	opr->arg = get_str(node->exp, end - start, end);
-	*i = end + 1;
-	append_opr(node, opr);
 }
 
 void	organize_exp(t_node *node)
 {
-	char	*exp;
 	char	*str;
+	int		from;
 	int		i;
-	int		len;
-	int		print;
+	int		flag[2];
 
-	exp = node->exp;
-	i = 0;
-	len = 0;
-	while (exp[i])
-	{
-		while (ft_isprint(exp[i]))
-		{
-			len++;
-			i++;
-			if (exp[i] == '<' || exp[i] == '>')
-			{
-				create_opr(node);
-				if (len > 1)
-				{
-					str = get_str(exp, len, i);
-					if (ft_str_isdigit(str));
-				}
-			}
-		}
-		len = 0;
-		i++;
-		// if (exp[i] == '<' || exp[i] == '>')
-		// {
-		// 	update_opr(node, len, &i);
-		// 	len = 0;
-		// 	continue ;
-		// }
-		// print = ft_isprint(exp[i]);
-		// if (!print && len)
-		// {
-		// 	update_cmd();
-		// 	len = 0;
-		// }
-		// else if (print)
-		// {
-		// 	len++;
-		// }
-		// i++;
+	flag[0] = 0;
+	from = 0;
+	while (node->exp[from])
+	{	
+		if (ft_isprint(node->exp[from]))
+			break ;
+		from++;
 	}
-	free(node->exp);
+	i = from;
+	while (node->exp[i])
+	{
+		lx_check_quotes(flag, node->exp[i]);
+		if (flag[0] && (!ft_isprint(node->exp[i]) || \
+			node->exp[i] == '<' || node->exp[i] == '>'))
+		{
+			add_instruction(node, node->exp, from, &i);
+			from = i;
+		}
+		i++;
+	}
+	add_instruction(node, node->exp, from, i);
 }

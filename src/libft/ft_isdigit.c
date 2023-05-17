@@ -1,33 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/01 11:51:46 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/17 02:58:12 by fgarzi-c         ###   ########.fr       */
+/*   Created: 2023/05/17 01:59:36 by fgarzi-c          #+#    #+#             */
+/*   Updated: 2023/05/17 02:08:25 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	main(int ac, char **av, char **env)
+int	ft_str_isdigit(char *str)
 {
-	t_node		root;
-	t_info		info;
+	size_t	i;
 
-	ft_check_input(ac, av);
-	init_tnode(&root);
-	ft_set_env(env, &info);
-	// set_signals();
-	ft_init_shell();
-	while (1)
+	if (!str)
 	{
-		ft_handle_input(&info);
-		ft_parser(&root, info.input);
-		// ft_run_all(&root, &info);
-		// ft_free(root, NULL);
+		return (0);
 	}
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	ft_isdigit(char c)
+{
+	if (c > 47 && c < 58)
+		return (1);
 	return (0);
 }

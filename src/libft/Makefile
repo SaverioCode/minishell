@@ -6,14 +6,14 @@
 #    By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/01 17:28:53 by fgarzi-c          #+#    #+#              #
-#    Updated: 2023/05/17 00:51:15 by fgarzi-c         ###   ########.fr        #
+#    Updated: 2023/05/17 02:09:15 by fgarzi-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 SRCS = ft_strlen.c ft_error.c ft_numlen.c ft_calloc.c ft_itoa.c \
 	ft_atoi.c int ft_strncmp.c ft_isprint.c ft_strchr.c \
-	ft_getstr_from_to.c
+	ft_getstr_from_to.c ft_isdigit.c
 OBJS = $(SRCS:.c=.o)
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
