@@ -6,13 +6,13 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 06:57:18 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/17 03:14:12 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/17 03:35:51 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_opr	*create_sopr(t_node *node)
+static t_opr	*create_opr(t_node *node)
 {
 	t_opr	*opr;
 	t_opr	*old;
@@ -32,18 +32,10 @@ static t_opr	*create_sopr(t_node *node)
 	return (opr);
 }
 
-static t_opr	*get_rigth_opr(t_node *node)
+static t_opr	*get_last_opr(t_node *node)
 {
 	t_opr	*opr;
 
-	if (!node->opr)
-	{
-		opr = ft_calloc(8, 1);
-		init_topr(opr);
-		node->opr = opr;
-		return (opr);
-	}
-	opr = node->opr;
 	while (opr->next)
 	{
 		opr = opr->next;
@@ -57,6 +49,34 @@ static t_opr	*get_rigth_opr(t_node *node)
 	return (opr->next);
 }
 
+static void	add_to_cmd(t_node *node, char *str)
+{
+	t_arg	*s_arg;
+
+	if (!node->cmd)
+	{
+		node->cmd = ft_calloc(8, 1);
+		init_tcmd(node->cmd);
+		node->cmd->cmd = str;
+		return ;
+	}
+	s_arg = node->cmd->arg;
+	if (!s_arg)
+	{
+		s_arg = ft_calloc(8, 1);
+		s_arg->arg = str;
+		s_arg->next = NULL;
+		return ;
+	}
+	while (s_arg->next)
+	{
+		s_arg = s_arg->next;
+	}
+	s_arg = ft_calloc(8, 1);
+	s_arg->arg = str;
+	s_arg->next = NULL;
+}
+
 static void	add_instruction(t_node *node, char *exp, int from, int *i)
 {
 	char	*str;
@@ -65,7 +85,7 @@ static void	add_instruction(t_node *node, char *exp, int from, int *i)
 	str = ft_getstr_from_to(exp, from, *i);
 	if (exp[*i] == '<' || exp[*i] == '>')
 	{
-		opr = get_rigth_opr(node);
+		opr = create_opr(node);
 		if (ft_str_isdigit(str))
 		{
 			opr->fd = ft_atoi(str);
@@ -73,16 +93,14 @@ static void	add_instruction(t_node *node, char *exp, int from, int *i)
 		}
 		else
 		{
-			// function //
+			add_to_cmd(node, str);
 		}
 		opr->token = lx_which_token(&exp[*i]);
+		if (opr->token == HDOC || opr->token == APP)
+			*i += 1;
 	}
-	else if ()
-	{
-		opr = get_rigth_opr(node);
-
-		// function //
-	}
+	opr = ls_get_last_topr(node->opr);
+	add_to_cmd(node, str);
 }
 
 void	organize_exp(t_node *node)
@@ -107,8 +125,11 @@ void	organize_exp(t_node *node)
 		if (flag[0] && (!ft_isprint(node->exp[i]) || \
 			node->exp[i] == '<' || node->exp[i] == '>'))
 		{
-			add_instruction(node, node->exp, from, &i);
-			from = i;
+			if (from < i)
+			{
+				add_instruction(node, node->exp, from, &i);
+			}
+			from = i + 1;
 		}
 		i++;
 	}

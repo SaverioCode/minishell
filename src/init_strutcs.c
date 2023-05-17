@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_strutcs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 08:12:12 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/14 22:06:18 by sav              ###   ########.fr       */
+/*   Updated: 2023/05/17 03:31:50 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	init_tinfo(t_info *info)
 void	init_tcmd(t_cmd *node)
 {
 	node->cmd = NULL;
-	node->args = NULL;
+	node->arg = NULL;
 }
 
 void	init_topr(t_opr *node)

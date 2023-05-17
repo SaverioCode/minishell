@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/15 19:04:51 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/17 03:31:25 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,16 @@
 # define OUT 	'>'
 # define APP	0b10000110
 
+typedef struct s_arg
+{
+	char			*arg;
+	struct s_arg	*next;
+}	t_arg;
+
 typedef struct s_cmd
 {
 	char	*cmd;
-	char	**args;
+	t_arg	*arg;
 }	t_cmd;
 
 typedef struct s_opr
