@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 18:12:09 by sav               #+#    #+#             */
-/*   Updated: 2023/05/09 20:44:51 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/19 06:29:46 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,20 +47,14 @@ static void	ft_free_oprs(t_opr *opr)
 static void	ft_free_parse(t_node *node)
 {
 	t_node	*var;
-	t_exp	*exp;
-	t_exp	*old_exp;
 
 	while (node)
 	{
-		exp = node->exps;
-		while (exp)
+		ft_free_cmd(node->cmd);
+		ft_free_oprs(node->opr);
+		if (node->subshl)
 		{
-			free(exp->exp);
-			ft_free_oprs(exp->opr);
-			ft_free_cmd(exp->cmd);
-			old_exp = exp;
-			exp = exp->next;
-			free(exp);
+			ft_free_parse(node->subshl);
 		}
 		var = node;
 		node = node->next;
