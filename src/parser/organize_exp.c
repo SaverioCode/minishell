@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 06:57:18 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/19 06:11:03 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/19 06:12:00 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,4 +136,5 @@ void	organize_exp(t_node *node, char *exp)
 		i++;
 	}
 	add_instruction(node, exp, from, i);
+	free(exp);
 }
