@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 06:57:18 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/19 05:02:51 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/19 06:11:03 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ static void	add_instruction(t_node *node, char *exp, int from, int *i)
 	add_to_cmd(node, str);
 }
 
-void	organize_exp(t_node *node)
+void	organize_exp(t_node *node, char *exp)
 {
 	char	*str;
 	int		from;
@@ -114,26 +114,26 @@ void	organize_exp(t_node *node)
 
 	flag[0] = 0;
 	from = 0;
-	while (node->exp[from])
+	while (exp[from])
 	{	
-		if (ft_isprint(node->exp[from]))
+		if (ft_isprint(exp[from]))
 			break ;
 		from++;
 	}
 	i = from;
-	while (node->exp[i])
+	while (exp[i])
 	{
-		lx_check_quotes(flag, node->exp[i]);
-		if (flag[0] && (!ft_isprint(node->exp[i]) || \
-			node->exp[i] == '<' || node->exp[i] == '>'))
+		lx_check_quotes(flag, exp[i]);
+		if (flag[0] && (!ft_isprint(exp[i]) || \
+			exp[i] == '<' || exp[i] == '>'))
 		{
 			if (from < i)
 			{
-				add_instruction(node, node->exp, from, &i);
+				add_instruction(node, exp, from, &i);
 			}
 			from = i + 1;
 		}
 		i++;
 	}
-	add_instruction(node, node->exp, from, i);
+	add_instruction(node, exp, from, i);
 }

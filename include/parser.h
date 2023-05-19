@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/19 05:59:36 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/19 06:11:15 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ typedef struct s_node
 {
 	char			token;
 	int				fd_output;
-	char			*exp;
 	t_opr			*opr;
 	t_cmd			*cmd;
 	struct s_node	*subshl;
@@ -56,7 +55,7 @@ void	lx_check_quotes(int *flag, char c);
 int		lx_token_check(int *token, char new_token, int *brkts);
 int		lexical_check(char *input, int flag);
 void	ft_parser(t_node *node, char *input);
-void	organize_exp(t_node *node);
+void	organize_exp(t_node *node, char *exp);
 void	ps_expander(t_node *node, t_env *env);
 char	*ps_quotes_cleaner(char *str);
 
