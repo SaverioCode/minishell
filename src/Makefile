@@ -6,7 +6,7 @@
 #    By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/17 15:34:23 by fgarzi-c          #+#    #+#              #
-#    Updated: 2023/05/19 06:35:27 by fgarzi-c         ###   ########.fr        #
+#    Updated: 2023/05/19 07:04:18 by fgarzi-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
 all: $(%.c)
-	@$(CC) $(CFLAGS) -c $(SRCS)
+	@$(CC) -I ../include $(CFLAGS) -c $(SRCS)
 	@ar rcs $(NAME) $(OBJS)
 
 %.c: %.o

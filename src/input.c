@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:03:46 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/17 03:00:40 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/19 07:07:15 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	is_empty(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (is_print(str[i]))
+		if (ft_isprint(str[i]))
 			return (1);
 		i++;
 	}
@@ -60,7 +60,7 @@ void	ft_handle_input(t_info *info)
 	token = 0;
 	while (token != CHAR)
 	{	
-		ft_get_input(&info);
+		ft_get_input(info);
 		token = lexical_check(info->input, token);
 		if (token == -1)
 		{
