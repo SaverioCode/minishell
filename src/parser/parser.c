@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/19 06:19:59 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/19 07:01:53 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char	get_token(char *input)
 {
-	if (input[0] == '&' && input[1] == '&&')
+	if (input[0] == '&' && input[1] == '&')
 	{
 		input[0] = 0;
 		input[1] = 1;
@@ -87,7 +87,7 @@ void	ft_parser(t_node *node, char *input)
 			else if (input[i] == '&' || input[i] == '|' || input[i + 1] == 0)
 			{	
 				node->token = get_token(&input[i]);
-				organize_exp(node, ft_getstr_from_to(input[i], from, i));
+				organize_exp(node, ft_getstr_from_to(input, from, i));
 				node = create_new_node(node, &input[i]);
 				from = i + 1;
 			}

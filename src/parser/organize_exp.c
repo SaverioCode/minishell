@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 06:57:18 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/19 06:12:00 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/19 06:59:57 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,28 @@ static t_opr	*create_opr(t_node *node)
 	return (opr);
 }
 
-static t_opr	*get_last_opr(t_node *node)
-{
-	t_opr	*opr;
+/// perche minchia ho questa funzione se invece ///
+/// qualche riga piu sotto ne chiamo una anloga ///
+/// che invece sta in un altro foglio ??? ///
+/// magari i resti di una vita passata ///
+/// oppure la soluzione finale ///
+// static t_opr	*get_last_opr(t_node *node)
+// {
+// 	t_opr	*opr;
 
-	while (opr->next)
-	{
-		opr = opr->next;
-	}
-	if (!opr->arg)
-	{	
-		return (opr);
-	}
-	opr->next = ft_calloc(8, 1);
-	init_topr(opr->next);
-	return (opr->next);
-}
+// 	opr = node->opr;
+// 	while (opr->next)
+// 	{
+// 		opr = opr->next;
+// 	}
+// 	if (!opr->arg)
+// 	{	
+// 		return (opr);
+// 	}
+// 	opr->next = ft_calloc(8, 1);
+// 	init_topr(opr->next);
+// 	return (opr->next);
+// }
 
 static void	add_to_cmd(t_node *node, char *str)
 {
@@ -67,7 +73,7 @@ static void	add_to_cmd(t_node *node, char *str)
 		node->cmd->args[0] = str;
 		return ;
 	}
-	i = ft_biarrlen(node->cmd->args[i]);
+	i = ft_biarrlen(node->cmd->args);
 	new_args = ft_calloc(8, i + 2);
 	new_args[i + 1] = str;
 	while (i >= 0)
@@ -107,7 +113,6 @@ static void	add_instruction(t_node *node, char *exp, int from, int *i)
 
 void	organize_exp(t_node *node, char *exp)
 {
-	char	*str;
 	int		from;
 	int		i;
 	int		flag[2];
@@ -135,6 +140,6 @@ void	organize_exp(t_node *node, char *exp)
 		}
 		i++;
 	}
-	add_instruction(node, exp, from, i);
+	add_instruction(node, exp, from, &i);
 	free(exp);
 }

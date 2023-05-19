@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 02:53:39 by sav               #+#    #+#             */
-/*   Updated: 2023/05/17 18:38:18 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/19 06:50:34 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static char *strjoin_in_the_middle(char *str1, int to, char *str2, char *str3)
 	int		i;
 	int		j;
 
-	len = i + ft_strlen(str2) + ft_strlen(str3);
+	len = to + ft_strlen(str2) + ft_strlen(str3);
 	new_str = ft_calloc(1, len + 1);
 	i = -1;
 	while (++i <= to)
@@ -42,7 +42,7 @@ static char *strjoin_in_the_middle(char *str1, int to, char *str2, char *str3)
 	return (new_str);
 }
 
-static char	*dollar_sub(char *str, int i)
+static char	*dollar_sub(char *str, int i, t_env *env)
 {
 	char	*var;
 	char	*value;
@@ -56,7 +56,7 @@ static char	*dollar_sub(char *str, int i)
 		i++;
 	}
 	var = ft_getstr_from_to(str, from + 1, i - 1);
-	value = get_varvalue(var);
+	value = get_varvalue(var, env);
 	str = strjoin_in_the_middle(str, from - 1, var, &str[i]);
 	free(var);
 	return (str);
@@ -75,7 +75,7 @@ static char	*expansion(char *str, t_env *env)
 		lx_check_quotes(flag, str[i]);
 		if ((!flag[0] || flag[1] == '"') && str[i] == '$')
 		{
-			str = dollar_sub(str, i);
+			str = dollar_sub(str, i, env);
 		}
 		i++;
 	}

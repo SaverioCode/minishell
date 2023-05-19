@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 01:47:49 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/17 03:01:25 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/19 06:54:12 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	lx_check_quotes(int *flag, char c)
 	}
 }
 
-static void	reset_params(int *token, int *flag, int *brkts, int *i)
+static void	reset_params(int *token, int *flag, int *brkts, size_t *i)
 {
 	token[0] = 0;
 	token[1] = 0;
@@ -70,6 +70,7 @@ static int	lx_exit_status(int *flag, int brkts, char token)
 		return (1);
 	if (token == INP || token == HDOC || token == OUT || token == APP)
 		return (-1);
+	return (token);
 }
 
 int	lexical_check(char *input, int reset)
