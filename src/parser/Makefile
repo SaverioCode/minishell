@@ -6,12 +6,12 @@
 #    By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/17 15:34:10 by fgarzi-c          #+#    #+#              #
-#    Updated: 2023/05/19 06:41:20 by fgarzi-c         ###   ########.fr        #
+#    Updated: 2023/05/19 19:35:59 by fgarzi-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = parser.a
-SRCS = expander.c lexical.c lexical_utils.c organize_exp.c \
+SRCS = lexical.c lexical_utils.c organize_exp.c \
 	parser.c quotes_cleaner.c
 OBJS = $(SRCS:.c=.o)
 CC = gcc
