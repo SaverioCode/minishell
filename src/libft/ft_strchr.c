@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 23:56:55 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/17 00:00:20 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/19 19:53:57 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	ft_strchr(char *str, char c)
 	{
 		if (c == str[i])
 			return (i);
+		i++;
 	}
 	return (i);
 }

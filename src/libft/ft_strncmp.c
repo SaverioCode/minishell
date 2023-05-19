@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 17:31:19 by sav               #+#    #+#             */
-/*   Updated: 2023/05/11 18:31:59 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/19 19:45:18 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_strncmp(char *a, char *b, size_t bytes)
 {
-	int	i;
-	int	len_a;
-	int	len_b;
+	size_t	i;
+	size_t	len_a;
+	size_t	len_b;
 
 	len_a = ft_strlen(a);
 	len_b = ft_strlen(b);

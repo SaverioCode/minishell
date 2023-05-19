@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 18:12:09 by sav               #+#    #+#             */
-/*   Updated: 2023/05/19 07:05:15 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/19 21:23:46 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@ static void	ft_free_cmd(t_cmd *cmd)
 {
 	int	i;
 
-	free(cmd->cmd);
+	if (cmd->cmd)
+	{	
+		free(cmd->cmd);
+	}
 	if (cmd->args)
 	{
 		i = 0;
@@ -27,7 +30,10 @@ static void	ft_free_cmd(t_cmd *cmd)
 		}
 		free(cmd->args);
 	}
-	free(cmd);
+	if (cmd)
+	{
+		free(cmd);
+	}
 }
 
 static void	ft_free_oprs(t_opr *opr)
@@ -36,7 +42,10 @@ static void	ft_free_oprs(t_opr *opr)
 
 	while (opr)
 	{
-		free(opr->arg);
+		if (opr->arg)
+		{
+			free(opr->arg);
+		}
 		var = opr;
 		opr = opr->next;
 		free(var);
@@ -49,14 +58,24 @@ static void	ft_free_parse(t_node *node)
 
 	while (node)
 	{
-		ft_free_cmd(node->cmd);
-		ft_free_oprs(node->opr);
+		if (node->opr)
+		{	
+			write(1, "1\n", 2);///
+			ft_free_oprs(node->opr);
+		}
+		if (node->cmd)
+		{	
+			write(1, "2\n", 2);///
+			ft_free_cmd(node->cmd);
+		}
 		if (node->subshl)
 		{
+			write(1, "3\n", 2);///
 			ft_free_parse(node->subshl);
 		}
 		var = node;
 		node = node->next;
+		write(1, "ciao\n", 5);///
 		free(var);
 	}
 }
@@ -69,8 +88,14 @@ static void	ft_free_info(t_info *info)
 	env = info->env;
 	while (env)
 	{
-		free(env->name);
-		free(env->value);
+		if (env->name)
+		{
+			free(env->name);
+		}
+		if (env->value)
+		{
+			free(env->value);
+		}
 		var = env;
 		env = env->next;
 		free(env);
@@ -80,6 +105,14 @@ static void	ft_free_info(t_info *info)
 
 void	ft_free(t_node *node, t_info *info)
 {
-	ft_free_parse(node);
-	ft_free_info(info);
+	if (node)
+	{
+		write(1, "ciao1\n", 6);///
+		ft_free_parse(node);
+	}
+	if (info)
+	{
+		write(1, "ciao2\n", 6);///
+		ft_free_info(info);
+	}
 }

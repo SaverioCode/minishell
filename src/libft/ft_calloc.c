@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:21:56 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/01 17:23:46 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/19 19:44:43 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	*ft_calloc(size_t bytes, size_t size)
 	void		*var;
 	char		*tmp;
 	long long	len;
-	size_t		i;
+	int			i;
 
 	len = bytes * size;
 	if (len > 16711568)

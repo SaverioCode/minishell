@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/19 07:01:53 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/19 20:21:32 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,13 @@ void	ft_parser(t_node *node, char *input)
 		{
 			if (input[i] == '(')
 			{
+				// write(1, "P3\n", 3);////////
 				input[i] = 32;
 				node = create_subshell(node);
 			}
 			else if (input[i] == ')')
 			{
+				// write(1, "P4\n", 3);////////
 				input[i] = 32;
 				organize_exp(node, ft_getstr_from_to(input, from, i));
 				node = node->back;
@@ -86,12 +88,16 @@ void	ft_parser(t_node *node, char *input)
 			}
 			else if (input[i] == '&' || input[i] == '|' || input[i + 1] == 0)
 			{	
+				// write(1, "P5\n", 3);////////
 				node->token = get_token(&input[i]);
 				organize_exp(node, ft_getstr_from_to(input, from, i));
+				// write(1, "P6\n", 3);////////
 				node = create_new_node(node, &input[i]);
 				from = i + 1;
 			}
 		}
 		i++;
+		// write(1, "P1\n", 3);////////
+		// write(1, "P2\n", 3);////////
 	}
 }

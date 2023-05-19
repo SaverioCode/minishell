@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/19 07:09:39 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/19 19:48:06 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_node
 }	t_node;
 
 
+void	ft_set_starting_env(char **env, t_info *info);
 void	init_tenv(t_env *node);
 void	init_tinfo(t_info *info);
 void	ft_free(t_node *node, t_info *info);
