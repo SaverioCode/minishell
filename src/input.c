@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:03:46 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/22 10:21:35 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/22 11:40:13 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	ft_handle_input(t_info *info)
 		token = lexical_check(info->input, token);
 		if (token == -1)
 		{
+			write(2, "Error: incorrect syntax.\n", 25);
 			add_history(info->input);
 			free(info->input);
 			info->input = NULL;

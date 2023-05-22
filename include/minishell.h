@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/22 09:59:26 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/22 11:25:36 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@
 # define HDOC	0b01000101
 # define OUT 	'>'
 # define APP	0b01000110
+
+typedef struct s_fd
+{
+	int			fd;
+	struct s_fd	*next;
+}	t_fd;
 
 typedef struct s_env
 {
@@ -73,6 +79,7 @@ void	ft_free(t_node *node, t_info *info);
 void	ft_check_input(int ac, char **av);
 void	ft_init_shell(void);
 void	ft_handle_input(t_info *info);
+void    ft_execute_tree(t_node *node, t_info *info);
 t_node	*ls_get_last_tnode(t_node *node, char c);
 t_opr	*ls_get_last_topr(t_opr *opr);
 
