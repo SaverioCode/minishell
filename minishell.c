@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:46 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/22 10:42:04 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/22 11:09:07 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int ac, char **av, char **env)
 		init_tnode(root);
 		init_tinfo(info);
 		ft_handle_input(info);
-		// ft_parser(&root, info.input);
+		ft_parser(root, info->input);
 		// ft_run_all(&root, &info);
 		ft_free(root, NULL);
 		free(info->input);

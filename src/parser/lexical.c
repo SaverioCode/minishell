@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 01:47:49 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/22 10:35:20 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/22 11:05:21 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,5 @@ int	lexical_check(char *input, int reset)
 		}
 		i++;
 	}
-	printf("|%d|\n", brkts);///////
 	return (lx_exit_status(flag, brkts, token[0]));
 }
