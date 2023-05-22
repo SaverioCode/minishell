@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:29:03 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/19 19:33:23 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/22 12:04:34 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <limits.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <fcntl.h>
 # include <sys/ioctl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
