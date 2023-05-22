@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:46 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/22 11:09:07 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/22 11:10:23 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,16 @@ int	main(int ac, char **av, char **env)
 	t_info		*info;
 
 	ft_check_input(ac, av);
+	info = NULL;
+	info = ft_calloc(1, sizeof(t_info));
+	info->env = env;
 	// ft_set_starting_env(env, info);  /// problems here /// but check if delete before correct them ///
 	// set_signals();
 	ft_init_shell();
 	while (1)
 	{
 		root = NULL;
-		info = NULL;
 		root = ft_calloc(1, sizeof(t_node));
-		info = ft_calloc(1, sizeof(t_info));
 		init_tnode(root);
 		init_tinfo(info);
 		ft_handle_input(info);
