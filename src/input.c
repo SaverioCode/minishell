@@ -6,11 +6,31 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:03:46 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/22 11:40:13 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/22 15:51:18 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ft_get_prompt_str(t_info *info)
+{
+	char	*user_name;
+	char	*str;
+
+	str = ft_calloc(1, 4);
+	str[0] = '\\';
+	str[1] = '>';
+	str[2] = 32;
+	user_name = getenv("USER");
+	if (user_name)
+	{
+		info->prompt = ft_strjoin(user_name, str);
+	}
+	else
+	{
+		info->prompt = str;
+	}
+}
 
 static int	is_empty(char *str)
 {
@@ -30,23 +50,21 @@ static int	is_empty(char *str)
 
 static void	ft_get_input(t_info *info)
 {
-	char	*user_name;
 	char	*str;
 
-	user_name = getenv("USER");
 	str = NULL;
 	while (!str)
 	{
-		write(1, user_name, ft_strlen(user_name));
-		str = readline("\\> ");
+		// write(1, user_name, ft_strlen(user_name));
+		str = readline(info->prompt);
 		if (!is_empty(str))
 		{	
 			free(str);
 			str = NULL;
-			// clean buffer //
+			rl_on_new_line();
 		}
 	}
-	// clean buffer //
+	rl_on_new_line();
 	if (!info->input)
 	{	
 		info->input = str;

@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 08:12:12 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/19 21:21:09 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/22 15:46:01 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	init_tinfo(t_info *info)
 	info->stdin_clone = 0;
 	info->stdout_clone = 0;
 	info->input = NULL;
+	info->prompt = NULL;
 }
 
 void	init_tcmd(t_cmd *node)

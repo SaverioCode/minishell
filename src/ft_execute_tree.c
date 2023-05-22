@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:15:31 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/22 12:15:53 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/22 13:26:46 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,18 @@ static int  handle_oprs(t_opr *opr, t_fd *fd_node)
     }
 }
 
-static int  handle_cmd(t_cmd *cmd)
+static int  handle_cmd(t_cmd *cmd, char token, char **env)
 {
     pid_t   pid;
 
     pid = fork();
     if (pid != 0)
     {
-        
+        if (execve("", "", env) == -1)
+        {
+            write(2, "Error: command or arguments are invalid.\n", 41);
+            return (-1);
+        }
     }
 }
 
@@ -71,10 +75,13 @@ void    ft_execute_tree(t_node *node, t_info *info)
             /// ft_free_fd_lis(fd_lis); ///
             return ;
         }
-        if (handle_cmd(node->cmd) == -1)
+        if (handle_cmd(node->cmd, node->token, info->env) == -1)
         {
-            /// ft_free_fd_lis(fd_lis); ///
-            return ;
+            /// set $? = 1; ///
+        }
+        if (node->subshl)
+        {
+            ft_execute_tree(node->subshl, info);
         }
         /// ft_free_fd_lis(fd_lis); ///
         node = node->next;
