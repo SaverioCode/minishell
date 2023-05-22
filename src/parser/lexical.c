@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 01:47:49 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/19 21:43:54 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/22 10:35:20 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ static int	lx_exit_status(int *flag, int brkts, char token)
 		return (1);
 	if (token == INP || token == HDOC || token == OUT || token == APP)
 		return (-1);
+	token = CHAR;
 	return (token);
 }
 
@@ -97,8 +98,11 @@ int	lexical_check(char *input, int reset)
 				/// write error indicando il token sbagliato ///
 				return (-1);
 			}
+			if (token[0] == AND || token[0] == OR)
+				i++;
 		}
 		i++;
 	}
+	printf("|%d|\n", brkts);///////
 	return (lx_exit_status(flag, brkts, token[0]));
 }

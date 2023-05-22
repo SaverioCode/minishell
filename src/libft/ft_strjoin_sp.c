@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 19:21:51 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/19 21:41:17 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/22 10:19:22 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char    *ft_strjoin_sp(char *str1, char *str2)
     str[i] = 32;
     i++;
     j = 0;
-    while (str2[0])
+    while (str2[j])
     {
         str[i + j] = str2[j];
         j++;

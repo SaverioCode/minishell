@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 23:49:40 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/19 19:54:19 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/22 10:41:16 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static t_env	*create_s_env(t_env *env)
 {
 	t_env	*new_env;
 
-	new_env = ft_calloc(8, 1);
+	new_env = ft_calloc(1, sizeof(t_env));
 	init_tenv(new_env);
 	env->next = new_env;
 	return (new_env);

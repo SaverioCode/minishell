@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 06:57:18 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/19 20:21:21 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/22 10:41:29 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static t_opr	*create_opr(t_node *node)
 	t_opr	*opr;
 	t_opr	*old;
 
-	opr = ft_calloc(8, 1);
+	opr = ft_calloc(1, sizeof(t_opr));
 	init_topr(opr);
 	if (!node->opr)
 	{	
