@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 08:12:12 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/22 15:46:01 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/22 16:17:04 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,20 @@ void	init_tenv(t_env *node)
 	node->next = NULL;
 }
 
-void	init_tinfo(t_info *info)
+void	init_tinfo(t_info *info, char **env)
 {
+	int	len;
+	int	i;
+
 	info->env = NULL;
+	len = ft_biarrlen(env);
+	info->env = ft_calloc(1, len + 1);
+	i = 0;
+	while (info->env)
+	{
+		info->env[0] = ft_strjoin(env[0], NULL);
+		i++;
+	}
 	info->status = 0;
 	info->stdin_clone = 0;
 	info->stdout_clone = 0;

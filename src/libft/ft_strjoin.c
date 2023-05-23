@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 19:21:51 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/22 15:56:49 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/22 16:16:18 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ char    *ft_strjoin(char *str1, char *str2)
         str[i + j] = str2[j];
         j++;
     }
-    free(str2);
+    if (str2)
+    {
+        free(str2);
+    }
     return (str);
 }
 
