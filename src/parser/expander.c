@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 02:53:39 by sav               #+#    #+#             */
-/*   Updated: 2023/05/19 06:50:34 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/25 00:32:48 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static char *strjoin_in_the_middle(char *str1, int to, char *str2, char *str3)
 	return (new_str);
 }
 
-static char	*dollar_sub(char *str, int i, t_env *env)
+static char	*dollar_sub(char *str, int i, char **env)
 {
 	char	*var;
 	char	*value;
@@ -62,7 +62,7 @@ static char	*dollar_sub(char *str, int i, t_env *env)
 	return (str);
 }
 
-static char	*expansion(char *str, t_env *env)
+static char	*expansion(char *str, char **env)
 {
 	int		flag[2];
 	int		i;
@@ -83,7 +83,7 @@ static char	*expansion(char *str, t_env *env)
 	return (str);
 }
 
-void	ps_expander(t_node *node, t_env *env)
+void	ps_expander(t_node *node, char **env)
 {
 	t_opr	*opr;
 	size_t	i;

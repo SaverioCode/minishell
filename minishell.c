@@ -6,14 +6,13 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:46 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/22 16:13:49 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/25 00:27:44 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int	main(int ac, char **av, char **env)
-
 {
 	t_node		*root;
 	t_info		*info;
@@ -23,7 +22,6 @@ int	main(int ac, char **av, char **env)
 	info = ft_calloc(1, sizeof(t_info));
 	init_tinfo(info, env);
 	ft_get_prompt_str(info);
-	// ft_set_starting_env(env, info);  /// problems here /// but check if delete before correct them ///
 	// set_signals();
 	ft_init_shell();
 	while (1)

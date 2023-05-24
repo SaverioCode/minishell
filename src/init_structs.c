@@ -6,18 +6,11 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 08:12:12 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/24 06:34:18 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/25 00:31:19 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	init_tenv(t_env *node)
-{
-	node->name = NULL;
-	node->value = NULL;
-	node->next = NULL;
-}
 
 void	init_tinfo(t_info *info, char **env)
 {
@@ -26,17 +19,17 @@ void	init_tinfo(t_info *info, char **env)
 
 	info->env = NULL;
 	len = ft_biarrlen(env);
-	info->env = ft_calloc(1, len + 1);
+	info->env = ft_calloc(len + 1, 8);
 	i = 0;
-	while (info->env)
+	while (env[i])
 	{
-		info->env[0] = ft_strjoin(env[0], NULL, 0, 0);
+		info->env[i] = ft_strjoin(env[i], NULL, 0, 0);
 		i++;
 	}
-	info->status = 0;
+	info->input = NULL;
 	info->stdin_clone = 0;
 	info->stdout_clone = 0;
-	info->input = NULL;
+	info->status = 0;
 	info->prompt = NULL;
 }
 
