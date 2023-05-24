@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/25 00:33:54 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/25 00:38:40 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void	ft_check_input(int ac, char **av);
 void	ft_init_shell(void);
 void	ft_handle_input(t_info *info);
 void    ft_execute_tree(t_node *node, t_info *info);
-t_node	*ls_get_last_tnode(t_node *node, char c);
 t_opr	*ls_get_last_topr(t_opr *opr);
 void 	ft_waitpid(int pid, t_info *info);
 
@@ -93,7 +92,7 @@ char	lx_which_token(char *str);
 void	lx_check_quotes(int *flag, char c);
 int		lx_token_check(int *token, char new_token, int *brkts);
 int		lexical_check(char *input, int flag);
-void	ft_parser(t_node *node, char *input);
+void	ps_parser(t_node *node, char *input);
 void	organize_exp(t_node *node, char *exp);
 void	ps_expander(t_node *node, char **env);
 char	*ps_quotes_cleaner(char *str);

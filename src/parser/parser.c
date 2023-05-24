@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/22 10:40:41 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/25 00:38:43 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static t_node	*create_new_node(t_node *node, char *input)
 	return (new_node);
 }
 
-void	ft_parser(t_node *node, char *input)
+void	ps_parser(t_node *node, char *input)
 {
 	int	flag[2];
 	int	from;
