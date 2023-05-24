@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/24 06:24:07 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/24 21:52:04 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	ft_handle_input(t_info *info);
 void    ft_execute_tree(t_node *node, t_info *info);
 t_node	*ls_get_last_tnode(t_node *node, char c);
 t_opr	*ls_get_last_topr(t_opr *opr);
-
+void 	ft_waitpid(int pid, t_info *info);
 
 ///	Parser ///
 

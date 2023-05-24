@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:03:46 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/24 06:35:04 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/24 22:07:25 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ static void	ft_get_input(t_info *info)
 	str = NULL;
 	while (!str)
 	{
-		// write(1, user_name, ft_strlen(user_name));
 		str = readline(info->prompt);
 		if (!is_empty(str))
 		{	
@@ -68,7 +67,7 @@ static void	ft_get_input(t_info *info)
 	}
 	else
 	{	
-		info->input = ft_strjoin_sp(info->input, str);
+		info->input = ft_strjoin(info->input, str, 1, 1);
 	}
 }
 
