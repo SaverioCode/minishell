@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/22 16:16:53 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/24 06:24:07 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@
 # define HDOC	0b01000101
 # define OUT 	'>'
 # define APP	0b01000110
+
+typedef struct s_cmd_path
+{
+	char				*str;
+	struct s_cmd_path	*next;
+}	t_path;
 
 typedef struct s_fd
 {

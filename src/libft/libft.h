@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:29:03 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/22 15:47:33 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/24 06:33:32 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*ft_getstr_from_to(char *str, int from, int to);
 int		ft_isdigit(char c);
 int		ft_str_isdigit(char *str);
 size_t	ft_biarrlen(char **arr);
-char    *ft_strjoin(char *str1, char *str2);
+char    *ft_strjoin(char *str1, char *str2, int flag1, int flag2);
 char    *ft_strjoin_sp(char *str1, char *str2);
 
 #endif

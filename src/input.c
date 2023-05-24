@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:03:46 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/22 15:51:18 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/24 06:35:04 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,11 @@ void	ft_get_prompt_str(t_info *info)
 	char	*user_name;
 	char	*str;
 
-	str = ft_calloc(1, 4);
-	str[0] = '\\';
-	str[1] = '>';
-	str[2] = 32;
+	str = "\\> ";
 	user_name = getenv("USER");
 	if (user_name)
 	{
-		info->prompt = ft_strjoin(user_name, str);
+		info->prompt = ft_strjoin(user_name, str, 0, 0);
 	}
 	else
 	{

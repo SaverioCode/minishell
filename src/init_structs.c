@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 08:12:12 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/22 16:17:04 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/24 06:34:18 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	init_tinfo(t_info *info, char **env)
 	i = 0;
 	while (info->env)
 	{
-		info->env[0] = ft_strjoin(env[0], NULL);
+		info->env[0] = ft_strjoin(env[0], NULL, 0, 0);
 		i++;
 	}
 	info->status = 0;

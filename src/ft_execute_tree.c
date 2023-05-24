@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:15:31 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/22 16:21:18 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/24 08:00:19 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,27 +48,30 @@ static int  handle_oprs(t_opr *opr, t_fd *fd_node)
     }
 }
 
-static int  handle_cmd(t_cmd *cmd, char token, t_info *info)
+static int  check_fd_lis(t_fd *fd_lis)
 {
-    pid_t   pid;
-
-    pid = fork();
-    if (pid != 0)
+    while (fd_lis)
     {
-        if (execve("", "", info->env) == -1)
+        if (fd_lis->std_fd == 1)
         {
-            write(2, "Error: command or arguments are invalid.\n", 41);
-            info->status = 1;
-            if (token == AND)
-            {
-                return (-1);
-            }
+            return (1);
         }
+        fd_lis = fd_lis->next;
     }
-    else
+    return (0);
+}
+
+static int  check_out(char *token , int status)
+{
+    if (token == OR && status == 1)
     {
-        wait(NULL);
+        return (0);
     }
+    if (token == AND && status == 0)
+    {
+        return (0);
+    }
+    return (-1);
 }
 
 void    ft_execute_tree(t_node *node, t_info *info)
@@ -84,9 +87,17 @@ void    ft_execute_tree(t_node *node, t_info *info)
             /// ft_free_fd_lis(fd_lis); ///
             return ;
         }
+        if (node->token == PIPE && check_fd_lis(fd_lis))
+        {
+            node->token == NULL;
+        }
         if (handle_cmd(node->cmd, node->token, info->env) == -1)
         {
             /// set $? = 1; ///
+        }
+        if (check_out(node->token, info->status) == -1)
+        {
+            return ;
         }
         if (node->subshl)
         {
@@ -98,5 +109,6 @@ void    ft_execute_tree(t_node *node, t_info *info)
         
         /// ft_free_fd_lis(fd_lis); ///
         node = node->next;
+        
     }
 }
