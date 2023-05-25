@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:15:31 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/24 22:01:52 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/25 02:25:36 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	ft_execute_tree(t_node *node, t_info *info)
 	fd_lis = create_fd_node(NULL);
 	while (node)
 	{
+		ps_expander(node, info->env);
 		if (handle_oprs(node->opr, fd_lis) == -1)
 		{
 			info->status = 1;
@@ -103,7 +104,7 @@ void	ft_execute_tree(t_node *node, t_info *info)
 			if (pid == 0)
 			{
 				ft_execute_tree(node->subshl, info);
-				exit(0);
+				exit(info->status);
 			}
 			ft_waitpid(pid, info);
 		}
