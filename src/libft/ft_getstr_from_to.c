@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 00:50:23 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/26 11:29:45 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/26 12:49:55 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_getstr_from_to(char *str, int from, int to)
 	char	*new;
 	int		i;
 
-	if (!str || from < 0 || to < 0 || to <= from)
+	if (!str || from < 0 || to < 0 || to < from)
 	{	
 		return (NULL);
 	}
