@@ -1,38 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_trim.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/01 17:21:56 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/26 10:15:05 by fgarzi-c         ###   ########.fr       */
+/*   Created: 2023/05/26 10:34:12 by fgarzi-c          #+#    #+#             */
+/*   Updated: 2023/05/26 11:32:24 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t bytes, size_t size)
+char	*ft_trim(char *str, char *head)
 {
-	char	*var;
-	int		len;
+	char	*new;
 	int		i;
+	int		start;
+	int		end;
 
-	len = bytes * size;
-	if (len > 16711568)
+	if (!str)
 	{
-		ft_error("Error: allocation is to big!\n");
+		return (NULL);
 	}
-	var = malloc(len);
-	if (!var)
+	start = ft_find_printable(str, '+');
+	end = ft_find_printable(str, '-');
+	if (start > end || start == -1 || end == -1)
 	{
-		ft_error("Error: allocation failed!\n");
+		free(str);
+		return (NULL);
 	}
+	new = ft_calloc(end - start + 2, 1);
 	i = 0;
-	while (i < len)
+	while (start + i <= end)
 	{
-		var[i] = 0;
+		new[i] = str[start + i];
 		i++;
 	}
-	return (var);
+	free(head);
+	return (new);
 }

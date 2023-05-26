@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 06:18:35 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/26 08:46:56 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/26 10:24:08 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ static void	get_cmd_paths(t_path *path, char **env, char *cmd)
 	paths = get_raw_paths(env);
 	if (!paths)
 		return ;
-	path = create_new_node(path);
 	i = 5;
 	start = i;
 	while (paths[i])
@@ -109,13 +108,12 @@ static char	**format_cmd_args(char *cmd, char **args)
 		new[0] = ft_strjoin(cmd, NULL, 0, 0);
 		return (new);
 	}
-	new = ft_calloc(len + 1, 8);
+	new = ft_calloc(len + 2, 8);
 	new[0] = ft_strjoin(cmd, NULL, 0, 0);
 	i = 0;
 	while (args[i])
 	{
 		new[1 + i] = args[i];
-		printf("|%s|\n", new[i + 1]);//////////
 		i++;
 	}
 	free(args);
@@ -137,20 +135,14 @@ void	ft_waitpid(int pid, t_info *info)
 	}
 }
 
-int	handle_cmd(t_cmd *cmd, t_info *info, char token)
+static int	execute_cmd(t_cmd *cmd, t_info *info, t_path *path, char token)
 {
 	pid_t	pid;
-	t_path	*path;
 	int		paths_len;
 	int		i;
 	// int		fd[2];
 
-	write(1, "CMD1\n", 5);///////////
 	cmd->args = format_cmd_args(cmd->cmd, cmd->args);
-	write(1, "CMD2\n", 5);///////////
-	path = NULL;
-	get_cmd_paths(path, info->env, cmd->cmd);
-	write(1, "CMD3\n", 5);///////////
 	pid = fork();
 	if (pid == 0)
 	{
@@ -170,5 +162,38 @@ int	handle_cmd(t_cmd *cmd, t_info *info, char token)
 	{
 		return (-1);
 	}
+	return (0);
+}
+
+static void	ft_free_path(t_path *path)
+{
+	t_path	*tmp;
+
+	tmp = path;
+	if (!path)
+	{
+		return ;
+	}
+	while (path)
+	{
+		tmp = path;
+		path = path->next;
+		free(tmp);
+	}
+}
+
+int	ft_handle_cmd(t_node *node, t_info *info)
+{
+	t_path	*path;
+
+	path = NULL;
+	path = create_new_node(path);
+	get_cmd_paths(path, info->env, node->cmd->cmd);
+	if (execute_cmd(node->cmd, info, path, node->token) == -1)
+	{
+		ft_free_path(path);
+		return (-1);
+	}
+	ft_free_path(path);
 	return (0);
 }

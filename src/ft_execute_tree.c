@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:15:31 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/26 06:50:33 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/26 09:56:50 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	ft_execute_tree(t_node *node, t_info *info)
 			node->token = 0;
 		}
 		//// evaluate if to put format args here ////
-		if (handle_cmd(node->cmd, info, node->token) == -1)
+		if (ft_handle_cmd(node, info) == -1)
 		{
 			info->status = 1;
 			if (node->token != OR)

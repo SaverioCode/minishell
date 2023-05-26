@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 18:12:09 by sav               #+#    #+#             */
-/*   Updated: 2023/05/25 00:30:37 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/26 10:25:06 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,9 @@ static void	ft_free_parse(t_node *node)
 		}
 		if (node->cmd)
 		{	
+			write(1, "CMD0\n", 5);/////////
 			ft_free_cmd(node->cmd);
+			write(1, "CMD1\n", 5);/////////
 		}
 		if (node->subshl)
 		{
