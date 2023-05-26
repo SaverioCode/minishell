@@ -6,13 +6,13 @@
 #    By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/17 15:34:23 by fgarzi-c          #+#    #+#              #
-#    Updated: 2023/05/25 00:15:04 by fgarzi-c         ###   ########.fr        #
+#    Updated: 2023/05/26 08:41:11 by fgarzi-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell.a
 SRCS = ft_free.c init_shell.c init_structs.c input.c \
-	ls_get_last.c
+	ft_execute_tree.c ft_execute_tree_utils.c
 OBJS = $(SRCS:.c=.o)
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror

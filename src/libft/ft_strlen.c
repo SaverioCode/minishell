@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 22:58:42 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/04 23:01:31 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/26 08:31:48 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,13 @@ size_t	ft_strlen(char *str)
 	size_t	len;
 
 	if (!str)
+	{
 		return (0);
+	}
 	len = 0;
 	while (str[len])
+	{
 		len++;
+	}
 	return (len);
 }

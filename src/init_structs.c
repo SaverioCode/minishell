@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 08:12:12 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/25 00:31:19 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/26 08:16:29 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	init_tcmd(t_cmd *node)
 
 void	init_topr(t_opr *node)
 {
+	node->token = 0;
 	node->fd = 0;
 	node->arg = NULL;
 	node->next = NULL;

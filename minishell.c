@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:46 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/25 00:39:38 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/26 06:42:09 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int ac, char **av, char **env)
 		init_tnode(root);
 		ft_handle_input(info);
 		ps_parser(root, info->input);
-		// ft_execute_tree(root, info);
+		ft_execute_tree(root, info);
 		ft_free(root, NULL);
 		free(info->input);
 		info->input = NULL;

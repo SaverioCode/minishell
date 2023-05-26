@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 06:57:18 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/22 10:41:29 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/26 08:40:45 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static t_opr	*create_opr(t_node *node)
 	if (!node->opr)
 	{	
 		node->opr = opr;
+		return (opr);
 	}
 	old = node->opr;
 	while (old->next)
@@ -31,29 +32,6 @@ static t_opr	*create_opr(t_node *node)
 	old->next = opr;
 	return (opr);
 }
-
-/// perche minchia ho questa funzione se invece ///
-/// qualche riga piu sotto ne chiamo una anloga ///
-/// che invece sta in un altro foglio ??? ///
-/// magari i resti di una vita passata ///
-/// oppure la soluzione finale ///
-// static t_opr	*get_last_opr(t_node *node)
-// {
-// 	t_opr	*opr;
-
-// 	opr = node->opr;
-// 	while (opr->next)
-// 	{
-// 		opr = opr->next;
-// 	}
-// 	if (!opr->arg)
-// 	{	
-// 		return (opr);
-// 	}
-// 	opr->next = ft_calloc(8, 1);
-// 	init_topr(opr->next);
-// 	return (opr->next);
-// }
 
 static void	add_to_cmd(t_node *node, char *str)
 {
@@ -90,24 +68,29 @@ static void	add_instruction(t_node *node, char *exp, int from, int *i)
 	char	*str;
 	t_opr	*opr;
 
-	str = ft_getstr_from_to(exp, from, *i);
+	str = ft_getstr_from_to(exp, from, *i - 1);
+	printf("|%s|\n", str);///////////
 	if (exp[*i] == '<' || exp[*i] == '>')
 	{
+		write(1, "ADINS1\n", 7);/////////
 		opr = create_opr(node);
 		if (ft_str_isdigit(str))
 		{
 			opr->fd = ft_atoi(str);
 			free(str);
+			return ;
 		}
-		else
-		{
-			add_to_cmd(node, str);
-		}
+		// else
+		// {
+		// 	write(1, "ADINS2\n", 7);/////////
+		// 	add_to_cmd(node, str);
+		// 	return ;
+		// }
 		opr->token = lx_which_token(&exp[*i]);
 		if (opr->token == HDOC || opr->token == APP)
 			*i += 1;
 	}
-	opr = ls_get_last_topr(node->opr);
+	write(1, "ADINS4\n", 7);/////////
 	add_to_cmd(node, str);
 }
 
@@ -119,22 +102,27 @@ void	organize_exp(t_node *node, char *exp)
 
 	flag[0] = 0;
 	from = 0;
+	// printf("|%s|\n", exp);/////////
+	// write(1, "OEXP0\n", 6);////////
 	while (exp[from])
 	{	
 		if (ft_isprint(exp[from]))
 			break ;
 		from++;
 	}
+	// printf("|%d|\n", from);///////
 	i = from;
 	while (exp[i])
 	{
 		lx_check_quotes(flag, exp[i]);
-		if (flag[0] && (!ft_isprint(exp[i]) || \
-			exp[i] == '<' || exp[i] == '>'))
+		if (!flag[0] && (!ft_isprint(exp[i]) || exp[i] == '<' || exp[i] == '>'))
 		{
+			// write(1, "OEXP1\n", 6);////////
 			if (from < i)
 			{
+				// write(1, "OEXP2\n", 6);////////
 				add_instruction(node, exp, from, &i);
+				write(1, "OEXP2\n", 6);////////
 			}
 			from = i + 1;
 		}
@@ -142,6 +130,6 @@ void	organize_exp(t_node *node, char *exp)
 		// printf("| %d |\n", i);////
 		i++;
 	}
-	// add_instruction(node, exp, from, &i);
+	add_instruction(node, exp, from, &i);
 	free(exp);
 }

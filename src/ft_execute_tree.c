@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:15:31 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/25 02:25:36 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/26 06:50:33 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static int	handle_oprs(t_opr *opr, t_fd *fd_node)
 		}
 		fd_node = create_fd_node(fd_node);
 	}
+	return (0);
 }
 
 static int	check_fd_lis(t_fd *fd_lis)
@@ -61,13 +62,13 @@ static int	check_fd_lis(t_fd *fd_lis)
 	return (0);
 }
 
-static int	check_out(char *token , int status)
+int	ft_check_out(char token , int status)
 {
 	if (token == OR && status == 1)
 	{
 		return (0);
 	}
-	if (token == AND && status == 0)
+	if ((token == AND || token == PIPE) && status == 0)
 	{
 		return (0);
 	}
@@ -76,27 +77,35 @@ static int	check_out(char *token , int status)
 
 void	ft_execute_tree(t_node *node, t_info *info)
 {
-	t_node 	*subshl;
 	t_fd	*fd_lis;
-	pid_t	*pid;
+	pid_t	pid;
 
 	fd_lis = create_fd_node(NULL);
 	while (node)
 	{
-		ps_expander(node, info->env);
+		// ps_expander(node, info->env);
 		if (handle_oprs(node->opr, fd_lis) == -1)
 		{
 			info->status = 1;
-			/// ft_free_fd_lis(fd_lis); ///
-			return ;
+			if (node->token != OR)
+			{
+				/// ft_free_fd_lis(fd_lis); ///
+				return ;
+			}
 		}
 		if (node->token == PIPE && check_fd_lis(fd_lis))
 		{
-			node->token == NULL;
+			node->token = 0;
 		}
-		if (handle_cmd(node->cmd, node->token, info->env) == -1)
+		//// evaluate if to put format args here ////
+		if (handle_cmd(node->cmd, info, node->token) == -1)
 		{
 			info->status = 1;
+			if (node->token != OR)
+			{
+				/// ft_free_fd_lis(fd_lis); ///
+				return ;
+			}
 		}
 		if (node->subshl)
 		{
@@ -108,16 +117,12 @@ void	ft_execute_tree(t_node *node, t_info *info)
 			}
 			ft_waitpid(pid, info);
 		}
-		if (check_out(node->token, info->status) == -1)
+		/// ft_free_fd_lis(fd_lis); ///
+		if (ft_check_out(node->token, info->status) == -1)
 		{
 			return ;
 		}
-		
-		// close(fd1);
-		// close(fd2);
-		
-		/// ft_free_fd_lis(fd_lis); ///
+
 		node = node->next;
-		
 	}
 }

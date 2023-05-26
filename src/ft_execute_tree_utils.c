@@ -6,11 +6,42 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 06:18:35 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/24 22:06:50 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/26 08:46:56 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.c"
+#include "minishell.h"
+
+static t_path   *create_new_node(t_path *node)
+{
+    t_path  *new;
+
+    new = calloc(1, sizeof(t_path));
+    new->str = NULL;
+    new->next = NULL;
+    if (node)
+    {
+        node->next = new;
+    }
+    return (new);
+}
+
+static size_t   lis_len(t_path *node)
+{
+    size_t  len;
+
+    len = 0;
+    if (!node)
+    {
+        return (len);
+    }
+    while (node->next)
+    {
+        len++;
+        node = node->next;
+    }
+    return (len);
+}
 
 static char	*get_raw_paths(char **env)
 {
@@ -23,7 +54,7 @@ static char	*get_raw_paths(char **env)
 		len = ft_strlen(env[i]);
 		if (len >= 6)
 		{
-			if (ft_strncmp(env[i], "PATH=/", 6) == 0)
+			if (ft_strncmp(env[i], "PATH=/", 6) == 1)
 			{
 				return (env[i]);
 			}
@@ -33,7 +64,7 @@ static char	*get_raw_paths(char **env)
 	return (NULL);
 }
 
-static void	take_cmd_path(char **env, t_path *path, char *cmd)
+static void	get_cmd_paths(t_path *path, char **env, char *cmd)
 {
 	char	*paths;
 	int		i;
@@ -42,18 +73,21 @@ static void	take_cmd_path(char **env, t_path *path, char *cmd)
 	paths = get_raw_paths(env);
 	if (!paths)
 		return ;
+	path = create_new_node(path);
 	i = 5;
 	start = i;
 	while (paths[i])
 	{
 		if (!paths[i + 1])
 		{
-			path->str = ft_get_str(paths, start, i);
+			path->str = ft_getstr_from_to(paths, start, i);
+			path->str = ft_strjoin(path->str, "/", 1, 0);
 			path->str = ft_strjoin(path->str, cmd, 1, 0);
 		}
 		if (paths[i] == ':')
 		{
 			path->str = ft_getstr_from_to(paths, start, i - 1);
+			path->str = ft_strjoin(path->str, "/", 1, 0);
 			path->str = ft_strjoin(path->str, cmd, 1, 0);
 			path = create_new_node(path);
 			start = i + 1;
@@ -69,16 +103,23 @@ static char	**format_cmd_args(char *cmd, char **args)
 	int		i;
 
 	len = ft_biarrlen(args);
-	new = ft_calloc(1, len + 1);
-	args[0] = cmd;
+	if (!len)
+	{
+		new = ft_calloc(2, 8);
+		new[0] = ft_strjoin(cmd, NULL, 0, 0);
+		return (new);
+	}
+	new = ft_calloc(len + 1, 8);
+	new[0] = ft_strjoin(cmd, NULL, 0, 0);
 	i = 0;
 	while (args[i])
 	{
 		new[1 + i] = args[i];
+		printf("|%s|\n", new[i + 1]);//////////
 		i++;
 	}
 	free(args);
-	return (args);
+	return (new);
 }
 
 void	ft_waitpid(int pid, t_info *info)
@@ -86,7 +127,7 @@ void	ft_waitpid(int pid, t_info *info)
 	int	status;
 
 	waitpid(pid, &status, 0);
-	if (WSTOPSIG(status) > 0)
+	if (WSTOPSIG(status) == 1)
 	{
 		info->status = 1;
 	}
@@ -96,35 +137,38 @@ void	ft_waitpid(int pid, t_info *info)
 	}
 }
 
-static void	execute_cmd(t_cmd *cmd, char **args, char **env, char token)
+int	handle_cmd(t_cmd *cmd, t_info *info, char token)
 {
 	pid_t	pid;
-	t_path	*paths;
 	t_path	*path;
-	int		num_of_paths;
+	int		paths_len;
 	int		i;
-	int		fd[2];
+	// int		fd[2];
 
-	args = format_cmd_args(cmd->cmd, args);
-	get_cmd_paths(paths);
-	if (token == PIPE);
-	{
-		pipe(fd);
-	}
+	write(1, "CMD1\n", 5);///////////
+	cmd->args = format_cmd_args(cmd->cmd, cmd->args);
+	write(1, "CMD2\n", 5);///////////
+	path = NULL;
+	get_cmd_paths(path, info->env, cmd->cmd);
+	write(1, "CMD3\n", 5);///////////
 	pid = fork();
 	if (pid == 0)
 	{
-		path = paths;
-		num_of_paths = lis_len(paths);
+		paths_len = lis_len(path);
 		i = 0;
-		while (i < num_of_paths)
+		while (i < paths_len)
 		{
-			execve(path->str, args, env);
+			execve(path->str, cmd->args, info->env);
 			path = path->next;
 			i++;
 		}
 		write(2, "Error: occured in execve.\n", 26);
-		exit(0);
+		exit(1);
 	}
 	ft_waitpid(pid, info);
+	if (ft_check_out(token, info->status) == -1)
+	{
+		return (-1);
+	}
+	return (0);
 }
