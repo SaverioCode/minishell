@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/27 14:37:55 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/27 15:29:55 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,9 @@ typedef struct s_node
 }	t_node;
 
 
+void	init_tnode(t_node *node);
+void	init_topr(t_opr *node);
+void	init_tcmd(t_cmd *node);
 void	ft_get_prompt_str(t_info *info);
 void	init_tinfo(t_info *info, char **env);
 void	ft_free(t_node *node, t_info *info);
@@ -80,19 +83,15 @@ void	ft_check_input(int ac, char **av);
 void	ft_init_shell(void);
 void	ft_handle_input(t_info *info);
 void    ft_execute_tree(t_node *node, t_info *info);
-void	ft_execute_tree(t_node *node, t_info *info);
 void 	ft_waitpid(int pid, t_info *info);
 int		ft_handle_cmd(t_node *node, t_info *info);
 void	get_cmd_paths(t_path *path, char **env, char *cmd);
-t_path   *create_path_node(t_path *node);
+t_path  *create_path_node(t_path *node);
 int		ft_check_out(char token , int status);
 int		ft_execute_cmd(t_cmd *cmd, t_info *info, t_path *path, char token);
 
 ///	Parser ///
 
-void	init_tnode(t_node *node);
-void	init_topr(t_opr *node);
-void	init_tcmd(t_cmd *node);
 char	lx_which_token(char *str);
 void	lx_check_quotes(int *flag, char c);
 int		lx_token_check(int *token, char new_token, int *brkts);

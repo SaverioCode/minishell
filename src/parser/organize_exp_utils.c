@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 14:34:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/27 15:24:57 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/27 16:49:28 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,11 +127,11 @@ void	ps_add_instruction(t_node *node, char *exp, int from, int *i)
 		{
 			return ;
 		}
-		if (ft_find_printable(str, '+') == -1)
-		{
-			free(str);
-			return ;
-		}
+	}
+	if (ft_find_printable(str, '+') == -1)
+	{
+		free(str);
+		return ;
 	}
 	add_to_cmd(node, str);
 }

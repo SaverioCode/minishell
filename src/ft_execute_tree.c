@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:15:31 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/27 15:10:45 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/27 15:26:39 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void	ft_execute_tree(t_node *node, t_info *info)
 		}
 		if (node->subshl)
 		{
+			write(1, "CHECK0\n", 7);//////////
 			pid = fork();
 			if (pid == 0)
 			{
