@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 07:02:15 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/27 17:47:13 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/27 17:55:42 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	ms_handle_cmd(t_node *node, t_info *info, t_fd *fd_lis)
 	path = NULL;
 	path = create_path_node(path);
 	get_cmd_paths(path, info->env, node->cmd->cmd);
-	if (ms_execute_cmd(node->cmd, info, path, node->token) == -1)
+	if (ms_execute_cmd(node->cmd, info, path) == -1)
 	{
 		ft_free_path(path);
 		return (1);

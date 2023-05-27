@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:15:31 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/27 17:47:05 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/27 17:48:44 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	handle_oprs(t_opr *opr, t_fd *fd_node)
 	return (0);
 }
 
-int	ft_check_out(char token , int status)
+int	ms_check_out(char token , int status)
 {
 	if (token == OR && status == 1)
 	{
@@ -103,7 +103,7 @@ void	ft_execute_tree(t_node *node, t_info *info)
 		status_opr = handle_oprs(node->opr, fd_lis);
 		status_cmd = ms_handle_cmd(node, info, fd_lis);
 		ms_set_status(info, status_opr, status_cmd);
-		if (ft_check_out(node->token, info->status) == -1)
+		if (ms_check_out(node->token, info->status) == -1)
 		{
 			return ;
 		}
