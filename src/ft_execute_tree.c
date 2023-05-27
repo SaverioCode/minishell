@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:15:31 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/27 17:44:00 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/27 17:47:05 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,6 @@ static int	handle_oprs(t_opr *opr, t_fd *fd_node)
 	return (0);
 }
 
-static int	check_fd_lis(t_fd *fd_lis)
-{
-	while (fd_lis)
-	{
-		if (fd_lis->std_fd == 1)
-		{
-			return (1);
-		}
-		fd_lis = fd_lis->next;
-	}
-	return (0);
-}
-
 int	ft_check_out(char token , int status)
 {
 	if (token == OR && status == 1)
@@ -92,7 +79,10 @@ static void	ms_restore_fd(t_fd *fd_lis)
 	while (fd_lis)
 	{
 		dup2(fd_lis->std_fd, fd_lis->std_fd);
-		close(fd_lis->file_fd);
+		if (fd_lis->file_fd != 0)
+		{
+			close(fd_lis->file_fd);
+		}
 		tmp = fd_lis;
 		fd_lis = fd_lis->next;
 		free(tmp);
