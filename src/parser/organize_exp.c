@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 06:57:18 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/26 13:02:52 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/27 12:51:29 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,7 @@ static char	*get_opr_arg(char *exp, int *i)
 	char	*arg;
 	int		j;
 
-	*i = ft_find_printable(&exp[*i], '+');
-	printf("start ||%d||\n", *i);/////////
+	*i += ft_find_printable(&exp[*i + 1], '+') + 1;
 	j = *i;
 	while (exp[j])
 	{
@@ -94,22 +93,25 @@ static void	add_instruction(t_node *node, char *exp, int from, int *i)
 	{
 		return ;
 	}
-	printf("exp:|%s| |%d| |%d|\n", exp, from, *i);//////////
 	str = ft_getstr_from_to(exp, from, *i - 1);
 	if (exp[*i] == '<' || exp[*i] == '>')
 	{
 		opr = create_opr(node);
-		printf("fd:|%s|\n", str);//////////
 		if (ft_str_isdigit(str))
 		{
 			opr->fd = ft_atoi(str);
 			free(str);
+		}
+		else
+		{
+			add_to_cmd(node, str);
 			return ;
 		}
 		opr->token = lx_which_token(&exp[*i]);
 		if (opr->token == HDOC || opr->token == APP)
 			*i += 1;
 		opr->arg = get_opr_arg(exp, i);
+		return ;
 	}
 	add_to_cmd(node, str);
 }
