@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/27 15:29:55 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/27 17:30:40 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,11 @@ void	ft_init_shell(void);
 void	ft_handle_input(t_info *info);
 void    ft_execute_tree(t_node *node, t_info *info);
 void 	ft_waitpid(int pid, t_info *info);
-int		ft_handle_cmd(t_node *node, t_info *info);
+int		ms_handle_cmd(t_node *node, t_info *info, t_fd *fd_lis);
 void	get_cmd_paths(t_path *path, char **env, char *cmd);
 t_path  *create_path_node(t_path *node);
 int		ft_check_out(char token , int status);
-int		ft_execute_cmd(t_cmd *cmd, t_info *info, t_path *path, char token);
+int		ms_execute_cmd(t_cmd *cmd, t_info *info, t_path *path, char token);
 
 ///	Parser ///
 

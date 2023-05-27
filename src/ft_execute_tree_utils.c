@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 06:18:35 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/26 12:06:49 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/27 17:12:03 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	ft_waitpid(int pid, t_info *info)
 	}
 }
 
-int	ft_execute_cmd(t_cmd *cmd, t_info *info, t_path *path, char token)
+int	ms_execute_cmd(t_cmd *cmd, t_info *info, t_path *path, char token)
 {
 	pid_t	pid;
 	int		paths_len;
