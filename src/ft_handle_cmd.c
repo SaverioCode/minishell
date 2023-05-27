@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 07:02:15 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/26 12:09:24 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/27 15:09:27 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ int	ft_handle_cmd(t_node *node, t_info *info)
 {
 	t_path	*path;
 
+	if (node->cmd == NULL)
+	{
+		return (0);
+	}
 	path = NULL;
 	path = create_path_node(path);
 	get_cmd_paths(path, info->env, node->cmd->cmd);

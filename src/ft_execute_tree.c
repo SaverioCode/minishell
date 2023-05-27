@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:15:31 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/26 12:44:15 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/27 15:10:45 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,13 @@ static int	handle_oprs(t_opr *opr, t_fd *fd_node)
 	while (opr)
 	{
 		fd_node->std_fd = opr->fd;
-		printf("|%s|\n", opr->arg);////////
 		fd_node->file_fd = open(opr->arg, O_RDWR);
 		if (fd_node->file_fd == -1)
 		{
 			write(2, "Error: bad path file.\n", 22);
 			return (-1);
 		}
-		dup2(fd_node->file_fd, fd_node->std_fd);
+		dup2(fd_node->std_fd, fd_node->file_fd);
 		opr = opr->next;
 		if (!opr)
 		{
@@ -119,6 +118,7 @@ void	ft_execute_tree(t_node *node, t_info *info)
 			ft_waitpid(pid, info);
 		}
 		/// ft_free_fd_lis(fd_lis); ///
+		/// eventualy reset file descriptor ///
 		if (ft_check_out(node->token, info->status) == -1)
 		{
 			return ;

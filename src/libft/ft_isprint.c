@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 01:12:28 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/26 10:48:32 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/27 15:20:23 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ int	ft_find_printable(char *str, char c)
 {
 	size_t	i;
 
+	if (!str)
+	{
+		return (-1);
+	}
 	i = 0;
 	if (c == '+')
 	{

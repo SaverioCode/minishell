@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 10:34:12 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/26 11:32:24 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/27 14:55:01 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_trim(char *str, char *head)
 	end = ft_find_printable(str, '-');
 	if (start > end || start == -1 || end == -1)
 	{
-		free(str);
+		free(head);
 		return (NULL);
 	}
 	new = ft_calloc(end - start + 2, 1);
