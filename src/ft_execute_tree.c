@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:15:31 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/27 17:33:51 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/27 17:44:00 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,30 @@ int	ft_check_out(char token , int status)
 	return (-1);
 }
 
+static void	ms_set_status(t_info *info, int status_opr, int status_cmd)
+{
+	if (status_opr == 1 || status_cmd == 1)
+	{
+		info->status = 1;
+		return ;
+	}
+	info->status = 0;
+}
+
+static void	ms_restore_fd(t_fd *fd_lis)
+{
+	t_fd	*tmp;
+
+	while (fd_lis)
+	{
+		dup2(fd_lis->std_fd, fd_lis->std_fd);
+		close(fd_lis->file_fd);
+		tmp = fd_lis;
+		fd_lis = fd_lis->next;
+		free(tmp);
+	}
+}
+
 void	ft_execute_tree(t_node *node, t_info *info)
 {
 	t_fd	*fd_lis;
@@ -88,14 +112,13 @@ void	ft_execute_tree(t_node *node, t_info *info)
 		// ps_expander(node, info->env);
 		status_opr = handle_oprs(node->opr, fd_lis);
 		status_cmd = ms_handle_cmd(node, info, fd_lis);
-		/// se uno dei due e' negativo status va settato negativo ///
+		ms_set_status(info, status_opr, status_cmd);
 		if (ft_check_out(node->token, info->status) == -1)
 		{
 			return ;
 		}
 		if (node->subshl)
 		{
-			// write(1, "CHECK0\n", 7);//////////
 			pid = fork();
 			if (pid == 0)
 			{
@@ -104,10 +127,7 @@ void	ft_execute_tree(t_node *node, t_info *info)
 			}
 			ft_waitpid(pid, info);
 		}
-		/// ft_free_fd_lis(fd_lis); ///
 		ms_restore_fd(fd_lis);
-		/// eventualy reset file descriptor ///
-
 		node = node->next;
 	}
 }
