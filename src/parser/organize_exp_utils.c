@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 14:34:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/27 16:49:28 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/27 20:57:05 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	add_to_cmd(t_node *node, char *str)
 
 	if (!node->cmd)
 	{
-		node->cmd = ft_calloc(8, 1);
+		node->cmd = ft_calloc(1, sizeof(t_cmd));
 		init_tcmd(node->cmd);
 		node->cmd->cmd = str;
 		return ;

@@ -1,1 +1,12 @@
-bella
+Makefile
+include
+minishell
+minishell.c
+minishell.o
+notes.txt
+src
+test.txt
+test2.txt
+tokens.txt
+tokens2.txt
+tokens3.txt
