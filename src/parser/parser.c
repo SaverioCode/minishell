@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/25 00:38:43 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/27 14:38:06 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	ps_parser(t_node *node, char *input)
 			{
 				// write(1, "P4\n", 3);////////
 				input[i] = 32;
-				organize_exp(node, ft_getstr_from_to(input, from, i));
+				ps_organize_exp(node, ft_getstr_from_to(input, from, i));
 				node = node->back;
 				from = i + 1;
 			}
@@ -90,7 +90,7 @@ void	ps_parser(t_node *node, char *input)
 			{	
 				// write(1, "P5\n", 3);////////
 				node->token = get_token(&input[i]);
-				organize_exp(node, ft_getstr_from_to(input, from, i));
+				ps_organize_exp(node, ft_getstr_from_to(input, from, i));
 				// write(1, "P6\n", 3);////////
 				node = create_new_node(node, &input[i]);
 				from = i + 1;

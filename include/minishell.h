@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/26 12:09:17 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/27 14:37:55 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,8 @@ void	lx_check_quotes(int *flag, char c);
 int		lx_token_check(int *token, char new_token, int *brkts);
 int		lexical_check(char *input, int flag);
 void	ps_parser(t_node *node, char *input);
-void	organize_exp(t_node *node, char *exp);
+void	ps_organize_exp(t_node *node, char *exp);
+void	ps_add_instruction(t_node *node, char *exp, int from, int *i);
 void	ps_expander(t_node *node, char **env);
 char	*ps_quotes_cleaner(char *str);
 
