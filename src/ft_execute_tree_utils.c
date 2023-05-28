@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 06:18:35 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/27 17:55:28 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/28 18:17:34 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static char	**format_cmd_args(char *cmd, char **args)
 	return (new);
 }
 
-void	ft_waitpid(int pid, t_info *info)
+void	ms_waitpid(int pid, t_info *info)
 {
 	int	status;
 
@@ -91,6 +91,6 @@ int	ms_execute_cmd(t_cmd *cmd, t_info *info, t_path *path)
 		write(2, "Error: occured in execve.\n", 26);
 		exit(1);
 	}
-	ft_waitpid(pid, info);
+	ms_waitpid(pid, info);
 	return (0);
 }

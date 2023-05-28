@@ -10,3 +10,4 @@ test2.txt
 tokens.txt
 tokens2.txt
 tokens3.txt
+CHECK0
