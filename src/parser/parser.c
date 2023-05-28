@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/27 16:51:45 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/28 18:46:28 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static char	get_token(char *input)
 
 static t_node	*create_subshell(t_node *node)
 {
-	t_node *subshl;
+	t_node	*subshl;
 
 	subshl = ft_calloc(1, sizeof(t_node));
 	init_tnode(subshl);
