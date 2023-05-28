@@ -6,14 +6,14 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/28 18:17:54 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/28 18:37:22 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "../src/libft/libft.h"
+# include "./libft/libft.h"
 # include "./readline/readline.h"
 
 # define AND	0b01000001
