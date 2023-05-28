@@ -6,24 +6,24 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 12:05:48 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/26 12:09:29 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/28 18:50:08 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_path   *create_path_node(t_path *node)
+t_path	*create_path_node(t_path *node)
 {
-    t_path  *new;
+	t_path	*new;
 
-    new = calloc(1, sizeof(t_path));
-    new->str = NULL;
-    new->next = NULL;
-    if (node)
-    {
-        node->next = new;
-    }
-    return (new);
+	new = calloc(1, sizeof(t_path));
+	new->str = NULL;
+	new->next = NULL;
+	if (node)
+	{
+		node->next = new;
+	}
+	return (new);
 }
 
 static char	*get_raw_paths(char **env)

@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:15:31 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/28 18:28:13 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/28 18:48:34 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	ms_restore_fd(t_fd *fd_lis)
 	}
 }
 
-int	ms_check_out(char token , int status, t_fd *fd_lis)
+int	ms_check_out(char token, int status, t_fd *fd_lis)
 {
 	if (token == OR && status == 1)
 	{

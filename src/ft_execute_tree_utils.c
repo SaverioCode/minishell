@@ -6,27 +6,27 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 06:18:35 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/28 18:17:34 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/28 18:48:00 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static size_t   lis_len(t_path *node)
+static size_t	lis_len(t_path *node)
 {
-    size_t  len;
+	size_t	len;
 
-    len = 0;
-    if (!node)
-    {
-        return (len);
-    }
-    while (node->next)
-    {
-        len++;
-        node = node->next;
-    }
-    return (len);
+	len = 0;
+	if (!node)
+	{
+		return (len);
+	}
+	while (node->next)
+	{
+		len++;
+		node = node->next;
+	}
+	return (len);
 }
 
 static char	**format_cmd_args(char *cmd, char **args)
