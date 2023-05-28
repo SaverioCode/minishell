@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-		"cstdlib": "c",
-		"complex": "c",
-		"cstdio": "c",
-		"cwchar": "c"
-	}
-}
