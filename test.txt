@@ -1,12 +1,53 @@
-Makefile
-include
-minishell
-minishell.c
-minishell.o
-notes.txt
-src
-test.txt
-test2.txt
-tokens.txt
-tokens2.txt
-tokens3.txt
+/usr/bin/ld: ./src/parser/parser.a(parser.o): in function `ps_parser':
+parser.c:(.text+0x249): undefined reference to `ft_getstr_from_to'
+/usr/bin/ld: parser.c:(.text+0x2e7): undefined reference to `ft_getstr_from_to'
+/usr/bin/ld: ./src/parser/parser.a(lexical.o): in function `lx_which_token':
+lexical.c:(.text+0x117): undefined reference to `ft_isprint'
+/usr/bin/ld: ./src/parser/parser.a(lexical.o): in function `lexical_check':
+lexical.c:(.text+0x2d9): undefined reference to `ft_isprint'
+/usr/bin/ld: ./src/parser/parser.a(organize_exp.o): in function `ps_organize_exp':
+organize_exp.c:(.text+0x37): undefined reference to `ft_find_printable'
+/usr/bin/ld: organize_exp.c:(.text+0x87): undefined reference to `ft_isprint'
+/usr/bin/ld: organize_exp.c:(.text+0x118): undefined reference to `ft_trim'
+/usr/bin/ld: ./src/parser/parser.a(organize_exp_utils.o): in function `add_to_cmd':
+organize_exp_utils.c:(.text+0x138): undefined reference to `ft_biarrlen'
+/usr/bin/ld: ./src/parser/parser.a(organize_exp_utils.o): in function `get_opr_arg':
+organize_exp_utils.c:(.text+0x20e): undefined reference to `ft_find_printable'
+/usr/bin/ld: organize_exp_utils.c:(.text+0x244): undefined reference to `ft_isprint'
+/usr/bin/ld: organize_exp_utils.c:(.text+0x27d): undefined reference to `ft_getstr_from_to'
+/usr/bin/ld: ./src/parser/parser.a(organize_exp_utils.o): in function `get_opr_exp':
+organize_exp_utils.c:(.text+0x329): undefined reference to `ft_str_isdigit'
+/usr/bin/ld: organize_exp_utils.c:(.text+0x339): undefined reference to `ft_atoi'
+/usr/bin/ld: ./src/parser/parser.a(organize_exp_utils.o): in function `ps_add_instruction':
+organize_exp_utils.c:(.text+0x3de): undefined reference to `ft_getstr_from_to'
+/usr/bin/ld: organize_exp_utils.c:(.text+0x43d): undefined reference to `ft_find_printable'
+/usr/bin/ld: ./src/minishell.a(init_structs.o): in function `init_tinfo':
+init_structs.c:(.text+0x28): undefined reference to `ft_biarrlen'
+/usr/bin/ld: init_structs.c:(.text+0x93): undefined reference to `ft_strjoin'
+/usr/bin/ld: ./src/minishell.a(input.o): in function `ft_get_prompt_str':
+input.c:(.text+0x48): undefined reference to `ft_strjoin'
+/usr/bin/ld: ./src/minishell.a(input.o): in function `is_empty':
+input.c:(.text+0xa1): undefined reference to `ft_isprint'
+/usr/bin/ld: ./src/minishell.a(input.o): in function `ft_get_input':
+input.c:(.text+0xf4): undefined reference to `readline'
+/usr/bin/ld: input.c:(.text+0x121): undefined reference to `rl_on_new_line'
+/usr/bin/ld: input.c:(.text+0x12d): undefined reference to `rl_on_new_line'
+/usr/bin/ld: input.c:(.text+0x166): undefined reference to `ft_strjoin'
+/usr/bin/ld: ./src/minishell.a(input.o): in function `ft_handle_input':
+input.c:(.text+0x1da): undefined reference to `add_history'
+/usr/bin/ld: input.c:(.text+0x213): undefined reference to `add_history'
+/usr/bin/ld: ./src/minishell.a(ft_execute_tree_utils.o): in function `format_cmd_args':
+ft_execute_tree_utils.c:(.text+0x61): undefined reference to `ft_biarrlen'
+/usr/bin/ld: ft_execute_tree_utils.c:(.text+0x98): undefined reference to `ft_strjoin'
+/usr/bin/ld: ft_execute_tree_utils.c:(.text+0xdc): undefined reference to `ft_strjoin'
+/usr/bin/ld: ./src/minishell.a(ft_cmd_paths.o): in function `get_raw_paths':
+ft_cmd_paths.c:(.text+0xbb): undefined reference to `ft_strncmp'
+/usr/bin/ld: ./src/minishell.a(ft_cmd_paths.o): in function `get_cmd_paths':
+ft_cmd_paths.c:(.text+0x174): undefined reference to `ft_getstr_from_to'
+/usr/bin/ld: ft_cmd_paths.c:(.text+0x19b): undefined reference to `ft_strjoin'
+/usr/bin/ld: ft_cmd_paths.c:(.text+0x1bf): undefined reference to `ft_strjoin'
+/usr/bin/ld: ft_cmd_paths.c:(.text+0x1f5): undefined reference to `ft_getstr_from_to'
+/usr/bin/ld: ft_cmd_paths.c:(.text+0x21c): undefined reference to `ft_strjoin'
+/usr/bin/ld: ft_cmd_paths.c:(.text+0x240): undefined reference to `ft_strjoin'
+collect2: error: ld returned 1 exit status
+make: *** [Makefile:32: all] Error 1

@@ -14,7 +14,7 @@
 
 int	ft_isprint(char c)
 {
-	if ((c > 32 && c < 127) || c > 127)
+	if (c > 32 && c < 127)
 	{
 		return (1);
 	}
@@ -23,7 +23,7 @@ int	ft_isprint(char c)
 
 int	ft_find_printable(char *str, char c)
 {
-	size_t	i;
+	int	i;
 
 	if (!str)
 		return (-1);

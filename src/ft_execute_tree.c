@@ -75,7 +75,7 @@ int	ms_check_out(char token, int status, t_fd *fd_lis)
 	{
 		return (0);
 	}
-	else if (status == 0)
+	else if (token != OR && status == 0)
 	{
 		return (0);
 	}

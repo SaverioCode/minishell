@@ -63,7 +63,7 @@ void	ms_waitpid(int pid, t_info *info)
 	{
 		info->status = 1;
 	}
-	else if (WSTOPSIG(status) == 0)
+	else if (WSTOPSIG(status) != 1)
 	{
 		info->status = 0;
 	}
@@ -80,22 +80,16 @@ int	ms_execute_cmd(t_cmd *cmd, t_info *info, t_path *path, char token)
 	if (token == PIPE)
 	{
 		pipe(fd);
-		// fd_clone[0] = dup(0);
-		// dup2(fd[0], 0);
-		// fd_clone[1] = dup(1);
 	}
 	cmd->args = format_cmd_args(cmd->cmd, cmd->args);
 	pid = fork();
 	if (pid == 0)
 	{
-		// write(1, "CHECK1\n", 7);///////////////
 		if (token == PIPE)
 		{
 			close(fd[0]);
-			// write(1, "CHECK2\n", 7);///////////////
 			dup2(fd[1], 1);
 		}
-		// write(1, "CHECK3\n", 7);///////////////
 		paths_len = lis_len(path);
 		i = 0;
 		while (i < paths_len)
@@ -114,21 +108,13 @@ int	ms_execute_cmd(t_cmd *cmd, t_info *info, t_path *path, char token)
 		close(fd[1]);
 		fd_clone[0] = dup(0);
 		dup2(fd[0], 0);
-		// write(1, "CHECK0\n", 7);///////////////
 	}
 	ms_waitpid(pid, info);
 	if (token == PIPE)
 	{
-		// write(1, "CHECK00\n", 8);///////////////
 		dup2(fd_clone[0], 0);
-		// dup2(fd_clone[1], 1);
 		close(fd[0]);
 		close(fd_clone[0]);
-		// close(fd_clone[1]);
 	}
-	// if (token != PIPE)
-	// {
-	// 	exit(0);
-	// }
 	return (info->status);
 }

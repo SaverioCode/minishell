@@ -12,13 +12,13 @@
 
 NAME = parser.a
 SRCS = lexical.c lexical_utils.c organize_exp.c organize_exp_utils.c \
-	parser.c quotes_cleaner.c expander.c
+	parser.c quotes_cleaner.c
 OBJS = $(SRCS:.c=.o)
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -I ../../include
 
 all: $(%.c)
-	@$(CC) -I ../../include $(CFLAGS) -c $(SRCS)
+	@$(CC)  $(CFLAGS) -c $(SRCS) 
 	@ar rcs $(NAME) $(OBJS)
 
 %.c: %.o

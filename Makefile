@@ -18,39 +18,40 @@ LIB_R = $(READLINE)/libreadline.a
 LIB_RH = $(READLINE)/libhistory.a
 LIB_M = ./src/minishell.a
 LIB_P = ./src/parser/parser.a
-LIBS = $(LIB_L) $(LIB_R) $(LIB_RH) $(LIB_P) $(LIB_M)
+LIBS = $(LIB_M) $(LIB_P) $(LIB_L) $(LIB_RH) $(LIB_R)
 SRCS = minishell.c
 OBJS = $(SRCS:.c=.o)
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror 
+CFLAGS = -Wall -Wextra -Werror -Iinclude
 
-all:
-	@make -C $(LIBFT)
-	@make -C ./src/parser
-	@make -C ./src
-	@$(CC) -I include $(CFLAGS) -c $(SRCS)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) -lcurses -o $(NAME)
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	@make -s -C $(LIBFT)
+	@make -s -C ./src/parser
+	@make -s -C ./src
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS) -lcurses
 
 config:
 	@cd $(READLINE) && sh configure && cd ../../
 	@make -C $(READLINE)
 
 clean:
-	@make clean -C $(LIBFT)
-	@make clean -C ./src/parser
-	@make clean -C ./src
+	@make clean -s -C $(LIBFT)
+	@make clean -s -C ./src/parser
+	@make clean -s -C ./src
 	@rm -f $(OBJS)
 	
 fclean: clean
 	# @make clean -C $(READLINE)
-	@make fclean -C $(LIBFT)
-	@make fclean -C ./src/parser
-	@make fclean -C ./src
+	@make fclean -s -C $(LIBFT)
+	@make fclean -s -C ./src/parser
+	@make fclean -s -C ./src
 	@rm -f $(NAME)
 	
 re: fclean all
-	@make re -C $(LIBFT)
-	@make re -C ./src/parser
-	@make re -C ./src
+	@make re -s -C $(LIBFT)
+	@make re -s -C ./src/parser
+	@make re -s -C ./src
 
 .PHONY: all clean fclean re

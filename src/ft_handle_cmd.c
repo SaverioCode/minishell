@@ -48,7 +48,7 @@ int	ms_handle_cmd(t_node *node, t_info *info, t_fd *fd_lis)
 
 	if (node->cmd == NULL)
 	{
-		return (0);
+		return (1);
 	}
 	if (node->token == PIPE && check_fd_lis(fd_lis))
 	{
@@ -57,11 +57,11 @@ int	ms_handle_cmd(t_node *node, t_info *info, t_fd *fd_lis)
 	path = NULL;
 	path = create_path_node(path);
 	get_cmd_paths(path, info->env, node->cmd->cmd);
-	if (ms_execute_cmd(node->cmd, info, path, node->token) == -1)
+	if (ms_execute_cmd(node->cmd, info, path, node->token) == 0)
 	{
 		ft_free_path(path);
-		return (1);
+		return (0);
 	}
 	ft_free_path(path);
-	return (0);
+	return (1);
 }

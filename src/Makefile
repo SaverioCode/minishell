@@ -16,10 +16,10 @@ SRCS = ft_free.c init_shell.c init_structs.c input.c \
 	ft_cmd_paths.c
 OBJS = $(SRCS:.c=.o)
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -I ../include
 
 all: $(%.c)
-	@$(CC) -I ../include $(CFLAGS) -c $(SRCS)
+	@$(CC) $(CFLAGS) -c $(SRCS)
 	@ar rcs $(NAME) $(OBJS)
 
 %.c: %.o
