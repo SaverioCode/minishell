@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/28 18:37:22 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/28 20:29:27 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int		ms_handle_cmd(t_node *node, t_info *info, t_fd *fd_lis);
 void	get_cmd_paths(t_path *path, char **env, char *cmd);
 t_path  *create_path_node(t_path *node);
 int		ms_check_out(char token , int status, t_fd *fd_lis);
-int		ms_execute_cmd(t_cmd *cmd, t_info *info, t_path *path);
+int		ms_execute_cmd(t_cmd *cmd, t_info *info, t_path *path, char token);
 
 ///	Parser ///
 

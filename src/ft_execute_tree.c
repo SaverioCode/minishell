@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:15:31 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/28 20:19:24 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/29 11:47:08 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void	ft_execute_tree(t_node *node, t_info *info)
 	{
 		fd_lis = create_fd_node(NULL);
 		// ps_expander(node, info->env);
+		// printf("cmd: |%s|\n", node->cmd->cmd);/////////////
 		info->status = handle_oprs(node->opr, fd_lis);
 		if (info->status == 0)
 		{

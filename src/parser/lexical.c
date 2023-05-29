@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 01:47:49 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/22 11:49:23 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/29 09:46:10 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	lx_which_token(char *str)
 		return (AND);
 	else if (str[0] == '&')
 		return ('&');
-	else if (str[0] == PIPE && str[0] == PIPE)
+	else if (str[0] == PIPE && str[1] == PIPE)
 		return (OR);
 	else if (str[0] == PIPE)
 		return (PIPE);

@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 06:18:35 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/28 19:45:56 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/29 12:09:41 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,17 +69,33 @@ void	ms_waitpid(int pid, t_info *info)
 	}
 }
 
-int	ms_execute_cmd(t_cmd *cmd, t_info *info, t_path *path)
+int	ms_execute_cmd(t_cmd *cmd, t_info *info, t_path *path, char token)
 {
 	pid_t	pid;
 	int		paths_len;
 	int		i;
-	// int		fd[2];
+	int		fd[2];
+	int		fd_clone[2];
 
+	if (token == PIPE)
+	{
+		pipe(fd);
+		// fd_clone[0] = dup(0);
+		// dup2(fd[0], 0);
+		// fd_clone[1] = dup(1);
+	}
 	cmd->args = format_cmd_args(cmd->cmd, cmd->args);
 	pid = fork();
 	if (pid == 0)
 	{
+		// write(1, "CHECK1\n", 7);///////////////
+		if (token == PIPE)
+		{
+			close(fd[0]);
+			// write(1, "CHECK2\n", 7);///////////////
+			dup2(fd[1], 1);
+		}
+		// write(1, "CHECK3\n", 7);///////////////
 		paths_len = lis_len(path);
 		i = 0;
 		while (i < paths_len)
@@ -88,9 +104,31 @@ int	ms_execute_cmd(t_cmd *cmd, t_info *info, t_path *path)
 			path = path->next;
 			i++;
 		}
-		write(2, "Error: occured in execve.\n", 26);
+		write(2, "Error: command not found: ", 26);
+		write(2, cmd->args[0], ft_strlen(cmd->args[0]));
+		write(2, "\n", 1);
 		exit(1);
 	}
+	if (token == PIPE)
+	{
+		close(fd[1]);
+		fd_clone[0] = dup(0);
+		dup2(fd[0], 0);
+		// write(1, "CHECK0\n", 7);///////////////
+	}
 	ms_waitpid(pid, info);
-	return (0);
+	if (token == PIPE)
+	{
+		// write(1, "CHECK00\n", 8);///////////////
+		dup2(fd_clone[0], 0);
+		// dup2(fd_clone[1], 1);
+		close(fd[0]);
+		close(fd_clone[0]);
+		// close(fd_clone[1]);
+	}
+	// if (token != PIPE)
+	// {
+	// 	exit(0);
+	// }
+	return (info->status);
 }

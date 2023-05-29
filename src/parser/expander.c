@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 02:53:39 by sav               #+#    #+#             */
-/*   Updated: 2023/05/25 00:32:48 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/29 11:45:51 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,32 @@ static char *strjoin_in_the_middle(char *str1, int to, char *str2, char *str3)
 	return (new_str);
 }
 
+static char	*get_var_value(char *var, char **env)
+{
+	char	*value;
+	int		i;
+	size_t	len;
+
+	len = ft_strlen(var);
+	i = 0;
+	value = NULL;
+	printf("var: |%s|\n", var);////////
+	while (env[i])
+	{
+		if (ft_strlen(env[i]) >= len)
+		{
+			if (ft_strncmp(var, env[i], len - 2) == 1)
+			{
+				printf("value before: |%s|\n", env[i] - 1);////////
+				value = ft_strjoin(&env[i][len], NULL, 0, 0);
+			}
+		}
+		i++;
+	}
+	printf("value: |%s|\n", value);////////
+	return (value);
+}
+
 static char	*dollar_sub(char *str, int i, char **env)
 {
 	char	*var;
@@ -49,24 +75,37 @@ static char	*dollar_sub(char *str, int i, char **env)
 	int		from;
 
 	from = i;
+	write(1, "DOLSUB0\n", 8);/////////////////
 	while (str[i])
 	{
 		if (!ft_isprint(str[i]) || str[i] == '$' || str[i] == '"')
 			break ;
 		i++;
 	}
+	printf("|||%s|||\n", str);////////////////
 	var = ft_getstr_from_to(str, from + 1, i - 1);
-	value = get_varvalue(var, env);
+	printf("|||%s|||\n", var);////////////////
+	write(1, "DOLSUB1\n", 8);/////////////////
+	value = get_var_value(var, env);
+	write(1, "DOLSUB2\n", 8);/////////////////
 	str = strjoin_in_the_middle(str, from - 1, var, &str[i]);
+	write(1, "DOLSUB3\n", 8);/////////////////
+	printf("str: |%s|\n", str);////////
 	free(var);
 	return (str);
 }
 
 static char	*expansion(char *str, char **env)
 {
+	char	*fallback;
 	int		flag[2];
 	int		i;
 
+	if (env == NULL)
+	{
+		fallback = ft_calloc(1, 1);
+		return (fallback);
+	}
 	flag[0] = 0;
 	flag[0] = 0;
 	i = 0;
@@ -88,18 +127,25 @@ void	ps_expander(t_node *node, char **env)
 	t_opr	*opr;
 	size_t	i;
 
-	node->cmd->cmd = expansion(node->cmd->cmd, env);
-	i = 0;
-	while (node->cmd->args[i])
+	if (node->cmd != NULL)
 	{
-		node->cmd->args[i] = expansion(node->cmd->args[i], env);
-		i++;
+		printf("cmd: |%s|\n", node->cmd->cmd);/////////////////////
+		node->cmd->cmd = expansion(node->cmd->cmd, env);
+		i = 0;
+		while (node->cmd->args[i])
+		{
+			node->cmd->args[i] = expansion(node->cmd->args[i], env);
+			i++;
+		}
 	}
-	opr = node->opr;
-	while (opr->next)
+	if (node->opr != NULL)
 	{
+		opr = node->opr;
+		while (opr->next)
+		{
+			opr->arg = expansion(opr->arg, env);
+			opr = opr->next;
+		}
 		opr->arg = expansion(opr->arg, env);
-		opr = opr->next;
 	}
-	opr->arg = expansion(opr->arg, env);
 }
