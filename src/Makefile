@@ -11,9 +11,9 @@
 # **************************************************************************** #
 
 NAME = minishell.a
-SRCS = ft_free.c init_shell.c init_structs.c input.c \
-	ft_execute_tree.c ft_execute_tree_utils.c ft_handle_cmd.c \
-	ft_cmd_paths.c
+SRCS = ms_free.c ms_init_shell.c ms_init_structs.c ms_input.c \
+	ms_execute_tree.c ms_execute_tree_utils.c ms_handle_cmd.c \
+	ms_cmd_paths.c
 OBJS = $(SRCS:.c=.o)
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I ../include

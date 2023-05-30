@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	ft_get_prompt_str(t_info *info)
+void	ms_get_prompt_str(t_info *info)
 {
 	char	*user_name;
 	char	*str;
@@ -45,7 +45,7 @@ static int	is_empty(char *str)
 	return (0);
 }
 
-static void	ft_get_input(t_info *info)
+static void	get_input(t_info *info)
 {
 	char	*str;
 
@@ -71,14 +71,14 @@ static void	ft_get_input(t_info *info)
 	}
 }
 
-void	ft_handle_input(t_info *info)
+void	ms_handle_input(t_info *info)
 {
 	int	token;
 
 	token = 0;
 	while (token != CHAR)
 	{	
-		ft_get_input(info);
+		get_input(info);
 		token = lexical_check(info->input, token);
 		if (token == -1)
 		{
@@ -92,7 +92,7 @@ void	ft_handle_input(t_info *info)
 	add_history(info->input);
 }
 
-void	ft_check_input(int ac, char **av)
+void	ms_check_input(int ac, char **av)
 {
 	if (ac > 1)
 	{

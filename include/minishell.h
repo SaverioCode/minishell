@@ -74,16 +74,16 @@ typedef struct s_node
 }	t_node;
 
 
-void	init_tnode(t_node *node);
-void	init_topr(t_opr *node);
-void	init_tcmd(t_cmd *node);
-void	ft_get_prompt_str(t_info *info);
-void	init_tinfo(t_info *info, char **env);
-void	ft_free(t_node *node, t_info *info);
-void	ft_check_input(int ac, char **av);
-void	ft_init_shell(void);
-void	ft_handle_input(t_info *info);
-void    ft_execute_tree(t_node *node, t_info *info);
+void	ms_init_tnode(t_node *node);
+void	ms_init_topr(t_opr *node);
+void	ms_init_tcmd(t_cmd *node);
+void	ms_get_prompt_str(t_info *info);
+void	ms_init_tinfo(t_info *info, char **env);
+void	ms_free(t_node *node, t_info *info);
+void	ms_check_input(int ac, char **av);
+void	ms_init_shell(void);
+void	ms_handle_input(t_info *info);
+void    ms_execute_tree(t_node *node, t_info *info);
 void 	ms_waitpid(int pid, t_info *info);
 int		ms_handle_cmd(t_node *node, t_info *info, t_fd *fd_lis);
 void	get_cmd_paths(t_path *path, char **env, char *cmd);

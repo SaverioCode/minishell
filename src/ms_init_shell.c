@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	ft_init_shell(void)
+void	ms_init_shell(void)
 {
 	char	*dragon;
 

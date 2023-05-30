@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static void	ft_free_cmd(t_cmd *cmd)
+static void	free_cmd(t_cmd *cmd)
 {
 	int	i;
 
@@ -36,7 +36,7 @@ static void	ft_free_cmd(t_cmd *cmd)
 	}
 }
 
-static void	ft_free_oprs(t_opr *opr)
+static void	free_oprs(t_opr *opr)
 {
 	t_opr	*var;
 
@@ -52,7 +52,7 @@ static void	ft_free_oprs(t_opr *opr)
 	}
 }
 
-static void	ft_free_parse(t_node *node)
+static void	free_parse(t_node *node)
 {
 	t_node	*var;
 
@@ -60,15 +60,15 @@ static void	ft_free_parse(t_node *node)
 	{
 		if (node->opr)
 		{	
-			ft_free_oprs(node->opr);
+			free_oprs(node->opr);
 		}
 		if (node->cmd)
 		{
-			ft_free_cmd(node->cmd);
+			free_cmd(node->cmd);
 		}
 		if (node->subshl)
 		{
-			ft_free_parse(node->subshl);
+			free_parse(node->subshl);
 		}
 		var = node;
 		node = node->next;
@@ -76,7 +76,7 @@ static void	ft_free_parse(t_node *node)
 	}
 }
 
-static void	ft_free_info(t_info *info)
+static void	free_info(t_info *info)
 {
 	int		i;
 
@@ -101,14 +101,14 @@ static void	ft_free_info(t_info *info)
 	free(info);
 }
 
-void	ft_free(t_node *node, t_info *info)
+void	ms_free(t_node *node, t_info *info)
 {
 	if (node)
 	{
-		ft_free_parse(node);
+		free_parse(node);
 	}
 	if (info)
 	{
-		ft_free_info(info);
+		free_info(info);
 	}
 }

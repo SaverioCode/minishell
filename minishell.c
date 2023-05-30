@@ -17,22 +17,22 @@ int	main(int ac, char **av, char **env)
 	t_node		*root;
 	t_info		*info;
 
-	ft_check_input(ac, av);
+	ms_check_input(ac, av);
 	info = NULL;
 	info = ft_calloc(1, sizeof(t_info));
-	init_tinfo(info, env);
-	ft_get_prompt_str(info);
+	ms_init_tinfo(info, env);
+	ms_get_prompt_str(info);
 	// set_signals();
-	ft_init_shell();
+	ms_init_shell();
 	while (1)
 	{
 		root = NULL;
 		root = ft_calloc(1, sizeof(t_node));
-		init_tnode(root);
-		ft_handle_input(info);
+		ms_init_tnode(root);
+		ms_handle_input(info);
 		ps_parser(root, info->input);
-		ft_execute_tree(root, info);
-		ft_free(root, NULL);
+		ms_execute_tree(root, info);
+		ms_free(root, NULL);
 		free(info->input);
 		info->input = NULL;
 	}

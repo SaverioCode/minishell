@@ -39,7 +39,7 @@ static t_node	*create_subshell(t_node *node)
 	t_node	*subshl;
 
 	subshl = ft_calloc(1, sizeof(t_node));
-	init_tnode(subshl);
+	ms_init_tnode(subshl);
 	node->subshl = subshl;
 	subshl->back = node;
 	return (subshl);
@@ -52,7 +52,7 @@ static t_node	*create_new_node(t_node *node, char *input)
 	if (input[1] == 0)
 		return (NULL);
 	new_node = ft_calloc(1, sizeof(t_node));
-	init_tnode(new_node);
+	ms_init_tnode(new_node);
 	node->next = new_node;
 	new_node->back = node;
 	return (new_node);

@@ -83,7 +83,7 @@ int	ms_check_out(char token, int status, t_fd *fd_lis)
 	return (-1);
 }
 
-void	ft_execute_tree(t_node *node, t_info *info)
+void	ms_execute_tree(t_node *node, t_info *info)
 {
 	t_fd	*fd_lis;
 	pid_t	pid;
@@ -107,7 +107,7 @@ void	ft_execute_tree(t_node *node, t_info *info)
 			pid = fork();
 			if (pid == 0)
 			{
-				ft_execute_tree(node->subshl, info);
+				ms_execute_tree(node->subshl, info);
 				exit(info->status);
 			}
 			ms_waitpid(pid, info);

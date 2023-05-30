@@ -18,7 +18,7 @@ static t_opr	*create_opr(t_node *node)
 	t_opr	*old;
 
 	opr = ft_calloc(1, sizeof(t_opr));
-	init_topr(opr);
+	ms_init_topr(opr);
 	if (!node->opr)
 	{	
 		node->opr = opr;
@@ -41,7 +41,7 @@ static void	add_to_cmd(t_node *node, char *str)
 	if (!node->cmd)
 	{
 		node->cmd = ft_calloc(1, sizeof(t_cmd));
-		init_tcmd(node->cmd);
+		ms_init_tcmd(node->cmd);
 		node->cmd->cmd = str;
 		return ;
 	}

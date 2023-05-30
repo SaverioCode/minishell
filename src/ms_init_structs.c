@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	init_tinfo(t_info *info, char **env)
+void	ms_init_tinfo(t_info *info, char **env)
 {
 	int	len;
 	int	i;
@@ -33,13 +33,13 @@ void	init_tinfo(t_info *info, char **env)
 	info->prompt = NULL;
 }
 
-void	init_tcmd(t_cmd *node)
+void	ms_init_tcmd(t_cmd *node)
 {
 	node->cmd = NULL;
 	node->args = NULL;
 }
 
-void	init_topr(t_opr *node)
+void	ms_init_topr(t_opr *node)
 {
 	node->token = 0;
 	node->fd = 0;
@@ -47,7 +47,7 @@ void	init_topr(t_opr *node)
 	node->next = NULL;
 }
 
-void	init_tnode(t_node *node)
+void	ms_init_tnode(t_node *node)
 {
 	node->token = 0;
 	node->opr = NULL;
