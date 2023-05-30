@@ -48,7 +48,7 @@ int	ms_handle_cmd(t_node *node, t_info *info, t_fd *fd_lis)
 
 	if (node->cmd == NULL)
 	{
-		return (1);
+		return (0);
 	}
 	if (node->token == PIPE && check_fd_lis(fd_lis))
 	{

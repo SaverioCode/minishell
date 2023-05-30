@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/28 20:29:27 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/30 17:46:47 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_opr
 typedef struct s_node
 {
 	char			token;
+	int				subshl_token;
 	t_opr			*opr;
 	t_cmd			*cmd;
 	struct s_node	*subshl;

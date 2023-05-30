@@ -22,7 +22,7 @@ int	main(int ac, char **av, char **env)
 	info = ft_calloc(1, sizeof(t_info));
 	ms_init_tinfo(info, env);
 	ms_get_prompt_str(info);
-	// set_signals();
+	// ms_set_signals();
 	ms_init_shell();
 	while (1)
 	{

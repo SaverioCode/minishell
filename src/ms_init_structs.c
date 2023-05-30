@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_structs.c                                     :+:      :+:    :+:   */
+/*   ms_init_structs.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 08:12:12 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/29 11:32:34 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/30 17:46:55 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	ms_init_topr(t_opr *node)
 void	ms_init_tnode(t_node *node)
 {
 	node->token = 0;
+	node->subshl_token = 0;
 	node->opr = NULL;
 	node->cmd = NULL;
 	node->subshl = NULL;

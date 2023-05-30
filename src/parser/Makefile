@@ -11,8 +11,8 @@
 # **************************************************************************** #
 
 NAME = parser.a
-SRCS = lexical.c lexical_utils.c organize_exp.c organize_exp_utils.c \
-	parser.c quotes_cleaner.c
+SRCS = lexical.c lexical_utils.c ps_organize_exp.c ps_organize_exp_utils.c \
+	parser.c ps_quotes_cleaner.c
 OBJS = $(SRCS:.c=.o)
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I ../../include

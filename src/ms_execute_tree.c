@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_execute_tree.c                                  :+:      :+:    :+:   */
+/*   ms_execute_tree.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:15:31 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/29 11:47:08 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/30 17:47:51 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ void	ms_execute_tree(t_node *node, t_info *info)
 	{
 		fd_lis = create_fd_node(NULL);
 		// ps_expander(node, info->env);
-		// printf("cmd: |%s|\n", node->cmd->cmd);/////////////
 		info->status = handle_oprs(node->opr, fd_lis);
 		if (info->status == 0)
 		{
@@ -100,6 +99,10 @@ void	ms_execute_tree(t_node *node, t_info *info)
 		}
 		if (ms_check_out(node->token, info->status, fd_lis) == -1)
 		{
+			if (node->subshl_token == 1)
+			{
+				exit(info->status);
+			}
 			return ;
 		}
 		if (node->subshl)
