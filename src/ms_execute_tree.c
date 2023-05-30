@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:15:31 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/30 17:47:51 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/30 18:28:17 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void	ms_execute_tree(t_node *node, t_info *info)
 		{
 			if (node->subshl_token == 1)
 			{
+				// clean memory //
 				exit(info->status);
 			}
 			return ;
@@ -111,6 +112,7 @@ void	ms_execute_tree(t_node *node, t_info *info)
 			if (pid == 0)
 			{
 				ms_execute_tree(node->subshl, info);
+				// clean memory //
 				exit(info->status);
 			}
 			ms_waitpid(pid, info);

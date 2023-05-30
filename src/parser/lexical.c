@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 01:47:49 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/29 09:46:10 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/05/30 19:00:28 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,26 @@ static int	lx_exit_status(int *flag, int brkts, char token)
 	return (token);
 }
 
+static int	check_if_fd(char *str, int i)
+{
+	int	start;
+
+	start = i;
+	while (str[i])
+	{
+		if (str[i] == '>' || str[i] == '<')
+		{
+			return (i);
+		}
+		if (!ft_isdigit(str[i]))
+		{
+			break ;
+		}
+		i++;
+	}
+	return (start);
+}
+
 int	lexical_check(char *input, int reset)
 {
 	static int		token[2];
@@ -91,6 +111,7 @@ int	lexical_check(char *input, int reset)
 		lx_check_quotes(flag, input[i]);
 		if (!flag[0] && ft_isprint(input[i]))
 		{
+			i = check_if_fd(input, i);
 			new_token = lx_which_token(&input[i]);
 			if (lx_token_check(token, new_token, &brkts) == -1)
 			{
