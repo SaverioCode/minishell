@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:29:03 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/30 17:32:01 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/01 17:21:36 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	*ft_calloc(size_t bytes, size_t size);
 int		ft_atoi(const char *str);
 char	*ft_itoa(long num);
 int		ft_strncmp(char *a, char *b, size_t bytes);
-char    *ft_strcpy(char *str);
+char	*ft_strcpy(char *str);
 char	*ft_strjoin(char *str1, char *str2, int flag1, int flag2);
 char	*ft_getstr_from_to(char *str, int from, int to);
 int		ft_strchr(char *str, char c);

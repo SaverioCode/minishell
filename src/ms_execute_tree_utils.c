@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_execute_tree_utils.c                            :+:      :+:    :+:   */
+/*   ms_execute_tree_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 06:18:35 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/29 12:09:41 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/01 18:40:48 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,31 +29,6 @@ static size_t	lis_len(t_path *node)
 	return (len);
 }
 
-static char	**format_cmd_args(char *cmd, char **args)
-{
-	char	**new;
-	int		len;
-	int		i;
-
-	len = ft_biarrlen(args);
-	if (!len)
-	{
-		new = ft_calloc(2, 8);
-		new[0] = ft_strjoin(cmd, NULL, 0, 0);
-		return (new);
-	}
-	new = ft_calloc(len + 2, 8);
-	new[0] = ft_strjoin(cmd, NULL, 0, 0);
-	i = 0;
-	while (args[i])
-	{
-		new[1 + i] = args[i];
-		i++;
-	}
-	free(args);
-	return (new);
-}
-
 void	ms_waitpid(int pid, t_info *info)
 {
 	int	status;
@@ -69,27 +44,15 @@ void	ms_waitpid(int pid, t_info *info)
 	}
 }
 
-int	ms_execute_cmd(t_cmd *cmd, t_info *info, t_path *path, char token)
+int	ms_execute_cmd(t_cmd *cmd, t_info *info, t_path *path)
 {
 	pid_t	pid;
 	int		paths_len;
 	int		i;
-	int		fd[2];
-	int		fd_clone[2];
 
-	if (token == PIPE)
-	{
-		pipe(fd);
-	}
-	cmd->args = format_cmd_args(cmd->cmd, cmd->args);
 	pid = fork();
 	if (pid == 0)
 	{
-		if (token == PIPE)
-		{
-			close(fd[0]);
-			dup2(fd[1], 1);
-		}
 		paths_len = lis_len(path);
 		i = 0;
 		while (i < paths_len)
@@ -103,18 +66,51 @@ int	ms_execute_cmd(t_cmd *cmd, t_info *info, t_path *path, char token)
 		write(2, "\n", 1);
 		exit(1);
 	}
-	if (token == PIPE)
-	{
-		close(fd[1]);
-		fd_clone[0] = dup(0);
-		dup2(fd[0], 0);
-	}
 	ms_waitpid(pid, info);
-	if (token == PIPE)
+	if (info->pipe)
 	{
-		dup2(fd_clone[0], 0);
-		close(fd[0]);
-		close(fd_clone[0]);
+		dup2(info->stdin_clone, 0);
+		info->pipe = 0;
 	}
+	return (info->status);
+}
+
+int	ms_execute_cmd_pipe(t_cmd *cmd, t_info *info, t_path *path)
+{
+	pid_t	pid;
+	int		paths_len;
+	int		i;
+
+	if (info->pipe)
+	{
+		dup2(info->stdin_clone, info->fd[0]);
+	}
+	info->pipe = 1;
+	pipe(info->fd);
+
+	pid = fork();
+	if (pid == 0)
+	{
+		close(info->fd[0]);
+		dup2(info->fd[1], 1);
+		paths_len = lis_len(path);
+		i = 0;
+		while (i < paths_len)
+		{
+			execve(path->str, cmd->args, info->env);
+			path = path->next;
+			i++;
+		}
+		write(2, "Error: command not found: \n", 27);
+		exit(1);
+	}
+
+	close(info->fd[1]);
+	dup2(info->fd[0], 0);
+	
+	ms_waitpid(pid, info);
+
+	close(info->fd[0]);
+	
 	return (info->status);
 }
