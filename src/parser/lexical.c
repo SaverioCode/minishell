@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 01:47:49 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/30 19:00:28 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/01 17:14:57 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,6 @@ char	lx_which_token(char *str)
 	else if (ft_isprint(str[0]))
 		return (CHAR);
 	return (0);
-}
-
-void	lx_check_quotes(int *flag, char c)
-{
-	if (c == 34 || c == 39)
-	{
-		if (!flag[0])
-		{
-			flag[0] = 1;
-			flag[1] = c;
-		}
-		else if (flag[1] == c)
-		{
-			flag[0] = 0;
-			flag[1] = 0;
-		}
-	}
 }
 
 static void	reset_params(int *token, int *flag, int *brkts, size_t *i)
