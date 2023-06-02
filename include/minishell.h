@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/01 18:39:09 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/02 00:31:00 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,6 @@ typedef struct s_fd
 	struct s_fd	*next;
 }	t_fd;
 
-typedef struct s_info
-{
-	char	**env;
-	char	*input;
-	int		stdin_clone;
-	int		stdout_clone;
-	int		status;
-	char	*prompt;
-	int		pipe;
-	int		fd[2];
-}	t_info;
-
 typedef struct s_cmd
 {
 	char	*cmd;
@@ -68,7 +56,6 @@ typedef struct s_opr
 typedef struct s_node
 {
 	char			token;
-	int				subshl_token;
 	t_opr			*opr;
 	t_cmd			*cmd;
 	struct s_node	*subshl;
@@ -76,6 +63,19 @@ typedef struct s_node
 	struct s_node	*back;
 }	t_node;
 
+typedef struct s_info
+{
+	t_node	*root;
+	char	**env;
+	char	*input;
+	int		stdin_clone;
+	int		stdout_clone;
+	int		status;
+	char	*prompt;
+	int		pipe;
+	int		subshl;
+	int		fd[2];
+}	t_info;
 
 void	ms_init_tnode(t_node *node);
 void	ms_init_topr(t_opr *node);
@@ -88,12 +88,13 @@ void	ms_init_shell(void);
 void	ms_handle_input(t_info *info);
 void    ms_execute_tree(t_node *node, t_info *info);
 void 	ms_waitpid(int pid, t_info *info);
-int		ms_handle_cmd(t_node *node, t_info *info, t_fd *fd_lis);
+int		ms_handle_oprs(t_info *info, t_opr *opr, t_fd *fd_node);
+t_fd	*create_fd_node(t_fd *node);
+void	ms_handle_cmd(t_node *node, t_info *info, t_fd *fd_lis);
 void	get_cmd_paths(t_path *path, char **env, char *cmd);
 t_path  *create_path_node(t_path *node);
 int		ms_check_out(char token , int status, t_fd *fd_lis);
-int		ms_execute_cmd(t_cmd *cmd, t_info *info, t_path *path);
-int		ms_execute_cmd_pipe(t_cmd *cmd, t_info *info, t_path *path);
+int		ms_execute_cmd(t_node *node, t_cmd *cmd, t_info *info, t_path *path);
 
 ///	Parser ///
 

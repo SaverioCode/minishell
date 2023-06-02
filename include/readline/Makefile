@@ -31,7 +31,7 @@ PACKAGE_TARNAME = readline
 srcdir = .
 
 top_srcdir = .
-BUILD_DIR = /nfs/homes/fgarzi-c/42/minishell/include/readline
+BUILD_DIR = /Users/fgarzi-c/42/minishell/include/readline
 
 INSTALL = /usr/bin/install -c
 INSTALL_PROGRAM = ${INSTALL}

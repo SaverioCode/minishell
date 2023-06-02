@@ -6,11 +6,28 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 06:18:35 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/01 18:40:48 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/02 01:29:25 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	ms_free_path(t_path *path)
+{
+	t_path	*tmp;
+
+	tmp = path;
+	if (!path)
+	{
+		return ;
+	}
+	while (path)
+	{
+		tmp = path;
+		path = path->next;
+		free(tmp);
+	}
+}
 
 static size_t	lis_len(t_path *node)
 {
@@ -44,55 +61,72 @@ void	ms_waitpid(int pid, t_info *info)
 	}
 }
 
-int	ms_execute_cmd(t_cmd *cmd, t_info *info, t_path *path)
+static void	init_pipe(char token, t_info *info)
 {
-	pid_t	pid;
-	int		paths_len;
-	int		i;
-
-	pid = fork();
-	if (pid == 0)
+	if (token == PIPE)
 	{
-		paths_len = lis_len(path);
-		i = 0;
-		while (i < paths_len)
-		{
-			execve(path->str, cmd->args, info->env);
-			path = path->next;
-			i++;
-		}
-		write(2, "Error: command not found: ", 26);
-		write(2, cmd->args[0], ft_strlen(cmd->args[0]));
-		write(2, "\n", 1);
-		exit(1);
+		info->pipe = 1;
+		pipe(info->fd);
 	}
-	ms_waitpid(pid, info);
-	if (info->pipe)
-	{
-		dup2(info->stdin_clone, 0);
-		info->pipe = 0;
-	}
-	return (info->status);
 }
 
-int	ms_execute_cmd_pipe(t_cmd *cmd, t_info *info, t_path *path)
+static void	end_execution(t_info *info, int pid, char token, t_path *path)
 {
-	pid_t	pid;
-	int		paths_len;
-	int		i;
-
-	if (info->pipe)
+	if (token == PIPE)
 	{
+		close(info->fd[1]);
+		dup2(info->fd[0], 0);
 		dup2(info->stdin_clone, info->fd[0]);
+		close(info->fd[0]);
 	}
-	info->pipe = 1;
-	pipe(info->fd);
+	else
+	{
+		ms_waitpid(pid, info);
+		if (info->pipe)
+		{
+			dup2(info->stdin_clone, 0);
+			info->pipe = 0;
+		}
+	}
+	ms_free_path(path);
+}
 
-	pid = fork();
-	if (pid == 0)
+static void	init_pipe_child(t_node *node, t_info *info)
+{
+	if (node->token == PIPE)
 	{
 		close(info->fd[0]);
 		dup2(info->fd[1], 1);
+	}
+}
+
+static void	end_execution_child(t_node *node, t_info *info, t_path *path)
+{
+
+	write(2, "Error: command not found: ", 26);
+	write(2, node->cmd->args[0], ft_strlen(node->cmd->args[0]));
+	write(2, "\n", 1);
+	if (node->token == PIPE)
+	{
+		close(info->fd[1]);
+	}
+	ms_free(info->root, info);
+	ms_free_path(path);
+	/// file descriptors ///
+	exit(1);
+}
+
+int	ms_execute_cmd(t_node *node, t_cmd *cmd, t_info *info, t_path *path)
+{
+	pid_t	pid;
+	int		paths_len;
+	int		i;
+
+	init_pipe(node->token, info);
+	pid = fork();
+	if (pid == 0)
+	{
+		init_pipe_child(node, info);
 		paths_len = lis_len(path);
 		i = 0;
 		while (i < paths_len)
@@ -101,16 +135,8 @@ int	ms_execute_cmd_pipe(t_cmd *cmd, t_info *info, t_path *path)
 			path = path->next;
 			i++;
 		}
-		write(2, "Error: command not found: \n", 27);
-		exit(1);
+		end_execution_child(node, info, path);
 	}
-
-	close(info->fd[1]);
-	dup2(info->fd[0], 0);
-	
-	ms_waitpid(pid, info);
-
-	close(info->fd[0]);
-	
+	end_execution(info, pid, node->token, path);
 	return (info->status);
 }

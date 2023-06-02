@@ -6,50 +6,11 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:15:31 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/30 18:28:17 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/02 02:02:47 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static t_fd	*create_fd_node(t_fd *node)
-{
-	t_fd	*new;
-
-	new = ft_calloc(1, sizeof(t_fd));
-	new->fd = 0;
-	new->fd_clone = 0;
-	new->file_fd = 0;
-	new->next = NULL;
-	if (node)
-	{
-		node->next = new;
-	}
-	return (new);
-}
-
-static int	handle_oprs(t_opr *opr, t_fd *fd_node)
-{
-	while (opr)
-	{
-		fd_node->fd = opr->fd;
-		fd_node->fd_clone = dup(opr->fd);
-		fd_node->file_fd = open(opr->arg, O_RDWR);
-		if (fd_node->file_fd == -1)
-		{
-			write(2, "Error: bad path file.\n", 22);
-			return (1);
-		}
-		dup2(fd_node->file_fd, fd_node->fd);
-		opr = opr->next;
-		if (!opr)
-		{
-			break ;
-		}
-		fd_node = create_fd_node(fd_node);
-	}
-	return (0);
-}
 
 static void	ms_restore_fd(t_fd *fd_lis)
 {
@@ -69,55 +30,63 @@ static void	ms_restore_fd(t_fd *fd_lis)
 	}
 }
 
-int	ms_check_out(char token, int status, t_fd *fd_lis)
+int	ms_check_status(char token, int status)
 {
-	if (token == OR && status == 1)
+	if (status == 1 && (token == OR || token == PIPE))
 	{
 		return (0);
 	}
-	else if (token != OR && status == 0)
+	else if (status == 0 && token != OR)
 	{
 		return (0);
 	}
-	ms_restore_fd(fd_lis);
-	return (-1);
+	// ms_restore_fd(fd_lis);
+	return (1);
+}
+
+void	check_subshell(t_node *node, t_info *info)
+{
+	pid_t	pid;
+
+	if (node->subshl)
+	{
+		pid = fork();
+		if (pid == 0)
+		{
+			info->subshl = 1;
+			ms_execute_tree(node->subshl, info);
+			// clean memory //
+			exit(info->status);
+		}
+		ms_waitpid(pid, info);
+	}
 }
 
 void	ms_execute_tree(t_node *node, t_info *info)
 {
 	t_fd	*fd_lis;
-	pid_t	pid;
 
 	while (node)
 	{
 		fd_lis = create_fd_node(NULL);
 		// ps_expander(node, info->env);
-		info->status = handle_oprs(node->opr, fd_lis);
-		if (info->status == 0)
+		if (ms_handle_oprs(info, node->opr, fd_lis) == 0)
 		{
-			info->status = ms_handle_cmd(node, info, fd_lis);
+			/// maybe handle pipe here ///
+			// init_pipe();
+			ms_handle_cmd(node, info, fd_lis);
+			// end_pipe();
 		}
-		if (ms_check_out(node->token, info->status, fd_lis) == -1)
+		if (ms_check_status(node->token, info->status) == 0)
 		{
-			if (node->subshl_token == 1)
-			{
-				// clean memory //
-				exit(info->status);
-			}
-			return ;
+			check_subshell(node, info);
+			ms_restore_fd(fd_lis);
+			node = node->next;
 		}
-		if (node->subshl)
-		{
-			pid = fork();
-			if (pid == 0)
-			{
-				ms_execute_tree(node->subshl, info);
-				// clean memory //
-				exit(info->status);
-			}
-			ms_waitpid(pid, info);
-		}
-		ms_restore_fd(fd_lis);
-		node = node->next;
 	}
+	info->status = 0;
+	// while (info->child->pid)
+	// {
+	// 	waitpid(info->child->pid, NULL, 0);
+	// }
 }
