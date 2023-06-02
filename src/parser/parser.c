@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/01 23:03:57 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/03 00:23:27 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static t_node	*create_new_node(t_node *node, char *input)
 {
 	t_node	*new_node;
 
-	if (input[1] == 0)
+	if (input[1] == 0)  // could generate seg fault
 		return (NULL);
 	new_node = ft_calloc(1, sizeof(t_node));
 	ms_init_tnode(new_node);
@@ -88,6 +88,7 @@ void	ps_parser(t_node *node, char *input)
 			if (input[i] == '(')
 			{
 				input[i] = 32;
+				node = create_new_node(node, "  ");
 				node = create_subshell(node);
 			}
 			else if (input[i] == ')')

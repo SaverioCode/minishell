@@ -1,10 +1,1 @@
-Makefile
-include
-minishell
-minishell.c
-minishell.o
-src
-test.txt
-test2.txt
-tokens2.txt
-tokens3.txt
+uid=13336(fgarzi-c) gid=4222(2022_rome) groups=4222(2022_rome),12(everyone),62(netaccounts),204(_developer)
