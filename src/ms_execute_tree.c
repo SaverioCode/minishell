@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:15:31 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/02 20:43:07 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/02 20:50:20 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,24 @@ static void	ms_restore_fd(t_fd *fd_lis)
 	}
 }
 
-// t_node	*ms_check_status(t_node *node, t_info *info)
-// {
-
-// 	return (NULL);
-// 	// if (status == 1 && (token == OR || token == PIPE))
-// 	// {
-// 	// 	return (0);
-// 	// }
-// 	// else if (status == 0 && token != OR)
-// 	// {
-// 	// 	return (0);
-// 	// }
-// 	// ms_restore_fd(fd_lis);
-// 	// return (1);
-// }
+int	ms_check_status(t_info *info)
+{
+	if (info->status == 0)
+	{
+		if (info->token == AND || info->token == PIPE || !info->token)
+		{
+			return (0);
+		}
+	}
+	else if (info->status == 1)
+	{
+		if (info->token == OR || info->token == PIPE)
+		{
+			return (0);
+		}
+	}
+	return (1);
+}
 
 void	check_subshell(t_node *node, t_info *info)
 {
@@ -72,30 +75,14 @@ void	ms_execute_tree(t_node *node, t_info *info)
 	{
 		fd_lis = create_fd_node(NULL);
 		// ps_expander(node, info->env);
-		if (info->status == 0)
+		if (ms_check_status(info) == 0)
 		{
-			if (info->token == AND || info->token == PIPE || !info->token)
+			if (ms_handle_oprs(info, node->opr, fd_lis) == 0)
 			{
-				if (ms_handle_oprs(info, node->opr, fd_lis) == 0)
-				{
-					/// maybe handle pipe here ///
-					// init_pipe();
-					ms_handle_cmd(node, info, fd_lis);
-					// end_pipe();
-				}
-			}
-		}
-		else if (info->status == 1)
-		{
-			if (info->token == OR || info->token == PIPE)
-			{
-				if (ms_handle_oprs(info, node->opr, fd_lis) == 0)
-				{
-					/// maybe handle pipe here ///
-					// init_pipe();
-					ms_handle_cmd(node, info, fd_lis);
-					// end_pipe();
-				}
+				/// maybe handle pipe here ///
+				// init_pipe();
+				ms_handle_cmd(node, info, fd_lis);
+				// end_pipe();
 			}
 		}
 		check_subshell(node, info);
