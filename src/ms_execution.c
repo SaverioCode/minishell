@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:15:31 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/05 17:09:24 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/05 19:39:31 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,9 @@ static void	check_subshell(t_node *node, t_info *info)
 			info->subshl = 1;
 			ms_execute_tree(node->subshl, info);
 			// clean memory //
-			ms_end_execution_child(node->subshl, info, NULL);
+			ms_end_execution_child(node->subshl, info);
 		}
-		ms_end_execution(node->token, info, pid, NULL);
+		ms_end_execution(node->token, info, pid);
 	}
 }
 
