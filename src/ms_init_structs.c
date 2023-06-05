@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 08:12:12 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/05 16:29:08 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/05 16:57:01 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	ms_init_tinfo(t_info *info, char **env)
 	int	i;
 
 	info->root = NULL;
+	info->child = NULL;
 	info->env = NULL;
 	info->token = 0;
 	len = ft_biarrlen(env);

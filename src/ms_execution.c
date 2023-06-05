@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_execute_tree.c                                  :+:      :+:    :+:   */
+/*   ms_execution.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:15:31 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/05 16:19:00 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/05 17:09:24 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,5 @@ void	ms_execute_tree(t_node *node, t_info *info)
 		node = get_next_node(node, info);
 		ms_restore_fd(fd_lis);
 	}
-	// while (info->child->pid)
-	// {
-	// 	waitpid(info->child->pid, NULL, 0);
-	// }
+	ms_waitchild(info);
 }

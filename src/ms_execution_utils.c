@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_execute_tree_utils.c                            :+:      :+:    :+:   */
+/*   ms_execution_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 06:18:35 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/05 16:32:11 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/05 17:08:55 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ms_init_pipe_child(t_node *node, t_info *info)
 	}
 }
 
-void	ms_end_execution(char token, t_info *info, int pid, t_path *path)
+void	ms_end_execution(char token, t_info *info, pid_t pid, t_path *path)
 {
 	if (token == PIPE)
 	{
@@ -55,6 +55,7 @@ void	ms_end_execution(char token, t_info *info, int pid, t_path *path)
 		dup2(info->fd[0], 0);
 		dup2(info->stdin_clone, info->fd[0]);
 		close(info->fd[0]);
+		ms_store_pid(info, pid);
 	}
 	else
 	{

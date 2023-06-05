@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/05 16:29:21 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/05 17:17:24 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 typedef struct s_child
 {
 	pid_t			pid;
-	struct s_pid	*next;
+	struct s_child	*next;
 }	t_child;
 
 typedef struct s_cmd_path
@@ -72,6 +72,7 @@ typedef struct s_node
 typedef struct s_info
 {
 	t_node	*root;
+	t_child	*child;
 	char	token;
 	char	**env;
 	char	*input;
@@ -94,7 +95,7 @@ void	ms_check_input(int ac, char **av);
 void	ms_init_shell(void);
 void	ms_handle_input(t_info *info);
 void    ms_execute_tree(t_node *node, t_info *info);
-void 	ms_waitpid(int pid, t_info *info);
+void 	ms_waitpid(pid_t pid, t_info *info);
 int		ms_handle_oprs(t_info *info, t_opr *opr, t_fd *fd_node);
 t_fd	*create_fd_node(t_fd *node);
 void	ms_handle_cmd(t_node *node, t_info *info, t_fd *fd_lis);
@@ -103,8 +104,10 @@ t_path  *create_path_node(t_path *node);
 int		ms_execute_cmd(t_node *node, t_cmd *cmd, t_info *info, t_path *path);
 void	ms_init_pipe(char token, t_info *info);
 void	ms_init_pipe_child(t_node *node, t_info *info);
-void	ms_end_execution(char token, t_info *info, int pid, t_path *path);
+void	ms_end_execution(char token, t_info *info, pid_t pid, t_path *path);
 void	ms_end_execution_child(t_node *node, t_info *info, t_path *path);
+void	ms_store_pid(t_info *info, pid_t pid);
+void	ms_waitchild(t_info *info);
 
 ///	Parser ///
 
