@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 12:05:48 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/05 19:40:38 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/05 19:54:26 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,31 +72,6 @@ static char	*get_cmd_path(char **env, char *cmd)
 	return (str);
 }
 
-static char	**add_cmd_to_args(char *cmd, char **args)
-{
-	char	**new;
-	int		len;
-	int		i;
-
-	len = ft_biarrlen(args);
-	if (!len)
-	{
-		new = ft_calloc(2, 8);
-		new[0] = ft_strjoin(cmd, NULL, 0, 0);
-		return (new);
-	}
-	new = ft_calloc(len + 2, 8);
-	new[0] = ft_strjoin(cmd, NULL, 0, 0);
-	i = 0;
-	while (args[i])
-	{
-		new[1 + i] = args[i];
-		i++;
-	}
-	free(args);
-	return (new);
-}
-
 static char	*get_cmd_from_path(t_cmd *cmd)
 {
 	char	*command;
@@ -125,11 +100,11 @@ void	ms_format_cmd(t_cmd *cmd, char **env)
 {
 	if (access(cmd->cmd, X_OK) == 0)
 	{
-		cmd->args = add_cmd_to_args(get_cmd_from_path(cmd), cmd->args);
+		cmd->args = ft_push_str(get_cmd_from_path(cmd), cmd->args);
 	}
 	else
 	{
-		cmd->args = add_cmd_to_args(cmd->cmd, cmd->args);
+		cmd->args = ft_push_str(cmd->cmd, cmd->args);
 		cmd->cmd = get_cmd_path(env, cmd->cmd);
 	}
 }
