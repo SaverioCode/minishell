@@ -6,11 +6,41 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 08:12:12 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/02 20:37:43 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/05 16:29:08 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ms_init_tpid(t_child *child)
+{
+	child->pid = 0;
+	child->next = NULL;
+}
+
+void	ms_init_tcmd(t_cmd *node)
+{
+	node->cmd = NULL;
+	node->args = NULL;
+}
+
+void	ms_init_topr(t_opr *node)
+{
+	node->token = 0;
+	node->fd = 0;
+	node->arg = NULL;
+	node->next = NULL;
+}
+
+void	ms_init_tnode(t_node *node)
+{
+	node->token = 0;
+	node->opr = NULL;
+	node->cmd = NULL;
+	node->subshl = NULL;
+	node->next = NULL;
+	node->back = NULL;
+}
 
 void	ms_init_tinfo(t_info *info, char **env)
 {
@@ -36,28 +66,4 @@ void	ms_init_tinfo(t_info *info, char **env)
 	info->prompt = NULL;
 	info->pipe = 0;
 	info->subshl = 0;
-}
-
-void	ms_init_tcmd(t_cmd *node)
-{
-	node->cmd = NULL;
-	node->args = NULL;
-}
-
-void	ms_init_topr(t_opr *node)
-{
-	node->token = 0;
-	node->fd = 0;
-	node->arg = NULL;
-	node->next = NULL;
-}
-
-void	ms_init_tnode(t_node *node)
-{
-	node->token = 0;
-	node->opr = NULL;
-	node->cmd = NULL;
-	node->subshl = NULL;
-	node->next = NULL;
-	node->back = NULL;
 }

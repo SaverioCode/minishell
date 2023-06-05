@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 07:02:15 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/05 16:19:15 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/05 16:35:20 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	ms_execute_cmd(t_node *node, t_cmd *cmd, t_info *info, t_path *path)
 		}
 		info->status = 1;
 		//// write command error ////
-		write(2, "Error: command not found: ", 26);
+		write(2, "Error: command not found: \n", 27);
 		ms_end_execution_child(node, info, path);
 	}
 	ms_end_execution(node->token, info, pid, path);
