@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 07:02:15 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/05 19:40:03 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/05 20:07:48 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	check_fd_lis(t_fd *fd_lis)
 	return (0);
 }
 
-int	ms_execute_cmd(t_node *node, t_cmd *cmd, t_info *info)
+static int	ms_execute_cmd(t_node *node, t_cmd *cmd, t_info *info)
 {
 	pid_t	pid;
 
