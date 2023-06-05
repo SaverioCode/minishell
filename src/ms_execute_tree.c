@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:15:31 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/03 00:57:44 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/05 16:19:00 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	ms_restore_fd(t_fd *fd_lis)
 	}
 }
 
-int	ms_check_status(t_info *info)
+static int	ms_check_status(t_info *info)
 {
 	if (info->status == 0)
 	{
@@ -49,7 +49,7 @@ int	ms_check_status(t_info *info)
 	return (1);
 }
 
-t_node	*get_next_node(t_node *node, t_info *info)
+static t_node	*get_next_node(t_node *node, t_info *info)
 {
 	if (node == NULL)
 	{
@@ -67,7 +67,7 @@ t_node	*get_next_node(t_node *node, t_info *info)
 	return (node);
 }
 
-void	check_subshell(t_node *node, t_info *info)
+static void	check_subshell(t_node *node, t_info *info)
 {
 	pid_t	pid;
 
@@ -77,15 +77,17 @@ void	check_subshell(t_node *node, t_info *info)
 	}
 	if (node->subshl)
 	{
+		ms_init_pipe(node->token, info);
 		pid = fork();
 		if (pid == 0)
 		{
+			ms_init_pipe_child(node, info);
 			info->subshl = 1;
 			ms_execute_tree(node->subshl, info);
 			// clean memory //
-			exit(info->status);
+			ms_end_execution_child(node->subshl, info, NULL);
 		}
-		ms_waitpid(pid, info);
+		ms_end_execution(node->token, info, pid, NULL);
 	}
 }
 
@@ -99,10 +101,7 @@ void	ms_execute_tree(t_node *node, t_info *info)
 		// ps_expander(node, info->env);
 		if (ms_handle_oprs(info, node->opr, fd_lis) == 0)
 		{
-			/// maybe handle pipe here ///
-			// init_pipe();
 			ms_handle_cmd(node, info, fd_lis);
-			// end_pipe();
 		}
 		check_subshell(node, info);
 		node = get_next_node(node, info);

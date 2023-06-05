@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 04:17:47 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/02 18:51:45 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/05 16:12:17 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ static int	token_check_second(char new, char old_1, char old_2, int *brkts)
 		(*brkts)++;
 		if (old_1 == CHAR)
 		{
-			if (old_2 != INP && old_2 != HDOC && old_2 != OUT && old_2 != APP)
+			if (old_2 == INP || old_2 == HDOC || old_2 == OUT || old_2 == APP)
+			{
 				return (-1);
+			}
 			return (0);
 		}
 		if (old_1 == AND || old_1 == OR || old_1 == PIPE)
 		{
-			// if (old_2 != CHAR)
-			// 	return (-1);
 			return (0);
 		}
 		if (old_1 == ')' || old_1 == INP || old_1 == HDOC)
