@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 13:37:54 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/05 17:21:04 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/06 18:27:20 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	ms_store_pid(t_info *info, pid_t pid)
 		child = child->next;
 	}
 	child->next = new;
-
 }
 
 void	ms_waitchild(t_info *info)
