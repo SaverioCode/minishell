@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:15:31 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/06 19:14:05 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/06 21:04:11 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ void	ms_execute_tree(t_node *node, t_info *info)
 		{
 			ms_handle_cmd(node, info);
 		}
-		// ms_restore_fd(info);
 		check_subshell(node, info);
 		node = get_next_node(node, info);
 		ms_restore_fd(info);

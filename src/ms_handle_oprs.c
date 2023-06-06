@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 20:52:41 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/06 18:49:44 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/06 20:30:58 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_fd	*create_fd_node(t_fd *node)
 
 	new = ft_calloc(1, sizeof(t_fd));
 	new->fd = 0;
+	new->fd = -1; ///////////////
 	new->fd_clone = 0;
 	new->file_fd = 0;
 	new->next = NULL;

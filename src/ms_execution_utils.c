@@ -6,17 +6,17 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 06:18:35 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/06 19:07:54 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/06 23:18:49 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	check_fd_lis(t_fd *fd_lis)
+static int	check_fd_lis(t_fd *fd_lis, int fd)
 {
 	while (fd_lis)
 	{
-		if (fd_lis->fd == 1)
+		if (fd_lis->fd == fd)
 		{
 			return (1);
 		}
@@ -39,7 +39,7 @@ void	ms_init_pipe_child(t_node *node, t_info *info)
 	if (node->token == PIPE)
 	{
 		close(info->fd[0]);
-		if (check_fd_lis(info->fd_lis))
+		if (check_fd_lis(info->fd_lis, 1))
 		{
 			close(info->fd[1]);
 			return ;
@@ -53,6 +53,13 @@ void	ms_end_execution(char token, t_info *info, pid_t pid)
 	if (token == PIPE)
 	{
 		close(info->fd[1]);
+		// if (check_fd_lis(info->fd_lis, 0))
+		// {
+		// 	write(1, "PORCODIO\n", 9);//////////////////
+		// 	close(info->fd[0]);
+		// 	return ;
+		// }
+		dup2(info->stdin_clone, 0);
 		dup2(info->fd[0], 0);
 		dup2(info->stdin_clone, info->fd[0]);
 		close(info->fd[0]);
