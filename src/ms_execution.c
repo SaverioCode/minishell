@@ -6,16 +6,18 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:15:31 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/05 19:39:31 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/06 19:14:05 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ms_restore_fd(t_fd *fd_lis)
+static void	ms_restore_fd(t_info *info)
 {
+	t_fd	*fd_lis;
 	t_fd	*tmp;
 
+	fd_lis = info->fd_lis;
 	while (fd_lis)
 	{
 		if (fd_lis->file_fd != 0)
@@ -28,6 +30,7 @@ static void	ms_restore_fd(t_fd *fd_lis)
 		fd_lis = fd_lis->next;
 		free(tmp);
 	}
+	info->fd_lis = NULL;
 }
 
 static int	ms_check_status(t_info *info)
@@ -93,19 +96,18 @@ static void	check_subshell(t_node *node, t_info *info)
 
 void	ms_execute_tree(t_node *node, t_info *info)
 {
-	t_fd	*fd_lis;
-
 	while (node)
 	{
-		fd_lis = create_fd_node(NULL);
+		info->fd_lis = create_fd_node(NULL);
 		// ps_expander(node, info->env);
-		if (ms_handle_oprs(info, node->opr, fd_lis) == 0)
+		if (ms_handle_oprs(info, node->opr, info->fd_lis) == 0)
 		{
-			ms_handle_cmd(node, info, fd_lis);
+			ms_handle_cmd(node, info);
 		}
+		// ms_restore_fd(info);
 		check_subshell(node, info);
 		node = get_next_node(node, info);
-		ms_restore_fd(fd_lis);
+		ms_restore_fd(info);
 	}
 	ms_waitchild(info);
 }

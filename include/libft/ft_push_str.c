@@ -6,15 +6,15 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 19:48:13 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/05 19:53:10 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/06 18:23:07 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char    **ft_push_str(char *str, char **arr)
+char	**ft_push_str(char *str, char **arr)
 {
-    char	**new;
+	char	**new;
 	int		len;
 	int		i;
 

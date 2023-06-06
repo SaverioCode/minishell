@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/05 20:07:55 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/06 19:06:56 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_info
 {
 	t_node	*root;
 	t_child	*child;
+	t_fd	*fd_lis;
 	char	token;
 	char	**env;
 	char	*input;
@@ -88,11 +89,11 @@ void	ms_free(t_node *node, t_info *info);
 void	ms_check_input(int ac, char **av);
 void	ms_init_shell(void);
 void	ms_handle_input(t_info *info);
-void    ms_execute_tree(t_node *node, t_info *info);
-void 	ms_waitpid(pid_t pid, t_info *info);
+void	ms_execute_tree(t_node *node, t_info *info);
+void	ms_waitpid(pid_t pid, t_info *info);
 int		ms_handle_oprs(t_info *info, t_opr *opr, t_fd *fd_node);
 t_fd	*create_fd_node(t_fd *node);
-void	ms_handle_cmd(t_node *node, t_info *info, t_fd *fd_lis);
+void	ms_handle_cmd(t_node *node, t_info *info);
 void	ms_format_cmd(t_cmd *cmd, char **env);
 void	ms_init_pipe(char token, t_info *info);
 void	ms_init_pipe_child(t_node *node, t_info *info);

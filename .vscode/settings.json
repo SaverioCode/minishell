@@ -6,6 +6,7 @@
         "ostream": "cpp",
         "algorithm": "cpp",
         "complex": "cpp",
-        "new": "cpp"
+        "new": "cpp",
+        "__node_handle": "c"
     }
 }
