@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 06:18:35 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/06 23:18:49 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/06 23:24:20 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ static int	check_fd_lis(t_fd *fd_lis, int fd)
 
 void	ms_init_pipe(char token, t_info *info)
 {
+	if (info->pipe == 1)
+	{
+		dup2(info->fd[0], 0);
+		close(info->fd[0]);
+	}
 	if (token == PIPE)
 	{
 		info->pipe = 1;
@@ -53,16 +58,6 @@ void	ms_end_execution(char token, t_info *info, pid_t pid)
 	if (token == PIPE)
 	{
 		close(info->fd[1]);
-		// if (check_fd_lis(info->fd_lis, 0))
-		// {
-		// 	write(1, "PORCODIO\n", 9);//////////////////
-		// 	close(info->fd[0]);
-		// 	return ;
-		// }
-		dup2(info->stdin_clone, 0);
-		dup2(info->fd[0], 0);
-		dup2(info->stdin_clone, info->fd[0]);
-		close(info->fd[0]);
 		ms_store_pid(info, pid);
 	}
 	else
