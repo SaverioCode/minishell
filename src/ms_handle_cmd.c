@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 07:02:15 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/06 19:12:25 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/07 22:30:40 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static int	ms_execute_cmd(t_node *node, t_cmd *cmd, t_info *info)
 {
 	pid_t	pid;
 
-	ms_init_pipe(node->token, info);
 	pid = fork();
 	if (pid == 0)
 	{

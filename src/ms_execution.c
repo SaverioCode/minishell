@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:15:31 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/06 21:04:11 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/07 22:30:44 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ static void	check_subshell(t_node *node, t_info *info)
 	}
 	if (node->subshl)
 	{
-		ms_init_pipe(node->token, info);
 		pid = fork();
 		if (pid == 0)
 		{
@@ -100,6 +99,7 @@ void	ms_execute_tree(t_node *node, t_info *info)
 	{
 		info->fd_lis = create_fd_node(NULL);
 		// ps_expander(node, info->env);
+		ms_init_pipe(node->token, info);
 		if (ms_handle_oprs(info, node->opr, info->fd_lis) == 0)
 		{
 			ms_handle_cmd(node, info);
