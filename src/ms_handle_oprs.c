@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 20:52:41 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/06 20:30:58 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/07 22:43:02 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int	ms_handle_oprs(t_info *info, t_opr *opr, t_fd *fd_node)
 	{
 		fd_node->fd = opr->fd;
 		fd_node->fd_clone = dup(opr->fd);
-		fd_node->file_fd = open(opr->arg, O_RDWR);
+		fd_node->file_fd = open(opr->path, O_RDWR);
+
 		if (fd_node->file_fd == -1)
 		{
 			write(2, "Error: bad path file.\n", 22);

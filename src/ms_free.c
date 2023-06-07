@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 18:12:09 by sav               #+#    #+#             */
-/*   Updated: 2023/06/05 19:39:49 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/07 22:43:44 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ static void	free_oprs(t_opr *opr)
 
 	while (opr)
 	{
-		if (opr->arg)
+		if (opr->path)
 		{
-			free(opr->arg);
+			free(opr->path);
 		}
 		var = opr;
 		opr = opr->next;

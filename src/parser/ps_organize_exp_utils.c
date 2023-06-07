@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   organize_exp_utils.c                               :+:      :+:    :+:   */
+/*   ps_organize_exp_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 14:34:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/28 18:44:55 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/07 22:42:26 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ static void	add_to_cmd(t_node *node, char *str)
 	node->cmd->args = new;
 }
 
-static char	*get_opr_arg(char *exp, int *i)
+static char	*get_opr_path(char *exp, int *i)
 {
-	char	*arg;
+	char	*path;
 	int		j;
 
 	*i += ft_find_printable(&exp[*i + 1], '+') + 1;
@@ -77,9 +77,9 @@ static char	*get_opr_arg(char *exp, int *i)
 		}
 		j++;
 	}
-	arg = ft_getstr_from_to(exp, *i, j - 1);
+	path = ft_getstr_from_to(exp, *i, j - 1);
 	*i = j - 1;
-	return (arg);
+	return (path);
 }
 
 static int	get_opr_exp(t_node *node, char *fd, char *exp, int *i)
@@ -92,7 +92,7 @@ static int	get_opr_exp(t_node *node, char *fd, char *exp, int *i)
 	{
 		*i += 1;
 	}
-	opr->arg = get_opr_arg(exp, i);
+	opr->path = get_opr_path(exp, i);
 	if (ft_str_isdigit(fd))
 	{
 		opr->fd = ft_atoi(fd);

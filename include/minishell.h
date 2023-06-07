@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/06 19:06:56 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/07 22:42:45 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct s_opr
 {
 	char			token;
 	int				fd;
-	char			*arg;
+	char			*path;
 	struct s_opr	*next;
 }	t_opr;
 

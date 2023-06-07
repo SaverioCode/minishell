@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 08:12:12 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/06 19:04:15 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/07 22:43:32 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ms_init_topr(t_opr *node)
 {
 	node->token = 0;
 	node->fd = 0;
-	node->arg = NULL;
+	node->path = NULL;
 	node->next = NULL;
 }
 
