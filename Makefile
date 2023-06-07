@@ -6,7 +6,7 @@
 #    By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/01 11:50:39 by fgarzi-c          #+#    #+#              #
-#    Updated: 2023/05/28 18:35:50 by fgarzi-c         ###   ########.fr        #
+#    Updated: 2023/06/07 22:23:23 by fgarzi-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,10 +18,10 @@ LIB_R = $(READLINE)/libreadline.a
 LIB_RH = $(READLINE)/libhistory.a
 LIB_M = ./src/minishell.a
 LIB_P = ./src/parser/parser.a
-LIBS = $(LIB_M) $(LIB_P) $(LIB_L) $(LIB_RH) $(LIB_R)
+LIBS = $(LIB_R) $(LIB_RH) $(LIB_P) $(LIB_M) $(LIB_L)
 SRCS = minishell.c
 OBJS = $(SRCS:.c=.o)
-CC = gcc
+CC = gcc -s
 CFLAGS = -Wall -Wextra -Werror -Iinclude
 
 all: $(NAME)
@@ -30,7 +30,7 @@ $(NAME): $(OBJS)
 	@make -s -C $(LIBFT)
 	@make -s -C ./src/parser
 	@make -s -C ./src
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS) -lcurses
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS) -lreadline -lhistory
 
 config:
 	@cd $(READLINE) && sh configure && cd ../../
