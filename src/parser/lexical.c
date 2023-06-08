@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 01:47:49 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/01 17:14:57 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/08 22:58:04 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	lexical_check(char *input, int reset)
 				/// write error indicando il token sbagliato ///
 				return (-1);
 			}
-			if (token[0] == AND || token[0] == OR)
+			if (token[0] == AND || token[0] == OR || token[0] == HDOC || token[0] == APP)
 				i++;
 		}
 		i++;

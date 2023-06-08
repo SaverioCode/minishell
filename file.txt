@@ -1,4 +1,5 @@
 Makefile
+file.txt
 include
 minishell
 minishell.c
