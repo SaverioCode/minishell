@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 20:52:41 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/09 22:43:02 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/10 00:57:47 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,42 +31,53 @@ t_fd	*create_fd_node(t_fd *node)
 
 int	here_document(t_opr *opr)
 {
-	char	*buffer;
+	char	buffer[2];
 	char	*str;
 	int		size;
+	int		del_len;
+	int		str_len;
 
-	buffer = NULL;
+	del_len = ft_strlen(opr->path);
 	str = NULL;
 	while (1)
 	{
 		size = read(0, buffer, 1);
-		str = ft_strjoin(str, buffer, 1, 1);
 		if (buffer[0] == '\n')
 		{
-			if (ft_strncmp(opr->path, str, ft_strlen(str) - 1))
+			str_len = ft_strlen(str);
+			if (del_len == str_len)
 			{
-				return (0);
+				if (ft_strncmp(opr->path, str, ft_strlen(str)) == 1)
+				{
+					free(str);
+					return (0);
+				}
 			}
+			free(str);
+			str = NULL;
+			continue ;
 		}
+		str = ft_strjoin(str, buffer, 1, 0);
 	}
+	free(str);
 }
 
 int	input_redir(t_info *info, t_opr *opr, t_fd *fd_node)
 {
-	if (access(opr->path, F_OK) == -1)
-	{
-		write(2, "Error: bad path file.\n", 22);
-		info->status = 1;
-		return (1);
-	}
-	if (info->token == HDOC)
+	if (opr->token == HDOC)
 	{
 		if (here_document(opr) == 1)
 		{
 			return (1);
 		}
 	}
-	else if (info->token == INP)
+	else if (access(opr->path, F_OK) == -1)
+	{
+		write(2, "Error: bad path file.\n", 22);
+		info->status = 1;
+		return (1);
+	}
+	else if (opr->token == INP)
 	{
 		fd_node->file_fd = open(opr->path, O_RDONLY);
 		if (fd_node->file_fd == -1)

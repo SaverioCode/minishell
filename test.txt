@@ -4,5 +4,5 @@ minishell
 minishell.c
 minishell.o
 src
-tes.txt
+test.txt
 test2.txt
