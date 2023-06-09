@@ -8,6 +8,8 @@
         "complex": "cpp",
         "new": "cpp",
         "__node_handle": "c",
-        "__config": "c"
+        "__config": "c",
+        "_types.h": "c",
+        "cdefs.h": "c"
     }
 }

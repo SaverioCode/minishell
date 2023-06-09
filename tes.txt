@@ -1,10 +1,8 @@
 Makefile
-file.txt
 include
 minishell
 minishell.c
 minishell.o
-new.txt
 src
-test.txt
+tes.txt
 test2.txt

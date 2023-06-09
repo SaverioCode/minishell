@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 20:52:41 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/09 18:29:32 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/09 22:43:02 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,38 +29,96 @@ t_fd	*create_fd_node(t_fd *node)
 	return (new);
 }
 
-// int	here_document(t_info *info, t_opr *opr, t_fd *fd_node)
-// {
-// 	char	*buffer;
-// 	int
-// }
+int	here_document(t_opr *opr)
+{
+	char	*buffer;
+	char	*str;
+	int		size;
+
+	buffer = NULL;
+	str = NULL;
+	while (1)
+	{
+		size = read(0, buffer, 1);
+		str = ft_strjoin(str, buffer, 1, 1);
+		if (buffer[0] == '\n')
+		{
+			if (ft_strncmp(opr->path, str, ft_strlen(str) - 1))
+			{
+				return (0);
+			}
+		}
+	}
+}
+
+int	input_redir(t_info *info, t_opr *opr, t_fd *fd_node)
+{
+	if (access(opr->path, F_OK) == -1)
+	{
+		write(2, "Error: bad path file.\n", 22);
+		info->status = 1;
+		return (1);
+	}
+	if (info->token == HDOC)
+	{
+		if (here_document(opr) == 1)
+		{
+			return (1);
+		}
+	}
+	else if (info->token == INP)
+	{
+		fd_node->file_fd = open(opr->path, O_RDONLY);
+		if (fd_node->file_fd == -1)
+		{
+			return (1);
+		}
+		fd_node->fd = opr->fd;
+		fd_node->fd_clone = dup(opr->fd);
+		dup2(fd_node->file_fd, fd_node->fd);
+	}
+	return (0);
+}
+
+int	output_redir(t_opr *opr, t_fd *fd_node)
+{
+	if (opr->token == OUT)
+	{
+		fd_node->file_fd = open(opr->path, O_RDWR | O_CREAT | O_TRUNC | O_CLOEXEC, 00644);
+	}
+	else if (opr->token == APP)
+	{
+		fd_node->file_fd = open(opr->path, O_RDWR | O_CREAT | O_APPEND | O_CLOEXEC, 00644);
+	}
+	if (fd_node->file_fd == -1)
+	{
+		return (1);
+	}
+	fd_node->fd = opr->fd;
+	fd_node->fd_clone = dup(opr->fd);
+	dup2(fd_node->file_fd, fd_node->fd);
+	return (0);
+}
 
 int	ms_handle_oprs(t_info *info, t_opr *opr, t_fd *fd_node)
 {
 	while (opr)
 	{
 		fd_node = create_fd_node(fd_node);
-		if (opr->token == OUT)
+		if (opr->token == OUT || opr->token == APP)
 		{
-			fd_node->file_fd = open(opr->path, O_RDWR | O_CREAT | O_TRUNC | O_CLOEXEC, 00644);
-		}
-		else if (opr->token == APP)
-		{
-			fd_node->file_fd = open(opr->path, O_RDWR | O_CREAT | O_APPEND | O_CLOEXEC, 00644);
-		}
-		else
-		{
-			if (access(opr->path, F_OK) == -1)
+			if (output_redir(opr, fd_node) == 1)
 			{
-				write(2, "Error: bad path file.\n", 22);
-				info->status = 1;
 				return (1);
 			}
-			fd_node->file_fd = open(opr->path, O_RDONLY);
 		}
-		fd_node->fd = opr->fd;
-		fd_node->fd_clone = dup(opr->fd);
-		dup2(fd_node->file_fd, fd_node->fd);
+		else if (opr->token == INP || opr->token == HDOC)
+		{
+			if (input_redir(info, opr, fd_node) == 1)
+			{
+				return (1);
+			}
+		}
 		opr = opr->next;
 	}
 	info->status = 0;

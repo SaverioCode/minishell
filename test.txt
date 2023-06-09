@@ -1,9 +1,0 @@
-Makefile
-include
-minishell
-minishell.c
-minishell.o
-new.txt
-src
-test.txt
-test2.txt

@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 18:12:09 by sav               #+#    #+#             */
-/*   Updated: 2023/06/07 22:43:44 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/09 23:49:42 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	free_cmd(t_cmd *cmd)
 	int	i;
 
 	if (cmd->cmd)
-	{	
+	{
 		free(cmd->cmd);
 	}
 	if (cmd->args)
@@ -49,7 +49,7 @@ static void	free_oprs(t_opr *opr)
 	}
 }
 
-static void	free_parse(t_node *node)
+static void	free_tnode(t_node *node)
 {
 	t_node	*var;
 
@@ -65,7 +65,7 @@ static void	free_parse(t_node *node)
 		}
 		if (node->subshl)
 		{
-			free_parse(node->subshl);
+			free_tnode(node->subshl);
 		}
 		var = node;
 		node = node->next;
@@ -103,7 +103,7 @@ void	ms_free(t_node *node, t_info *info)
 {
 	if (node)
 	{
-		free_parse(node);
+		free_tnode(node);
 	}
 	if (info)
 	{

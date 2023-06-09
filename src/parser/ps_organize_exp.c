@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   organize_exp.c                                     :+:      :+:    :+:   */
+/*   ps_organize_exp.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 06:57:18 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/27 20:55:52 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/09 23:49:20 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,5 @@ void	ps_organize_exp(t_node *node, char *exp)
 	exp = ft_trim(&exp[from], exp);
 	i = ft_strlen(exp);
 	ps_add_instruction(node, exp, 0, &i);
+	free(exp);
 }

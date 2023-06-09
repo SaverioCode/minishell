@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 12:05:48 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/05 19:54:26 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/09 23:09:39 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,13 @@ static char	*get_cmd_from_path(t_cmd *cmd)
 
 void	ms_format_cmd(t_cmd *cmd, char **env)
 {
+	char	*cmd_without_path;
+
 	if (access(cmd->cmd, X_OK) == 0)
 	{
-		cmd->args = ft_push_str(get_cmd_from_path(cmd), cmd->args);
+		cmd_without_path = get_cmd_from_path(cmd);
+		cmd->args = ft_push_str(cmd_without_path, cmd->args);
+		free(cmd_without_path);
 	}
 	else
 	{
