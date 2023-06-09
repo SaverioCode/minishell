@@ -1,2 +1,10 @@
-bella agiungo parole
-bella aggiungo altre parole
+Makefile
+file.txt
+include
+minishell
+minishell.c
+minishell.o
+new.txt
+src
+test.txt
+test2.txt
