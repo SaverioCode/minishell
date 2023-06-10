@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 02:53:39 by sav               #+#    #+#             */
-/*   Updated: 2023/06/10 01:45:24 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/10 04:25:41 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ static char *strjoin_in_the_middle(char *str1, int to, char *str2, char *str3)
 	len = to + ft_strlen(str2) + ft_strlen(str3);
 	new_str = ft_calloc(1, len + 1);
 	i = -1;
+	printf("to:||%d||\n", to);///////////
 	while (++i <= to)
 		new_str[i] = str1[i];
+	printf("new_str: |%s|\n", new_str);/////////
 	j = 0;
 	while (str2 && str2[j])
 	{
@@ -31,12 +33,14 @@ static char *strjoin_in_the_middle(char *str1, int to, char *str2, char *str3)
 		i++;
 		j++;
 	}
+	printf("new_str: |%s|\n", new_str);/////////
 	j = 0;
 	while (str3[j])
 	{
 		new_str[i + j] = str3[j];
 		j++;
 	}
+	printf("new_str: |%s|\n", new_str);/////////
 	free(str1);
 	free(str2);
 	return (new_str);
@@ -51,15 +55,18 @@ static char	*get_var_value(char *var, char **env)
 	len = ft_strlen(var);
 	i = 0;
 	value = NULL;
-	printf("var: |%s|\n", var);////////
 	while (env[i])
 	{
 		if (ft_strlen(env[i]) >= len)
 		{
 			if (ft_strncmp(var, env[i], len - 2) == 1)
 			{
-				printf("value before: |%s|\n", env[i] - 1);////////
-				value = ft_strjoin(&env[i][len], NULL, 0, 0);
+				if (env[i][len] == '=' || env[i][len] == '0')
+				{
+					value = ft_strjoin(&env[i][len + 1], NULL, 0, 0);
+					printf("value: |%s|\n", value);////////
+					return (value);
+				}
 			}
 		}
 		i++;
@@ -75,7 +82,8 @@ static char	*dollar_sub(char *str, int i, char **env)
 	int		from;
 
 	from = i;
-	write(1, "DOLSUB0\n", 8);/////////////////
+	i += 1;
+	printf("|||%s|||\n", str);////////////////
 	while (str[i])
 	{
 		if (!ft_isprint(str[i]) || str[i] == '$' || str[i] == '"')
@@ -84,10 +92,8 @@ static char	*dollar_sub(char *str, int i, char **env)
 		}
 		i++;
 	}
-	printf("|||%s|||\n", str);////////////////
 	var = ft_getstr_from_to(str, from + 1, i - 1);
-	printf("|||%s|||\n", var);////////////////
-	write(1, "DOLSUB1\n", 8);/////////////////
+	printf("VAR: |%s|\n", var);////////////////
 	value = get_var_value(var, env);
 	write(1, "DOLSUB2\n", 8);/////////////////
 	str = strjoin_in_the_middle(str, from - 1, var, &str[i]);
@@ -99,17 +105,9 @@ static char	*dollar_sub(char *str, int i, char **env)
 
 static char	*expansion(char *str, char **env)
 {
-	char	*fallback;
 	int		flag[2];
 	int		i;
 
-	//// I don't really need this check I have to be sure that without env ////
-	//// I return blank when expanding ////
-	if (env == NULL)
-	{
-		fallback = ft_calloc(1, 1);
-		return (fallback);
-	}
 	flag[0] = 0;
 	flag[1] = 0;
 	i = 0;
@@ -122,7 +120,7 @@ static char	*expansion(char *str, char **env)
 		}
 		i++;
 	}
-	str = ps_quotes_cleaner(str);
+	// str = ps_quotes_cleaner(str);
 	return (str);
 }
 
