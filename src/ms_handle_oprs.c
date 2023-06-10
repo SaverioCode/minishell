@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 20:52:41 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/10 01:01:16 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/10 03:51:54 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,11 +111,56 @@ int	output_redir(t_opr *opr, t_fd *fd_node)
 	return (0);
 }
 
+t_fd	*get_fd_node(t_fd *head, t_fd *target)
+{
+	t_fd	*fd_node;
+
+	fd_node = head;
+	while (fd_node)
+	{
+		if (fd_node->next == target)
+		{
+			return (fd_node);
+		}
+		fd_node = fd_node->next;
+	}
+	return (NULL);
+}
+
+void	ms_check_fd(t_opr *opr, t_info *info)
+{
+	t_fd	*fd_node;
+	t_fd	*var;
+
+	fd_node = info->fd_lis;
+	while (fd_node)
+	{
+		if (opr->fd == fd_node->fd)
+		{
+			dup2(fd_node->fd_clone, fd_node->fd);
+			close(fd_node->fd_clone);
+			close(fd_node->file_fd);
+			if (fd_node == info->fd_lis)
+			{
+				free(fd_node);
+				info->fd_lis = NULL;
+				return ;
+			}
+			var = get_fd_node(info->fd_lis, fd_node);
+			var->next = fd_node->next;
+			free(fd_node);
+			return ;
+		}
+		fd_node = fd_node->next;
+	}
+}
+
 int	ms_handle_oprs(t_info *info, t_opr *opr, t_fd *fd_node)
 {
 	while (opr)
 	{
-		fd_node = create_fd_node(fd_node);
+		ms_check_fd(opr, info);
+		fd_node = create_fd_node(get_fd_node(info->fd_lis, NULL));
 		if (opr->token == OUT || opr->token == APP)
 		{
 			if (output_redir(opr, fd_node) == 1)
