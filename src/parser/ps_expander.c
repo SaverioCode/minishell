@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 02:53:39 by sav               #+#    #+#             */
-/*   Updated: 2023/06/10 04:25:41 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/10 05:28:59 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,12 @@ static char	*get_var_value(char *var, char **env)
 				if (env[i][len] == '=' || env[i][len] == '0')
 				{
 					value = ft_strjoin(&env[i][len + 1], NULL, 0, 0);
-					printf("value: |%s|\n", value);////////
 					return (value);
 				}
 			}
 		}
 		i++;
 	}
-	printf("value: |%s|\n", value);////////
 	return (value);
 }
 
@@ -83,7 +81,6 @@ static char	*dollar_sub(char *str, int i, char **env)
 
 	from = i;
 	i += 1;
-	printf("|||%s|||\n", str);////////////////
 	while (str[i])
 	{
 		if (!ft_isprint(str[i]) || str[i] == '$' || str[i] == '"')
@@ -93,9 +90,7 @@ static char	*dollar_sub(char *str, int i, char **env)
 		i++;
 	}
 	var = ft_getstr_from_to(str, from + 1, i - 1);
-	printf("VAR: |%s|\n", var);////////////////
 	value = get_var_value(var, env);
-	write(1, "DOLSUB2\n", 8);/////////////////
 	str = strjoin_in_the_middle(str, from - 1, var, &str[i]);
 	write(1, "DOLSUB3\n", 8);/////////////////
 	printf("str: |%s|\n", str);////////
