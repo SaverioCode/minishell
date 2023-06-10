@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 14:34:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/09 23:49:36 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/10 04:01:04 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static char	*get_opr_path(char *exp, int *i)
 	j = *i;
 	while (exp[j])
 	{
-		if (!ft_isprint(exp[j]))
+		if (!ft_isprint(exp[j]) || exp[j] == '<' || exp[j] == '>')
 		{
 			break ;
 		}
