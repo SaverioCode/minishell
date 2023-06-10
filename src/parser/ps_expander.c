@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expander.c                                         :+:      :+:    :+:   */
+/*   ps_expander.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 02:53:39 by sav               #+#    #+#             */
-/*   Updated: 2023/05/29 11:45:51 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/10 01:45:24 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,9 @@ static char	*dollar_sub(char *str, int i, char **env)
 	while (str[i])
 	{
 		if (!ft_isprint(str[i]) || str[i] == '$' || str[i] == '"')
+		{
 			break ;
+		}
 		i++;
 	}
 	printf("|||%s|||\n", str);////////////////
@@ -101,13 +103,15 @@ static char	*expansion(char *str, char **env)
 	int		flag[2];
 	int		i;
 
+	//// I don't really need this check I have to be sure that without env ////
+	//// I return blank when expanding ////
 	if (env == NULL)
 	{
 		fallback = ft_calloc(1, 1);
 		return (fallback);
 	}
 	flag[0] = 0;
-	flag[0] = 0;
+	flag[1] = 0;
 	i = 0;
 	while (str[i])
 	{
@@ -129,13 +133,15 @@ void	ps_expander(t_node *node, char **env)
 
 	if (node->cmd != NULL)
 	{
-		printf("cmd: |%s|\n", node->cmd->cmd);/////////////////////
 		node->cmd->cmd = expansion(node->cmd->cmd, env);
 		i = 0;
-		while (node->cmd->args[i])
+		if (node->cmd->args)
 		{
-			node->cmd->args[i] = expansion(node->cmd->args[i], env);
-			i++;
+			while (node->cmd->args[i])
+			{
+				node->cmd->args[i] = expansion(node->cmd->args[i], env);
+				i++;
+			}
 		}
 	}
 	if (node->opr != NULL)
@@ -143,9 +149,9 @@ void	ps_expander(t_node *node, char **env)
 		opr = node->opr;
 		while (opr->next)
 		{
-			opr->arg = expansion(opr->arg, env);
+			opr->path = expansion(opr->path, env);
 			opr = opr->next;
 		}
-		opr->arg = expansion(opr->arg, env);
+		opr->path = expansion(opr->path, env);
 	}
 }

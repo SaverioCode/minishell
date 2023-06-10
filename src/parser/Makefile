@@ -6,13 +6,13 @@
 #    By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/17 15:34:10 by fgarzi-c          #+#    #+#              #
-#    Updated: 2023/05/29 11:08:31 by fgarzi-c         ###   ########.fr        #
+#    Updated: 2023/06/10 01:34:57 by fgarzi-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = parser.a
 SRCS = lexical.c lexical_utils.c ps_organize_exp.c ps_organize_exp_utils.c \
-	parser.c ps_quotes_cleaner.c
+	parser.c ps_quotes_cleaner.c ps_expander.c
 OBJS = $(SRCS:.c=.o)
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I ../../include

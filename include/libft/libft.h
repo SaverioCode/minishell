@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:29:03 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/06 18:25:24 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/10 01:03:18 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <limits.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <signal.h>
 # include <fcntl.h>
 # include <sys/ioctl.h>
 # include <sys/wait.h>

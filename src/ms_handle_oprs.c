@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 20:52:41 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/10 00:57:47 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/10 01:01:16 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	here_document(t_opr *opr)
 	str = NULL;
 	while (1)
 	{
-		size = read(0, buffer, 1);
+		size = read(opr->fd, buffer, 1);
 		if (buffer[0] == '\n')
 		{
 			str_len = ft_strlen(str);
