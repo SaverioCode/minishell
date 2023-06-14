@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 20:52:41 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/10 03:51:54 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/12 18:09:37 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,12 @@ int	here_document(t_opr *opr)
 
 	del_len = ft_strlen(opr->path);
 	str = NULL;
+	// int	stdin_clone = dup(0);///////
+	int	fd[2];//////
+	pipe(fd);/////
 	while (1)
 	{
-		size = read(opr->fd, buffer, 1);
+		size = read(0, buffer, 1);
 		if (buffer[0] == '\n')
 		{
 			str_len = ft_strlen(str);
@@ -50,7 +53,7 @@ int	here_document(t_opr *opr)
 				if (ft_strncmp(opr->path, str, ft_strlen(str)) == 1)
 				{
 					free(str);
-					return (0);
+					break ;
 				}
 			}
 			free(str);
@@ -59,7 +62,11 @@ int	here_document(t_opr *opr)
 		}
 		str = ft_strjoin(str, buffer, 1, 0);
 	}
-	free(str);
+	write(fd[1], "ciao\n", 5);/////////////
+	dup2(fd[0], 0);
+	// dup2(stdin_clone, 0);///////
+	// free(str);
+	return (0);//////////
 }
 
 int	input_redir(t_info *info, t_opr *opr, t_fd *fd_node)
