@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 20:52:41 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/12 18:09:37 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/14 22:08:48 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,51 +29,65 @@ t_fd	*create_fd_node(t_fd *node)
 	return (new);
 }
 
-int	here_document(t_opr *opr)
+int	here_document(t_opr *opr, t_fd *fd_node)
 {
-	char	buffer[2];
+	char	*buffer;
 	char	*str;
-	int		size;
 	int		del_len;
 	int		str_len;
 
 	del_len = ft_strlen(opr->path);
 	str = NULL;
-	// int	stdin_clone = dup(0);///////
-	int	fd[2];//////
-	pipe(fd);/////
+	buffer = NULL;
+	fd_node->fd = opr->fd;
+	fd_node->fd_clone = dup(opr->fd);
+	int	fd[2];
+	pipe(fd);
 	while (1)
 	{
-		size = read(0, buffer, 1);
-		if (buffer[0] == '\n')
+		buffer = readline(">> ");
+		rl_on_new_line();
+		if (!buffer)
 		{
-			str_len = ft_strlen(str);
-			if (del_len == str_len)
-			{
-				if (ft_strncmp(opr->path, str, ft_strlen(str)) == 1)
-				{
-					free(str);
-					break ;
-				}
-			}
-			free(str);
-			str = NULL;
 			continue ;
 		}
+		str_len = ft_strlen(buffer);
+		if (del_len == str_len)
+		{
+			if (ft_strncmp(opr->path, buffer, ft_strlen(buffer)) == 1)
+			{
+				free(buffer);
+				break ;
+			}
+			free(buffer);
+			buffer = NULL;
+			continue ;
+		}
+		if (str != NULL)
+		{
+			str = ft_strjoin(str, "\n", 1, 0);
+		}
 		str = ft_strjoin(str, buffer, 1, 0);
+		free(buffer);
+		buffer = NULL;
 	}
-	write(fd[1], "ciao\n", 5);/////////////
+	if (str != NULL)
+	{
+		str = ft_strjoin(str, "\n", 1, 0);
+	}
+	fd_node->file_fd = fd[0];
+	write(fd[1], str, ft_strlen(str));
 	dup2(fd[0], 0);
-	// dup2(stdin_clone, 0);///////
-	// free(str);
-	return (0);//////////
+	close(fd[1]);
+	free(str);
+	return (0);
 }
 
 int	input_redir(t_info *info, t_opr *opr, t_fd *fd_node)
 {
 	if (opr->token == HDOC)
 	{
-		if (here_document(opr) == 1)
+		if (here_document(opr, fd_node) == 1)
 		{
 			return (1);
 		}
