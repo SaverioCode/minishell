@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 20:52:41 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/14 22:08:48 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/14 22:15:21 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,17 +63,10 @@ int	here_document(t_opr *opr, t_fd *fd_node)
 			buffer = NULL;
 			continue ;
 		}
-		if (str != NULL)
-		{
-			str = ft_strjoin(str, "\n", 1, 0);
-		}
+		buffer = ft_strjoin(buffer, "\n", 1, 0);
 		str = ft_strjoin(str, buffer, 1, 0);
 		free(buffer);
 		buffer = NULL;
-	}
-	if (str != NULL)
-	{
-		str = ft_strjoin(str, "\n", 1, 0);
 	}
 	fd_node->file_fd = fd[0];
 	write(fd[1], str, ft_strlen(str));
