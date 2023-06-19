@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 01:02:06 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/20 00:32:29 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/20 00:35:12 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ms_set_termios(void)
 	fd = ttyslot();
 	if (tcgetattr(fd, &settings) != 0)
 	{
-		write(1, "ERROR\n", 6);
+		write(1, "Error: error occurred getting termios.\n", 39);
 		exit(1);
 	}
 	settings.c_cc[VINTR] = 4;
@@ -28,7 +28,7 @@ void	ms_set_termios(void)
 	settings.c_cc[VQUIT] = _POSIX_VDISABLE;
 	if (tcsetattr(fd, TCSANOW, &settings) != 0)
 	{
-		write(1, "ERROR2\n", 7);
+		write(1, "Error: error occurred setting termios.\n", 39);
 		exit(1);
 	}
 	signal(SIGQUIT, SIG_IGN);
