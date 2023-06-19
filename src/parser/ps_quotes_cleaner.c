@@ -1,33 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quotes_cleaner.c                                   :+:      :+:    :+:   */
+/*   ps_quotes_cleaner.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 18:37:25 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/19 07:03:08 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/20 01:29:07 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	count_quotes(int *flag, char c, size_t *len)
+static int	count_quotes(char *str)
 {
-	if (c == 34 || c == 96)
+	int	i;
+	int	len;
+	int	flag;
+
+	flag = 0;
+	i = 0;
+	len = 0;
+	while (str[i])
 	{
-		if (!flag[0])
+		if (str[i] == 34 || str[i] == 39)
 		{
-			(*len)++;
-			flag[0] = 1;
-			flag[1] = c;
+			if (!flag)
+			{
+				len++;
+				flag = str[i];
+			}
+			else if (flag == str[i])
+			{
+				len++;
+				flag = 0;
+			}
 		}
-		else if (flag[1] == c)
-		{
-			flag[0] = 0;
-			flag[1] = 0;
-		}
+		i++;
 	}
+	return (len);
 }
 
 char	*ps_quotes_cleaner(char *str)
@@ -41,8 +52,7 @@ char	*ps_quotes_cleaner(char *str)
 	flag[0] = 0;
 	len = 0;
 	i = -1;
-	while (str[++i])
-		count_quotes(flag, str[i], &len);
+	len = count_quotes(str);
 	if (!len)
 		return (str);
 	new_str = ft_calloc(1, ft_strlen(str) - len + 1);
