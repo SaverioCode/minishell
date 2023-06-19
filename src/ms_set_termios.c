@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_set_signals.c                                   :+:      :+:    :+:   */
+/*   ms_set_termios.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 01:02:06 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/19 23:30:32 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/19 23:33:37 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-void	ms_set_signals(void)
+void	ms_set_termios(void)
 {
 	struct termios	settings;
 	int				fd;
@@ -24,6 +23,7 @@ void	ms_set_signals(void)
 		write(1, "ERROR\n", 6);
 		exit(1);
 	}
+	
 	settings.c_cc[VINTR] = 4;
 	settings.c_cc[VEOF] = 3;
 	if (tcsetattr(fd, TCSANOW, &settings) != 0)
