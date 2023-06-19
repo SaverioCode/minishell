@@ -6,45 +6,11 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 02:53:39 by sav               #+#    #+#             */
-/*   Updated: 2023/06/10 05:28:59 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/20 01:03:19 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static char *strjoin_in_the_middle(char *str1, int to, char *str2, char *str3)
-{
-	char	*new_str;
-	int		len;
-	int		i;
-	int		j;
-
-	len = to + ft_strlen(str2) + ft_strlen(str3);
-	new_str = ft_calloc(1, len + 1);
-	i = -1;
-	printf("to:||%d||\n", to);///////////
-	while (++i <= to)
-		new_str[i] = str1[i];
-	printf("new_str: |%s|\n", new_str);/////////
-	j = 0;
-	while (str2 && str2[j])
-	{
-		new_str[i] = str2[j];
-		i++;
-		j++;
-	}
-	printf("new_str: |%s|\n", new_str);/////////
-	j = 0;
-	while (str3[j])
-	{
-		new_str[i + j] = str3[j];
-		j++;
-	}
-	printf("new_str: |%s|\n", new_str);/////////
-	free(str1);
-	free(str2);
-	return (new_str);
-}
 
 static char	*get_var_value(char *var, char **env)
 {
@@ -77,6 +43,8 @@ static char	*dollar_sub(char *str, int i, char **env)
 {
 	char	*var;
 	char	*value;
+	char	*new;
+	char	*old;
 	int		from;
 
 	from = i;
@@ -90,10 +58,10 @@ static char	*dollar_sub(char *str, int i, char **env)
 		i++;
 	}
 	var = ft_getstr_from_to(str, from + 1, i - 1);
+	old = ft_getstr_from_to(str, 0, from - 1);
 	value = get_var_value(var, env);
-	str = strjoin_in_the_middle(str, from - 1, var, &str[i]);
-	write(1, "DOLSUB3\n", 8);/////////////////
-	printf("str: |%s|\n", str);////////
+	new = ft_strjoin(old, value, 0 , 0);
+	str = ft_strjoin(new, &str[i], 1, 0);
 	free(var);
 	return (str);
 }
