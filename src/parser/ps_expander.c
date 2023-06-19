@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 02:53:39 by sav               #+#    #+#             */
-/*   Updated: 2023/06/20 01:03:19 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/20 01:14:15 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,11 @@ static char	*dollar_sub(char *str, int i, char **env)
 	var = ft_getstr_from_to(str, from + 1, i - 1);
 	old = ft_getstr_from_to(str, 0, from - 1);
 	value = get_var_value(var, env);
-	new = ft_strjoin(old, value, 0 , 0);
-	str = ft_strjoin(new, &str[i], 1, 0);
+	new = ft_strjoin(old, value, 1 , 1);
+	new = ft_strjoin(new, &str[i], 1, 0);
+	free(str);
 	free(var);
-	return (str);
+	return (new);
 }
 
 static char	*expansion(char *str, char **env)
@@ -83,7 +84,7 @@ static char	*expansion(char *str, char **env)
 		}
 		i++;
 	}
-	// str = ps_quotes_cleaner(str);
+	str = ps_quotes_cleaner(str);
 	return (str);
 }
 
