@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/19 18:47:07 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/19 23:30:56 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	ms_init_tinfo(t_info *info, char **env);
 void	ms_free(t_node *node, t_info *info);
 void	ms_check_input(int ac, char **av);
 void	ms_init_shell(void);
-void	ms_set_signals(t_info *info);
+void	ms_set_signals(void);
 void	ms_handle_input(t_info *info);
 void	ms_execute_tree(t_node *node, t_info *info);
 void	ms_waitpid(pid_t pid, t_info *info);

@@ -6,14 +6,14 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 01:02:06 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/19 23:29:48 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/19 23:30:32 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 
-void	ms_set_signals(t_info *info)
+void	ms_set_signals(void)
 {
 	struct termios	settings;
 	int				fd;
@@ -32,6 +32,4 @@ void	ms_set_signals(t_info *info)
 		exit(1);
 	}
 	signal(SIGQUIT, SIG_IGN);
-	// signal(SIGINT, (void*)sigint);
-	(void)info;
 }
