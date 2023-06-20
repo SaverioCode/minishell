@@ -6,32 +6,11 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 12:05:48 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/09 23:09:39 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/21 00:32:02 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static char	*get_raw_paths(char **env)
-{
-	int	i;
-	int	len;
-
-	i = 0;
-	while (env[i])
-	{
-		len = ft_strlen(env[i]);
-		if (len >= 6)
-		{
-			if (ft_strncmp(env[i], "PATH=/", 6) == 1)
-			{
-				return (env[i]);
-			}
-		}
-		i++;
-	}
-	return (NULL);
-}
 
 static char	*get_cmd_path(char **env, char *cmd)
 {
@@ -40,7 +19,7 @@ static char	*get_cmd_path(char **env, char *cmd)
 	int		i;
 	int		start;
 
-	paths = get_raw_paths(env);
+	paths = ms_get_env_line(env, "PATH");
 	if (!paths)
 		return (NULL);
 	i = 5;

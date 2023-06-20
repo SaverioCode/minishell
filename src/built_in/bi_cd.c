@@ -1,49 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bi_pwd.c                                           :+:      :+:    :+:   */
+/*   bi_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/20 22:39:25 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/20 23:15:06 by fgarzi-c         ###   ########.fr       */
+/*   Created: 2023/06/20 23:01:46 by fgarzi-c          #+#    #+#             */
+/*   Updated: 2023/06/21 00:24:23 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*get_cwd(void)
+// char *get_home(t_info *info)
+// {
+// 	while ()
+// }
+
+int	bi_cd(char **args)
 {
-	char	*cwd;
-	char	*buff;
-	int		size;
-
-	cwd = NULL;
-	buff = NULL;
-	size = 1;
-	while (cwd == NULL)
-	{
-		free(cwd);
-		free(buff);
-		buff = ft_calloc(1, size);
-		cwd = getcwd(buff, size);
-		size++;
-	}
-	free(buff);
-	return (cwd);
-}
-
-int	bi_pwd(char **args)
-{
-	char	*cwd;
-
-	if (args != NULL)
+	if (ft_biarrlen(args) > 1)
 	{
 		write(2, "Error: to many arguments.\n", 26);
 		return (1);
 	}
-	cwd = get_cwd();
-	write(1, cwd, ft_strlen(cwd));
-	write(1, "\n", 1);
+	if (args == NULL)
+	{
+		if (chdir(NULL) == -1)
+		{
+			write(2, "Error: no entry point.\n", 23);
+			return (1);
+		}
+	}
+	else if (chdir(args[0]) == -1)
+	{
+		if (chdir(get_cwd()) == -1)
+		{
+			write(2, "Error: directory not found.\n", 28);
+			return (1);
+		}
+	}
 	return (0);
 }

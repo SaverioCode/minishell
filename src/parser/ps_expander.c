@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 02:53:39 by sav               #+#    #+#             */
-/*   Updated: 2023/06/20 01:14:15 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/21 00:32:10 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,19 @@
 static char	*get_var_value(char *var, char **env)
 {
 	char	*value;
+	char	*str;
 	int		i;
 	size_t	len;
 
 	len = ft_strlen(var);
 	i = 0;
 	value = NULL;
-	while (env[i])
+	str = ms_get_env_line(env, var);
+	if (str == NULL)
 	{
-		if (ft_strlen(env[i]) >= len)
-		{
-			if (ft_strncmp(var, env[i], len - 2) == 1)
-			{
-				if (env[i][len] == '=' || env[i][len] == '0')
-				{
-					value = ft_strjoin(&env[i][len + 1], NULL, 0, 0);
-					return (value);
-				}
-			}
-		}
-		i++;
+		return (NULL);
 	}
+	value = ms_get_env_value(str, var);
 	return (value);
 }
 
