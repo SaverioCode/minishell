@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 01:02:06 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/20 00:51:23 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/20 22:26:58 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,4 @@ void	ms_set_termios(void)
 		write(1, "Error: error occurred setting termios.\n", 39);
 		exit(1);
 	}
-	signal(SIGQUIT, SIG_IGN);
 }
