@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/21 00:38:12 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/21 00:52:43 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,9 @@ char	*ps_quotes_cleaner(char *str);
 
 /// Built in ///
 
+int		bi_cd(t_info *info, char **args);
+int		bi_exit(t_info *info, char **args);
 int		bi_pwd(char **args);
 char	*get_cwd(void);
-int		bi_cd(t_info *info, char **args);
 
 #endif
