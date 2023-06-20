@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 07:02:15 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/21 00:27:29 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/21 00:39:17 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	built_in(t_cmd *cmd, t_info *info)
 {
 	if (ft_strncmp("cd", cmd->cmd, 2) == 1)
 	{
-		info->status = bi_cd(cmd->args);
+		info->status = bi_cd(info, cmd->args);
 	}
 	else if (ft_strncmp("pwd", cmd->cmd, 3) == 1)
 	{
