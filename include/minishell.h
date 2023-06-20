@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/19 23:31:29 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/20 22:49:20 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,9 @@ void	ps_organize_exp(t_node *node, char *exp);
 void	ps_add_instruction(t_node *node, char *exp, int from, int *i);
 void	ps_expander(t_node *node, char **env);
 char	*ps_quotes_cleaner(char *str);
+
+/// Built in ///
+
+int	bi_pwd(char **args);
 
 #endif

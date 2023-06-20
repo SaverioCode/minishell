@@ -6,11 +6,24 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 07:02:15 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/07 22:30:40 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/20 22:48:11 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	built_in(t_cmd *cmd, t_info *info)
+{
+	if (ft_strncmp("pwd", cmd->cmd, 3))
+	{
+		info->status = bi_pwd(cmd->args);
+	}
+	else
+	{
+		return (1);
+	}
+	return (0);
+}
 
 static int	ms_execute_cmd(t_node *node, t_cmd *cmd, t_info *info)
 {
@@ -36,6 +49,9 @@ void	ms_handle_cmd(t_node *node, t_info *info)
 	{
 		return ;
 	}
-	ms_format_cmd(node->cmd, info->env);
-	info->status = ms_execute_cmd(node, node->cmd, info);
+	if (built_in(node->cmd, info) == 1)
+	{
+		ms_format_cmd(node->cmd, info->env);
+		info->status = ms_execute_cmd(node, node->cmd, info);
+	}
 }
