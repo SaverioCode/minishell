@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 18:37:25 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/20 01:45:42 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/20 20:48:47 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,18 @@ static int	count_quotes(char *str)
 	return (len);
 }
 
-static int	check_quotes(int flag, char c)
+static int	check_quotes(int *flag, char c)
 {
 	if (c == 34 || c == 39)
 	{
-		if (!flag)
+		if (*flag == 0)
 		{
-			flag = c;
+			*flag = c;
 			return (1);
 		}
-		if (flag == c)
+		if (*flag == c)
 		{
-			flag = 0;
+			*flag = 0;
 			return (1);
 		}
 	}
@@ -78,7 +78,7 @@ char	*ps_quotes_cleaner(char *str)
 	j = 0;
 	while (str[i])
 	{
-		if (check_quotes(flag, str[i]) == 0)
+		if (check_quotes(&flag, str[i]) == 0)
 		{
 			new_str[j] = str[i];
 			j++;
