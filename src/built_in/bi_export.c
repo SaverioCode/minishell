@@ -1,37 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bi_env.c                                           :+:      :+:    :+:   */
+/*   bi_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/21 00:41:23 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/21 19:53:59 by fgarzi-c         ###   ########.fr       */
+/*   Created: 2023/06/21 19:13:48 by fgarzi-c          #+#    #+#             */
+/*   Updated: 2023/06/21 19:58:51 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	bi_env(t_env *node, char **args)
+void	print_all_vars(t_env *node)
 {
-	if (args != NULL)
-	{
-		write(2, "Error: to many arguments.\n", 26);
-		return (127);
-	}
 	while (node)
 	{
-		if (node->env == 1)
-		{
-			write(1, node->name, ft_strlen(node->name));
-			write(1, "=", 1);
-		}
+		write(1, node->name, ft_strlen(node->name));
 		if (node->value)
 		{
+			write(1, "=", 1);
 			write(1, node->value, ft_strlen(node->value));
-			write(1, "\n", 1);
 		}
+		write(1, "\n", 1);
 		node = node->next;
 	}
-	return (0);
+}
+
+int	bi_export(t_info *info, char **args)
+{
+	if (args == NULL)
+	{
+		print_all_vars(info->env);
+		return (0);
+	}
 }

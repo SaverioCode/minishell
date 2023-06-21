@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 00:08:10 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/21 18:59:18 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/21 19:55:38 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,27 @@ char	*ms_get_env_value(t_info *info, char *name)
 	return (NULL);
 }
 
+static t_env	*create_env_node(char *str)
+{
+	t_env	*node;
+
+	node = ft_calloc(1, sizeof(t_env));
+	node->env = 0;
+	node->name = NULL;
+	node->value = NULL;
+	node->next = NULL;
+	node->env = 1;
+	node->name = extract_env_name(str);
+	node->value = extract_env_value(str, node->name);
+	return (node);
+}
+
 void	ms_set_env(t_info *info, char **env)
 {
 	t_env	*node;
 	t_env	*new;
 	int		i;
 
-	i = 0;
 	node = NULL;
 	info->env = node;
 	if (env == NULL)
@@ -83,12 +97,7 @@ void	ms_set_env(t_info *info, char **env)
 	i = 0;
 	while (env[i])
 	{
-		new = ft_calloc(1, sizeof(t_env));
-		new->name = NULL;
-		new->value = NULL;
-		new->next = NULL;
-		new->name = extract_env_name(env[i]);
-		new->value = extract_env_value(env[i], new->name);
+		new = create_env_node(env[i]);
 		if (info->env != NULL)
 		{
 			node->next = new;

@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 07:02:15 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/21 19:08:49 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/21 19:56:30 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ static int	built_in(t_cmd *cmd, t_info *info)
 	else if (ft_strictcmp("unset", cmd->cmd) == 0)
 	{
 		info->status = bi_unset(info, cmd->args);
+	}
+	else if (ft_strictcmp("export", cmd->cmd) == 0)
+	{
+		info->status = bi_export(info, cmd->args);
 	}
 	else
 	{
