@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/21 17:22:03 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/21 18:01:42 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,6 @@ void	ms_init_shell(void);
 void	ms_set_termios(void);
 void	ms_handle_input(t_info *info);
 void	ms_set_env(t_info *info, char **env);
-// char	*ms_get_env_line(char **env, char *str);
-// char	*ms_get_env_value(char *str, char *name);
 char	*ms_get_env_value(t_info *info, char *name);
 void	ms_execute_tree(t_node *node, t_info *info);
 void	ms_waitpid(pid_t pid, t_info *info);

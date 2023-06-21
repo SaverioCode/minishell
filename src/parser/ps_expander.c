@@ -6,30 +6,11 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 02:53:39 by sav               #+#    #+#             */
-/*   Updated: 2023/06/21 17:57:42 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/21 18:02:15 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static char	*get_var_value(char *var, t_info *info)
-{
-	char	*value;
-	// char	*str;
-	int		i;
-	size_t	len;
-
-	len = ft_strlen(var);
-	i = 0;
-	value = NULL;
-	// str = ms_get_env_line(env, var);
-	// if (str == NULL)
-	// {
-	// 	return (NULL);
-	// }
-	value = ms_get_env_value(info, var);
-	return (value);
-}
 
 static char	*dollar_sub(char *str, int i, t_info *info)
 {
@@ -51,7 +32,7 @@ static char	*dollar_sub(char *str, int i, t_info *info)
 	}
 	var = ft_getstr_from_to(str, from + 1, i - 1);
 	old = ft_getstr_from_to(str, 0, from - 1);
-	value = get_var_value(var, info);
+	value = ms_get_env_value(info, var);
 	new = ft_strjoin(old, value, 1 , 1);
 	new = ft_strjoin(new, &str[i], 1, 0);
 	free(str);
