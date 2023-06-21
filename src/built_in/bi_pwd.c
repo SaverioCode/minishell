@@ -6,13 +6,13 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 22:39:25 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/20 23:15:06 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/21 18:03:25 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*get_cwd(void)
+char	*bi_get_cwd(void)
 {
 	char	*cwd;
 	char	*buff;
