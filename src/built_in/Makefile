@@ -6,12 +6,12 @@
 #    By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/20 22:49:33 by fgarzi-c          #+#    #+#              #
-#    Updated: 2023/06/21 18:39:05 by fgarzi-c         ###   ########.fr        #
+#    Updated: 2023/06/21 18:57:22 by fgarzi-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = built_in.a
-SRCS = bi_pwd.c bi_cd.c bi_exit.c bi_env.c
+SRCS = bi_pwd.c bi_cd.c bi_exit.c bi_env.c bi_unset.c
 OBJS = $(SRCS:.c=.o)
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I ../../include

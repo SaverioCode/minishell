@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 00:08:10 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/21 18:00:31 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/21 18:59:18 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*ms_get_env_value(t_info *info, char *name)
 	{
 		if (node->name)
 		{
-			if (ft_strncmp(node->name, name, name_len) == 1)
+			if (ft_strictcmp(node->name, name) == 0)
 			{
 				value = ft_strcpy(node->value);
 				return (value);

@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 07:02:15 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/21 18:34:15 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/21 19:08:49 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,25 @@ static int	built_in(t_cmd *cmd, t_info *info)
 	int	cmd_len;
 
 	cmd_len = ft_strlen(cmd->cmd);
-	if (ft_strncmp("cd", cmd->cmd, cmd_len) == 1)
+	if (ft_strictcmp("cd", cmd->cmd) == 0)
 	{
 		info->status = bi_cd(info, cmd->args);
 	}
-	else if (ft_strncmp("exit", cmd->cmd, cmd_len) == 1)
+	else if (ft_strictcmp("exit", cmd->cmd) == 0)
 	{
 		info->status = bi_exit(info, cmd->args);
 	}
-	else if (ft_strncmp("pwd", cmd->cmd, cmd_len) == 1)
+	else if (ft_strictcmp("pwd", cmd->cmd) == 0)
 	{
 		info->status = bi_pwd(cmd->args);
 	}
-	else if (ft_strncmp("env", cmd->cmd, cmd_len) == 1)
+	else if (ft_strictcmp("env", cmd->cmd) == 0)
 	{
 		info->status = bi_env(info->env, cmd->args);
+	}
+	else if (ft_strictcmp("unset", cmd->cmd) == 0)
+	{
+		info->status = bi_unset(info, cmd->args);
 	}
 	else
 	{
