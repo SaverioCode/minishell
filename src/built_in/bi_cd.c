@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 23:01:46 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/21 17:20:33 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/21 18:05:28 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 static int	cd_home(t_info *info)
 {
-	// char	*str;
 	char	*value;
 
-	// str = ms_get_env_line(info->env, "HOME");
 	value = ms_get_env_value(info, "HOME");
 	if (chdir(value) == -1)
 	{
