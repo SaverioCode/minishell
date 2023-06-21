@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 18:12:09 by sav               #+#    #+#             */
-/*   Updated: 2023/06/21 01:03:55 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/21 17:58:33 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,21 +73,27 @@ static void	free_tnode(t_node *node)
 	}
 }
 
+static void	free_env(t_env *node)
+{
+	t_env	*tmp;
+
+	while (node)
+	{
+		free(node->name);
+		free(node->value);
+		tmp = node;
+		node = node->next;
+		free(tmp);
+	}
+}
+
 static void	free_info(t_info *info)
 {
-	int		i;
-
 	// clean child //
 	// clean fd lis //
 	if (info->env)
 	{
-		i = 0;
-		while (info->env[i])
-		{
-			free(info->env[i]);
-			i++;
-		}
-		free(info->env);
+		free_env(info->env);
 	}
 	if (info->input)
 	{

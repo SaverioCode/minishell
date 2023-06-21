@@ -6,32 +6,32 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 02:53:39 by sav               #+#    #+#             */
-/*   Updated: 2023/06/21 00:32:10 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/21 17:57:42 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*get_var_value(char *var, char **env)
+static char	*get_var_value(char *var, t_info *info)
 {
 	char	*value;
-	char	*str;
+	// char	*str;
 	int		i;
 	size_t	len;
 
 	len = ft_strlen(var);
 	i = 0;
 	value = NULL;
-	str = ms_get_env_line(env, var);
-	if (str == NULL)
-	{
-		return (NULL);
-	}
-	value = ms_get_env_value(str, var);
+	// str = ms_get_env_line(env, var);
+	// if (str == NULL)
+	// {
+	// 	return (NULL);
+	// }
+	value = ms_get_env_value(info, var);
 	return (value);
 }
 
-static char	*dollar_sub(char *str, int i, char **env)
+static char	*dollar_sub(char *str, int i, t_info *info)
 {
 	char	*var;
 	char	*value;
@@ -51,7 +51,7 @@ static char	*dollar_sub(char *str, int i, char **env)
 	}
 	var = ft_getstr_from_to(str, from + 1, i - 1);
 	old = ft_getstr_from_to(str, 0, from - 1);
-	value = get_var_value(var, env);
+	value = get_var_value(var, info);
 	new = ft_strjoin(old, value, 1 , 1);
 	new = ft_strjoin(new, &str[i], 1, 0);
 	free(str);
@@ -59,7 +59,7 @@ static char	*dollar_sub(char *str, int i, char **env)
 	return (new);
 }
 
-static char	*expansion(char *str, char **env)
+static char	*expansion(char *str, t_info *info)
 {
 	int		flag[2];
 	int		i;
@@ -72,7 +72,7 @@ static char	*expansion(char *str, char **env)
 		lx_check_quotes(flag, str[i]);
 		if ((!flag[0] || flag[1] == '"') && str[i] == '$')
 		{
-			str = dollar_sub(str, i, env);
+			str = dollar_sub(str, i, info);
 		}
 		i++;
 	}
@@ -80,20 +80,20 @@ static char	*expansion(char *str, char **env)
 	return (str);
 }
 
-void	ps_expander(t_node *node, char **env)
+void	ps_expander(t_node *node, t_info *info)
 {
 	t_opr	*opr;
 	size_t	i;
 
 	if (node->cmd != NULL)
 	{
-		node->cmd->cmd = expansion(node->cmd->cmd, env);
+		node->cmd->cmd = expansion(node->cmd->cmd, info);
 		i = 0;
 		if (node->cmd->args)
 		{
 			while (node->cmd->args[i])
 			{
-				node->cmd->args[i] = expansion(node->cmd->args[i], env);
+				node->cmd->args[i] = expansion(node->cmd->args[i], info);
 				i++;
 			}
 		}
@@ -103,9 +103,9 @@ void	ps_expander(t_node *node, char **env)
 		opr = node->opr;
 		while (opr->next)
 		{
-			opr->path = expansion(opr->path, env);
+			opr->path = expansion(opr->path, info);
 			opr = opr->next;
 		}
-		opr->path = expansion(opr->path, env);
+		opr->path = expansion(opr->path, info);
 	}
 }

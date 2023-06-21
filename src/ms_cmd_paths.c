@@ -6,20 +6,20 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 12:05:48 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/21 00:32:02 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/21 18:00:45 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*get_cmd_path(char **env, char *cmd)
+static char	*get_cmd_path(t_info *info, char *cmd)
 {
 	char	*paths;
 	char	*str;
 	int		i;
 	int		start;
 
-	paths = ms_get_env_line(env, "PATH");
+	paths = ms_get_env_value(info, "PATH");
 	if (!paths)
 		return (NULL);
 	i = 5;
@@ -75,7 +75,7 @@ static char	*get_cmd_from_path(t_cmd *cmd)
 	return (command);
 }
 
-void	ms_format_cmd(t_cmd *cmd, char **env)
+void	ms_format_cmd(t_cmd *cmd, t_info *info)
 {
 	char	*cmd_without_path;
 
@@ -88,6 +88,6 @@ void	ms_format_cmd(t_cmd *cmd, char **env)
 	else
 	{
 		cmd->args = ft_push_str(cmd->cmd, cmd->args);
-		cmd->cmd = get_cmd_path(env, cmd->cmd);
+		cmd->cmd = get_cmd_path(info, cmd->cmd);
 	}
 }

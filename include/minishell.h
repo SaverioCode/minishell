@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/21 00:52:43 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/21 17:22:03 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,20 @@ typedef struct s_node
 	struct s_node	*back;
 }	t_node;
 
+typedef struct s_env
+{
+	char			*name;
+	char			*value;
+	struct s_env	*next;
+}	t_env;
+
 typedef struct s_info
 {
 	t_node	*root;
 	t_child	*child;
 	t_fd	*fd_lis;
+	t_env	*env;
 	char	token;
-	char	**env;
 	char	*input;
 	int		stdin_clone;
 	int		stdout_clone;
@@ -90,14 +97,16 @@ void	ms_check_input(int ac, char **av);
 void	ms_init_shell(void);
 void	ms_set_termios(void);
 void	ms_handle_input(t_info *info);
-char	*ms_get_env_line(char **env, char *str);
-char	*ms_get_env_value(char *str, char *name);
+void	ms_set_env(t_info *info, char **env);
+// char	*ms_get_env_line(char **env, char *str);
+// char	*ms_get_env_value(char *str, char *name);
+char	*ms_get_env_value(t_info *info, char *name);
 void	ms_execute_tree(t_node *node, t_info *info);
 void	ms_waitpid(pid_t pid, t_info *info);
 int		ms_handle_oprs(t_info *info, t_opr *opr, t_fd *fd_node);
 t_fd	*create_fd_node(t_fd *node);
 void	ms_handle_cmd(t_node *node, t_info *info);
-void	ms_format_cmd(t_cmd *cmd, char **env);
+void	ms_format_cmd(t_cmd *cmd, t_info *info);
 void	ms_init_pipe(char token, t_info *info);
 void	ms_init_pipe_child(t_node *node, t_info *info);
 void	ms_end_execution(char token, t_info *info, pid_t pid);
@@ -114,7 +123,7 @@ int		lexical_check(char *input, int flag);
 void	ps_parser(t_node *node, char *input);
 void	ps_organize_exp(t_node *node, char *exp);
 void	ps_add_instruction(t_node *node, char *exp, int from, int *i);
-void	ps_expander(t_node *node, char **env);
+void	ps_expander(t_node *node, t_info *info);
 char	*ps_quotes_cleaner(char *str);
 
 /// Built in ///

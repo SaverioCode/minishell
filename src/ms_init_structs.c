@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 08:12:12 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/07 22:43:32 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/21 18:00:05 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,22 +44,11 @@ void	ms_init_tnode(t_node *node)
 
 void	ms_init_tinfo(t_info *info, char **env)
 {
-	int	len;
-	int	i;
-
 	info->root = NULL;
 	info->child = NULL;
 	info->fd_lis = NULL;
-	info->env = NULL;
+	ms_set_env(info, env);
 	info->token = 0;
-	len = ft_biarrlen(env);
-	info->env = ft_calloc(len + 1, 8);
-	i = 0;
-	while (env[i])
-	{
-		info->env[i] = ft_strjoin(env[i], NULL, 0, 0);
-		i++;
-	}
 	info->input = NULL;
 	info->stdin_clone = 0;
 	info->stdin_clone = dup(0);
