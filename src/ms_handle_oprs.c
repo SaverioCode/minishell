@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 20:52:41 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/14 22:15:21 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/21 23:58:55 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,11 @@ int	ms_handle_oprs(t_info *info, t_opr *opr, t_fd *fd_node)
 	while (opr)
 	{
 		ms_check_fd(opr, info);
+		if (info->pipe == 1 && opr->fd == 0)
+		{
+			dup2(info->stdin_clone, 0);
+			info->pipe = 0;
+		}
 		fd_node = create_fd_node(get_fd_node(info->fd_lis, NULL));
 		if (opr->token == OUT || opr->token == APP)
 		{
