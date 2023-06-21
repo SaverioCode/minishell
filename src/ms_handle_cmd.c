@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 07:02:15 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/21 23:47:41 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/22 00:52:57 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static int	built_in(t_cmd *cmd, t_info *info)
 {
 	int	cmd_len;
 
+
+/////// settare la pipe ////////////
 	cmd_len = ft_strlen(cmd->cmd);
 	if (ft_strictcmp("cd", cmd->cmd) == 0)
 	{
@@ -48,22 +50,68 @@ static int	built_in(t_cmd *cmd, t_info *info)
 	// }
 }
 
+int	env_len(t_env *node)
+{
+	int	i;
+
+	i = 0;
+	while (node)
+	{
+		if (node->env == 1)
+		{
+			i++;
+		}
+		node = node->next;
+	}
+	return (i);
+}
+
+char	**format_env(t_info *info)
+{
+	char	**env;
+	int		len;
+	int		i;
+	t_env	*node;
+
+	if (info->env == NULL)
+	{
+		return (NULL);
+	}
+	len = env_len(info->env);
+	env = ft_calloc(len + 1, 8);
+	node = info->env;
+	i = 0;
+	while (i < len)
+	{
+		if (node->env == 1)
+		{
+			env[i] = ft_strjoin(node->name, "=", 0, 0);
+			env[i] = ft_strjoin(env[i], node->value, 1, 0);
+		}
+		i++;
+		node = node->next;
+	}
+	return (env);
+}
+
 static int	ms_execute_cmd(t_node *node, t_cmd *cmd, t_info *info)
 {
 	pid_t	pid;
-
+	char	**env;
 	/// get env formatted ///
+	env = format_env(info);
 	pid = fork();
 	if (pid == 0)
 	{
 		ms_init_pipe_child(node, info);
-		execve(cmd->cmd, cmd->args, NULL);
+		execve(cmd->cmd, cmd->args, env);
 		info->status = 1;
 		//// write command error ////
 		write(2, "Error: command not found: \n", 27);
 		ms_end_execution_child(node, info);
 	}
 	ms_end_execution(node->token, info, pid);
+	free(env);
 	return (info->status);
 }
 
