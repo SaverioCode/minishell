@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 07:02:15 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/21 18:04:46 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/21 18:34:15 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ static int	built_in(t_cmd *cmd, t_info *info)
 	else if (ft_strncmp("pwd", cmd->cmd, cmd_len) == 1)
 	{
 		info->status = bi_pwd(cmd->args);
+	}
+	else if (ft_strncmp("env", cmd->cmd, cmd_len) == 1)
+	{
+		info->status = bi_env(info->env, cmd->args);
 	}
 	else
 	{

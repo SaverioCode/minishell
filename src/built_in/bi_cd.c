@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 23:01:46 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/21 18:05:28 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/21 18:38:55 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	bi_cd(t_info *info, char **args)
 	}
 	else if (chdir(args[0]) == -1)
 	{
-		if (chdir(get_cwd()) == -1)
+		if (chdir(bi_get_cwd()) == -1)
 		{
 			write(2, "Error: directory not found.\n", 28);
 			return (1);
