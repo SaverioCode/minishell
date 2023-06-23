@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 00:08:10 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/21 19:55:38 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/23 15:12:11 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,7 @@ char	*ms_get_env_value(t_info *info, char *name)
 {
 	t_env	*node;
 	char	*value;
-	int		name_len;
 
-	name_len = ft_strlen(name);
 	node = info->env;
 	while (node)
 	{

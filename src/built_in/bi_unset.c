@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 18:42:02 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/21 19:54:10 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/23 15:11:31 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,11 @@ int	unset_node(t_info *info, char **args, t_env *node, t_env *tmp)
 {
 	int		count;
 	int		i;
-	int		arg_len;
 
 	i = 0;
 	count = 0;
 	while (args[i])
 	{
-		arg_len = ft_strlen(args[i]);
 		if (ft_strictcmp(node->name, args[i]) == 0)
 		{
 			count++;

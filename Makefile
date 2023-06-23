@@ -6,7 +6,7 @@
 #    By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/01 11:50:39 by fgarzi-c          #+#    #+#              #
-#    Updated: 2023/06/20 22:51:19 by fgarzi-c         ###   ########.fr        #
+#    Updated: 2023/06/23 15:18:13 by fgarzi-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ LIB_RH = $(READLINE)/libhistory.a
 LIB_M = ./src/minishell.a
 LIB_P = ./src/parser/parser.a
 LIB_BI = ./src/built_in/built_in.a
-LIBS = $(LIB_R) $(LIB_RH) $(LIB_P) $(LIB_M) $(LIB_L) $(LIB_BI)
+LIBS = $(LIB_R) $(LIB_RH) $(LIB_M) $(LIB_BI) $(LIB_P) $(LIB_L) 
 SRCS = minishell.c
 OBJS = $(SRCS:.c=.o)
 CC = gcc

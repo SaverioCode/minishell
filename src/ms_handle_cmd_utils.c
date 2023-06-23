@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 02:15:52 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/23 03:34:35 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/23 15:12:33 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,6 @@ static void	built_in_1_5(t_info *info, t_cmd *cmd, bi_cmd token)
 
 static int	is_built_in(char *cmd)
 {
-	int	cmd_len;
-
-	cmd_len = ft_strlen(cmd);
 	if (ft_strictcmp("cd", cmd) == 0)
 	{
 		return(BI_CD);

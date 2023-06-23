@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 00:44:41 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/21 01:01:46 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/23 16:01:30 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	bi_exit(t_info *info, char **args)
 		return (1);
 	}
 	status = info->status;
+	rl_clear_history();
 	ms_free(info->root, info);
 	exit(status);
 }

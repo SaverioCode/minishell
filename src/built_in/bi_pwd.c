@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 22:39:25 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/21 18:37:47 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/23 15:45:35 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ char	*bi_get_cwd(void)
 		cwd = getcwd(buff, size);
 		size++;
 	}
-	free(buff);
-	return (cwd);
+	return (buff);
 }
 
 int	bi_pwd(char **args)
@@ -45,5 +44,6 @@ int	bi_pwd(char **args)
 	cwd = bi_get_cwd();
 	write(1, cwd, ft_strlen(cwd));
 	write(1, "\n", 1);
+	free(cwd);
 	return (0);
 }
