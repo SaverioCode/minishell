@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 07:02:15 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/23 02:51:46 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/23 03:47:06 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	ms_execute_cmd(t_node *node, t_cmd *cmd, t_info *info)
 {
 	pid_t	pid;
 	char	**env;
-	/// get env formatted ///
+
 	env = format_env(info);
 	pid = fork();
 	if (pid == 0)
@@ -69,8 +69,7 @@ static int	ms_execute_cmd(t_node *node, t_cmd *cmd, t_info *info)
 		ms_init_pipe_child(node, info);
 		execve(cmd->cmd, cmd->args, env);
 		info->status = 1;
-		//// write command error ////
-		write(2, "Error: command not found: \n", 27);
+		write(2, "Error: command not found.\n", 27);
 		ms_end_execution_child(node, info);
 	}
 	ms_end_execution(node->token, info, pid);
