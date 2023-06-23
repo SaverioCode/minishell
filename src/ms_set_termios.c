@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 01:02:06 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/23 15:50:38 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/23 18:20:52 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,8 @@ void	ms_set_termios(void)
 		write(1, "Error: error occurred getting termios.\n", 39);
 		exit(1);
 	}
-	printf("|%d|\n",settings.c_cc[VEOF]);///////////
-	printf("|%d|\n",settings.c_cc[VINTR]);///////////
-	// settings.c_cc[VINTR] = 4;
-	// settings.c_cc[VEOF] = 3;
+	settings.c_cc[VINTR] = 4;
+	settings.c_cc[VEOF] = 3;
 	settings.c_cc[VQUIT] = _POSIX_VDISABLE;
 	if (tcsetattr(fd, TCSANOW, &settings) != 0)
 	{
