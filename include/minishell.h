@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/23 02:47:10 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/23 03:48:47 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int		ms_cmd_built_in(t_info *info, t_node *node);
 void	ms_init_pipe(char token, t_info *info);
 void	ms_init_pipe_child(t_node *node, t_info *info);
 void	ms_end_execution(char token, t_info *info, pid_t pid);
-void	ms_end_execution_child(t_node *node, t_info *info);
+void	ms_end_execution_child(t_info *info);
 void	ms_store_pid(t_info *info, pid_t pid);
 void	ms_waitchild(t_info *info);
 

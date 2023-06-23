@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 06:18:35 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/23 03:31:45 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/23 03:48:15 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	ms_end_execution(char token, t_info *info, pid_t pid)
 	}
 }
 
-void	ms_end_execution_child(t_node *node, t_info *info)
+void	ms_end_execution_child(t_info *info)
 {
 	if (info->pipe == 1)
 	{
@@ -86,5 +86,4 @@ void	ms_end_execution_child(t_node *node, t_info *info)
 		/// file descriptors ///
 		exit(info->status);
 	}
-	(void)node;
 }
