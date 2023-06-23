@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 06:18:35 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/22 00:12:55 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/23 03:31:45 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ void	ms_init_pipe_child(t_node *node, t_info *info)
 {
 	if (node->token == PIPE)
 	{
-		close(info->fd[0]);
+		if (info->subshl == 1)
+		{
+			close(info->fd[0]);
+		}
 		if (check_fd_lis(info->fd_lis, 1))
 		{
 			close(info->fd[1]);
@@ -73,11 +76,15 @@ void	ms_end_execution(char token, t_info *info, pid_t pid)
 
 void	ms_end_execution_child(t_node *node, t_info *info)
 {
-	if (node->token == PIPE)
+	if (info->pipe == 1)
 	{
 		close(info->fd[1]);
 	}
-	ms_free(info->root, info);
-	/// file descriptors ///
-	exit(info->status);
+	if (info->subshl == 1)
+	{
+		ms_free(info->root, info);
+		/// file descriptors ///
+		exit(info->status);
+	}
+	(void)node;
 }

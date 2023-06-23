@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/21 19:47:38 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/23 02:47:10 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,16 @@
 # define HDOC	0b01000101
 # define OUT 	'>'
 # define APP	0b01000110
+
+typedef enum e_cmd
+{
+	BI_NULL,
+	BI_CD,
+	BI_ENV,
+	BI_EXIT,
+	BI_PWD,
+	BI_UNSET
+} bi_cmd;
 
 typedef struct s_child
 {
@@ -106,6 +116,7 @@ int		ms_handle_oprs(t_info *info, t_opr *opr, t_fd *fd_node);
 t_fd	*create_fd_node(t_fd *node);
 void	ms_handle_cmd(t_node *node, t_info *info);
 void	ms_format_cmd(t_cmd *cmd, t_info *info);
+int		ms_cmd_built_in(t_info *info, t_node *node);
 void	ms_init_pipe(char token, t_info *info);
 void	ms_init_pipe_child(t_node *node, t_info *info);
 void	ms_end_execution(char token, t_info *info, pid_t pid);

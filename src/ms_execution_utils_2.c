@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 13:37:54 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/06 18:27:20 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/23 02:09:07 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,7 @@ void	ms_waitpid(pid_t pid, t_info *info)
 	int	status;
 
 	waitpid(pid, &status, 0);
-	if (WSTOPSIG(status) == 1)
-	{
-		info->status = 1;
-	}
-	else if (WSTOPSIG(status) != 1)
-	{
-		info->status = 0;
-	}
+	info->status = WSTOPSIG(status);
 }
 
 void	ms_store_pid(t_info *info, pid_t pid)

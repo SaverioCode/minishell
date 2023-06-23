@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 08:12:12 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/21 18:00:05 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/23 00:43:00 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	ms_init_tinfo(t_info *info, char **env)
 	info->stdin_clone = 0;
 	info->stdin_clone = dup(0);
 	info->stdout_clone = 0;
+	info->stdout_clone = dup(1);
 	info->status = 0;
 	info->prompt = NULL;
 	info->pipe = 0;

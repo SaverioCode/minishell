@@ -6,49 +6,11 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 07:02:15 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/22 00:52:57 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/23 02:51:46 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int	built_in(t_cmd *cmd, t_info *info)
-{
-	int	cmd_len;
-
-
-/////// settare la pipe ////////////
-	cmd_len = ft_strlen(cmd->cmd);
-	if (ft_strictcmp("cd", cmd->cmd) == 0)
-	{
-		info->status = bi_cd(info, cmd->args);
-	}
-	else if (ft_strictcmp("exit", cmd->cmd) == 0)
-	{
-		info->status = bi_exit(info, cmd->args);
-	}
-	else if (ft_strictcmp("pwd", cmd->cmd) == 0)
-	{
-		info->status = bi_pwd(cmd->args);
-	}
-	else if (ft_strictcmp("env", cmd->cmd) == 0)
-	{
-		info->status = bi_env(info->env, cmd->args);
-	}
-	else if (ft_strictcmp("unset", cmd->cmd) == 0)
-	{
-		info->status = bi_unset(info, cmd->args);
-	}
-	else
-	{
-		return (1);
-	}
-	return (0);
-	// else if (ft_strictcmp("export", cmd->cmd) == 0)
-	// {
-	// 	info->status = bi_export(info, cmd->args);
-	// }
-}
 
 int	env_len(t_env *node)
 {
@@ -103,6 +65,7 @@ static int	ms_execute_cmd(t_node *node, t_cmd *cmd, t_info *info)
 	pid = fork();
 	if (pid == 0)
 	{
+		info->subshl = 1;
 		ms_init_pipe_child(node, info);
 		execve(cmd->cmd, cmd->args, env);
 		info->status = 1;
@@ -121,7 +84,7 @@ void	ms_handle_cmd(t_node *node, t_info *info)
 	{
 		return ;
 	}
-	if (built_in(node->cmd, info) == 1)
+	if (ms_cmd_built_in(info, node) == -1)
 	{
 		ms_format_cmd(node->cmd, info);
 		info->status = ms_execute_cmd(node, node->cmd, info);
