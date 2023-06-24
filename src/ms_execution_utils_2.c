@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_execution_utils_2.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 13:37:54 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/23 02:09:07 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/24 09:49:05 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@ void	ms_waitchild(t_info *info)
 		child = child->next;
 		free(tmp);
 	}
+	ms_free_childs(info->child);
 	info->child = NULL;
 }

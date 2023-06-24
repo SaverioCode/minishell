@@ -229,7 +229,7 @@
 #define HAVE_SYS_TIME_H 1
 
 /* Define if you have the <termcap.h> header file.  */
-#define HAVE_TERMCAP_H 1
+/* #undef HAVE_TERMCAP_H */
 
 /* Define if you have the <termio.h> header file.  */
 #define HAVE_TERMIO_H 1

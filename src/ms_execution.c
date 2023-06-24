@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ms_execution.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:15:31 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/23 03:50:18 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/24 09:59:09 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ms_restore_fd(t_info *info)
+void	ms_restore_fd(t_info *info)
 {
 	t_fd	*fd_lis;
 	t_fd	*tmp;

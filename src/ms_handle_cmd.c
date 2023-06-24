@@ -3,16 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ms_handle_cmd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 07:02:15 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/23 03:49:55 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/24 10:11:00 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	env_len(t_env *node)
+static void	free_formatted_env(char **env)
+{
+	__int32_t	i;
+	// __int32_t	j;
+
+	i = 0;
+	// j = 0;
+	while (env[i])
+	{
+		// while (env[j])
+		// {
+		// 	env[j] = 0;
+		// 	j++;
+		// }
+		free(env[i]);
+		env[i] = NULL;
+		i++;
+	}
+	free(env);
+	env = NULL;
+}
+
+static int	env_len(t_env *node)
 {
 	int	i;
 
@@ -28,7 +50,7 @@ int	env_len(t_env *node)
 	return (i);
 }
 
-char	**format_env(t_info *info)
+static char	**format_env(t_info *info)
 {
 	char	**env;
 	int		len;
@@ -68,12 +90,12 @@ static int	ms_execute_cmd(t_node *node, t_cmd *cmd, t_info *info)
 		info->subshl = 1;
 		ms_init_pipe_child(node, info);
 		execve(cmd->cmd, cmd->args, env);
-		info->status = 1;
+		info->status = 127;
 		write(2, "Error: command not found.\n", 27);
 		ms_end_execution_child(info);
 	}
 	ms_end_execution(node->token, info, pid);
-	free(env);
+	free_formatted_env(env);
 	return (info->status);
 }
 

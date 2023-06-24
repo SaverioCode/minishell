@@ -430,7 +430,7 @@ Copyright (C) 2021 Free Software Foundation, Inc.
 This config.status script is free software; the Free Software Foundation
 gives unlimited permission to copy, distribute and modify it."
 
-ac_pwd='/nfs/homes/fgarzi-c/42/minishell/include/readline'
+ac_pwd='/home/sav/42/minishell/include/readline'
 srcdir='.'
 INSTALL='/usr/bin/install -c'
 test -n "$AWK" || AWK=awk
@@ -613,7 +613,7 @@ S["ARFLAGS"]="cr"
 S["LOCAL_DEFS"]=""
 S["LOCAL_LDFLAGS"]=""
 S["LOCAL_CFLAGS"]=""
-S["BUILD_DIR"]="/nfs/homes/fgarzi-c/42/minishell/include/readline"
+S["BUILD_DIR"]="/home/sav/42/minishell/include/readline"
 S["EXAMPLES_INSTALL_TARGET"]="install-examples"
 S["SHARED_INSTALL_TARGET"]="install-shared"
 S["STATIC_INSTALL_TARGET"]="install-static"
@@ -650,7 +650,7 @@ S["OBJEXT"]="o"
 S["EXEEXT"]=""
 S["ac_ct_CC"]="gcc"
 S["CPPFLAGS"]=""
-S["LDFLAGS"]=""
+S["LDFLAGS"]=" -L./lib/termcap"
 S["CFLAGS"]="-g -O2 -Wno-parentheses -Wno-format-security -Wno-tautological-constant-out-of-range-compare"
 S["CC"]="gcc"
 S["SET_MAKE"]=""
@@ -816,7 +816,6 @@ D["HAVE_LIMITS_H"]=" 1"
 D["HAVE_LOCALE_H"]=" 1"
 D["HAVE_PWD_H"]=" 1"
 D["HAVE_MEMORY_H"]=" 1"
-D["HAVE_TERMCAP_H"]=" 1"
 D["HAVE_TERMIOS_H"]=" 1"
 D["HAVE_TERMIO_H"]=" 1"
 D["HAVE_SYS_IOCTL_H"]=" 1"

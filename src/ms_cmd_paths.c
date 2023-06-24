@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_cmd_paths.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 12:05:48 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/21 18:00:45 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/24 10:16:24 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,18 @@ static char	*get_cmd_path(t_info *info, char *cmd)
 			if (access(str, X_OK) == 0)
 			{
 				free(cmd);
+				free(paths);
 				return (str);
 			}
-			else
-			{
-				free(str);
-			}
+			free(str);
 			start = i + 1;
 		}
 		i++;
 	}
 	str = ft_getstr_from_to(paths, start, i - 1);
 	str = ft_strjoin(str, "/", 1, 0);
-	str = ft_strjoin(str, cmd, 1, 0);
-	free(cmd);
+	str = ft_strjoin(str, cmd, 1, 1);
+	free(paths);
 	return (str);
 }
 

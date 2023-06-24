@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_execution_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 06:18:35 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/23 03:50:18 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/24 09:58:23 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ void	ms_end_execution_child(t_info *info)
 	}
 	if (info->subshl == 1)
 	{
+		ms_restore_fd(info);
 		ms_free(info->root, info);
-		/// file descriptors ///
 		exit(info->status);
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bi_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 00:44:41 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/23 16:01:30 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/24 09:46:13 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int	bi_exit(t_info *info, char **args)
 	}
 	status = info->status;
 	rl_clear_history();
+	ms_free_childs(info->child);
+	ms_restore_fd(info);
 	ms_free(info->root, info);
 	exit(status);
 }

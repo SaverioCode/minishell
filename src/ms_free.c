@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 18:12:09 by sav               #+#    #+#             */
-/*   Updated: 2023/06/21 17:58:33 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/24 09:30:23 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ static void	free_info(t_info *info)
 		free(info->prompt);
 	}
 	close(info->stdin_clone);
+	close(info->stdout_clone);
 	free(info);
 }
 
