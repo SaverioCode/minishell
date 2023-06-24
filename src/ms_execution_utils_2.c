@@ -6,7 +6,7 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 13:37:54 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/24 09:49:05 by sav              ###   ########.fr       */
+/*   Updated: 2023/06/24 12:04:10 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,5 @@ void	ms_waitchild(t_info *info)
 		child = child->next;
 		free(tmp);
 	}
-	ms_free_childs(info->child);
 	info->child = NULL;
 }

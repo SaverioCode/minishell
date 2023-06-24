@@ -6,7 +6,7 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/24 09:47:14 by sav              ###   ########.fr       */
+/*   Updated: 2023/06/24 21:22:31 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ void	ms_init_tcmd(t_cmd *node);
 void	ms_get_prompt_str(t_info *info);
 void	ms_init_tinfo(t_info *info, char **env);
 void	ms_free(t_node *node, t_info *info);
-void	ms_free_childs(t_child *node);
 void	ms_check_input(int ac, char **av);
 void	ms_init_shell(void);
 void	ms_set_termios(void);
@@ -122,6 +121,7 @@ void	ms_init_pipe(char token, t_info *info);
 void	ms_init_pipe_child(t_node *node, t_info *info);
 void	ms_end_execution(char token, t_info *info, pid_t pid);
 void	ms_end_execution_child(t_info *info);
+int		ms_check_fd_lis(t_fd *fd_lis, int fd);
 void	ms_store_pid(t_info *info, pid_t pid);
 void	ms_waitchild(t_info *info);
 void	ms_restore_fd(t_info *info);

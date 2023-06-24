@@ -6,20 +6,9 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 09:43:41 by sav               #+#    #+#             */
-/*   Updated: 2023/06/24 09:49:55 by sav              ###   ########.fr       */
+/*   Updated: 2023/06/24 12:10:54 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ms_free_childs(t_child *node)
-{
-	t_child	*tmp;
-
-	while (node)
-	{
-		tmp = node;
-		node = node->next;
-		free(tmp);
-	}
-}

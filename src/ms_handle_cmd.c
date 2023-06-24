@@ -6,7 +6,7 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 07:02:15 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/24 10:30:17 by sav              ###   ########.fr       */
+/*   Updated: 2023/06/24 21:27:04 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ static int	ms_execute_cmd(t_node *node, t_cmd *cmd, t_info *info)
 	pid = fork();
 	if (pid == 0)
 	{
-		info->subshl = 1;
 		ms_init_pipe_child(node, info);
+		info->subshl = 1;
 		execve(cmd->cmd, cmd->args, env);
 		info->status = 127;
 		write(2, "Error: command not found.\n", 27);

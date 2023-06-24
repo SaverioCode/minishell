@@ -6,7 +6,7 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:03:46 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/24 11:58:06 by sav              ###   ########.fr       */
+/*   Updated: 2023/06/24 12:12:58 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ms_get_prompt_str(t_info *info)
 	}
 	else
 	{
-		info->prompt = str;
+		info->prompt = ft_strjoin("anonymous", str, 0, 0);
 	}
 }
 

@@ -6,19 +6,19 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 06:18:35 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/24 10:22:55 by sav              ###   ########.fr       */
+/*   Updated: 2023/06/24 21:23:37 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	check_fd_lis(t_fd *fd_lis, int fd)
+int	ms_check_fd_lis(t_fd *fd_lis, int fd)
 {
 	while (fd_lis)
 	{
 		if (fd_lis->fd == fd)
 		{
-			return (1);
+			return (-1);
 		}
 		fd_lis = fd_lis->next;
 	}
@@ -43,11 +43,8 @@ void	ms_init_pipe_child(t_node *node, t_info *info)
 {
 	if (node->token == PIPE)
 	{
-		if (info->subshl == 1)
-		{
-			close(info->fd[0]);
-		}
-		if (check_fd_lis(info->fd_lis, 1))
+		close(info->fd[0]);
+		if (ms_check_fd_lis(info->fd_lis, 1) == -1)
 		{
 			close(info->fd[1]);
 			return ;
@@ -80,10 +77,5 @@ void	ms_end_execution_child(t_info *info)
 	{
 		close(info->fd[1]);
 	}
-	if (info->subshl == 1)
-	{
-		// ms_restore_fd(info);
-		// ms_free(info->root, info);
-		exit(info->status);
-	}
+	exit(info->status);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_handle_cmd_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 02:15:52 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/23 15:12:33 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/24 21:22:35 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,15 @@ static int	is_built_in(char *cmd)
 
 static void	execute_built_in(t_info *info, t_node *node, bi_cmd token)
 {
-	ms_init_pipe_child(node, info);
+	if (node->token == PIPE)
+	{
+		if (ms_check_fd_lis(info->fd_lis, 1) == -1)
+		{
+			close(info->fd[1]);
+			return ;
+		}
+		dup2(info->fd[1], 1);
+	}
 	if (token < 6)
 	{
 		built_in_1_5(info, node->cmd, token);

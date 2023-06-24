@@ -6,7 +6,7 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:15:31 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/24 09:59:09 by sav              ###   ########.fr       */
+/*   Updated: 2023/06/24 21:43:03 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ static void	check_subshell(t_node *node, t_info *info)
 			info->subshl = 1;
 			ms_execute_tree(node->subshl, info);
 			// clean memory //
-			ms_restore_fd(info);
 			ms_end_execution_child(info);
 		}
 		ms_end_execution(node->token, info, pid);
@@ -98,7 +97,6 @@ void	ms_execute_tree(t_node *node, t_info *info)
 {
 	while (node)
 	{
-		info->fd_lis = create_fd_node(NULL);
 		ps_expander(node, info);
 		ms_init_pipe(node->token, info);
 		if (ms_handle_oprs(info, node->opr, info->fd_lis) == 0)

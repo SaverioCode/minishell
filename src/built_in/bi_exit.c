@@ -6,11 +6,23 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 00:44:41 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/24 09:46:13 by sav              ###   ########.fr       */
+/*   Updated: 2023/06/24 12:13:18 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	free_childs(t_child *node)
+{
+	t_child	*tmp;
+
+	while (node)
+	{
+		tmp = node;
+		node = node->next;
+		free(tmp);
+	}
+}
 
 int	bi_exit(t_info *info, char **args)
 {
@@ -35,7 +47,7 @@ int	bi_exit(t_info *info, char **args)
 	}
 	status = info->status;
 	rl_clear_history();
-	ms_free_childs(info->child);
+	free_childs(info->child);
 	ms_restore_fd(info);
 	ms_free(info->root, info);
 	exit(status);
