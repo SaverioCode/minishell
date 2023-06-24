@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_input.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:03:46 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/23 16:06:32 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/24 11:58:06 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ static void	get_input(t_info *info)
 		}
 	}
 	rl_on_new_line();
-	// rl_replace_line();
 	if (!info->input)
 	{	
 		info->input = str;

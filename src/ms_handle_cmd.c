@@ -6,7 +6,7 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 07:02:15 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/24 10:11:00 by sav              ###   ########.fr       */
+/*   Updated: 2023/06/24 10:30:17 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,10 @@
 static void	free_formatted_env(char **env)
 {
 	__int32_t	i;
-	// __int32_t	j;
 
 	i = 0;
-	// j = 0;
 	while (env[i])
 	{
-		// while (env[j])
-		// {
-		// 	env[j] = 0;
-		// 	j++;
-		// }
 		free(env[i]);
 		env[i] = NULL;
 		i++;
