@@ -6,7 +6,7 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/25 19:29:08 by sav              ###   ########.fr       */
+/*   Updated: 2023/06/25 21:09:33 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef enum e_cmd
 {
 	BI_NULL,
 	BI_CD,
+	BI_ECHO,
 	BI_ENV,
 	BI_EXIT,
 	BI_PWD,
@@ -139,11 +140,12 @@ char	*ps_quotes_cleaner(char *str);
 
 /// Built in ///
 
-int		bi_cd(t_info *info, char **args);
-int		bi_env(t_env *node, char **args);
-int		bi_exit(t_info *info, char **args);
-int		bi_pwd(char **args);
-char	*bi_get_cwd(void);
-int		bi_unset(t_info *info, char **args);
+int			bi_cd(t_info *info, char **args);
+__int8_t	bi_echo(char **args);
+int			bi_env(t_env *node, char **args);
+int			bi_exit(t_info *info, char **args);
+int			bi_pwd(char **args);
+char		*bi_get_cwd(void);
+int			bi_unset(t_info *info, char **args);
 
 #endif
