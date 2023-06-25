@@ -6,7 +6,7 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:15:31 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/24 21:43:03 by sav              ###   ########.fr       */
+/*   Updated: 2023/06/25 18:18:17 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ static void	check_subshell(t_node *node, t_info *info)
 			ms_init_pipe_child(node, info);
 			info->subshl = 1;
 			ms_execute_tree(node->subshl, info);
-			// clean memory //
 			ms_end_execution_child(info);
 		}
 		ms_end_execution(node->token, info, pid);

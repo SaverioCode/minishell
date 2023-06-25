@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ms_handle_oprs.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 20:52:41 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/21 23:58:55 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/25 19:28:27 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_fd	*create_fd_node(t_fd *node)
+t_fd	*create_fd_node(t_info *info, t_fd *node)
 {
 	t_fd	*new;
 
@@ -25,6 +25,10 @@ t_fd	*create_fd_node(t_fd *node)
 	if (node)
 	{
 		node->next = new;
+	}
+	else
+	{
+		info->fd_lis = new;
 	}
 	return (new);
 }
@@ -179,7 +183,7 @@ int	ms_handle_oprs(t_info *info, t_opr *opr, t_fd *fd_node)
 			dup2(info->stdin_clone, 0);
 			info->pipe = 0;
 		}
-		fd_node = create_fd_node(get_fd_node(info->fd_lis, NULL));
+		fd_node = create_fd_node(info, get_fd_node(info->fd_lis, NULL));
 		if (opr->token == OUT || opr->token == APP)
 		{
 			if (output_redir(opr, fd_node) == 1)

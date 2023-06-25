@@ -6,7 +6,7 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 18:12:09 by sav               #+#    #+#             */
-/*   Updated: 2023/06/24 09:30:23 by sav              ###   ########.fr       */
+/*   Updated: 2023/06/25 18:18:44 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,6 @@ static void	free_env(t_env *node)
 
 static void	free_info(t_info *info)
 {
-	// clean child //
-	// clean fd lis //
 	if (info->env)
 	{
 		free_env(info->env);
