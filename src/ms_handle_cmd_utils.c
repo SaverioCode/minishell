@@ -6,14 +6,13 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 02:15:52 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/25 21:10:37 by sav              ###   ########.fr       */
+/*   Updated: 2023/06/26 21:39:10 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-static void	built_in_1_6(t_info *info, t_cmd *cmd, bi_cmd token)
+static void	built_in_1_5(t_info *info, t_cmd *cmd, bi_cmd token)
 {
 	if (token == BI_CD)
 	{
@@ -31,7 +30,15 @@ static void	built_in_1_6(t_info *info, t_cmd *cmd, bi_cmd token)
 	{
 		info->status = bi_exit(info, cmd->args);
 	}
-	else if (token == BI_PWD)
+	else if (token == BI_EXPORT)
+	{
+		info->status = bi_export(info, cmd->args);
+	}
+}
+
+static void	built_in_6_10(t_info *info, t_cmd *cmd, bi_cmd token)
+{
+	if (token == BI_PWD)
 	{
 		info->status = bi_pwd(cmd->args);
 	}
@@ -44,29 +51,19 @@ static void	built_in_1_6(t_info *info, t_cmd *cmd, bi_cmd token)
 static int	is_built_in(char *cmd)
 {
 	if (ft_strictcmp("cd", cmd) == 0 || ft_strictcmp("CD", cmd) == 0)
-	{
 		return(BI_CD);
-	}
-	else if (ft_strictcmp("echo", cmd) == 0 || ft_strictcmp("ECHO", cmd) == 0)
-	{
+	if (ft_strictcmp("echo", cmd) == 0 || ft_strictcmp("ECHO", cmd) == 0)
 		return(BI_ECHO);
-	}
-	else if (ft_strictcmp("exit", cmd) == 0 || ft_strictcmp("EXIT", cmd) == 0)
-	{
-		return(BI_EXIT);
-	}
-	else if (ft_strictcmp("pwd", cmd) == 0 || ft_strictcmp("PWD", cmd) == 0)
-	{
-		return(BI_PWD);
-	}
-	else if (ft_strictcmp("env", cmd) == 0 || ft_strictcmp("ENV", cmd) == 0)
-	{
+	if (ft_strictcmp("env", cmd) == 0 || ft_strictcmp("ENV", cmd) == 0)
 		return(BI_ENV);
-	}
-	else if (ft_strictcmp("unset", cmd) == 0 || ft_strictcmp("UNSET", cmd) == 0)
-	{
+	if (ft_strictcmp("exit", cmd) == 0 || ft_strictcmp("EXIT", cmd) == 0)
+		return(BI_EXIT);
+	if (ft_strictcmp("export", cmd) == 0 || ft_strictcmp("EXPORT", cmd) == 0)
+		return(BI_EXPORT);
+	if (ft_strictcmp("pwd", cmd) == 0 || ft_strictcmp("PWD", cmd) == 0)
+		return(BI_PWD);
+	if (ft_strictcmp("unset", cmd) == 0 || ft_strictcmp("UNSET", cmd) == 0)
 		return(BI_UNSET);
-	}
 	return (BI_NULL);
 }
 
@@ -81,14 +78,14 @@ static void	execute_built_in(t_info *info, t_node *node, bi_cmd token)
 		}
 		dup2(info->fd[1], 1);
 	}
-	if (token < 7)
+	if (token < 6)
 	{
-		built_in_1_6(info, node->cmd, token);
+		built_in_1_5(info, node->cmd, token);
 	}
-	// else if (bi_token > 4 && bi_token < 10)
-	// {
-	// 	built_in_0_10(info, node);
-	// }
+	else if (token > 5 && token < 11)
+	{
+		built_in_6_10(info, node->cmd, token);
+	}
 	if (info->pipe == 1)
 	{
 		close(info->fd[1]);

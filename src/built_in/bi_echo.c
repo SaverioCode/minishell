@@ -6,13 +6,13 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 20:53:04 by sav               #+#    #+#             */
-/*   Updated: 2023/06/25 21:15:02 by sav              ###   ########.fr       */
+/*   Updated: 2023/06/26 16:02:31 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	check_flag(char *str)
+static __int8_t	check_flag(char *str)
 {
 	__int32_t	i;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bi_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 19:13:48 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/21 23:21:30 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/26 22:21:06 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,36 +27,126 @@ void	print_all_vars(t_env *node)
 	}
 }
 
-static int	check_arg(char *str)
+static __int8_t	check_name(char *str, __int8_t *status)
 {
-	int	i;
+	__int32_t	i;
 
 	i = 0;
+	if (str == NULL)
+	{
+		return (-1);
+	}
 	while (str[i])
 	{
-		if ((ft_isalpha(str[i]) == 1  && str[i + 1] != '+' ) || !ft_isprint(str[i]))
+		if (!ft_isalpha(str[i]) && !ft_isdigit(str[i]))
 		{
-			write(2, "Error: invalid name.\n", 21);
+			*status = 1;
 			return (-1);
 		}
 		i++;
 	}
-	return (1);
+	return (0);
 }
 
-static void	add_export_var(t_info *info, char *str, int *status)
+static __int8_t	update_node(t_env *node, char *name, char *value, int flag)
 {
-	if (check_arg(str) == -1)
+	while (node)
 	{
-		*status = 1;
+		if (ft_strictcmp(node->name, name) == 0)
+		{
+			if (flag == 1)
+			{
+				node->value = ft_strjoin(node->value, value, 1, 1);
+			}
+			else
+			{
+				free(node->value);
+				node->value = value;
+			}
+			if (node->value == NULL)
+			{
+				node->env = 0;
+			}
+			else
+			{
+				node->env = 1;
+			}
+			free(name);
+			return (0);
+		}
+		node = node->next;
 	}
-	
+	return (-1);
 }
 
-int	bi_export(t_info *info, char **args)
+static void	add_node(t_info *info, char *name, char *value, int flag)
 {
-	int	i;
-	int	status;
+	t_env *node;
+	t_env *new;
+
+	node = info->env;
+	if (update_node(node, name, value, flag) == 0)
+	{
+		return ;
+	}
+	while (node->next)
+	{
+		node = node->next;
+	}
+	new = ft_calloc(1, sizeof(t_env));
+	new->name = NULL;
+	new->name = name;
+	new->value = NULL;
+	new->value = value;
+	new->env = 0;
+	if (new->value != NULL)
+	{
+		new->env = 1;
+	}
+	node->next = new;
+	new->next = NULL;
+}
+
+static void	add_export_var(t_info *info, char *arg, __int8_t *status)
+{
+	char		*name;
+	char		*value;
+	__int32_t	i;
+	__int8_t	flag;
+
+	value = NULL;
+	flag = 0;
+	i = ft_find_char(arg, '=');
+	if (i == -1)
+	{
+		name = ft_strcpy(arg);
+	}
+	else if (arg[i - 1] == '+' && arg[i] == '=')
+	{
+		flag = 1;
+		name = ft_getstr_from_to(arg, 0, i - 2);
+		value = ft_getstr_from_to(arg, i + 1, ft_strlen(arg) - 1);
+	}
+	else if (arg[i] == '=')
+	{
+		name = ft_getstr_from_to(arg, 0, i - 1);
+		value = ft_getstr_from_to(arg, i + 1, ft_strlen(arg) - 1);
+	}
+	if (check_name(name, status) == -1)
+	{
+		write(2, "Error: invalid name.\n", 21);
+		*status = 1;
+		free(name);
+		free(value);
+		return ;
+	}
+	add_node(info, name, value, flag);
+}
+
+__int8_t	bi_export(t_info *info, char **args)
+{
+	__int32_t	i;
+	__int8_t	status;
 
 	if (args == NULL)
 	{
@@ -67,16 +157,16 @@ int	bi_export(t_info *info, char **args)
 	i = 0;
 	while (args[i])
 	{
-		// status = check_arg(args[i]);
-		if (ft_find_char(args[i], '=') == 1)
+		if (!ft_isalpha(args[i][0]) && !ft_isdigit(args[i][0]))
+		{
+			write(2, "Error: invalid name.\n", 21);
+			status = 1;
+		}
+		else
 		{
 			add_export_var(info, args[i], &status);
 		}
-		else if (status == 0)
-		{
-			add_env_var(info, args[i], &status);
-		}
 		i++;
 	}
-	return (0);
+	return (status);
 }

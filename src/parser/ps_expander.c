@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_expander.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 02:53:39 by sav               #+#    #+#             */
-/*   Updated: 2023/06/22 00:29:22 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/26 21:44:39 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static char	*dollar_sub(char *str, int i, t_info *info)
 	i += 1;
 	while (str[i])
 	{
-		if (!ft_isprint(str[i]) || str[i] == '$' || str[i] == '"')
+		if (!ft_isalpha(str[i]) && !ft_isdigit(str[i]))
 		{
 			break ;
 		}
@@ -39,25 +39,6 @@ static char	*dollar_sub(char *str, int i, t_info *info)
 	free(var);
 	return (new);
 }
-
-// static int	check_quotes(int *flag, char c)
-// {
-// 	if (c == 34 || c == 39)
-// 	{
-// 		if (*flag == 0)
-// 		{
-// 			*flag = c;
-// 			return (1);
-// 		}
-// 		if (*flag == c)
-// 		{
-// 			*flag = 0;
-// 			return (1);
-// 		}
-// 	}
-// 	return (0);
-// }
-
 
 static char	*expansion(char *str, t_info *info)
 {

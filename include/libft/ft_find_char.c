@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_find_char.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 22:39:01 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/21 22:40:39 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/26 21:17:11 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int	ft_find_char(char *str, char c)
 	{
 		if (str[i] == c)
 		{
-			return (0);
+			return (i);
 		}
 		i++;
 	}
-	return (0);
+	return (-1);
 }

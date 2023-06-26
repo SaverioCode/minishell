@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bi_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 00:41:23 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/21 19:53:59 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/26 22:08:32 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ int	bi_env(t_env *node, char **args)
 		if (node->env == 1)
 		{
 			write(1, node->name, ft_strlen(node->name));
-			write(1, "=", 1);
-		}
-		if (node->value)
-		{
-			write(1, node->value, ft_strlen(node->value));
-			write(1, "\n", 1);
+			if (node->value)
+			{
+				write(1, "=", 1);
+				write(1, node->value, ft_strlen(node->value));
+				write(1, "\n", 1);
+			}
 		}
 		node = node->next;
 	}
