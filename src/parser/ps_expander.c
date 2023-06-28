@@ -6,7 +6,7 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 02:53:39 by sav               #+#    #+#             */
-/*   Updated: 2023/06/26 21:44:39 by sav              ###   ########.fr       */
+/*   Updated: 2023/06/28 00:14:42 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,20 @@ static char	*expansion(char *str, t_info *info)
 	flag[0] = 0;
 	flag[1] = 0;
 	i = 0;
+	if (str == NULL)
+	{
+		return (NULL);
+	}
 	while (str[i])
 	{
 		lx_check_quotes(flag, str[i]);
 		if ((!flag[0] || flag[1] == '"') && str[i] == '$')
 		{
-			str = dollar_sub(str, i, info);
+				str = dollar_sub(str, i, info);
 		}
 		i++;
 	}
+	str = ps_wildcard(str);
 	str = ps_quotes_cleaner(str);
 	return (str);
 }

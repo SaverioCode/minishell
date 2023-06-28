@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_quotes_cleaner.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 18:37:25 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/20 20:48:47 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/28 00:15:58 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,10 @@ char	*ps_quotes_cleaner(char *str)
 	size_t	j;
 	int		flag;
 
+	if (str == NULL)
+	{
+		return (NULL);
+	}
 	flag = 0;
 	len = count_quotes(str);
 	if (!len)

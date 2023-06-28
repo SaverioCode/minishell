@@ -1,0 +1,17 @@
+WILDCART Implementation.
+
+RULES:
+
+	if '*' is present when expansion happend is going to be substitute with all the visible file and direcotory's names N.B. it has to be outside quotes
+	if characters are present before or after '*' their are goin to be considereted the start end/or the end of the string. so '*' is going to fill what in between trying to match any file or directory names present in that folder. if no matche occur then blank is going to be sobtitute
+
+HOW TO DO IT?:
+
+when I met a '*' outside quotes I should start to contestualizing it. it means that I need to unserstand if it is isolated or attached to other symbols/characters. If it is alone I can simply expand it to every name founded in the directory.
+If not alone or it has somenthing attached before or after.
+If somenthing is attached before it could be a path and this has to be checked. If somenthing is attached after is a delimeter for the expansion (I mean the sobstitution has to match that end).
+
+0. It has to be done has first thing during expansion.
+1. Analays contest
+2. If alone just expand it
+3. If somenthing came before verify if '/' is present if it is do it for another directory

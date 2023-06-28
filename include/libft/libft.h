@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:29:03 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/21 22:40:56 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/06/28 01:03:33 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <sys/ttydefaults.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <dirent.h>
 
 size_t	ft_strlen(char *str);
 size_t	ft_biarrlen(char **arr);
@@ -44,6 +45,7 @@ char	*ft_trim(char *str, char *head);
 int		ft_isprint(char c);
 int		ft_find_printable(char *str, char c);
 int		ft_find_char(char *str, char c);
+int		ft_find_char_rev(char *str, char c);
 int		ft_isalpha(char c);
 int		ft_isdigit(char c);
 int		ft_str_isdigit(char *str);

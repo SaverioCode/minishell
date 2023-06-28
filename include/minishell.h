@@ -6,7 +6,7 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/26 21:38:44 by sav              ###   ########.fr       */
+/*   Updated: 2023/06/27 23:36:39 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ void	ps_parser(t_node *node, char *input);
 void	ps_organize_exp(t_node *node, char *exp);
 void	ps_add_instruction(t_node *node, char *exp, int from, int *i);
 void	ps_expander(t_node *node, t_info *info);
+char	*ps_wildcard(char *str);
 char	*ps_quotes_cleaner(char *str);
 
 /// Built in ///
