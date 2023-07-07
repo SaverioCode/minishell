@@ -6,7 +6,7 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 18:37:25 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/28 00:15:58 by sav              ###   ########.fr       */
+/*   Updated: 2023/06/30 22:31:57 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	check_quotes(int *flag, char c)
 	return (0);
 }
 
-char	*ps_quotes_cleaner(char *str)
+char	*ps_clean_quotes(char *str)
 {
 	char	*new_str;
 	size_t	i;
@@ -67,10 +67,6 @@ char	*ps_quotes_cleaner(char *str)
 	size_t	j;
 	int		flag;
 
-	if (str == NULL)
-	{
-		return (NULL);
-	}
 	flag = 0;
 	len = count_quotes(str);
 	if (!len)
@@ -91,4 +87,21 @@ char	*ps_quotes_cleaner(char *str)
 	}
 	free(str);
 	return (new_str);
+}
+
+char	**ps_quotes_cleaner(char **arr)
+{
+	size_t	i;
+
+	if (arr == NULL)
+	{
+		return (NULL);
+	}
+	i = 0;
+	while (arr[i])
+	{
+		arr[i] = ps_clean_quotes(arr[i]);
+		i++;
+	}
+	return (arr);
 }

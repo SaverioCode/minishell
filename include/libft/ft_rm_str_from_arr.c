@@ -1,38 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_push_str.c                                      :+:      :+:    :+:   */
+/*   ft_rm_str_from_arr.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/05 19:48:13 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/30 22:49:58 by sav              ###   ########.fr       */
+/*   Created: 2023/06/30 19:04:28 by sav               #+#    #+#             */
+/*   Updated: 2023/07/07 14:57:23 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	**ft_push_str(char *str, char **arr)
+char **ft_rm_str_from_arr(char **arr ,__uint32_t index)
 {
-	char	**new;
-	int		len;
-	int		i;
+	char		**new;
+	__uint32_t	i;
+	__uint32_t	j;
+	__uint32_t	len;
 
-	len = ft_biarrlen(arr);
-	if (!len)
+	if (arr == NULL)
 	{
-		new = ft_calloc(3, sizeof(char *));
-		new[0] = ft_strcpy(str);
-		return (new);
+		return (NULL);
 	}
-	new = ft_calloc(len + 2, 8);
-	new[0] = ft_strcpy(str);
+	len = ft_biarrlen(arr);
+	if (len == 1)
+	{
+		free(arr[0]);
+		free(arr);
+		return (NULL);
+	}
+	new = ft_calloc(len, sizeof(char *));
+	j = 0;
 	i = 0;
 	while (arr[i])
 	{
-		new[1 + i] = arr[i];
+		if (i == index)
+		{
+			i++;
+		}
+		new[i] = arr[j];
+		j++;
 		i++;
 	}
+	free(arr[j]);
 	free(arr);
 	return (new);
 }

@@ -6,7 +6,7 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 02:53:39 by sav               #+#    #+#             */
-/*   Updated: 2023/06/28 00:14:42 by sav              ###   ########.fr       */
+/*   Updated: 2023/06/30 19:26:50 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,19 @@ static char	*dollar_sub(char *str, int i, t_info *info)
 	return (new);
 }
 
-static char	*expansion(char *str, t_info *info)
+static char	**expansion(char *str, t_info *info)
 {
 	int		flag[2];
 	int		i;
+	char	**arr;
 
-	flag[0] = 0;
-	flag[1] = 0;
-	i = 0;
 	if (str == NULL)
 	{
 		return (NULL);
 	}
+	flag[0] = 0;
+	flag[1] = 0;
+	i = 0;
 	while (str[i])
 	{
 		lx_check_quotes(flag, str[i]);
@@ -61,37 +62,65 @@ static char	*expansion(char *str, t_info *info)
 		}
 		i++;
 	}
-	str = ps_wildcard(str);
-	str = ps_quotes_cleaner(str);
-	return (str);
+	arr = ps_wildcard(str);
+	arr = ps_quotes_cleaner(arr);
+	return (arr);
+}
+
+static void	expand_opr_node(t_opr *node, t_info *info)
+{
+	t_opr	*opr;
+	char	**arr;
+	
+	if (node != NULL)
+	{
+		arr = NULL;
+		opr = node;
+		while (opr)
+		{
+			arr = expansion(opr->path, info);
+			if (arr != NULL)
+			{
+				opr->path = ft_strcpy(arr[0]);
+			}
+			ft_free_arr(arr);
+			arr = NULL;
+			opr = opr->next;
+		}
+	}
+}
+
+static void	expand_cmd_node(t_cmd *node, t_info *info)
+{
+	__uint32_t	i;
+	char	**arr;
+
+	if (node->cmd != NULL)
+	{
+		arr = NULL;
+		arr = expansion(node->cmd, info);
+		if (arr != NULL)
+		{
+			node->cmd = ft_strcpy(arr[0]);
+		}
+		ft_free_arr(arr);
+		if (node->args)
+		{
+			arr = NULL;
+			i = 0;
+			while (node->args[i])
+			{
+				arr = ft_append_arr(arr, expansion(node->args[i], info));
+				i++;
+			}
+			ft_free_arr(node->args);
+			node->args = arr;
+		}
+	}
 }
 
 void	ps_expander(t_node *node, t_info *info)
 {
-	t_opr	*opr;
-	size_t	i;
-
-	if (node->cmd != NULL)
-	{
-		node->cmd->cmd = expansion(node->cmd->cmd, info);
-		i = 0;
-		if (node->cmd->args)
-		{
-			while (node->cmd->args[i])
-			{
-				node->cmd->args[i] = expansion(node->cmd->args[i], info);
-				i++;
-			}
-		}
-	}
-	if (node->opr != NULL)
-	{
-		opr = node->opr;
-		while (opr->next)
-		{
-			opr->path = expansion(opr->path, info);
-			opr = opr->next;
-		}
-		opr->path = expansion(opr->path, info);
-	}
+	expand_cmd_node(node->cmd, info);
+	expand_opr_node(node->opr, info);
 }
