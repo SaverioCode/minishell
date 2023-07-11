@@ -6,7 +6,7 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/30 22:32:24 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/10 10:06:22 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define MINISHELL_H
 
 # include "./libft/libft.h"
+# include "./parser.h"
+# include "./built_in.h"
 # include "./readline/readline.h"
 
 # define AND	0b01000001
@@ -24,18 +26,6 @@
 # define HDOC	0b01000101
 # define OUT 	'>'
 # define APP	0b01000110
-
-typedef enum e_cmd
-{
-	BI_NULL,
-	BI_CD,
-	BI_ECHO,
-	BI_ENV,
-	BI_EXIT,
-	BI_EXPORT,
-	BI_PWD,
-	BI_UNSET
-} bi_cmd;
 
 typedef struct s_child
 {
@@ -92,7 +82,7 @@ typedef struct s_info
 	char	token;
 	char	*input;
 	int		stdin_clone;
-	int		stdout_clone;
+	int		stdout_clone; // i think I never use it //
 	int		status;
 	char	*prompt;
 	int		pipe;
@@ -126,31 +116,5 @@ int		ms_check_fd_lis(t_fd *fd_lis, int fd);
 void	ms_store_pid(t_info *info, pid_t pid);
 void	ms_waitchild(t_info *info);
 void	ms_restore_fd(t_info *info);
-
-///	Parser ///
-
-char	lx_which_token(char *str);
-void	lx_check_quotes(int *flag, char c);
-int		lx_token_check(int *token, char new_token, int *brkts);
-int		lexical_check(char *input, int flag);
-void	ps_parser(t_node *node, char *input);
-void	ps_organize_exp(t_node *node, char *exp);
-void	ps_add_instruction(t_node *node, char *exp, int from, int *i);
-void	ps_expander(t_node *node, t_info *info);
-char	**ps_wildcard(char *str);
-char	**ps_analyze_string(char *str, __uint32_t i);
-char	**ps_quotes_cleaner(char **arr);
-char	*ps_clean_quotes(char *str);
-
-/// Built in ///
-
-int			bi_cd(t_info *info, char **args);
-__int8_t	bi_echo(char **args);
-int			bi_env(t_env *node, char **args);
-int			bi_exit(t_info *info, char **args);
-__int8_t	bi_export(t_info *info, char **args);
-int			bi_pwd(char **args);
-char		*bi_get_cwd(void);
-int			bi_unset(t_info *info, char **args);
 
 #endif

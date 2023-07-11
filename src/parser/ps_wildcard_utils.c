@@ -6,7 +6,7 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 00:54:44 by sav               #+#    #+#             */
-/*   Updated: 2023/06/30 22:39:58 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/10 00:07:02 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ static char	*get_after(char *str, __uint32_t i)
 		return (NULL);
 	}
 	after = ft_getstr_from_to(str, j, ft_strlen(str));
+	/// cleaning duplicate cause SEGFAULT ///
 	after = clean_wc_duplicate(after);
 	after = ps_clean_quotes(after);
 	return (after);
@@ -88,8 +89,11 @@ static char	*get_prev(char *str, __uint32_t i)
 {
 	char		*prev;
 
-	prev = ft_getstr_from_to(str, 0, i);
-	prev = ps_clean_quotes(prev);
+	prev = ft_getstr_from_to(str, 0, i - 1);
+	if (prev != NULL)
+	{
+		prev = ps_clean_quotes(prev);
+	}
 	return (prev);
 }
 
@@ -156,122 +160,6 @@ static char	*get_suffix(char *str)
 	return (new);
 }
 
-static __int8_t	check_prefix(char *name, char *prefix)
-{
-	__int32_t	i;
-
-	if (prefix == NULL)
-	{
-		return (0);
-	}
-	i = 0;
-	while (prefix[i])
-	{
-		if (prefix[i] != name[i])
-		{
-			return (-1);
-		}
-		i++;
-	}
-	return (0);
-}
-
-static __int8_t	check_suffix(char *name, __int32_t len_name, char *suffix)
-{
-	__int32_t	i;
-
-	if (suffix == 0)
-	{
-		return (0);
-	}
-	i = 0;
-	while (suffix[i])
-	{
-		if (suffix[i] != name[len_name - 1 - i])
-		{
-			return (-1);
-		}
-		i++;
-	}
-	return (0);
-}
-
-static __int8_t	check_name(char *name, char *prefix, char *suffix)
-{
-	__int32_t	len_name;
-	__int32_t	len;
-
-	if (prefix == NULL && suffix == NULL)
-	{
-		return (0);
-	}
-	len_name = ft_strlen(name);
-	len = ft_strlen(prefix) + ft_strlen(suffix);
-	if (len_name > len)
-	{
-		return (-1);
-	}
-	if (check_prefix(name, prefix) == -1)
-	{
-		return (-1);
-	}
-	if (check_suffix(name, len_name, suffix) == -1)
-	{
-		return (-1);
-	}
-	return (0);
-}
-
-static char	*get_wildcard_value(char *str, char *prefix, char *suffix)
-{
-	char		*new;
-	__int32_t	start;
-	__int32_t	end;
-
-	start = ft_strlen(prefix) - 1;
-	if (start == -1)
-	{
-		start = 0;
-	}
-	if (ft_strlen(suffix) == 0)
-	{
-		end = ft_strlen(str) - 1;
-	}
-	else
-	{
-		end = ft_strlen(str) - ft_strlen(suffix) - 1;
-	}
-	new = ft_calloc(start + end + 1, sizeof(char));
-	new = ft_getstr_from_to(str, start, end);
-	return (new);
-}
-
-static char	**get_matrix(char *prefix, char *suffix, char *dir)
-{
-	DIR				*dir_stream;
-	struct dirent	*dir_node;
-	char			*name;
-	char			*str;
-	char			**matrix;
-
-	matrix = NULL;
-	dir_stream = opendir(dir);
-	dir_node = readdir(dir_stream);
-	while (dir_node)
-	{
-		name = ft_strcpy(dir_node->d_name);
-		if (check_name(name, prefix, suffix) == 0)
-		{
-			str = get_wildcard_value(name, prefix, suffix);
-			matrix = ft_push_str(str, matrix);
-		}
-		free(name);
-		dir_node = readdir(dir_stream);
-	}
-	closedir(dir_stream);
-	return (matrix);
-}
-
 char	**ps_analyze_string(char *str, __uint32_t i)
 {
 	char		*prev;
@@ -290,7 +178,7 @@ char	**ps_analyze_string(char *str, __uint32_t i)
 	dir = get_dir(prev);
 	prefix = get_prefix(prev);
 	suffix = get_suffix(after);
-	free(after);
+	free(after); ///  ????? am I sure??
 	free(prev);
 	matrix = get_matrix(prefix, suffix, dir);
 	if (matrix == NULL)

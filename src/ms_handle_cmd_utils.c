@@ -6,7 +6,7 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 02:15:52 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/26 21:39:10 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/10 18:31:47 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,19 +50,19 @@ static void	built_in_6_10(t_info *info, t_cmd *cmd, bi_cmd token)
 
 static int	is_built_in(char *cmd)
 {
-	if (ft_strictcmp("cd", cmd) == 0 || ft_strictcmp("CD", cmd) == 0)
+	if (ft_strictcmp("cd", cmd) == 0)
 		return(BI_CD);
-	if (ft_strictcmp("echo", cmd) == 0 || ft_strictcmp("ECHO", cmd) == 0)
+	if (ft_strictcmp("echo", cmd) == 0)
 		return(BI_ECHO);
-	if (ft_strictcmp("env", cmd) == 0 || ft_strictcmp("ENV", cmd) == 0)
+	if (ft_strictcmp("env", cmd) == 0)
 		return(BI_ENV);
-	if (ft_strictcmp("exit", cmd) == 0 || ft_strictcmp("EXIT", cmd) == 0)
+	if (ft_strictcmp("exit", cmd) == 0)
 		return(BI_EXIT);
-	if (ft_strictcmp("export", cmd) == 0 || ft_strictcmp("EXPORT", cmd) == 0)
+	if (ft_strictcmp("export", cmd) == 0)
 		return(BI_EXPORT);
-	if (ft_strictcmp("pwd", cmd) == 0 || ft_strictcmp("PWD", cmd) == 0)
+	if (ft_strictcmp("pwd", cmd) == 0)
 		return(BI_PWD);
-	if (ft_strictcmp("unset", cmd) == 0 || ft_strictcmp("UNSET", cmd) == 0)
+	if (ft_strictcmp("unset", cmd) == 0)
 		return(BI_UNSET);
 	return (BI_NULL);
 }

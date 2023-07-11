@@ -1,0 +1,1 @@
+Somenthing wrong with the cleaning of de dubplicated of '*', eg '****' to '*'.

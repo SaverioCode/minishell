@@ -6,7 +6,7 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 18:37:25 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/30 22:31:57 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/10 09:49:35 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,9 @@ char	**ps_quotes_cleaner(char **arr)
 	while (arr[i])
 	{
 		arr[i] = ps_clean_quotes(arr[i]);
+		/// se la stringa e' nulla va rimossa //
+		/// ed il contatore portato indietro di uno //
+		/// per evitare SEGFAULT //
 		i++;
 	}
 	return (arr);

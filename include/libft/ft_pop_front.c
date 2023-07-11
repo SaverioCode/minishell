@@ -1,44 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_append_arr.c                                    :+:      :+:    :+:   */
+/*   ft_pop_front.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/30 18:48:00 by sav               #+#    #+#             */
-/*   Updated: 2023/07/10 20:39:57 by sav              ###   ########.fr       */
+/*   Created: 2023/06/30 19:04:28 by sav               #+#    #+#             */
+/*   Updated: 2023/07/10 20:19:01 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	**ft_append_arr(char **arr1, char **arr2)
+char **ft_pop_front(char **arr)
 {
 	char		**new;
 	__uint32_t	i;
-	__uint32_t	j;
+	__uint32_t	len;
 
-	if (arr1 == NULL && arr2 == NULL)
+	if (arr == NULL)
+	{
 		return (NULL);
-	if (arr1 == NULL)
-		return (arr2);
-	if (arr2 == NULL)
-		return (arr1);
-	new = ft_calloc(ft_biarrlen(arr1) + ft_biarrlen(arr2) + 1, sizeof(char *));
+	}
+	len = ft_biarrlen(arr);
+	if (len == 1)
+	{
+		// free(arr[0]);
+		free(arr);
+		return (NULL);
+	}
+	new = ft_calloc(len, sizeof(char *));
 	i = 0;
-	while (arr1 && arr1[i])
+	while (arr[i + 1])
 	{
-		new[i] = arr1[i];
+		new[i] = arr[i + 1];
 		i++;
 	}
-	j = 0;
-	while (arr2 && arr2[j])
-	{
-		new[i] = arr2[j];
-		j++;
-		i++;
-	}
-	free(arr1);
-	free(arr2);
+	// free(arr[0]);
+	free(arr);
 	return (new);
 }

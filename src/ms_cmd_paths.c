@@ -6,7 +6,7 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 12:05:48 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/24 10:16:24 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/10 20:54:28 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,10 @@ void	ms_format_cmd(t_cmd *cmd, t_info *info)
 	{
 		cmd_without_path = get_cmd_from_path(cmd);
 		cmd->args = ft_push_str(cmd_without_path, cmd->args);
-		free(cmd_without_path);
 	}
 	else
 	{
-		cmd->args = ft_push_str(cmd->cmd, cmd->args);
+		cmd->args = ft_push_str(ft_strcpy(cmd->cmd), cmd->args);
 		cmd->cmd = get_cmd_path(info, cmd->cmd);
 	}
 }
