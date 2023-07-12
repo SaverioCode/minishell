@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_wildcard_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 00:54:44 by sav               #+#    #+#             */
-/*   Updated: 2023/07/12 04:38:18 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/12 11:38:44 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static char	*get_after(char *str, __uint32_t i)
 	{
 		return (NULL);
 	}
-	after = ft_getstr_from_to(str, j, ft_strlen(str));
+	after = ft_getstr_from_to(str, j, ft_strlen(str) - 1);
 	/// cleaning duplicate cause SEGFAULT ///
 	after = clean_wc_duplicate(after);
 	after = ps_clean_quotes(after);
