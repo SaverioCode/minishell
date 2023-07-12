@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_expander.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 02:53:39 by sav               #+#    #+#             */
-/*   Updated: 2023/07/10 20:49:04 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/12 04:37:50 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,7 @@ static char	**expansion(char *str, t_info *info)
 		}
 		i++;
 	}
-	// printf("EXP0|%s|\n", str);////////////////////// 
-	// // arr = ps_wildcard(str);
-	// printf("EXP1|%s|\n", arr[0]);/////////////////// 
-	arr = NULL;
-	arr = ft_push_str(str, arr);
+	arr = ps_wildcard(str);
 	arr = ps_quotes_cleaner(arr);
 	return (arr);
 }

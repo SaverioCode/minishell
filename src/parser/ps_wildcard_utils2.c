@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_wildcard_utils2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 01:42:54 by sav               #+#    #+#             */
-/*   Updated: 2023/07/09 23:58:19 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/12 04:22:11 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,28 +88,19 @@ static __int8_t	check_name(char *name, char *prefix, char *suffix)
 static char	*get_wildcard_value(char *str, char *prefix, char *suffix)
 {
 	char		*new;
-	__int32_t	start;
-	__int32_t	end;
+	__int32_t	len;
+	__int32_t	len_prefix;
+	__int32_t	len_suffix;
 
-	start = ft_strlen(prefix) - 1;
-	if (start == -1)
-	{
-		start = 0;
-	}
-	if (ft_strlen(suffix) == 0)
-	{
-		end = ft_strlen(str) - 1;
-	}
-	else
-	{
-		end = ft_strlen(str) - ft_strlen(suffix) - 1;
-	}
-	new = ft_calloc(start + end + 1, sizeof(char));
-	new = ft_getstr_from_to(str, start, end);
+	len_prefix =  ft_strlen(prefix);
+	len_suffix = ft_strlen(suffix);
+	len = ft_strlen(str) - len_prefix - len_suffix;
+	new = ft_calloc(len + 1, sizeof(char));
+	new = ft_getstr_from_to(str, len_prefix, len);
 	return (new);
 }
 
-char	**get_matrix(char *prefix, char *suffix, char *dir)
+char	**ps_get_matrix(t_wildcard *info)
 {
 	DIR				*dir_stream;
 	struct dirent	*dir_node;
@@ -117,20 +108,22 @@ char	**get_matrix(char *prefix, char *suffix, char *dir)
 	char			**matrix;
 
 	matrix = NULL;
-	dir_stream = opendir(dir);
+
+	dir_stream = opendir(info->dir);
 	dir_node = readdir(dir_stream);
 	while (dir_node)
 	{
-		if (check_name(dir_node->d_name, prefix, suffix) == 0)
+		if (check_name(dir_node->d_name, info->prefix, info->suffix) == 0)
 		{
-			name = get_wildcard_value(dir_node->d_name, prefix, suffix);
-			printf("GETM|%s|\n", name);//////
+			name = get_wildcard_value(dir_node->d_name, info->prefix, info->suffix);
+			name = ft_strjoin(info->prev, name, 0, 0);
+			name = ft_strjoin(name, info->after, 0, 0);
 			matrix = ft_append_str(matrix, name);
 		}
 		dir_node = readdir(dir_stream);
 	}
-	write(1, "END\n", 4);/////////////////////////
-	/// I need to alphabeticaly order the array ///
+	/// I need to alphabeticaly order the array   ///
+	/// this problem seems not to occure on MacOS ///
 	closedir(dir_stream);
 	return (matrix);
 }

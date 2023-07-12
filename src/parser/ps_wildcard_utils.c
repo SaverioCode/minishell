@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_wildcard_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 00:54:44 by sav               #+#    #+#             */
-/*   Updated: 2023/07/10 00:07:02 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/12 04:38:18 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,29 +162,25 @@ static char	*get_suffix(char *str)
 
 char	**ps_analyze_string(char *str, __uint32_t i)
 {
-	char		*prev;
-	char		*after;
-	char		*dir;
-	char		*prefix;
-	char		*suffix;
+	t_wildcard	*info;
 	char		**matrix;
 
 	if (str == NULL)
 	{
 		return (NULL);
 	}
-	prev = get_prev(str, i);
-	after = get_after(str, i);
-	dir = get_dir(prev);
-	prefix = get_prefix(prev);
-	suffix = get_suffix(after);
-	free(after); ///  ????? am I sure??
-	free(prev);
-	matrix = get_matrix(prefix, suffix, dir);
-	if (matrix == NULL)
-	{
-		matrix = ft_push_str(str, matrix);
-		return (matrix);
-	}
+	info = ft_calloc(1, sizeof(t_wildcard));
+	info->prev = get_prev(str, i);
+	info->after = get_after(str, i);
+	info->dir = get_dir(info->prev);
+	info->prefix = get_prefix(info->prev);
+	info->suffix = get_suffix(info->after);
+	matrix = ps_get_matrix(info);
+	free(info->after);
+	free(info->prev);
+	free(info->dir);
+	free(info->prefix);
+	free(info->suffix);
+	free(info);
 	return (matrix);
 }

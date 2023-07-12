@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 07:28:05 by sav               #+#    #+#             */
-/*   Updated: 2023/07/10 07:36:05 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/12 01:26:03 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,14 @@
 
 typedef struct s_node t_node;
 typedef struct s_info t_info;
+
+typedef struct s_wildcard {
+	char	*prev;
+	char	*after;
+	char	*dir;
+	char	*prefix;
+	char	*suffix;
+}	t_wildcard;
 
 char	lx_which_token(char *str);
 void	lx_check_quotes(int *flag, char c);
@@ -30,6 +38,6 @@ char	**ps_wildcard(char *str);
 char	**ps_analyze_string(char *str, __uint32_t i);
 char	**ps_quotes_cleaner(char **arr);
 char	*ps_clean_quotes(char *str);
-char	**get_matrix(char *prefix, char *suffix, char *dir);
+char	**ps_get_matrix(t_wildcard *info);
 
 #endif

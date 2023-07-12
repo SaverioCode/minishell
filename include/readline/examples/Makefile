@@ -32,7 +32,7 @@ datadir = ${datarootdir}
 
 top_srcdir = ..
 #BUILD_DIR = .
-BUILD_DIR = /home/sav/42/minishell/include/readline
+BUILD_DIR = /Users/fgarzi-c/42/minishell2/include/readline
 installdir = $(datadir)/readline
 
 INSTALL = /usr/bin/install -c
@@ -55,7 +55,7 @@ INCLUDES = -I$(srcdir) -I$(top_srcdir) -I..
 
 CCFLAGS  = $(ASAN_CFLAGS) $(DEFS) $(LOCAL_CFLAGS) $(INCLUDES) $(CPPFLAGS) \
 	$(CFLAGS)
-LDFLAGS = -g -L..  -L./lib/termcap $(ASAN_LDFLAGS)
+LDFLAGS = -g -L..  $(ASAN_LDFLAGS)
 
 ASAN_XCFLAGS = -fsanitize=address -fno-omit-frame-pointer
 ASAN_XLDFLAGS = -fsanitize=address

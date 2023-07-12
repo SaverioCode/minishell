@@ -32,7 +32,7 @@ datarootdir = ${prefix}/share
 srcdir = .
 VPATH = ..
 topdir = ..
-BUILD_DIR = /home/sav/42/minishell/include/readline
+BUILD_DIR = /Users/fgarzi-c/42/minishell2/include/readline
 
 INSTALL = /usr/bin/install -c
 INSTALL_PROGRAM = ${INSTALL}
@@ -49,8 +49,8 @@ LN = ln
 
 SHELL = /bin/sh
 
-host_os = linux-gnu
-host_vendor = pc
+host_os = darwin18.7.0
+host_vendor = apple
 
 prefix = /usr/local
 exec_prefix = ${prefix}
@@ -66,7 +66,7 @@ DESTDIR =
 CFLAGS = -g -O2 -Wno-parentheses -Wno-format-security -Wno-tautological-constant-out-of-range-compare
 LOCAL_CFLAGS =  -DRL_LIBRARY_VERSION='"$(RL_LIBRARY_VERSION)"' -DBRACKETED_PASTE_DEFAULT=1
 CPPFLAGS = 
-LDFLAGS =  -L./lib/termcap  -g -O2 -Wno-parentheses -Wno-format-security -Wno-tautological-constant-out-of-range-compare
+LDFLAGS =   -g -O2 -Wno-parentheses -Wno-format-security -Wno-tautological-constant-out-of-range-compare
 
 DEFS = -DHAVE_CONFIG_H 
 LOCAL_DEFS = 
@@ -78,21 +78,21 @@ LOCAL_DEFS =
 # changes to bash-maintainers@gnu.org.
 #
 SHOBJ_CC = gcc
-SHOBJ_CFLAGS = -fPIC
+SHOBJ_CFLAGS = -fno-common
 SHOBJ_LD = ${CC}
 
-SHOBJ_LDFLAGS = -shared -Wl,-soname,$@
+SHOBJ_LDFLAGS = -dynamiclib -dynamic -undefined dynamic_lookup 
 SHOBJ_XLDFLAGS = 
 SHOBJ_LIBS = 
 
-SHLIB_XLDFLAGS =  -L./lib/termcap -Wl,-rpath,$(libdir) -Wl,-soname,`basename $@ $(SHLIB_MINOR)`
-SHLIB_LIBS =  
+SHLIB_XLDFLAGS =  -dynamiclib -install_name $(libdir)/`echo $@ | sed "s:\..*::"`.$(SHLIB_MAJOR).$(SHLIB_LIBSUFF) -current_version $(SHLIB_MAJOR)$(SHLIB_MINOR) -compatibility_version $(SHLIB_MAJOR)$(SHLIB_MINOR) -v
+SHLIB_LIBS = -lncurses
 
 SHLIB_DOT = .
 SHLIB_LIBPREF = lib
-SHLIB_LIBSUFF = so
+SHLIB_LIBSUFF = dylib
 
-SHLIB_LIBVERSION = $(SHLIB_LIBSUFF).$(SHLIB_MAJOR)$(SHLIB_MINOR)
+SHLIB_LIBVERSION = $(SHLIB_MAJOR)$(SHLIB_MINOR).$(SHLIB_LIBSUFF)
 SHLIB_DLLVERSION = $(SHLIB_MAJOR)
 
 SHLIB_STATUS = supported

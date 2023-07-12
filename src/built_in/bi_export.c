@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bi_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 19:13:48 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/26 23:44:08 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/12 00:52:21 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ static void	add_export_var(t_info *info, char *arg, __int8_t *status)
 	__int8_t	flag;
 
 	value = NULL;
+	name = NULL;
 	flag = 0;
 	i = ft_find_char(arg, '=');
 	if (i == -1)

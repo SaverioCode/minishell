@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_wildcard.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 20:49:07 by sav               #+#    #+#             */
-/*   Updated: 2023/07/10 09:02:30 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/12 04:42:28 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,39 +34,23 @@ char	**sub_wildcard(char *str)
 		}
 		i++;
 	}
-	// return (NULL);
-	arr = ft_push_str(str, arr);
 	return (arr);
 }
 
 char	**ps_wildcard(char *str)
 {
-	// __uint32_t		i;
 	char			**arr;
-	// char			**new_arr;
 
 	if (str == NULL)
 	{
 		return (NULL);
 	}
-	arr = sub_wildcard(str);
-	// i = 0;
+	arr = NULL;
+	arr = sub_wildcard(ft_strcpy(str));
 	if (arr == NULL)
 	{
-		return (NULL);
+		arr = ft_push_str(ft_strcpy(str), arr);
 	}
-	printf("WC0: |%s|\n", arr[0]);////////////////
-	// while (arr[i])
-	// {
-	// 	new_arr = sub_wildcard(arr[i]);
-	// 	if (new_arr == NULL)
-	// 	{
-	// 		return (arr);
-	// 		// continue ;
-	// 	}
-	// 	arr = ft_append_arr(arr, new_arr);
-	// 	arr = ft_rm_str_from_arr(arr, i);
-	// 	i++;
-	// }
+	free(str);
 	return (arr);
 }
