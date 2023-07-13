@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 07:28:05 by sav               #+#    #+#             */
-/*   Updated: 2023/07/12 01:26:03 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/13 02:13:14 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ void	ps_organize_exp(t_node *node, char *exp);
 void	ps_add_instruction(t_node *node, char *exp, int from, int *i);
 void	ps_expander(t_node *node, t_info *info);
 char	**ps_wildcard(char *str);
-char	**ps_analyze_string(char *str, __uint32_t i);
+char	**ps_analyze_string(char *str);//, __uint32_t i);
 char	**ps_quotes_cleaner(char **arr);
 char	*ps_clean_quotes(char *str);
-char	**ps_get_matrix(t_wildcard *info);
+char	**ps_get_matrix(t_wildcard *info, char *str);
 
 #endif
