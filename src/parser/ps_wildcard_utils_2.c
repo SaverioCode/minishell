@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 01:42:54 by sav               #+#    #+#             */
-/*   Updated: 2023/07/13 19:52:20 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/13 20:51:14 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static __int8_t	check_name(char *name, char *str)
 	return (0);
 }
 
-char	**ps_get_matrix(t_wildcard *info, char *str)
+char	**ps_get_matrix(char *dir, char *str)
 {
 	DIR				*dir_stream;
 	struct dirent	*dir_node;
@@ -68,7 +68,7 @@ char	**ps_get_matrix(t_wildcard *info, char *str)
 
 	matrix = NULL;
 
-	dir_stream = opendir(info->dir);
+	dir_stream = opendir(dir);
 	dir_node = readdir(dir_stream);
 	while (dir_node)
 	{

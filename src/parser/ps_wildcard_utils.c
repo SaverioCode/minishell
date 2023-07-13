@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 00:54:44 by sav               #+#    #+#             */
-/*   Updated: 2023/07/13 20:41:06 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/13 20:51:46 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,20 +84,18 @@ static char	*get_dir(char *str)
 
 char	**ps_analyze_string(char *str)
 {
-	t_wildcard	*info;
+	char 		*dir;
 	char		**matrix;
 
 	if (str == NULL)
 	{
 		return (NULL);
 	}
-	info = ft_calloc(1, sizeof(t_wildcard));
 	str = ps_clean_quotes(str);
 	str = clean_wc_duplicate(str);
-	info->dir = get_dir(NULL);
-	matrix = ps_get_matrix(info, str);
+	dir = get_dir(NULL);
+	matrix = ps_get_matrix(dir, str);
 	free(str);
-	free(info->dir);
-	free(info);
+	free(dir);
 	return (matrix);
 }
