@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 01:42:54 by sav               #+#    #+#             */
-/*   Updated: 2023/07/13 20:51:14 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/13 22:22:30 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static __int8_t	check_invalid_options(char *name, char *str)
 		return (-1);
 	len_name = ft_strlen(name) - 1;
 	len_str = ft_strlen(str) - 1;
-	if ((str[len_str] != 6) && (name[len_name] != str[len_str]))
+	if (str[len_str] != 6 && name[len_name] != str[len_str])
 		return (-1);
 	return (0);
 }
@@ -35,26 +35,25 @@ static __int8_t	check_name(char *name, char *str)
 
 	if (check_invalid_options(name, str) == -1)
 		return (-1);
-	// if (name[0] == '.' && str[0] != '.')
-	// 	return (-1);
 	if (ft_strlen(str) == 1 && str[0] == 6)
 		return (0);
 	i = 0;
 	j = 0;
-	while (name[i])
+	while (str[i])
 	{
-		if (str[j] == 6)
+		if (str[i] == 6)
 		{
-			if (str[j + 1] == 0)
+			if (str[i + 1] == 0)
 				return (0);
-			if (ft_find_char(&name[i], str[j + 1]) == -1)
+			if (ft_find_char(&name[j], str[i + 1]) == -1)
 				return (-1);
-			i += ft_find_char(&name[i], str[j + 1]);
+			j += ft_find_char(&name[j], str[i + 1]);
+			i++;
 		}
-		else if (name[i] != str[j])
+		else if (str[i] != name[j])
 			return (-1);
-		j++;
 		i++;
+		j++;
 	}
 	return (0);
 }
