@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 01:42:54 by sav               #+#    #+#             */
-/*   Updated: 2023/07/13 22:22:30 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/13 22:24:22 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ static __int8_t	check_name(char *name, char *str)
 		return (-1);
 	if (ft_strlen(str) == 1 && str[0] == 6)
 		return (0);
-	i = 0;
+	i = -1;
 	j = 0;
-	while (str[i])
+	while (str[++i])
 	{
 		if (str[i] == 6)
 		{
@@ -52,7 +52,6 @@ static __int8_t	check_name(char *name, char *str)
 		}
 		else if (str[i] != name[j])
 			return (-1);
-		i++;
 		j++;
 	}
 	return (0);
@@ -66,7 +65,6 @@ char	**ps_get_matrix(char *dir, char *str)
 	char			**matrix;
 
 	matrix = NULL;
-
 	dir_stream = opendir(dir);
 	dir_node = readdir(dir_stream);
 	while (dir_node)
@@ -78,8 +76,6 @@ char	**ps_get_matrix(char *dir, char *str)
 		}
 		dir_node = readdir(dir_stream);
 	}
-	/// I need to alphabeticaly order the array   ///
-	/// this problem seems not to occure on MacOS ///
 	closedir(dir_stream);
 	return (matrix);
 }

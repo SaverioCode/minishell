@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 00:54:44 by sav               #+#    #+#             */
-/*   Updated: 2023/07/13 20:51:46 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/13 22:24:47 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static char	*get_dir(char *str)
 
 char	**ps_analyze_string(char *str)
 {
-	char 		*dir;
+	char		*dir;
 	char		**matrix;
 
 	if (str == NULL)
