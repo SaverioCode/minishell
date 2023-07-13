@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 00:54:44 by sav               #+#    #+#             */
-/*   Updated: 2023/07/13 20:14:20 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/13 20:41:06 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ char	**ps_analyze_string(char *str)
 	str = clean_wc_duplicate(str);
 	info->dir = get_dir(NULL);
 	matrix = ps_get_matrix(info, str);
+	free(str);
 	free(info->dir);
 	free(info);
 	return (matrix);

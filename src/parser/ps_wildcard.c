@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 20:49:07 by sav               #+#    #+#             */
-/*   Updated: 2023/07/13 18:28:32 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/13 20:47:28 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,10 @@ char	**ps_wildcard(char *str)
 	if (arr == NULL)
 	{
 		arr = ft_append_str(arr, str);
+	}
+	else
+	{
+		free(str);
 	}
 	return (arr);
 }
