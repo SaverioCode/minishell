@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 07:32:30 by sav               #+#    #+#             */
-/*   Updated: 2023/07/10 07:34:09 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/13 18:35:23 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 # include "./libft/libft.h"
 
-typedef struct s_node t_node;
-typedef struct s_env t_env;
-typedef struct s_info t_info;
+typedef struct s_node	t_node;
+typedef struct s_env	t_env;
+typedef struct s_info	t_info;
 
 typedef enum e_cmd
 {
@@ -29,7 +29,7 @@ typedef enum e_cmd
 	BI_EXPORT,
 	BI_PWD,
 	BI_UNSET
-} bi_cmd;
+}	t_bi_cmd;
 
 int			bi_cd(t_info *info, char **args);
 __int8_t	bi_echo(char **args);

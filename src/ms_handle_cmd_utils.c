@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ms_handle_cmd_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 02:15:52 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/07/10 18:31:47 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/13 18:51:49 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	built_in_1_5(t_info *info, t_cmd *cmd, bi_cmd token)
+static void	built_in_1_5(t_info *info, t_cmd *cmd, t_bi_cmd token)
 {
 	if (token == BI_CD)
 	{
@@ -36,7 +36,7 @@ static void	built_in_1_5(t_info *info, t_cmd *cmd, bi_cmd token)
 	}
 }
 
-static void	built_in_6_10(t_info *info, t_cmd *cmd, bi_cmd token)
+static void	built_in_6_10(t_info *info, t_cmd *cmd, t_bi_cmd token)
 {
 	if (token == BI_PWD)
 	{
@@ -51,23 +51,23 @@ static void	built_in_6_10(t_info *info, t_cmd *cmd, bi_cmd token)
 static int	is_built_in(char *cmd)
 {
 	if (ft_strictcmp("cd", cmd) == 0)
-		return(BI_CD);
+		return (BI_CD);
 	if (ft_strictcmp("echo", cmd) == 0)
-		return(BI_ECHO);
+		return (BI_ECHO);
 	if (ft_strictcmp("env", cmd) == 0)
-		return(BI_ENV);
+		return (BI_ENV);
 	if (ft_strictcmp("exit", cmd) == 0)
-		return(BI_EXIT);
+		return (BI_EXIT);
 	if (ft_strictcmp("export", cmd) == 0)
-		return(BI_EXPORT);
+		return (BI_EXPORT);
 	if (ft_strictcmp("pwd", cmd) == 0)
-		return(BI_PWD);
+		return (BI_PWD);
 	if (ft_strictcmp("unset", cmd) == 0)
-		return(BI_UNSET);
+		return (BI_UNSET);
 	return (BI_NULL);
 }
 
-static void	execute_built_in(t_info *info, t_node *node, bi_cmd token)
+static void	execute_built_in(t_info *info, t_node *node, t_bi_cmd token)
 {
 	if (node->token == PIPE)
 	{
@@ -95,7 +95,7 @@ static void	execute_built_in(t_info *info, t_node *node, bi_cmd token)
 
 int	ms_cmd_built_in(t_info *info, t_node *node)
 {
-	bi_cmd	token;
+	t_bi_cmd	token;
 
 	token = is_built_in(node->cmd->cmd);
 	if (token == 0)

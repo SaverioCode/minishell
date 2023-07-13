@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_quotes_cleaner.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 18:37:25 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/07/10 09:49:35 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/13 19:02:21 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,7 @@ char	*ps_clean_quotes(char *str)
 	flag = 0;
 	len = count_quotes(str);
 	if (!len)
-	{
 		return (str);
-	}
 	new_str = ft_calloc(1, ft_strlen(str) - len + 1);
 	i = 0;
 	j = 0;
@@ -101,9 +99,6 @@ char	**ps_quotes_cleaner(char **arr)
 	while (arr[i])
 	{
 		arr[i] = ps_clean_quotes(arr[i]);
-		/// se la stringa e' nulla va rimossa //
-		/// ed il contatore portato indietro di uno //
-		/// per evitare SEGFAULT //
 		i++;
 	}
 	return (arr);

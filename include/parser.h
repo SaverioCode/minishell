@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 07:28:05 by sav               #+#    #+#             */
-/*   Updated: 2023/07/13 02:13:14 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/13 18:34:31 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include "./libft/libft.h"
 
-typedef struct s_node t_node;
-typedef struct s_info t_info;
+typedef struct s_node	t_node;
+typedef struct s_info	t_info;
 
 typedef struct s_wildcard {
 	char	*prev;

@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 00:08:10 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/23 15:12:11 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/13 18:51:15 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,7 @@ void	ms_set_env(t_info *info, char **env)
 	node = NULL;
 	info->env = node;
 	if (env == NULL)
-	{
 		return ;
-	}
 	i = 0;
 	while (env[i])
 	{
@@ -109,5 +107,3 @@ void	ms_set_env(t_info *info, char **env)
 		i++;
 	}
 }
-
-

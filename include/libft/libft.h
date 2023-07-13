@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:29:03 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/07/10 18:46:21 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/13 18:43:02 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ int		ft_isalpha(char c);
 int		ft_isdigit(char c);
 int		ft_str_isdigit(char *str);
 char	**ft_append_arr(char **arr1, char **arr2);
-char 	**ft_pop_front(char **arr);
-char	**ft_insert_arr(char **arr1, __int32_t i, char **arr2);
 void	ft_free_arr(char **arr);
 
 #endif

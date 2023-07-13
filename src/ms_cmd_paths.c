@@ -3,14 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ms_cmd_paths.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 12:05:48 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/07/10 20:54:28 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/13 19:31:10 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static char	*get_string(char *paths, char *cmd, int start, int end)
+{
+	char	*str;
+
+	str = ft_getstr_from_to(paths, start, end);
+	str = ft_strjoin(str, "/", 1, 0);
+	str = ft_strjoin(str, cmd, 1, 0);
+	return (str);
+}
+
+static int	check_acces(char *str, char *cmd, char *paths)
+{
+	if (access(str, X_OK) == 0)
+	{
+		free(cmd);
+		free(paths);
+		return (0);
+	}
+	return (-1);
+}
 
 static char	*get_cmd_path(t_info *info, char *cmd)
 {
@@ -28,23 +49,15 @@ static char	*get_cmd_path(t_info *info, char *cmd)
 	{
 		if (paths[i] == ':')
 		{
-			str = ft_getstr_from_to(paths, start, i - 1);
-			str = ft_strjoin(str, "/", 1, 0);
-			str = ft_strjoin(str, cmd, 1, 0);
-			if (access(str, X_OK) == 0)
-			{
-				free(cmd);
-				free(paths);
+			str = get_string(paths, cmd, start, i - 1);
+			if (check_acces(str, cmd, paths) == 0)
 				return (str);
-			}
 			free(str);
 			start = i + 1;
 		}
 		i++;
 	}
-	str = ft_getstr_from_to(paths, start, i - 1);
-	str = ft_strjoin(str, "/", 1, 0);
-	str = ft_strjoin(str, cmd, 1, 1);
+	str = get_string(paths, cmd, start, i - 1);
 	free(paths);
 	return (str);
 }

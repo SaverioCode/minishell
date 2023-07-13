@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_append_arr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 18:48:00 by sav               #+#    #+#             */
-/*   Updated: 2023/07/10 20:39:57 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/13 18:38:13 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,10 @@ char	**ft_append_arr(char **arr1, char **arr2)
 		new[i] = arr1[i];
 		i++;
 	}
-	j = 0;
+	j = -1;
 	while (arr2 && arr2[j])
 	{
-		new[i] = arr2[j];
-		j++;
-		i++;
+		new[i++] = arr2[++j];
 	}
 	free(arr1);
 	free(arr2);
