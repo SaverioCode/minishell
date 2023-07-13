@@ -1,38 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   ps_parser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/25 19:21:44 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/13 22:40:18 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static char	get_token(char *input)
-{
-	if (input[0] == '&' && input[1] == '&')
-	{
-		input[0] = 32;
-		input[1] = 32;
-		return (AND);
-	}
-	else if (input[0] == '|' && input[1] == '|')
-	{
-		input[0] = 32;
-		input[1] = 32;
-		return (OR);
-	}
-	else if (input[0] == '|')
-	{
-		input[0] = 32;
-		return (PIPE);
-	}
-	return (0);
-}
 
 static t_node	*create_subshell(t_node *node)
 {
@@ -73,6 +51,31 @@ static t_node	*get_last_node(t_node *node)
 	return (node);
 }
 
+static t_node	*parser_logic(t_node *node, char *input, int i, int *from)
+{
+	if (input[i] == '(')
+	{
+		input[i] = 32;
+		node = create_new_node(node, "  ");
+		node = create_subshell(node);
+	}
+	else if (input[i] == ')')
+	{
+		input[i] = 32;
+		ps_organize_exp(node, ft_getstr_from_to(input, *from, i));
+		node = get_last_node(node);
+		*from = i + 1;
+	}
+	else if (input[i] == '&' || input[i] == '|' || input[i + 1] == 0)
+	{	
+		node->token = ps_get_token(&input[i]);
+		ps_organize_exp(node, ft_getstr_from_to(input, *from, i));
+		node = create_new_node(node, &input[i]);
+		*from = i + 1;
+	}
+	return (node);
+}
+
 void	ps_parser(t_node *node, char *input)
 {
 	int	flag[2];
@@ -87,26 +90,7 @@ void	ps_parser(t_node *node, char *input)
 		lx_check_quotes(flag, input[i]);
 		if (!flag[0])
 		{
-			if (input[i] == '(')
-			{
-				input[i] = 32;
-				node = create_new_node(node, "  ");
-				node = create_subshell(node);
-			}
-			else if (input[i] == ')')
-			{
-				input[i] = 32;
-				ps_organize_exp(node, ft_getstr_from_to(input, from, i));
-				node = get_last_node(node);
-				from = i + 1;
-			}
-			else if (input[i] == '&' || input[i] == '|' || input[i + 1] == 0)
-			{	
-				node->token = get_token(&input[i]);
-				ps_organize_exp(node, ft_getstr_from_to(input, from, i));
-				node = create_new_node(node, &input[i]);
-				from = i + 1;
-			}
+			node = parser_logic(node, input, i, &from);
 		}
 		i++;
 	}

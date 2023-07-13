@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/07/10 10:06:22 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/13 22:39:51 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	ms_init_tcmd(t_cmd *node);
 void	ms_get_prompt_str(t_info *info);
 void	ms_init_tinfo(t_info *info, char **env);
 void	ms_free(t_node *node, t_info *info);
+void	ms_free_info(t_info *info);
 void	ms_check_input(int ac, char **av);
 void	ms_init_shell(void);
 void	ms_set_termios(void);

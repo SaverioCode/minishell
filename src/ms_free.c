@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 18:12:09 by sav               #+#    #+#             */
-/*   Updated: 2023/06/25 18:18:44 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/13 22:40:55 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,39 +73,6 @@ static void	free_tnode(t_node *node)
 	}
 }
 
-static void	free_env(t_env *node)
-{
-	t_env	*tmp;
-
-	while (node)
-	{
-		free(node->name);
-		free(node->value);
-		tmp = node;
-		node = node->next;
-		free(tmp);
-	}
-}
-
-static void	free_info(t_info *info)
-{
-	if (info->env)
-	{
-		free_env(info->env);
-	}
-	if (info->input)
-	{
-		free(info->input);
-	}
-	if (info->prompt)
-	{
-		free(info->prompt);
-	}
-	close(info->stdin_clone);
-	close(info->stdout_clone);
-	free(info);
-}
-
 void	ms_free(t_node *node, t_info *info)
 {
 	if (node)
@@ -114,6 +81,6 @@ void	ms_free(t_node *node, t_info *info)
 	}
 	if (info)
 	{
-		free_info(info);
+		ms_free_info(info);
 	}
 }

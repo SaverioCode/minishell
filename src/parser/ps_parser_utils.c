@@ -1,46 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_free_2.c                                        :+:      :+:    :+:   */
+/*   ps_parser_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/24 09:43:41 by sav               #+#    #+#             */
-/*   Updated: 2023/07/13 22:41:00 by fgarzi-c         ###   ########.fr       */
+/*   Created: 2023/07/13 22:26:13 by fgarzi-c          #+#    #+#             */
+/*   Updated: 2023/07/13 22:33:30 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	free_env(t_env *node)
+char	ps_get_token(char *input)
 {
-	t_env	*tmp;
-
-	while (node)
+	if (input[0] == '&' && input[1] == '&')
 	{
-		free(node->name);
-		free(node->value);
-		tmp = node;
-		node = node->next;
-		free(tmp);
+		input[0] = 32;
+		input[1] = 32;
+		return (AND);
 	}
-}
-
-void	ms_free_info(t_info *info)
-{
-	if (info->env)
+	else if (input[0] == '|' && input[1] == '|')
 	{
-		free_env(info->env);
+		input[0] = 32;
+		input[1] = 32;
+		return (OR);
 	}
-	if (info->input)
+	else if (input[0] == '|')
 	{
-		free(info->input);
+		input[0] = 32;
+		return (PIPE);
 	}
-	if (info->prompt)
-	{
-		free(info->prompt);
-	}
-	close(info->stdin_clone);
-	close(info->stdout_clone);
-	free(info);
+	return (0);
 }
