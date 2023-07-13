@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 20:49:07 by sav               #+#    #+#             */
-/*   Updated: 2023/07/13 20:47:28 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/13 20:48:45 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,7 @@ char	**ps_wildcard(char *str)
 	char	**arr;
 
 	if (str == NULL)
-	{
 		return (NULL);
-	}
 	arr = NULL;
 	converted = convert_wildcard(ft_strcpy(str));
 	if (ft_find_char(converted, 6) != -1)
