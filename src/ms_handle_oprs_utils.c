@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 19:44:14 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/07/14 20:09:42 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/14 20:11:35 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,13 @@ int	ms_output_redir(t_opr *opr, t_fd *fd_node)
 {
 	if (opr->token == OUT)
 	{
-		fd_node->file_fd = open(opr->path, O_RDWR | O_CREAT | O_TRUNC | O_CLOEXEC, 00644);
+		fd_node->file_fd = open(opr->path, \
+			O_RDWR | O_CREAT | O_TRUNC | O_CLOEXEC, 00644);
 	}
 	else if (opr->token == APP)
 	{
-		fd_node->file_fd = open(opr->path, O_RDWR | O_CREAT | O_APPEND | O_CLOEXEC, 00644);
+		fd_node->file_fd = open(opr->path, \
+			O_RDWR | O_CREAT | O_APPEND | O_CLOEXEC, 00644);
 	}
 	if (fd_node->file_fd == -1)
 	{

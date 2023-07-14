@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 20:52:41 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/07/14 19:46:47 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/14 20:12:10 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,16 +91,12 @@ int	ms_handle_oprs(t_info *info, t_opr *opr, t_fd *fd_node)
 		if (opr->token == OUT || opr->token == APP)
 		{
 			if (ms_output_redir(opr, fd_node) == 1)
-			{
 				return (1);
-			}
 		}
 		else if (opr->token == INP || opr->token == HDOC)
 		{
 			if (ms_input_redir(info, opr, fd_node) == 1)
-			{
 				return (1);
-			}
 		}
 		opr = opr->next;
 	}
