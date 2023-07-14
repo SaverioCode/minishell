@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/07/13 22:39:51 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/14 20:00:39 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ char	*ms_get_env_value(t_info *info, char *name);
 void	ms_execute_tree(t_node *node, t_info *info);
 void	ms_waitpid(pid_t pid, t_info *info);
 int		ms_handle_oprs(t_info *info, t_opr *opr, t_fd *fd_node);
+int		ms_input_redir(t_info *info, t_opr *opr, t_fd *fd_node);
+int		ms_output_redir(t_opr *opr, t_fd *fd_node);
 void	ms_handle_cmd(t_node *node, t_info *info);
 void	ms_format_cmd(t_cmd *cmd, t_info *info);
 int		ms_cmd_built_in(t_info *info, t_node *node);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexical_utils.c                                    :+:      :+:    :+:   */
+/*   ps_lexical_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 04:17:47 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/05 16:12:17 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/14 19:43:12 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,10 @@ int	lx_token_check(int *token, char new_token, int *brkts)
 	{
 		token[1] = token[0];
 		token[0] = new_token;
+	}
+	if (status == -1)
+	{
+		write(2, "error lexical.\n", 14);
 	}
 	return (status);
 }

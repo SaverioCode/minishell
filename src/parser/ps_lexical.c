@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 01:47:49 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/07/13 19:05:52 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/14 19:43:20 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,16 @@ static void	reset_params(int *token, int *flag, int *brkts, size_t *i)
 	flag[0] = 0;
 	flag[1] = 0;
 	*brkts = 0;
-	*i = -1;
+	*i = 0;
 }
 
 static int	lx_exit_status(int *flag, int brkts, char token)
 {
 	if (flag[0] || brkts)
+	{
+		// write(2, "Error: unclosed brackest or quotes.\n", 36);
 		return (1);
+	}
 	if (token == INP || token == HDOC || token == OUT || token == APP)
 		return (-1);
 	token = CHAR;
@@ -87,7 +90,7 @@ int	lexical_check(char *input, int reset)
 
 	if (!reset)
 		reset_params(tk, flag, &brkts, &i);
-	while (input[++i])
+	while (input[i])
 	{
 		lx_check_quotes(flag, input[i]);
 		if (!flag[0] && ft_isprint(input[i]))
@@ -95,13 +98,11 @@ int	lexical_check(char *input, int reset)
 			i = check_if_fd(input, i);
 			new_token = lx_which_token(&input[i]);
 			if (lx_token_check(tk, new_token, &brkts) == -1)
-			{
-				write(2, "error lexical.\n", 14);
 				return (-1);
-			}
 			if (tk[0] == AND || tk[0] == OR || tk[0] == HDOC || tk[0] == APP)
 				i++;
 		}
+		i++;
 	}
 	return (lx_exit_status(flag, brkts, tk[0]));
 }
