@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 18:48:00 by sav               #+#    #+#             */
-/*   Updated: 2023/07/13 18:38:13 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/14 19:25:13 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ char	**ft_append_arr(char **arr1, char **arr2)
 		i++;
 	}
 	j = -1;
-	while (arr2 && arr2[j])
+	while (arr2 && arr2[++j])
 	{
-		new[i++] = arr2[++j];
+		new[i++] = arr2[j];
 	}
 	free(arr1);
 	free(arr2);
