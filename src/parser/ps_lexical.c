@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 01:47:49 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/07/14 19:43:20 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/14 22:49:10 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ static int	lx_exit_status(int *flag, int brkts, char token)
 {
 	if (flag[0] || brkts)
 	{
-		// write(2, "Error: unclosed brackest or quotes.\n", 36);
 		return (1);
 	}
 	if (token == INP || token == HDOC || token == OUT || token == APP)

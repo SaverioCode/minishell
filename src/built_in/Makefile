@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sav <sav@student.42.fr>                    +#+  +:+       +#+         #
+#    By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/20 22:49:33 by fgarzi-c          #+#    #+#              #
-#    Updated: 2023/06/26 21:39:50 by sav              ###   ########.fr        #
+#    Updated: 2023/07/14 20:22:12 by fgarzi-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = built_in.a
 SRCS = bi_pwd.c bi_cd.c bi_exit.c bi_env.c bi_unset.c bi_echo.c \
-	bi_export.c
+	bi_export.c bi_export_utils.c
 OBJS = $(SRCS:.c=.o)
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I ../../include

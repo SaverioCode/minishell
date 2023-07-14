@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 04:17:47 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/07/14 19:43:12 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/14 22:50:51 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,7 @@ static int	token_check_second(char new, char old_1, char old_2, int *brkts)
 		(*brkts)++;
 		if (old_1 == CHAR)
 		{
-			if (old_2 == INP || old_2 == HDOC || old_2 == OUT || old_2 == APP)
-			{
-				return (-1);
-			}
-			return (0);
+			return (-1);
 		}
 		if (old_1 == AND || old_1 == OR || old_1 == PIPE)
 		{
@@ -115,10 +111,6 @@ int	lx_token_check(int *token, char new_token, int *brkts)
 	{
 		token[1] = token[0];
 		token[0] = new_token;
-	}
-	if (status == -1)
-	{
-		write(2, "error lexical.\n", 14);
 	}
 	return (status);
 }

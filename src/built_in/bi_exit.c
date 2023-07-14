@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bi_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 00:44:41 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/24 12:13:18 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/14 20:36:43 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,15 @@ static void	free_childs(t_child *node)
 	}
 }
 
+static __int32_t	get_status(char *num)
+{
+	__int32_t	status;
+
+	status = ft_atoi(num);
+	status = status % 256;
+	return (status);
+}
+
 int	bi_exit(t_info *info, char **args)
 {
 	int	status;
@@ -39,13 +48,13 @@ int	bi_exit(t_info *info, char **args)
 	{
 		if (ft_str_isdigit(args[0]))
 		{
-			status = ft_atoi(args[0]);
+			status = get_status(args[0]);
 			exit(status);
 		}
 		write(1, "Error: argument has to be a number.\n", 36);
 		return (1);
 	}
-	status = info->status;
+	status = info->status % 256;
 	rl_clear_history();
 	free_childs(info->child);
 	ms_restore_fd(info);
