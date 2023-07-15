@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 19:44:14 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/07/14 20:11:35 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/15 22:07:53 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static char	*here_doc_logic(t_opr *opr)
 	}
 }
 
-int	here_document(t_opr *opr, t_fd *fd_node)
+void	here_document(t_opr *opr, t_fd *fd_node)
 {
 	char	*str;
 	int		fd[2];
@@ -54,17 +54,13 @@ int	here_document(t_opr *opr, t_fd *fd_node)
 	close(fd[1]);
 	close(fd[0]);
 	free(str);
-	return (0);
 }
 
 int	ms_input_redir(t_info *info, t_opr *opr, t_fd *fd_node)
 {
 	if (opr->token == HDOC)
 	{
-		if (here_document(opr, fd_node) == 1)
-		{
-			return (1);
-		}
+		here_document(opr, fd_node);
 	}
 	else if (access(opr->path, F_OK) == -1)
 	{
@@ -74,7 +70,7 @@ int	ms_input_redir(t_info *info, t_opr *opr, t_fd *fd_node)
 	}
 	else if (opr->token == INP)
 	{
-		fd_node->file_fd = open(opr->path, O_RDONLY);
+		fd_node->file_fd = open(opr->path, O_RDONLY | O_CLOEXEC, 00644);
 		if (fd_node->file_fd == -1)
 		{
 			return (1);

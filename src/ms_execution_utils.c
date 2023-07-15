@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_execution_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 06:18:35 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/24 21:23:37 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/15 22:38:40 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ int	ms_check_fd_lis(t_fd *fd_lis, int fd)
 	{
 		if (fd_lis->fd == fd)
 		{
-			return (-1);
+			return (0);
 		}
 		fd_lis = fd_lis->next;
 	}
-	return (0);
+	return (-1);
 }
 
 void	ms_init_pipe(char token, t_info *info)
@@ -44,7 +44,7 @@ void	ms_init_pipe_child(t_node *node, t_info *info)
 	if (node->token == PIPE)
 	{
 		close(info->fd[0]);
-		if (ms_check_fd_lis(info->fd_lis, 1) == -1)
+		if (ms_check_fd_lis(info->fd_lis, 1) == 0)
 		{
 			close(info->fd[1]);
 			return ;

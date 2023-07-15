@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 02:15:52 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/07/13 18:51:49 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/15 20:29:15 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void	execute_built_in(t_info *info, t_node *node, t_bi_cmd token)
 {
 	if (node->token == PIPE)
 	{
-		if (ms_check_fd_lis(info->fd_lis, 1) == -1)
+		if (ms_check_fd_lis(info->fd_lis, 1) == 0)
 		{
 			close(info->fd[1]);
 			return ;
