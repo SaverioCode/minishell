@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_execution.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:15:31 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/25 18:18:17 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/15 20:06:48 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	ms_check_status(t_info *info)
 			return (0);
 		}
 	}
-	else if (info->status == 1)
+	else if (info->status > 0)
 	{
 		if (info->token == OR || info->token == PIPE)
 		{

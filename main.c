@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:46 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/24 09:33:06 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/15 20:00:44 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,12 @@ int	main(int ac, char **av, char **env)
 
 	ms_check_input(ac, av);
 	ms_set_termios();
-	info = NULL;
 	info = ft_calloc(1, sizeof(t_info));
 	ms_init_tinfo(info, env);
 	ms_get_prompt_str(info);
 	ms_print_header();
 	while (1)
 	{ 
-		root = NULL;
 		root = ft_calloc(1, sizeof(t_node));
 		ms_init_tnode(root);
 		info->root = root;

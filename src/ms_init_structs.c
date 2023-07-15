@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_init_structs.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 08:12:12 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/24 21:00:59 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/15 20:01:30 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	ms_init_tinfo(t_info *info, char **env)
 	info->stdout_clone = 0;
 	info->stdout_clone = dup(1);
 	info->status = 0;
+	// info->exit_status = 0;
 	info->prompt = NULL;
 	info->pipe = 0;
 	info->subshl = 0;
