@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 00:44:41 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/07/14 20:36:43 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/15 23:21:09 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	bi_exit(t_info *info, char **args)
 		write(1, "Error: argument has to be a number.\n", 36);
 		return (1);
 	}
-	status = info->status % 256;
+	status = info->exit_status % 256;
 	rl_clear_history();
 	free_childs(info->child);
 	ms_restore_fd(info);

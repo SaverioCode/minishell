@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 02:15:52 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/07/15 20:29:15 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/15 23:22:57 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,6 @@ int	ms_cmd_built_in(t_info *info, t_node *node)
 		return (-1);
 	}
 	execute_built_in(info, node, token);
+	info->exit_status = info->status;
 	return (0);
 }

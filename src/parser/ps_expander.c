@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 02:53:39 by sav               #+#    #+#             */
-/*   Updated: 2023/07/15 19:49:24 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/15 23:33:36 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,19 @@ static char	*dollar_sub(char *str, int i, t_info *info)
 	int		from;
 
 	from = i;
-	i += 1;
-	while (str[i])
+	while (str[++i])
 	{
 		if (!ft_isalpha(str[i]) && !ft_isdigit(str[i]))
-		{
 			break ;
-		}
-		i++;
 	}
 	var = ft_getstr_from_to(str, from + 1, i - 1);
-	old = ft_getstr_from_to(str, 0, from - 1);
 	value = ms_get_env_value(info, var);
+	if (str[i] == '?' && !ft_isalpha(str[i + 1]) && !ft_isdigit(str[i + 1]))
+	{
+		value = ft_itoa(info->exit_status);
+		i++;
+	}
+	old = ft_getstr_from_to(str, 0, from - 1);
 	new = ft_strjoin(old, value, 1, 1);
 	new = ft_strjoin(new, &str[i], 1, 0);
 	free(str);

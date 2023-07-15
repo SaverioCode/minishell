@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:22:14 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/01 17:24:22 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/15 23:34:43 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ char	*ft_itoa(long num)
 	int		strlen;
 	char	*strnum;
 
-	if (!num || num < INT_MIN || num > INT_MAX)
+	if (num < INT_MIN || num > INT_MAX)
 		return (NULL);
 	if (num == 0)
 	{
-		strnum = ft_calloc(1, 1);
-		strnum[0] = 48;
+		strnum = ft_calloc(2, sizeof(char));
+		strnum[0] = '0';
 		return (strnum);
 	}
 	strlen = ft_numlen(num, 10);
-	strnum = ft_calloc(strlen, 1);
+	strnum = ft_calloc(strlen + 1, sizeof(char));
 	if (num < 0)
 	{
 		strnum[0] = 45;

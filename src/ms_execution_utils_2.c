@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_execution_utils_2.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 13:37:54 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/24 12:04:10 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/15 23:21:53 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	ms_waitpid(pid_t pid, t_info *info)
 
 	waitpid(pid, &status, 0);
 	info->status = WSTOPSIG(status);
+	info->exit_status = info->status;
 }
 
 void	ms_store_pid(t_info *info, pid_t pid)
