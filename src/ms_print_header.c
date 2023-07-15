@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	ms_init_shell(void)
+void	ms_print_header(void)
 {
 	char	*dragon;
 

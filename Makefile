@@ -20,7 +20,7 @@ LIB_M = ./src/minishell.a
 LIB_P = ./src/parser/parser.a
 LIB_BI = ./src/built_in/built_in.a
 LIBS = $(LIB_R) $(LIB_RH) $(LIB_M) $(LIB_BI) $(LIB_P) $(LIB_L) 
-SRCS = minishell.c
+SRCS = main.c
 OBJS = $(SRCS:.c=.o)
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -Iinclude

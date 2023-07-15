@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME = minishell.a
-SRCS = ms_free.c ms_init_shell.c ms_init_structs.c ms_input.c \
+SRCS = ms_free.c ms_print_header.c ms_init_structs.c ms_input.c \
 	ms_execution.c ms_execution_utils.c ms_execution_utils_2.c \
 	ms_handle_cmd.c ms_cmd_paths.c ms_handle_oprs.c ms_set_termios.c \
 	ms_env_utils.c ms_handle_cmd_utils.c ms_free_2.c ms_handle_oprs_utils.c

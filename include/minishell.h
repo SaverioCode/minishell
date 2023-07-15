@@ -98,7 +98,7 @@ void	ms_init_tinfo(t_info *info, char **env);
 void	ms_free(t_node *node, t_info *info);
 void	ms_free_info(t_info *info);
 void	ms_check_input(int ac, char **av);
-void	ms_init_shell(void);
+void	ms_print_header(void);
 void	ms_set_termios(void);
 void	ms_handle_input(t_info *info);
 void	ms_set_env(t_info *info, char **env);

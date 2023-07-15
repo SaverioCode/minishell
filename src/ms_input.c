@@ -6,7 +6,7 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:03:46 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/24 12:12:58 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/15 05:43:19 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,19 @@ static int	is_empty(char *str)
 	return (0);
 }
 
-static void	get_input(t_info *info)
+static void	get_input(t_info *info, int token)
 {
 	char	*str;
+	char	*prompt;
 
 	str = NULL;
+	if (token == 1)
+		prompt = ">> ";
+	else
+		prompt = info->prompt;
 	while (!str)
 	{
-		str = readline(info->prompt);
+		str = readline(prompt);
 		if (!is_empty(str))
 		{	
 			free(str);
@@ -62,13 +67,9 @@ static void	get_input(t_info *info)
 	}
 	rl_on_new_line();
 	if (!info->input)
-	{	
 		info->input = str;
-	}
 	else
-	{	
 		info->input = ft_strjoin(info->input, str, 1, 1);
-	}
 }
 
 void	ms_handle_input(t_info *info)
@@ -78,7 +79,7 @@ void	ms_handle_input(t_info *info)
 	token = 0;
 	while (token != CHAR)
 	{	
-		get_input(info);
+		get_input(info, token);
 		token = lexical_check(info->input, token);
 		if (token == -1)
 		{
