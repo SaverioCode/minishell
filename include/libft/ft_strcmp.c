@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 23:43:24 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/07/15 23:47:09 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/15 23:58:13 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ __int32_t	ft_strcmp(char *str1, char *str2)
 	{
 		if (str1[i] != str2[i])
 		{
-			return (str1[1] - str2[1]);
+			return (str1[i] - str2[i]);
 		}
 		i++;
 	}

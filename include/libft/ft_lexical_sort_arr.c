@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 23:41:25 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/07/15 23:56:40 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/15 23:59:42 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ char	**ft_lexical_sort_arr(char **arr)
 				tmp = arr[i];
 				arr[i] = arr[j];
 				arr[j] = tmp;
-				i = -1;
-				break;
+				i--;
+				break ;
 			}
 			j++;
 		}

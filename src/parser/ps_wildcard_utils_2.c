@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 01:42:54 by sav               #+#    #+#             */
-/*   Updated: 2023/07/15 23:57:20 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/15 23:58:18 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char	**ps_get_matrix(char *dir, char *str)
 		}
 		dir_node = readdir(dir_stream);
 	}
-	// matrix = ft_lexical_sort_arr(matrix);
+	matrix = ft_lexical_sort_arr(matrix);
 	closedir(dir_stream);
 	return (matrix);
 }
