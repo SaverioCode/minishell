@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/07/15 20:01:54 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/16 12:02:27 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_opr
 {
 	char			token;
 	int				fd;
+	int				hdoc_fd;
 	char			*path;
 	struct s_opr	*next;
 }	t_opr;
@@ -106,7 +107,8 @@ void	ms_set_env(t_info *info, char **env);
 char	*ms_get_env_value(t_info *info, char *name);
 void	ms_execute_tree(t_node *node, t_info *info);
 void	ms_waitpid(pid_t pid, t_info *info);
-int		ms_handle_oprs(t_info *info, t_opr *opr, t_fd *fd_node);
+int		ms_handle_oprs(t_info *info, t_node *node, t_opr *opr, t_fd *fd_node);
+void	ms_handle_here_doc(t_node *node);
 int		ms_input_redir(t_info *info, t_opr *opr, t_fd *fd_node);
 int		ms_output_redir(t_opr *opr, t_fd *fd_node);
 void	ms_handle_cmd(t_node *node, t_info *info);

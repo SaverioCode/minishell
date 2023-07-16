@@ -6,7 +6,7 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 19:44:14 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/07/16 10:16:07 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/16 13:32:40 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,34 @@ static char	*here_doc_logic(t_opr *opr)
 		buffer = NULL;
 	}
 }
+/// checka che la redirection in input non avvenga se c'e un here doc //
+/// nella stessa lista di operatori //
+void	dup_here_doc(t_info *info, t_opr *opr, t_fd *fd_node)
+{
+	fd_node->fd = opr->fd;
+	fd_node->fd_clone = dup(opr->fd);
+	fd_node->file_fd = opr->hdoc_fd;
+	if (opr->fd == 0 && info->pipe == 1)
+	{
+		close(info->fd[0]);
+		dup2(info->stdin_clone, 0);
 
-void	here_document(t_opr *opr, t_fd *fd_node)
+	}
+	dup2(opr->hdoc_fd, opr->fd);
+	close(opr->hdoc_fd);
+}
+
+void	here_document(t_opr *opr)
 {
 	char	*str;
 	int		fd[2];
 
 	str = NULL;
-	fd_node->fd = opr->fd;
-	fd_node->fd_clone = dup(opr->fd);
 	pipe(fd);
 	str = here_doc_logic(opr);
-	fd_node->file_fd = fd[0];
+	opr->hdoc_fd = fd[0];
 	write(fd[1], str, ft_strlen(str));
-	dup2(fd[0], 0);
 	close(fd[1]);
-	close(fd[0]);
 	free(str);
 }
 
@@ -60,7 +72,7 @@ int	ms_input_redir(t_info *info, t_opr *opr, t_fd *fd_node)
 {
 	if (opr->token == HDOC)
 	{
-		here_document(opr, fd_node);
+		dup_here_doc(info, opr, fd_node);
 	}
 	else if (access(opr->path, F_OK) == -1)
 	{
@@ -85,6 +97,29 @@ int	ms_input_redir(t_info *info, t_opr *opr, t_fd *fd_node)
 		dup2(fd_node->file_fd, fd_node->fd);
 	}
 	return (0);
+}
+
+void	ms_handle_here_doc(t_node *node)
+{
+	t_opr	*opr;
+
+	while (node)
+	{
+		opr = node->opr;
+		while (opr)
+		{
+			if (opr->token == HDOC)
+			{
+				here_document(opr);
+			}
+			opr = opr->next;
+		}
+		if (node->subshl)
+		{
+			ms_handle_here_doc(node->subshl);
+		}
+		node = node->next;
+	}
 }
 
 int	ms_output_redir(t_opr *opr, t_fd *fd_node)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_handle_oprs.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 20:52:41 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/07/15 23:24:57 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/16 20:36:12 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,19 @@ t_fd	*get_fd_node(t_fd *head, t_fd *target)
 	return (NULL);
 }
 
+__int8_t	check_hdoc(t_opr *opr)
+{
+	while (opr)
+	{
+		if (opr->token == HDOC)
+		{
+			return (0);
+		}
+		opr = opr->next;
+	}
+	return (-1);
+}
+
 void	ms_check_fd(t_opr *opr, t_info *info)
 {
 	t_fd	*fd_node;
@@ -77,8 +90,10 @@ void	ms_check_fd(t_opr *opr, t_info *info)
 	}
 }
 
-int	ms_handle_oprs(t_info *info, t_opr *opr, t_fd *fd_node)
+int	ms_handle_oprs(t_info *info, t_node *node, t_opr *opr, t_fd *fd_node)
 {
+	if (node == info->root)
+		ms_handle_here_doc(node);
 	while (opr)
 	{
 		ms_check_fd(opr, info);
@@ -91,7 +106,7 @@ int	ms_handle_oprs(t_info *info, t_opr *opr, t_fd *fd_node)
 		else if (opr->token == INP || opr->token == HDOC)
 		{
 			if (ms_input_redir(info, opr, fd_node) == 1)
-				return (1);
+					return (1);
 		}
 		opr = opr->next;
 	}

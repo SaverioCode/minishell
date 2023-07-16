@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_execution.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:15:31 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/07/15 23:24:17 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/16 12:02:01 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	ms_execute_tree(t_node *node, t_info *info)
 	{
 		ps_expander(node, info);
 		ms_init_pipe(node->token, info);
-		if (ms_handle_oprs(info, node->opr, info->fd_lis) == 0)
+		if (ms_handle_oprs(info, node, node->opr, info->fd_lis) == 0)
 		{
 			ms_handle_cmd(node, info);
 		}

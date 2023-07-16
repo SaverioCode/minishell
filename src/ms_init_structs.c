@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_init_structs.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 08:12:12 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/07/15 23:20:41 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/16 12:00:02 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	ms_init_topr(t_opr *node)
 {
 	node->token = 0;
 	node->fd = 0;
+	node->hdoc_fd = 0;
 	node->path = NULL;
 	node->next = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 06:18:35 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/07/16 10:16:35 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/16 10:21:58 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,6 @@ void	ms_init_pipe(char token, t_info *info)
 {
 	if (info->pipe == 1)
 	{
-		// if (ms_check_fd_lis(info->fd_lis, 0) == -1)
-		// {
-		// 	write(1, "CHECK0\n", 7);////////////////////
-		// 	dup2(info->fd[0], 0);
-		// }
 		dup2(info->fd[0], 0);
 		close(info->fd[0]);
 	}
