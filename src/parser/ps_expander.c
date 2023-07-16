@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_expander.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 02:53:39 by sav               #+#    #+#             */
-/*   Updated: 2023/07/15 23:33:36 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/16 21:11:18 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static char	*dollar_sub(char *str, int i, t_info *info)
 	}
 	var = ft_getstr_from_to(str, from + 1, i - 1);
 	value = ms_get_env_value(info, var);
-	if (str[i] == '?' && !ft_isalpha(str[i + 1]) && !ft_isdigit(str[i + 1]))
+	if (str[i] == '?')
 	{
 		value = ft_itoa(info->exit_status);
 		i++;
