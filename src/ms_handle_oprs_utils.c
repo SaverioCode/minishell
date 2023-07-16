@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_handle_oprs_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 19:44:14 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/07/15 23:24:57 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/16 10:16:07 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ int	ms_input_redir(t_info *info, t_opr *opr, t_fd *fd_node)
 	}
 	else if (opr->token == INP)
 	{
+		if (opr->fd == 0 && info->pipe == 1)
+			dup2(info->stdin_clone, 0);
 		fd_node->file_fd = open(opr->path, O_RDONLY | O_CLOEXEC, 00644);
 		if (fd_node->file_fd == -1)
 		{
