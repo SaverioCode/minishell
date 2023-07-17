@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_execution.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:15:31 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/07/16 12:02:01 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/17 11:32:07 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,11 @@ void	ms_execute_tree(t_node *node, t_info *info)
 		if (ms_handle_oprs(info, node, node->opr, info->fd_lis) == 0)
 		{
 			ms_handle_cmd(node, info);
+		}
+		if (info->pipe && node->token != PIPE)
+		{
+			dup2(info->stdin_clone, 0);
+			info->pipe = 0;
 		}
 		check_subshell(node, info);
 		node = get_next_node(node, info);

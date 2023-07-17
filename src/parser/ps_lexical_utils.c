@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 04:17:47 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/07/14 22:50:51 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/17 11:45:12 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	token_check_first(char new, char old)
 		return (0);
 	}
 	else if (new == '&')
-	{	
+	{
 		return (-1);
 	}
 	else if (new == AND || new == PIPE || new == OR)
@@ -100,7 +100,7 @@ int	lx_token_check(int *token, char new_token, int *brkts)
 
 	status = token_check_first(new_token, token[0]);
 	if (status == 1)
-	{	
+	{
 		status = token_check_second(new_token, token[0], token[1], brkts);
 	}
 	if (status == 1)

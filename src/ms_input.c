@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_input.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 01:03:46 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/07/15 05:43:19 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/17 11:39:45 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	get_input(t_info *info, int token)
 	{
 		str = readline(prompt);
 		if (!is_empty(str))
-		{	
+		{
 			free(str);
 			str = NULL;
 			rl_on_new_line();
@@ -78,7 +78,7 @@ void	ms_handle_input(t_info *info)
 
 	token = 0;
 	while (token != CHAR)
-	{	
+	{
 		get_input(info, token);
 		token = lexical_check(info->input, token);
 		if (token == -1)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_handle_oprs_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 19:44:14 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/07/17 07:03:34 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/17 11:38:04 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,7 @@ void	here_document(t_opr *opr)
 int	ms_input_redir(t_info *info, t_opr *opr, t_fd *fd_node)
 {
 	if (opr->token == HDOC)
-	{
 		dup_here_doc(info, opr, fd_node);
-	}
 	else if (access(opr->path, F_OK) == -1)
 	{
 		write(2, "Error: bad path file.\n", 22);

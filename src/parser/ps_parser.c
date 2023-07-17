@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_parser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 23:15:57 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/07/17 08:00:55 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/17 11:47:06 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static t_node	*parser_logic(t_node *node, char *input, int i, int *from)
 		*from = i;
 	}
 	else if (input[i] == '&' || input[i] == '|' || input[i + 1] == 0)
-	{	
+	{
 		node->token = ps_get_token(&input[i]);
 		ps_organize_exp(node, ft_getstr_from_to(input, *from, i));
 		node = create_new_node(node, &input[i]);

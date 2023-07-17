@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_organize_exp.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 06:57:18 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/07/17 07:59:46 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/17 11:45:47 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	ps_organize_exp(t_node *node, char *exp)
 	from = ft_find_printable(exp, '+');
 	if (from == -1)
 		from = 0;
-	i = from;
-	while (exp[i])
+	i = from - 1;
+	while (exp[++i])
 	{
 		lx_check_quotes(flag, exp[i]);
 		if (!flag[0] && (!ft_isprint(exp[i]) || exp[i] == '<' || exp[i] == '>'))
@@ -34,7 +34,6 @@ void	ps_organize_exp(t_node *node, char *exp)
 			}
 			from = i + 1;
 		}
-		i++;
 	}
 	exp = ft_trim(&exp[from], exp);
 	i = ft_strlen(exp);

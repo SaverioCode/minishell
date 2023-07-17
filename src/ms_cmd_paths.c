@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 12:05:48 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/07/13 19:31:10 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/17 11:35:21 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ static char	*get_cmd_path(t_info *info, char *cmd)
 	paths = ms_get_env_value(info, "PATH");
 	if (!paths)
 		return (NULL);
-	i = 5;
-	start = i;
-	while (paths[i])
+	i = 4;
+	start = i + 1;
+	while (paths[++i])
 	{
 		if (paths[i] == ':')
 		{
@@ -55,9 +55,9 @@ static char	*get_cmd_path(t_info *info, char *cmd)
 			free(str);
 			start = i + 1;
 		}
-		i++;
 	}
 	str = get_string(paths, cmd, start, i - 1);
+	free(cmd);
 	free(paths);
 	return (str);
 }

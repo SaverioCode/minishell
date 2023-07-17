@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_organize_exp_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 14:34:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/25 19:21:59 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/17 11:46:19 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static t_opr	*create_opr(t_node *node)
 	opr = ft_calloc(1, sizeof(t_opr));
 	ms_init_topr(opr);
 	if (!node->opr)
-	{	
+	{
 		node->opr = opr;
 		return (opr);
 	}

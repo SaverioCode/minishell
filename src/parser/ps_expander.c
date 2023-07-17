@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_expander.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 02:53:39 by sav               #+#    #+#             */
-/*   Updated: 2023/07/17 07:03:28 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/17 11:44:07 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,8 @@ static void	expand_cmd_node(t_cmd *node, t_info *info)
 		i = 0;
 		while (node->args[i])
 		{
-			arr = ft_append_arr(arr, ps_wildcard(ps_expand(node->args[i], info)));
+			node->args[i] = ps_expand(node->args[i], info);
+			arr = ft_append_arr(arr, ps_wildcard(node->args[i]));
 			arr = ps_quotes_cleaner(arr);
 			i++;
 		}

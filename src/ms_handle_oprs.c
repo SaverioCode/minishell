@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_handle_oprs.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 20:52:41 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/07/16 20:36:12 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/17 11:36:05 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	ms_handle_oprs(t_info *info, t_node *node, t_opr *opr, t_fd *fd_node)
 		else if (opr->token == INP || opr->token == HDOC)
 		{
 			if (ms_input_redir(info, opr, fd_node) == 1)
-					return (1);
+				return (1);
 		}
 		opr = opr->next;
 	}
