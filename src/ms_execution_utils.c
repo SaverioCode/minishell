@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_execution_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 06:18:35 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/07/17 08:21:15 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/17 10:18:27 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void	ms_end_execution(char token, t_info *info, pid_t pid)
 		ms_waitpid(pid, info);
 		if (info->pipe)
 		{
-			write(1, "CHECK0\n", 7);////////////////
 			dup2(info->stdin_clone, 0);
 			info->pipe = 0;
 		}
