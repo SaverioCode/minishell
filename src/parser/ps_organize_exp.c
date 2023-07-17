@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_organize_exp.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 06:57:18 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/09 23:49:20 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/17 07:59:46 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	ps_organize_exp(t_node *node, char *exp)
 
 	flag[0] = 0;
 	from = ft_find_printable(exp, '+');
+	if (from == -1)
+		from = 0;
 	i = from;
 	while (exp[i])
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 01:12:28 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/28 18:39:53 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/17 07:50:38 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_find_printable(char *str, char c)
 	}
 	else if (c == '-')
 	{
-		i = ft_strlen(str);
+		i = ft_strlen(str) - 1;
 		while (i >= 0)
 		{
 			if (ft_isprint(str[i]))
