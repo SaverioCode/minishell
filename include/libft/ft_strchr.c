@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 23:56:55 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/05 20:02:28 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/17 19:52:53 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_strchr(char *str, char c)
 	size_t	i;
 
 	if (str == NULL)
-	{	
+	{
 		return (-1);
 	}
 	i = 0;

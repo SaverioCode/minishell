@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 17:22:20 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/05/01 17:33:23 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/17 19:52:35 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_numlen(long long num, int base)
 		counter++;
 	}
 	while (num > 0)
-	{	
+	{
 		num /= base;
 		counter++;
 	}
