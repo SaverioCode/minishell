@@ -6,11 +6,56 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 23:01:46 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/06/21 18:38:55 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/17 13:43:38 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	update_oldpwd(t_info *info)
+{
+	t_env	*env;
+	t_env	*new;
+
+	env = info->env;
+	while (env)
+	{
+		if (ft_strictcmp(env->name, "OLDPWD") == 0)
+		{
+			free(env->value);
+			env->value = ms_get_env_value(info, "PWD");
+			break ;
+		}
+		env = env->next;
+	}
+	if (env == NULL)
+	{
+		new = ft_calloc(1, sizeof(t_env));
+		new->next = NULL;
+		new->env = 0;
+		new->name = ft_strcpy("OLDPWD");
+		new->value = ms_get_env_value(info, "PWD");
+		env->next = new;
+	}
+}
+
+static void	update_env(t_info *info, char *cwd)
+{
+	t_env	*env;
+
+	update_oldpwd(info);
+	env = info->env;
+	while (env)
+	{
+		if (ft_strictcmp(env->name, "PWD") == 0)
+		{
+			free(env->value);
+			env->value = ft_strcpy(cwd);
+		}
+		env = env->next;
+	}
+	free(cwd);
+}
 
 static int	cd_home(t_info *info)
 {
@@ -48,5 +93,6 @@ int	bi_cd(t_info *info, char **args)
 			return (1);
 		}
 	}
+	update_env(info, bi_get_cwd());
 	return (0);
 }

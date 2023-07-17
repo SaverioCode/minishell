@@ -6,7 +6,7 @@
 /*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 19:44:14 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/07/17 11:38:04 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/17 12:49:10 by fgarzi-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	here_document(t_opr *opr)
 		buffer = readline(">> ");
 		rl_on_new_line();
 		if (!buffer)
-			continue ;
+			break ;
 		if (ft_strictcmp(opr->path, buffer) == 0)
 		{
 			free(buffer);
