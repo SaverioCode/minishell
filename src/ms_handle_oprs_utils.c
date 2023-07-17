@@ -6,7 +6,7 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 19:44:14 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/07/17 06:39:55 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/17 07:03:34 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	here_document(t_opr *opr)
 		{
 			free(buffer);
 			return ;
-			break ;
 		}
 		buffer = ft_strjoin(buffer, "\n", 1, 0);
 		opr->arr = ft_append_str(opr->arr, buffer);

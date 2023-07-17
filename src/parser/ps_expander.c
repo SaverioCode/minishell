@@ -6,7 +6,7 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 02:53:39 by sav               #+#    #+#             */
-/*   Updated: 2023/07/17 06:41:43 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/17 07:03:28 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static void	expand_opr_node(t_opr *node, t_info *info)
 	opr = node;
 	while (opr)
 	{
-		arr = ps_quotes_cleaner(ps_wildcard(ps_expand(node->path, info)));
+		arr = ps_quotes_cleaner(ps_wildcard(ps_expand(opr->path, info)));
 		if (arr != NULL)
 		{
 			opr->path = ft_strcpy(arr[0]);
