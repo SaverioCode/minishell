@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 07:28:05 by sav               #+#    #+#             */
-/*   Updated: 2023/07/13 22:33:40 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/17 06:40:28 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ char	ps_get_token(char *input);
 void	ps_organize_exp(t_node *node, char *exp);
 void	ps_add_instruction(t_node *node, char *exp, int from, int *i);
 void	ps_expander(t_node *node, t_info *info);
+char	*ps_expand(char *str, t_info *info);
 char	**ps_wildcard(char *str);
 char	**ps_analyze_string(char *str);
 char	**ps_quotes_cleaner(char **arr);

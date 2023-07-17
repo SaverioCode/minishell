@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 18:12:09 by sav               #+#    #+#             */
-/*   Updated: 2023/07/13 22:40:55 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/17 06:43:25 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@ static void	free_oprs(t_opr *opr)
 		if (opr->path)
 		{
 			free(opr->path);
+		}
+		if (opr->arr)
+		{
+			ft_free_arr(opr->arr);
 		}
 		var = opr;
 		opr = opr->next;

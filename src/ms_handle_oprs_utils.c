@@ -6,19 +6,46 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 19:44:14 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/07/16 13:32:40 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/17 06:39:55 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*here_doc_logic(t_opr *opr)
+void	dup_here_doc(t_info *info, t_opr *opr, t_fd *fd_node)
 {
-	char	*str;
+	__int32_t	fd[2];
+	__int32_t	i;
+
+	fd_node->fd = opr->fd;
+	fd_node->fd_clone = dup(opr->fd);
+	pipe(fd);
+	i = 0;
+	while (opr->arr && opr->arr[i])
+	{
+		opr->arr[i] = ps_expand(opr->arr[i], info);
+		write(fd[1], opr->arr[i], ft_strlen(opr->arr[i]));
+		free(opr->arr[i]);
+		i++;
+	}
+	free(opr->arr);
+	opr->arr = NULL;
+	fd_node->file_fd = fd[0];
+	if (opr->fd == 0 && info->pipe == 1)
+	{
+		close(info->fd[0]);
+		dup2(info->stdin_clone, 0);
+	}
+	close(fd[1]);
+	dup2(fd[0], opr->fd);
+	close(fd[0]);
+}
+
+void	here_document(t_opr *opr)
+{
 	char	*buffer;
 
 	buffer = NULL;
-	str = NULL;
 	while (1)
 	{
 		buffer = readline(">> ");
@@ -28,44 +55,13 @@ static char	*here_doc_logic(t_opr *opr)
 		if (ft_strictcmp(opr->path, buffer) == 0)
 		{
 			free(buffer);
-			return (str);
+			return ;
 			break ;
 		}
 		buffer = ft_strjoin(buffer, "\n", 1, 0);
-		str = ft_strjoin(str, buffer, 1, 0);
-		free(buffer);
+		opr->arr = ft_append_str(opr->arr, buffer);
 		buffer = NULL;
 	}
-}
-/// checka che la redirection in input non avvenga se c'e un here doc //
-/// nella stessa lista di operatori //
-void	dup_here_doc(t_info *info, t_opr *opr, t_fd *fd_node)
-{
-	fd_node->fd = opr->fd;
-	fd_node->fd_clone = dup(opr->fd);
-	fd_node->file_fd = opr->hdoc_fd;
-	if (opr->fd == 0 && info->pipe == 1)
-	{
-		close(info->fd[0]);
-		dup2(info->stdin_clone, 0);
-
-	}
-	dup2(opr->hdoc_fd, opr->fd);
-	close(opr->hdoc_fd);
-}
-
-void	here_document(t_opr *opr)
-{
-	char	*str;
-	int		fd[2];
-
-	str = NULL;
-	pipe(fd);
-	str = here_doc_logic(opr);
-	opr->hdoc_fd = fd[0];
-	write(fd[1], str, ft_strlen(str));
-	close(fd[1]);
-	free(str);
 }
 
 int	ms_input_redir(t_info *info, t_opr *opr, t_fd *fd_node)

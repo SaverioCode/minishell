@@ -6,7 +6,7 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 02:53:39 by sav               #+#    #+#             */
-/*   Updated: 2023/07/16 21:11:18 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/17 06:41:43 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,10 @@ static char	*dollar_sub(char *str, int i, t_info *info)
 	return (new);
 }
 
-static char	**expansion(char *str, t_info *info)
+char	*ps_expand(char *str, t_info *info)
 {
 	int		flag[2];
 	int		i;
-	char	**arr;
 
 	if (str == NULL)
 	{
@@ -63,9 +62,7 @@ static char	**expansion(char *str, t_info *info)
 		}
 		i++;
 	}
-	arr = ps_wildcard(str);
-	arr = ps_quotes_cleaner(arr);
-	return (arr);
+	return (str);
 }
 
 static void	expand_opr_node(t_opr *node, t_info *info)
@@ -76,7 +73,7 @@ static void	expand_opr_node(t_opr *node, t_info *info)
 	opr = node;
 	while (opr)
 	{
-		arr = expansion(opr->path, info);
+		arr = ps_quotes_cleaner(ps_wildcard(ps_expand(node->path, info)));
 		if (arr != NULL)
 		{
 			opr->path = ft_strcpy(arr[0]);
@@ -92,7 +89,7 @@ static void	expand_cmd_node(t_cmd *node, t_info *info)
 	__uint32_t	i;
 	char		**arr;
 
-	arr = expansion(node->cmd, info);
+	arr = ps_quotes_cleaner(ps_wildcard(ps_expand(node->cmd, info)));
 	if (arr != NULL)
 	{
 		node->cmd = ft_strcpy(arr[0]);
@@ -104,7 +101,8 @@ static void	expand_cmd_node(t_cmd *node, t_info *info)
 		i = 0;
 		while (node->args[i])
 		{
-			arr = ft_append_arr(arr, expansion(node->args[i], info));
+			arr = ft_append_arr(arr, ps_wildcard(ps_expand(node->args[i], info)));
+			arr = ps_quotes_cleaner(arr);
 			i++;
 		}
 		free(node->args);

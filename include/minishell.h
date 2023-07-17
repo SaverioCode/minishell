@@ -6,7 +6,7 @@
 /*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 11:51:09 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/07/16 12:02:27 by sav              ###   ########.fr       */
+/*   Updated: 2023/07/17 06:44:33 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ typedef struct s_opr
 {
 	char			token;
 	int				fd;
-	int				hdoc_fd;
 	char			*path;
+	char			**arr;
 	struct s_opr	*next;
 }	t_opr;
 
