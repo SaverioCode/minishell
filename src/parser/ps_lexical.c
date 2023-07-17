@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_lexical.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgarzi-c <fgarzi-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sav <sav@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 01:47:49 by fgarzi-c          #+#    #+#             */
-/*   Updated: 2023/07/14 22:49:10 by fgarzi-c         ###   ########.fr       */
+/*   Updated: 2023/07/17 08:09:19 by sav              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,13 @@ static int	lx_exit_status(int *flag, int brkts, char token)
 	{
 		return (1);
 	}
+	if (token == AND || token == OR || token == PIPE)
+	{
+		return (1);
+	}
 	if (token == INP || token == HDOC || token == OUT || token == APP)
 		return (-1);
-	token = CHAR;
-	return (token);
+	return (CHAR);
 }
 
 static int	check_if_fd(char *str, int i)
