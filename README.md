@@ -15,6 +15,6 @@ For this project the following features have been implemented:
   - $0 and $var_name
   - built in commands(some with limited features): echo, env, export, unset, cd, pwd, exit
 
-As wrote before bash shell as been taken as model, then for the use of the program just refere to bash
+As wrote before bash shell has been taken as model, then for the use of the program just refere to bash
 
 Enjoy my minishell!
