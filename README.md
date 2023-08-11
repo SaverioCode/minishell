@@ -11,7 +11,7 @@ For this project the following features have been implemented:
   - '<' '<<' '>' '>>'
   - '&&' '||' '|'
   - '()' (subshell)
-  - single and souble quotes
+  - single and double quotes
   - $0 and $var_name
   - built in commands(some with limited features): echo, env, export, unset, cd, pwd, exit
 
