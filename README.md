@@ -8,12 +8,12 @@ In order to run the project 'readline' is requested. Two options are aviable:
 
 Minishell, as the name suggest, is a reproduction of a simple shell, emulating bash.
 For this project the following features have been implemented:
-      - '<' '<<' '>' '>>'
-      - '&&' '||' '|'
-      - '()' (subshell)
-      - single and souble quotes
-      - $0 and $var_name
-      - built in commands(some with limited features): echo, env, export, unset, cd, pwd, exit
+  - '<' '<<' '>' '>>'
+  - '&&' '||' '|'
+  - '()' (subshell)
+  - single and souble quotes
+  - $0 and $var_name
+  - built in commands(some with limited features): echo, env, export, unset, cd, pwd, exit
 
 As wrote before bash shell as been taken as model, then for the use of the program just refere to bash
 
